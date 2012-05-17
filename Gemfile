@@ -2,11 +2,22 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 
+group :production do
+	gem 'pg'
+end
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
+group :development, :test do
+	gem 'sqlite3'
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'capybara'
+	gem 'rb-fsevent', :require => false
+	gem 'growl'
+	gem 'ruby_gntp'
+	gem 'guard-spork'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
