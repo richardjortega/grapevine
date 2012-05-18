@@ -64,7 +64,7 @@
           <p>This form require Javascript to use. Please enable it or download a browser of this century.</p>
         </noscript>
 
-        <div id="credit-card" style="<%= @user.last_4_digits ? "display:none" : "display:block" %>">
+        <div id="credit-card" style="<%= user.last_4_digits ? "display:none" : "display:block" %>">
           <div id="credit-card-errors" style="display:none">
             <div id="stripe-error-message" class="alert-message block-message error">
             </div>
