@@ -1,10 +1,16 @@
 Grapevine::Application.routes.draw do
-  get "static_pages/home"
-
-  get "static_pages/help"
-
   root to: 'static_pages#home'
+  match 'sign_up' => 'users#new', :as => :sign_up
+  match "sign_in" => "sessions#new", :as => :sign_in
+  match "sign_out" => "sessions#destroy", :as => :sign_out
+  match "edit_profile" => "users#edit", :as => :edit_profile
 
+  resources :users
+  resources :sessions
+
+  match '/help',  to: 'static_pages#help'
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

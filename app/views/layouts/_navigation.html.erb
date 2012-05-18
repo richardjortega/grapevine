@@ -1,1 +1,18 @@
 <%= link_to "Grapevine", root_path, :class => 'brand' %>
+<ul class="nav">
+	<% if current_user %>
+		<li>
+			<%= link_to "Edit Profile", edit_profile_path %>
+		</li>
+		<li>
+			<%= link_to "Sign Out", sign_out_path %>
+		</li>
+	  <% else %>
+	  	<li>
+	  		<%= link_to "Sign In", sign_in_path %>
+	  	</li>
+	  	<li>
+	  		<%= link_to "Sign Up", sign_up_path %>
+	  	</li>
+	<% end %>
+</ul>
