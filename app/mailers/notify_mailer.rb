@@ -10,7 +10,14 @@ class NotifyMailer < ActionMailer::Base
   # end
 
   ### Used in production
+  # Send signup email notification using SendGrid
   def signup(user)
-    mail to: user.email, subject: "Ohh.. me soo horny...; Thanks for signing up!"
+    mail to: user.email, subject: "Thanks for signing up!"
+  end
+
+  # Send signup email notification to Erik, pass in user object
+  def alert_erik(user)
+    @user = user
+    mail to: "erik@pickgrapevine.com", subject: "New customer signed up"
   end
 end

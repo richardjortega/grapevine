@@ -11,11 +11,13 @@ class UsersController < ApplicationController
     # Creat new user from params
     @user = User.new(params[:user])
     if @user.save
-      # Deliver the signup_email
-      Notify_mailer.signup_email(@user).deliver
       # Establish user with a session, redirect to home
       session[:user_id] = @user.id
       redirect_to root_path, :notice => "Signed up!"
+      # Deliver the signup_email
+      NotifyMailer.signup(@user).deliver
+      # Send 'ol Erik a notice of a new customer signed up upon completion
+      NotifyMailer.alert_erik(@user).deliver
     else
       render :action => :new
     end
