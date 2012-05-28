@@ -49,6 +49,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    css_parser (1.2.6)
+      addressable
+      rdoc
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.3.2)
@@ -109,6 +112,11 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    roadie (2.3.1)
+      actionmailer (> 3.0.0, < 3.3.0)
+      css_parser
+      nokogiri (>= 1.4.4)
+      sprockets
     rspec (2.9.0)
       rspec-core (~> 2.9.0)
       rspec-expectations (~> 2.9.0)
@@ -170,6 +178,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.1)
   rb-fsevent
+  roadie
   rspec-rails
   ruby_gntp
   sass-rails (~> 3.2.3)

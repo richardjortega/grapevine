@@ -8,8 +8,12 @@ class UsersController < ApplicationController
   end
 
   def create
+    # Creat new user from params
     @user = User.new(params[:user])
     if @user.save
+      # Deliver the signup_email
+      Notify_mailer.signup_email(@user).deliver
+      # Establish user with a session, redirect to home
       session[:user_id] = @user.id
       redirect_to root_path, :notice => "Signed up!"
     else
