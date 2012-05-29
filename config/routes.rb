@@ -8,6 +8,8 @@ Grapevine::Application.routes.draw do
   resources :users
   resources :sessions
 
+  match "hooks" => "hooks#receiver"
+
   match '/help',  to: 'static_pages#help'
 
   
