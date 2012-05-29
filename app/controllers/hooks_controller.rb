@@ -35,7 +35,7 @@ class HooksController < ApplicationController
 			@user.subscribed = true
 			@user.save!
 			# Notify Grapevine Support that a user can been charged
-			NotifyMailer.alert_invoice_succeeded(@user)
+			NotifyMailer.alert_invoice_succeeded(@user).deliver
 		end
 	end
 
