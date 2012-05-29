@@ -21,7 +21,7 @@ class NotifyMailer < ActionMailer::Base
 
   def alert_invoice_succeeded(user)
     @user = user
-    mail to: "erik@pickgrapevine.com", subject: "Customer was charged, invoice sent"
+    mail to: "erik@pickgrapevine.com", subject: "#{@user.name} was charged, invoice sent"
   end
-  
+
 end

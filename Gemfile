@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 gem 'bootstrap-sass', '2.0.0'
-gem 'stripe'
+gem 'stripe',	'~> 1.7.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
 group :production do
