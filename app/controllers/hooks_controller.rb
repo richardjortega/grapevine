@@ -1,12 +1,9 @@
 class HooksController < ApplicationController
-	#for production
-	#Stripe::api_key = ENV['STRIPE_SECRET_KEY']
+	
+	Stripe::api_key = ENV['STRIPE_SECRET_KEY']
 
 	require 'json'
 	require 'stripe'
-
-	# for straight up testing
-	Stripe.api_key = "tJhooWqaOtgRuLxkGogSLTL3sLxEU4ak"
 
 	def receiver
 		#webhooking like a ninja

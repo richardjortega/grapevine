@@ -20,6 +20,7 @@ group :development, :test do
 	gem 'growl'
 	gem 'ruby_gntp'
 	gem 'guard-spork'
+	gem 'letter_opener'
 end
 
 # Gems used only for assets and not required

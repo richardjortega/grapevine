@@ -1,5 +1,14 @@
 Grapevine::Application.configure do
  # Settings specified here will take precedence over those in config/application.rb
+ActionMailer::Base.smtp_settings = {
+  :address        => 'smtp.sendgrid.net',
+  :port           => '587',
+  :authentication => :plain,
+  :user_name      => 'grapvine',
+  :password       => 'grape2011',
+  :domain         => 'pickgrapevine.com'
+}
+
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -15,6 +24,9 @@ Grapevine::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
+
+  # setup for mailer to use other than smtp (can use :smtp or :letter_opener)
+  config.action_mailer.delivery_method = :letter_opener
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
