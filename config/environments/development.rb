@@ -1,14 +1,16 @@
 Grapevine::Application.configure do
  # Settings specified here will take precedence over those in config/application.rb
-ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
-  :authentication => :plain,
-  :user_name      => 'grapvine',
-  :password       => 'grape2011',
-  :domain         => 'pickgrapevine.com'
-}
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'grapvine',
+    :password       => 'grape2011',
+    :domain         => 'pickgrapevine.com'
+  }
 
+  # specify what domain to use for mailer URLs
+  config.action_mailer.default_url_options = {host: "localhost:3000"}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
