@@ -18,11 +18,13 @@ class NotifyMailer < ActionMailer::Base
 
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)
+    @user = user
     mail to: user.email, subject: "Thanks for signing up to Grapevine for 30 days!"
   end
   
   # Send a signup email to the user, pass user object that contains the user's email address
   def paid_signup(user)
+    @user = user
     mail to: user.email, subject: "Thanks for signing up!"
   end
 
