@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       # Deliver the signup_email
       NotifyMailer.signup(@user).deliver
       # Send 'ol Erik a notice of a new customer signed up upon completion
-      NotifyMailer.alert_new_customer(@user).deliver
+      NotifyMailer.new_customer(@user).deliver
     else
       render :action => :new
     end

@@ -14,13 +14,14 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Send signup email notification to Erik, pass in user object
-  def alert_new_customer(user)
+  def new_customer(user)
     @user = user
     mail to: "erik@pickgrapevine.com", subject: "New customer signed up"
   end
 
-  def alert_invoice_succeeded(user)
-    @user = user
+  def invoice_succeeded(invoice, customer)
+    @subscription = invoice.lines.subscription[0]
+    @user = customer
     mail to: "erik@pickgrapevine.com", subject: "#{@user.name} was charged, invoice sent"
   end
 

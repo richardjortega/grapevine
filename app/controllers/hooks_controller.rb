@@ -16,6 +16,8 @@ class HooksController < ApplicationController
 		#Retreiving the event from the Stripe API guarantees its authenticity
 		event = Stripe::Event.retrieve(data[:id])
 
+		#Retreive and store the invoice of the customer
+
 		# This will send receipts on successful invoices
 		if event.type == "invoice.payment_succeeded"
 			make_active(event.data.object)
@@ -31,8 +33,12 @@ class HooksController < ApplicationController
 		if @user.subscribed == false
 			@user.subscribed = true
 			@user.save!
+			
+			#Retreive and store the invoice of the customer
+			customer = Stripe::Customer.retrieve(invoice.customer)
+
 			# Notify Grapevine Support that a user can been charged
-			NotifyMailer.alert_invoice_succeeded(@user).deliver
+			NotifyMailer.invoice_succeeded(event, customer).deliver
 		end
 	end
 
