@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Grapevine Receipt</title>
+        <style type="text/css">
+            h1, h2, td, p {
+                font-family: helvetica, arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- center -->
+        <table width="100%" cellpadding="10" cellspacing="0">
+            <tr>
+                <td valign="top" align="center">
+                    <!-- header -->
+                    <table width="600" cellpadding="0" cellspacing="0" id="headerTable">
+                        <tr>
+                            <td>
+                                <h1 style="font-family:helvetica, arial, sans-serif;font-size:28px;">
+                                    <a href="http://www.pickgrapevine.com" title="Grapevine"
+                                       style="text-decoration:none;color:#555555;">Grapevine</a>
+                                </h1>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /header -->
+                </td>
+            </tr>
+        </table>
+        <!-- /center -->
+
+
+<!-- account-info -->
+<table id="account-info" width="100%" cellpadding="0" cellspacing="0"
+       bgcolor="#F3F3F3"
+       style="border-top: 3px solid #CCCCCC;border-bottom: 3px solid #CCCCCC;">
+    <tr>
+        <td valign="top" align="center">
+            <table width="600" cellpadding="0" border="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <p style="float: right;font-size: 12px;text-align:left"><strong><%= "#{Time.now.strftime("%m/%d/%Y")}" %></strong>
+                        </p>
+
+                        <h2 style="font-size:16px;text-align:left">Invoice</h2>
+
+                        <p style="font-size: 12px;text-align:left">
+                            <strong><%= user.name %></strong></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table><!-- /account-info -->
+
+<table width="100%" cellpadding="10" cellspacing="0">
+    <tr>
+        <td valign="top" align="center">
+            <table width="600" cellpadding="0" border="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <h1 style="font-size:20px;text-align:left">Invoice Receipt</h1>
+
+                        <table width="100%" cellpadding="0" cellspacing="0"
+                               style="margin-bottom: 10px">
+                            <tr>
+                                <td width="320" id="message-body" align="left"
+                                    valign="top" style="font-size:12px;">
+                                    <!-- message-body -->
+                                    <p>This email confirms your recent
+                                        payment of <%= "#{subscription_amount} (USD)" %>.
+                                        <br />Here are the details of your
+                                        payment:</p>
+                                    <!-- /message-body -->
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- invoice-table -->
+                        <table id="invoice-table" width="100%" cellpadding="4"
+                               cellspacing="0">
+                            <!-- table headers -->
+                            <thead>
+                            <tr bgcolor="#CCCCCC">
+                                <th align="left" style="font-size:12px"><strong>Date</strong>
+                                </th>
+                                <th align="left" style="font-size:12px"><strong>Description</strong>
+                                </th>
+                                <th align="right" width="20"
+                                    style="font-size:12px">
+                                    <strong>Paid Amount</strong></th>
+                            </tr>
+                            </thead>
+							<!-- table data -->
+                            <tbody>
+                            <tr>
+                                <td align="left" valign="top"
+                                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                                    <%= "#{subscription_start} - #{subscription_end}" %>
+                                </td>
+                                <td align="left" valign="top"
+                                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                                    <%= "#{subscription_plan}" %>
+                                </td>
+                                <td align="right" valign="top" width="20"
+                                    style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
+                                    <strong><%= "#{subscription_amount}" %></strong></td>
+                            </tr>
+                            </tbody>
+                            <!-- table footer -->
+                            <tfoot>
+                            
+
+                            </tfoot>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+    </body>
+</html>

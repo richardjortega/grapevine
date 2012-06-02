@@ -1,4 +1,6 @@
 class HooksController < ApplicationController
+
+	#Hooks can only be used with a live URL (production, localtunnel, or herokuapp)
 	
 	Stripe::api_key = ENV['STRIPE_SECRET_KEY']
 
@@ -16,9 +18,7 @@ class HooksController < ApplicationController
 		#Retreiving the event from the Stripe API guarantees its authenticity
 		event = Stripe::Event.retrieve(data[:id])
 
-		#Retreive and store the invoice of the customer
-
-		# This will send receipts on successful invoices
+		# Identify wether the invoice was successful or failed
 		if event.type == "invoice.payment_succeeded"
 			make_active(event.data.object)
 		end
@@ -28,27 +28,25 @@ class HooksController < ApplicationController
 		end
 	end
 
-	def make_active(event)
-		@user = User.find_by_stripe_id(event.customer)
+	def make_active(invoice)
+		@user = User.find_by_stripe_id(invoice.customer)
 		if @user.subscribed == false
 			@user.subscribed = true
 			@user.save!
-			
-			#Retreive and store the invoice of the customer
-			customer = Stripe::Customer.retrieve(invoice.customer)
 
-			# Notify Grapevine Support that a user can been charged
-			NotifyMailer.invoice_succeeded(event, customer).deliver
+			# Notify the User's charge was Successful and CC Grapevine- Support
+			NotifyMailer.invoice_succeeded(invoice, @user).deliver
 		end
 	end
 
-	def make_inactive(event)
-		@user = User.find_by_stripe_id(event.customer)
+	def make_inactive(invoice)
+		@user = User.find_by_stripe_id(invoice.customer)
 		if @user.subscribed == true
 			@user.subscribed = false
 			@user.save!
 
-			# Need to create a notifcation for invoices that failed
+			# Notify the User's charge was Failed and CC Grapevine- Support
+			NotifyMailer.invoice_failed(invoice, @user).deliver
 		end
 	end
 

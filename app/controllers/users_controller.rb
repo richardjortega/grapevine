@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path, :notice => "Signed up!"
       # Deliver the signup_email
-      NotifyMailer.signup(@user).deliver
+      NotifyMailer.paid_signup(@user).deliver
       # Send 'ol Erik a notice of a new customer signed up upon completion
       NotifyMailer.new_customer(@user).deliver
     else

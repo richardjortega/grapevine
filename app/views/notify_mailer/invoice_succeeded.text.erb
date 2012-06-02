@@ -1,15 +1,17 @@
-Dear #{user.email}:
+Dear #{user.name}:
 
-This is a receipt for your subscription. This is only a receipt, 
-no payment is due. Thanks for your continued support!
+This email confirms your recent payment. Here are the details of your payment:
 
 -------------------------------------------------
 SUBSCRIPTION RECEIPT - #{Time.now.strftime("%m/%d/%Y")}
 
 Email: #{user.email}
-Plan: #{subscription.plan.name}
-Amount: #{format_stripe_amount(invoice.total)} (USD)
+Plan: #{subscription_plan}
+Amount: #{subscription_amount} (USD)
 
-For service between #{format_stripe_timestamp(subscription.period.start)} and #{format_stripe_timestamp(subscription.period.end)}
+For service between #{subscription_start} and #{subscription_end}
 
------------------------------------------------
+-------------------------------------------------
+
+Thanks for your continued support!
+- Grapevine Team
