@@ -3,9 +3,6 @@ class NotifyMailer < ActionMailer::Base
   default from: "alerts@pickgrapevine.com",
           reply_to: "no-reply@pickgrapevine.com"
 
-  #Set instance var for CC Grapevine Support
-  @grapevine = "erik@pickgrapevine.com"
-
   #Friendly amount formats
   def format_amount(amount)
     sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
@@ -31,7 +28,7 @@ class NotifyMailer < ActionMailer::Base
   # Send signup email notification to Grapevine support when we have a new customer
   def new_customer(user)
     @user = user
-    mail to: grapevine, subject: "New customer signed up"
+    mail to: "erik@pickgrapevine.com", subject: "New customer signed up"
   end
 
   # Email invoice receipt to User's email and Grapevine Support - successful
@@ -43,7 +40,7 @@ class NotifyMailer < ActionMailer::Base
     @subscription_start = format_timestamp(subscription.period.start)
     @subscription_end = format_timestamp(subscription.period.end)
     # Mail invoice 
-    mail to: user.email, subject: "Grapevine Receipt", bcc: grapevine
+    mail to: user.email, subject: "Grapevine Receipt", bcc: "erik@pickgrapevine.com"
   end
 
   # Email invoice receipt to User's email and Grapevine Support - failed
