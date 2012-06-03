@@ -33,12 +33,12 @@ class NotifyMailer < ActionMailer::Base
 
   # Email invoice receipt to User's email and Grapevine Support - successful
   def invoice_succeeded(invoice, user)
-    @subscription = invoice.lines.subscription[0]
+    @subscription = invoice.lines.subscriptions[0]
     @user = user
-    @subscription_plan = subscription.plan.name
+    @subscription_plan = @subscription.plan.name
     @subscription_amount = format_amount(invoice.total)
-    @subscription_start = format_timestamp(subscription.period.start)
-    @subscription_end = format_timestamp(subscription.period.end)
+    @subscription_start = format_timestamp(@subscription.period.start)
+    @subscription_end = format_timestamp(@subscription.period.end)
     # Mail invoice 
     mail to: user.email, subject: "Grapevine Receipt", bcc: "erik@pickgrapevine.com"
   end

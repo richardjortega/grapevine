@@ -47,7 +47,7 @@
                         <h2 style="font-size:16px;text-align:left">Invoice</h2>
 
                         <p style="font-size: 12px;text-align:left">
-                            <strong><%= user.name %></strong></p>
+                            <strong><%= @user.name %></strong></p>
                     </td>
                 </tr>
             </table>
@@ -70,7 +70,7 @@
                                     valign="top" style="font-size:12px;">
                                     <!-- message-body -->
                                     <p>This email confirms your recent
-                                        payment of <%= "#{subscription_amount} (USD)" %>.
+                                        payment of <%= "#{@subscription_amount} (USD)" %>.
                                         <br />Here are the details of your
                                         payment:</p>
                                     <!-- /message-body -->
@@ -98,15 +98,15 @@
                             <tr>
                                 <td align="left" valign="top"
                                     style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
-                                    <%= "#{subscription_start} - #{subscription_end}" %>
+                                    <%= "#{@subscription_start} - #{@subscription_end}" %>
                                 </td>
                                 <td align="left" valign="top"
                                     style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
-                                    <%= "#{subscription_plan}" %>
+                                    <%= "#{@subscription_plan}" %>
                                 </td>
                                 <td align="right" valign="top" width="20"
                                     style="border-bottom: 1px solid #f3f3f3;font-size:12px;">
-                                    <strong><%= "#{subscription_amount}" %></strong></td>
+                                    <strong><%= "#{@subscription_amount}" %></strong></td>
                             </tr>
                             </tbody>
                             <!-- table footer -->

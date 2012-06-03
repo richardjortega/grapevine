@@ -1,15 +1,15 @@
-Dear #{user.name}:
+Dear #{@user.name}:
 
 This email confirms your recent payment. Here are the details of your payment:
 
 -------------------------------------------------
 SUBSCRIPTION RECEIPT - #{Time.now.strftime("%m/%d/%Y")}
 
-Email: #{user.email}
-Plan: #{subscription_plan}
-Amount: #{subscription_amount} (USD)
+Email: #{@user.email}
+Plan: #{@subscription_plan}
+Amount: #{@subscription_amount} (USD)
 
-For service between #{subscription_start} and #{subscription_end}
+For service between #{@subscription_start} and #{@subscription_end}
 
 -------------------------------------------------
 
