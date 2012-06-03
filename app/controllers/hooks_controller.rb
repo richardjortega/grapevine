@@ -1,11 +1,11 @@
 class HooksController < ApplicationController
 
+	require 'json'
+	require 'stripe'
+
 	#Hooks can only be used with a live URL (production, localtunnel, or herokuapp)
 	
 	Stripe::api_key = ENV['STRIPE_SECRET_KEY']
-
-	require 'json'
-	require 'stripe'
 
 	def receiver
 		#webhooking like a ninja
