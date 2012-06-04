@@ -32,7 +32,8 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Email invoice receipt to User's email and Grapevine Support - successful
-  def invoice_succeeded(invoice, user)
+  # Called in HooksController
+  def successfully_invoiced(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
     @subscription_plan = @subscription.plan.name
@@ -44,7 +45,8 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Email invoice receipt to User's email and Grapevine Support - failed
-  def invoice_failed(invoice, user)
+  # Called in HooksController
+  def unsuccessfully_invoiced(invoice, user)
     puts "We're still working on this..."
   end
 
