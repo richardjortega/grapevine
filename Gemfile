@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
-gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-sass', '2.0.3'
 gem 'stripe',	'~> 1.7.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
@@ -36,6 +36,12 @@ end
 
 gem 'jquery-rails'
 gem 'roadie'
+
+# Rails SaaS Kit and dependencies
+source 'https://railskits.com/gems/0908d347-e9b9-fd79-6ec7-e7f5a6641e51'
+gem 'saas-kit'
+gem 'rails3_acts_as_paranoid'
+gem 'ssl_requirement'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
