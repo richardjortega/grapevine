@@ -1,12 +1,35 @@
 Grapevine::Application.routes.draw do
-  root to: 'static_pages#home'
-  match 'sign_up' => 'users#new', :as => :sign_up
-  match "sign_in" => "sessions#new", :as => :sign_in
-  match "sign_out" => "sessions#destroy", :as => :sign_out
-  match "edit_profile" => "users#edit", :as => :edit_profile
+  devise_for :users, :skip => [:sessions]
+  # Reconfiguring Devise routes for pretty URLs, because they look pretty!
+  # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
+  as :user do
+    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign_in' => 'devise/sessions#create', :as => :user_session
+    delete 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'sign_up' => 'devise/registrations#new', :as => :new_user_registration
+    get 'edit_profile' => 'devise/registrations#edit', :as => :edit_user_registration
+  end
 
-  resources :users
-  resources :sessions
+  # default rake routes for devise User
+  #         new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
+  #             user_session POST   /users/sign_in(.:format)       devise/sessions#create
+  #     destroy_user_session DELETE /users/sign_out(.:format)      devise/sessions#destroy
+  #            user_password POST   /users/password(.:format)      devise/passwords#create
+  #        new_user_password GET    /users/password/new(.:format)  devise/passwords#new
+  #       edit_user_password GET    /users/password/edit(.:format) devise/passwords#edit
+  #                          PUT    /users/password(.:format)      devise/passwords#update
+  # cancel_user_registration GET    /users/cancel(.:format)        devise/registrations#cancel
+  #        user_registration POST   /users(.:format)               devise/registrations#create
+  #    new_user_registration GET    /users/sign_up(.:format)       devise/registrations#new
+  #   edit_user_registration GET    /users/edit(.:format)          devise/registrations#edit
+  #                          PUT    /users(.:format)               devise/registrations#update
+  #                          DELETE /users(.:format)               devise/registrations#destroy
+  authenticated :user do
+    # Change route if we want to show a different page for logged in users
+    root to: 'static_pages#home'
+  end
+
+  root to: 'static_pages#home'
 
   match "hooks" => "hooks#receiver"
 
