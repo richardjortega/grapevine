@@ -21,6 +21,8 @@ Grapevine::Application.configure do
 
   # setup for mailer to use other than smtp (can use :smtp or :letter_opener)
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => 'utf-8'
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
