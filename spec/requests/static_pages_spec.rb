@@ -13,9 +13,5 @@ describe "Static pages" do
 			page.should have_selector 'title', text: 'Grapevine'
 		end
 
-		it "should have logos and shit" do
-			#i'll figure this test eventually...
-			#page.should have_link 'g-only-colorflat.png'
-		end
 	end
 end

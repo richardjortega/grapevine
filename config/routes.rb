@@ -1,13 +1,14 @@
 Grapevine::Application.routes.draw do
-  devise_for :users, :skip => [:sessions]
+  devise_for :users, :controllers => { :registrations => 'registrations' }
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
   as :user do
     get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
     post 'sign_in' => 'devise/sessions#create', :as => :user_session
-    delete 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
-    get 'sign_up' => 'devise/registrations#new', :as => :new_user_registration
-    get 'edit_profile' => 'devise/registrations#edit', :as => :edit_user_registration
+    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
+      :via => Devise.mappings[:user].sign_out_via
+    get 'sign_up' => 'registrations#new', :as => :new_user_registration
+    get 'edit_profile' => 'registrations#edit', :as => :edit_user_registration
   end
 
   # default rake routes for devise User

@@ -11,7 +11,7 @@ class HooksController < ApplicationController
 	## showoff.io - free for 5 mins
 	## localtunnel.com - free, major issue - randomizies same URLs so sometimes your server has to handle other random webhooks from other user's services. 
 
-	Stripe.api_key = "tJhooWqaOtgRuLxkGogSLTL3sLxEU4ak"
+	Stripe.api_key = '<%= ENV["STRIPE_SECRET_KEY"] %>'
 
 	def receiver
 		#webhooking like a ninja
