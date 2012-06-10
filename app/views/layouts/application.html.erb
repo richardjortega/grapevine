@@ -29,7 +29,7 @@
         <div class="content">
            <div class="row">
             <div class="feature span12">
-              <% if current_page?('/') %>
+              <% if current_page?(root_url) %>
                 <%= render 'layouts/home' %>
               <% else %>
                 <%= render 'layouts/messages' %>
@@ -42,8 +42,8 @@
 
     </div> <!--! end of #main -->
   </body>
-  <footer>
 
-      <%= debug(params) if Rails.env.development? %>
+  <footer>
+      <%= render 'layouts/footer' %>
   </footer>
 </html>
