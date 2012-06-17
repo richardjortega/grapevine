@@ -1,0 +1,7 @@
+<h1>Howdy, Cowboy! Welcome to your Grapevine Profile</h1>
+<h2>Here's what we got on your file right now</h2>
+
+<%= for @user.each do |u| %>
+	<div>User: <%= u.first_name %> <%= u.last_name %></div>
+	<div>Email: <%= u.email %></div>
+<% end %>

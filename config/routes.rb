@@ -1,5 +1,15 @@
 Grapevine::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
+  
+  root to: 'static_pages#home'
+  
+  #match "/profile", to: 'users#show'
+  match 'users/:id' => 'users#show', :as => :users
+
+  match "hooks" => "hooks#receiver"
+
+  match '/help',  to: 'static_pages#help'
+
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
   as :user do
@@ -25,16 +35,9 @@ Grapevine::Application.routes.draw do
   #   edit_user_registration GET    /users/edit(.:format)          devise/registrations#edit
   #                          PUT    /users(.:format)               devise/registrations#update
   #                          DELETE /users(.:format)               devise/registrations#destroy
-  authenticated :user do
-    # Change route if we want to show a different page for logged in users
-    root to: 'static_pages#home'
-  end
+  
 
-  root to: 'static_pages#home'
 
-  match "hooks" => "hooks#receiver"
-
-  match '/help',  to: 'static_pages#help'
 
   
   # The priority is based upon order of creation:
