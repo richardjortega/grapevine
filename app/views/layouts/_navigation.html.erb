@@ -5,7 +5,7 @@
 	<span class="icon-bar"></span>
 </a>
 <!-- Be sure to leave the brand out there if you want it shown -->
-<%= link_to "Grapevine", root_path, :class => 'brand' %>
+<%= link_to image_tag( "logo_333x71.png", :class => "brand", :alt => "Grapevine"), root_path %>
 
 <!-- Everything you want hidden at 940px or less, place within here -->
 <div class="nav-collapse">
@@ -19,9 +19,10 @@
 				<%= link_to "Sign Out", destroy_user_session_path %>
 			</li>
 		  <% else %>
-		  	<li>
+<!-- 		  	<li>
 		  		<%= link_to "Sign In", new_user_session_path %>
-		  	</li>
+		  	</li> -->
+		  	<li> <h4>Call Us.</h4><h3>210-549-7799</h3></li>
 		  	<li>
 		  		<%= link_to "Sign Up", new_user_registration_path %>
 		  	</li>

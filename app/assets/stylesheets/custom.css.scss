@@ -9,6 +9,8 @@ body {
 
 p {
     text-shadow:#fff 0 1px 0;
+    font-size:18px;
+    line-height:24px;
 }
 
 a:link, a:visited {
@@ -33,9 +35,9 @@ h3 {
 }
 
 .hand {
-    font-family: 'Delius Swash Caps', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight:400;
-    color:#4fb6e9;
+    color:#7c40bc;
 }
 
 h2 {
@@ -55,7 +57,7 @@ h2 strong {
 h4 {
     font-family:'Open Sans', sans-serif;
     font-weight:600;
-    font-size:16px;
+    font-size:20px;
     
 }
 
@@ -72,13 +74,28 @@ h4 {
     filter:none;
 }
 
+// .navbar .brand {
+//     font-family: 'Open Sans Condensed', sans-serif;
+//     font-weight:700;
+//     font-size:32px;
+//     padding:40;
+//     margin-left:0;
+// }
+
 .navbar .brand {
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-weight:700;
-    font-size:32px;
-    padding:0;
+    // background-image: image-url("logo_340x71.png");
+    // height: 71px;
+    // width: 340px;
+    background-repeat: no-repeat;
+    background-position: left top;
+    // text-indent: -9999em;
+    // padding-top:20px;
+    // padding:100;
     margin-left:0;
 }
+
+
+
 
 .navbar .nav {
     float:right;
@@ -179,7 +196,7 @@ h4 {
 /** FEATURE ***/
 
 .feature {
-    margin-top:60px;
+    // margin-top:60px;
     margin-bottom:60px;
     text-align:center;
 }
@@ -251,6 +268,8 @@ h4 {
     text-align:center;
     padding:8px 0;
     border-bottom:1px solid #eee;
+    font-size:14px;
+    line-height:18px;
     
 }
 
