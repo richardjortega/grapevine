@@ -1,10 +1,13 @@
 Grapevine::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
+
+  authenticated :user do
+    root to: 'accounts#index'
+  end
+
   root to: 'static_pages#home'
 
   match '/demo', to: 'static_pages#demo'
-  
-  #match "/profile", to: 'users#show'
 
   match "hooks" => "hooks#receiver"
 

@@ -29,12 +29,8 @@
         <div class="content">
            <div class="row">
             <div class="feature span12">
-              <% if current_page?(root_url) %>
-                <%= render 'layouts/home' %>
-              <% else %>
                 <%= render 'layouts/messages' %>
                 <%= yield %>
-              <% end %>
             </div>
           </div>
         </div>
