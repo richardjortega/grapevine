@@ -9,14 +9,6 @@ class ApplicationController < ActionController::Base
   # Access session for this scope - user_session
 
   private
-
-  # do i even need this... damn will find out while refactoring
-  def require_user
-  	redirect_to root_path unless current_user
-  end
-
-  # def after_sign_in_path_for(resource)
-  #   stored_location_for(resource) || user_path
-  # end
+  
 
 end

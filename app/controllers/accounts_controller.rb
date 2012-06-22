@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 
-	def dashboard
+	def index
 	end
 
 end
