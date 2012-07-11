@@ -7,6 +7,8 @@ Grapevine::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  match '/enroll', to: 'static_pages#enroll'
+
   match '/demo', to: 'static_pages#demo'
 
   match "hooks" => "hooks#receiver"
