@@ -1,6 +1,10 @@
 Grapevine::Application.configure do
  # Settings specified here will take precedence over those in config/application.rb
 
+  #Info for IronWorker to work in dev
+  ENV['IRON_WORKER_TOKEN'] = 'txB1rSLVN6dDm2cwgGR5S4Nae6o'
+  ENV['IRON_WORKER_PROJECT_ID'] = '4fcc53f5f709a255190125f3'
+
   # specify what domain to use for mailer URLs
   config.action_mailer.default_url_options = { :host => 'localhost:3000'}
 
