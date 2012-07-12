@@ -3,6 +3,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'csv'
 
+
+
 url = "http://www.opentable.com/san-antonio-texas-restaurant-listings"
 doc = Nokogiri::HTML(open(url)).css('tr.ResultRow')
 
@@ -13,7 +15,13 @@ found_locations = doc.collect do |listing|
 	parsed_locations
 end
 
-CSV.open("locations4.csv", "wb") do |row|
+puts "Finished finding all location pages"
+puts "Please provide a output filename"
+puts "Note: .csv will be appended for you, also spaces should be underscores"
+puts '> '
+filename = STDIN.gets.chomp()
+
+CSV.open("#{filename}.csv", "wb") do |row|
 	row << [ "name", "url" ]
 	found_locations.each do |location|
 		row << [ location[:Name], location[:Url] ]
