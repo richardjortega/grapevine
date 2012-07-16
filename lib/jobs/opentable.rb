@@ -26,17 +26,17 @@ class OpenTableParser
 		puts "Scraping Data from Each Location..."
 
 		### For quick testing, only uses two links
-		twolinks = Array.new
-		twolinks << links[0] << links[1]
-		found_details = twolinks.collect do |location_link|
-			parse_location_page(location_link)
-		end
+		# twolinks = Array.new
+		# twolinks << links[0] << links[1]
+		# found_details = twolinks.collect do |location_link|
+		# 	parse_location_page(location_link)
+		# end
 
 		# Probably should be broken to another method
 		# Parse all pages on the returned pages
-		# found_details = links.collect do |location_link|
-		# 	parse_location_page(location_link)
-		# end
+		found_details = links.collect do |location_link|
+			parse_location_page(location_link)
+		end
 		
 		# Remove any nil values from the returned array
 		found_details.compact!
