@@ -19,6 +19,7 @@ group :development, :test do
 	gem 'ruby_gntp'
 	gem 'guard-spork'
 	gem 'factory_girl_rails', '>= 3.1.0'
+	gem 'debugger'
 end
 
 group :test do

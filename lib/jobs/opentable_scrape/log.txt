@@ -1,2 +1,0 @@
-# Logfile created on 2012-07-11 19:16:47 -0500 by logger.rb/31641
-E, [2012-07-11T19:16:47.007317 #29695] ERROR -- : This will not be ignored
