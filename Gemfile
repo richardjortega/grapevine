@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.5'
 gem 'bootstrap-sass', '2.0.3'
 gem 'stripe',	'~> 1.7.0'
-gem 'formtastic', '~> 2.1.1'
-gem 'formtastic-bootstrap'
-#gem 'bcrypt-ruby', :require => 'bcrypt'
 
 group :production do
 	gem 'pg'
@@ -22,6 +19,7 @@ group :development, :test do
 	gem 'ruby_gntp'
 	gem 'guard-spork'
 	gem 'factory_girl_rails', '>= 3.1.0'
+	gem 'debugger'
 end
 
 group :test do
