@@ -8,7 +8,7 @@ class OpenTableParser
 
 	def initialize()
 		@source = "opentable.com"
-		@directory_listing = "san-antonio-texas-restaurant-listings"
+		@directory_listing = "austin-texas-restaurant-listings"
 		@city_location_link = "http://www.#{@source}/#{@directory_listing}"
 	end
 
@@ -116,7 +116,7 @@ class OpenTableParser
 				parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
 				parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
-				puts "Finished scrapping: " + parsed_detail[:name] + "in #{(Time.now - job_start_time)} seconds"
+				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
 				parsed_detail
 			end
 		rescue => e
