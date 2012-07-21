@@ -233,5 +233,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   shoulda-matchers
   sqlite3
-  stripe (~> 1.7.0)
+  stripe
   uglifier (>= 1.0.3)

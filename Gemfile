@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.5'
 gem 'bootstrap-sass', '2.0.3'
-gem 'stripe',	'~> 1.7.0'
+gem 'stripe'
 
 group :production do
 	gem 'pg'
