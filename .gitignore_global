@@ -38,7 +38,8 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-# Rails local shit #
+# Rails local shit and other stuff #
 ######################
 tmp/
 log/
+.env

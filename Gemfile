@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.5'
 gem 'bootstrap-sass', '2.0.3'
 gem 'stripe'
+gem 'thin'
+
 
 group :production do
 	gem 'pg'
@@ -11,6 +13,7 @@ end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
+	gem 'foreman'
 	gem 'sqlite3'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
