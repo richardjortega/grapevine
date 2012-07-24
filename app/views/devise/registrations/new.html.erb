@@ -1,8 +1,4 @@
-<% content_for :head do %>
-  <%= javascript_include_tag "registrations" %>
-  <%= javascript_include_tag "https://js.stripe.com/v1/" %>
-  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
-<% end %>
+<%= render 'devise/registrations/stripe_tag_includes' %>
 
 <div class="page-header">
 	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
