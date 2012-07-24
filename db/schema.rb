@@ -11,7 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724005912) do
+ActiveRecord::Schema.define(:version => 20120724054722) do
+
+  create_table "plans", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "slug",       :null => false
+    t.integer  "amount",     :null => false
+    t.string   "currency",   :null => false
+    t.string   "interval",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "plans", ["amount"], :name => "index_plans_on_amount"
+  add_index "plans", ["slug"], :name => "index_plans_on_slug", :unique => true
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id",               :null => false
+    t.integer  "plan_id",               :null => false
+    t.string   "status"
+    t.string   "current_period_end"
+    t.string   "current_period_start"
+    t.string   "trial_end"
+    t.string   "trial_start"
+    t.string   "stripe_customer_token"
+    t.string   "card_zip"
+    t.string   "last_four"
+    t.string   "card_type"
+    t.date     "next_bill_on"
+    t.string   "card_expiration"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

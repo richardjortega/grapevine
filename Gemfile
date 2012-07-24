@@ -5,9 +5,16 @@ gem 'bootstrap-sass', '2.0.3'
 gem 'stripe'
 gem 'thin'
 
+gem 'jquery-rails'
+gem 'roadie'
+gem 'devise', '>= 2.1.0.rc'
+gem 'cancan', '>= 1.6.7'
+gem 'rolify', '>= 3.1.0'
+gem 'friendly_id'
 
 group :production do
 	gem 'pg'
+	gem 'newrelic_rpm'
 end
 
 # Bundle edge Rails instead:
@@ -23,6 +30,8 @@ group :development, :test do
 	gem 'guard-spork'
 	gem 'factory_girl_rails', '>= 3.1.0'
 	gem 'debugger'
+	gem 'rails-erd'
+	gem 'thoughtbot-shoulda'
 end
 
 group :test do
@@ -30,7 +39,6 @@ group :test do
 	gem 'capybara'
 	gem 'database_cleaner', '>= 0.7.2'
 	gem 'launchy'
-	gem 'shoulda-matchers'
 end
 
 
@@ -40,30 +48,4 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
 end
-
-gem 'jquery-rails'
-gem 'roadie'
-gem 'devise', '>= 2.1.0.rc'
-gem 'cancan', '>= 1.6.7'
-gem 'rolify', '>= 3.1.0'
-
-# Monitoring apps
-gem 'newrelic_rpm'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
