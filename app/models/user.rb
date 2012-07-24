@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  # Associations
+  has_one :subscription
+  has_one :plan, :through => :subscription
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

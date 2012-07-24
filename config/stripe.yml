@@ -1,0 +1,4 @@
+# see https://manage.stripe.com/#account/apikeys
+---
+STRIPE_PUBLISHABLE_KEY: "pk_bAEZXsFEaF2YxPP7rzt12lH6e4JaL"
+STRIPE_SECRET_KEY: "tJhooWqaOtgRuLxkGogSLTL3sLxEU4ak"

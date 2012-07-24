@@ -47,3 +47,4 @@ Thumbs.db
 # Rails local shit
 tmp/
 log/
+.env
