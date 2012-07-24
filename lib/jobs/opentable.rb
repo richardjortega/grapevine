@@ -8,7 +8,7 @@ class OpenTableParser
 
 	def initialize()
 		@source = "opentable.com"
-		@directory_listing = "austin-texas-restaurant-listings"
+		@directory_listing = "las-vegas-restaurant-listings"
 		@city_location_link = "http://www.#{@source}/#{@directory_listing}"
 	end
 
