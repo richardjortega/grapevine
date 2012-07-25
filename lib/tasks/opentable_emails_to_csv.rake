@@ -1,5 +1,4 @@
 require_relative "../jobs/opentable.rb"
-require_relative "../jobs/open_file.rb"
 
 namespace :opentable do
 	desc "OpenTable - Export CSV of All Locations with Emails"
