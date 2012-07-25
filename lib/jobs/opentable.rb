@@ -6,9 +6,9 @@ require 'pp'
 
 class OpenTableParser
 
-	def initialize()
+	def initialize(city_listing)
 		@source = "opentable.com"
-		@directory_listing = "las-vegas-restaurant-listings"
+		@directory_listing = city_listing
 		@city_location_link = "http://www.#{@source}/#{@directory_listing}"
 	end
 
