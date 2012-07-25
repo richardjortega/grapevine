@@ -84,7 +84,7 @@ class OpenTableParser
 
 	def parse_location_page(link)
 		begin
-			url = "http://www.opentable.com/#{link}"
+			url = "http://www.#{@source}/#{link}"
 			puts "Scrapping: " + url
 			job_start_time = Time.now
 			doc = Nokogiri::HTML(open(url)).css('div.section.main')
@@ -92,7 +92,9 @@ class OpenTableParser
 			doc.collect do |detail|
 				parsed_detail = Hash.new
 					
-				parsed_detail[:url] = url
+				parsed_detail[:url] = "#{url}&tab=2"
+				debugger
+				
 				# Declutter address
 				address = detail.css('span#ProfileOverview_lblAddressText').first.inner_html
 				address_parts = address.split("<br>")
