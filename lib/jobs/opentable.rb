@@ -49,10 +49,11 @@ class OpenTableParser
 
 		# Uses CSV from Ruby Core lib, this data has no owner so won't interact with our DB.
 		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb") do |row|
-			row << [ "name", "rating", "address", "total reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review rating", "review description", "review dine date" ]
+			row << [ "name", "url", "rating", "address", "total reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review rating", "review description", "review dine date" ]
 			
 			found_details.each do |location|
-				row << [ location[:name], 
+				row << [ location[:name],
+					location[:url], 
 					location[:rating], 
 					location[:address],
 					location[:total_reviews], 
@@ -91,6 +92,7 @@ class OpenTableParser
 			doc.collect do |detail|
 				parsed_detail = Hash.new
 					
+				parsed_detail[:url] = url
 				# Declutter address
 				address = detail.css('span#ProfileOverview_lblAddressText').first.inner_html
 				address_parts = address.split("<br>")

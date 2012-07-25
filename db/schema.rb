@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724054722) do
+ActiveRecord::Schema.define(:version => 20120724231940) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "name",           :null => false
+    t.string   "lat"
+    t.string   "long"
+    t.string   "street_address", :null => false
+    t.string   "address_line_2"
+    t.string   "city",           :null => false
+    t.string   "state",          :null => false
+    t.string   "zip",            :null => false
+    t.string   "website"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "locations", ["name"], :name => "index_locations_on_name", :unique => true
 
   create_table "plans", :force => true do |t|
     t.string   "name",       :null => false
@@ -61,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20120724054722) do
     t.string   "last_name"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "phone_number"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
