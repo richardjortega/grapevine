@@ -93,8 +93,7 @@ class OpenTableParser
 				parsed_detail = Hash.new
 					
 				parsed_detail[:url] = "#{url}&tab=2"
-				debugger
-				
+
 				# Declutter address
 				address = detail.css('span#ProfileOverview_lblAddressText').first.inner_html
 				address_parts = address.split("<br>")
