@@ -8,7 +8,7 @@ class Plan < ActiveRecord::Base
 
 	validates :name,	presence: true, uniqueness: true
 	validates :slug, 	presence: true, uniqueness: true
-	validates :amount,	presence: true, numbericality: { greater_than_or_equal_to: 0 }
+	validates :amount,	presence: true, numericality: { greater_than_or_equal_to: 0 }
 
 	attr_accessible :amount, :currency, :interval, :name, :slug
 
