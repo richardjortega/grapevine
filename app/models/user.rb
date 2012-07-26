@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # Associations
   has_one :subscription
   has_one :plan, :through => :subscription
+  has_and_belongs_to_many :locations
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
