@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(:version => 20120724235638) do
 
   add_index "locations", ["name"], :name => "index_locations_on_name", :unique => true
 
+  create_table "locations_users", :id => false, :force => true do |t|
+    t.integer "location_id"
+    t.integer "user_id"
+  end
+
   create_table "plans", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "slug",       :null => false
@@ -75,9 +80,9 @@ ActiveRecord::Schema.define(:version => 20120724235638) do
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "phone_number"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "phone_number"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
