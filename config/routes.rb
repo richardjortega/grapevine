@@ -1,6 +1,8 @@
 Grapevine::Application.routes.draw do
   devise_for :users
 
+  resources :subscriptions
+
   authenticated :user do
     root to: 'accounts#index'
   end

@@ -3,6 +3,7 @@ class Location < ActiveRecord::Base
 
   #Associations
   has_many :users, :through => :relationships
+  has_many :relationships
 
   #Model Validations
   validates_presence_of :name

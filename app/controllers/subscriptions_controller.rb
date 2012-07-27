@@ -1,8 +1,16 @@
 class SubscriptionsController < ApplicationController
  
+  def new
+
+
+  end
+
   def create
   	@subscription 		= Subscription.new params[:subscription]
-  	@subscription.user	= current_user
+  	user				= User.create! params[:user]
+  	@subscription.user  = user
+  	user.locations << Location.create!(params[:location])
+
 
   	@plan = Plan.find params[:subscription][:plan_id]
 

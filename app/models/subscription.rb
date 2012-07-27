@@ -19,13 +19,14 @@ class Subscription < ActiveRecord::Base
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts
   	customer.update_subscription({:plan => "basic_monthly"})
+  	save!
   end
 
 
 
 private
 	def stripe_description
-	  	"#{user.name}: #{user.email}"
+	  	"#{user.first_name} #{user.last_name}: #{user.email}"
 	end
 
 	def stripe_customer_without_credit_card
