@@ -7,6 +7,8 @@ Grapevine::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  get '/signup' => 'static_pages#signup',      as: 'signup'
+
   match '/enroll', to: 'static_pages#enroll'
   match '/demo', to: 'static_pages#demo'
   match "hooks" => "hooks#receiver"
@@ -19,7 +21,7 @@ Grapevine::Application.routes.draw do
     post 'sign_in' => 'devise/sessions#create', :as => :user_session
     match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
       :via => Devise.mappings[:user].sign_out_via
-    get 'sign_up' => 'devise/registrations#new', :as => :new_user_registration
+    # get 'sign_up' => 'devise/registrations#new', :as => :new_user_registration
     get 'edit_profile' => 'devise/registrations#edit', :as => :edit_user_registration
   end
 
