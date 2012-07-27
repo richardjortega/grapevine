@@ -3,7 +3,8 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  def help
+  def signup
+  	@plan = Plan.find_by_identifier['basic-monthly']
   end
 
 end

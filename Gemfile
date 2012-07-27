@@ -10,9 +10,9 @@ gem 'roadie'
 gem 'devise', '>= 2.1.0.rc'
 gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
-gem 'friendly_id'
 
 group :production do
+	# gem 'mysql2'
 	gem 'pg'
 	gem 'newrelic_rpm'
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724235638) do
+ActiveRecord::Schema.define(:version => 20120727051631) do
 
   create_table "locations", :force => true do |t|
     t.string   "name",           :null => false
@@ -29,23 +29,26 @@ ActiveRecord::Schema.define(:version => 20120724235638) do
 
   add_index "locations", ["name"], :name => "index_locations_on_name", :unique => true
 
-  create_table "locations_users", :id => false, :force => true do |t|
-    t.integer "location_id"
-    t.integer "user_id"
-  end
-
   create_table "plans", :force => true do |t|
-    t.string   "name",       :null => false
-    t.string   "slug",       :null => false
-    t.integer  "amount",     :null => false
-    t.string   "currency",   :null => false
-    t.string   "interval",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",              :null => false
+    t.string   "identifier",        :null => false
+    t.integer  "amount",            :null => false
+    t.string   "currency",          :null => false
+    t.string   "interval",          :null => false
+    t.integer  "trial_period_days"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "plans", ["amount"], :name => "index_plans_on_amount"
-  add_index "plans", ["slug"], :name => "index_plans_on_slug", :unique => true
+  add_index "plans", ["identifier"], :name => "index_plans_on_identifier", :unique => true
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "user_id",               :null => false
