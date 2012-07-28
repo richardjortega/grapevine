@@ -1,3 +1,135 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+    .box .row + .row{
+    	margin-top:0px;
+    }
+	div.row.features-sales-page{
+		margin-top:5px;
+	}
+
+	img.center-feature{
+		float:right;
+		max-width:200px;
+	}
+
+	.feature img{
+	  margin:5px 0 0;
+	}
+
+    .feature{
+        margin-bottom:30px;
+    }
+
+.purple_button {
+		display:inline-block;
+    font-family:'Open Sans', sans-serif;
+    font-size:24px;
+    font-weight:400;
+    padding:15px 30px;
+    -webkit-border-radius:32px;
+    border-radius:32px;
+    background:rgb(200,64,188);
+    border:1px solid #ddd;
+    border-color:rgb(200,64,188) rgb(150,64,188) rgb(124,64,188);
+    color:#fff;
+    text-shadow:none;
+    background-image: linear-gradient(top, rgb(200,64,188) 0%, rgb(79,182,233) 5%, rgb(124,64,188) 100%);
+    
+    background-image: -o-linear-gradient(top, rgb(200,64,188) 0%, rgb(150,64,188) 5%, rgb(124,64,188) 100%);
+    
+    background-image: -moz-linear-gradient(top, rgb(200,64,188) 0%, rgb(150,64,188) 5%, rgb(124,64,188) 100%);
+
+    background-image: -webkit-linear-gradient(top, rgb(200,64,188) 0%, rgb(150,64,188) 5%, rgb(124,64,188) 100%);
+
+    background-image: -ms-linear-gradient(top, rgb(200,64,188) 0%, rgb(79,182,233) 5%, rgb(124,64,188) 100%);
+    
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, rgb(200,64,188)),
+        color-stop(0.05, rgb(150,64,188)),
+        color-stop(1, rgb(124,64,188))
+    );
+    text-shadow:#3799ca 0 -1px 0;
+    box-shadow:rgba(0,0,0,0.2) 0 1px 1px;
+
+}
+
+.purple_button:link, .purple_button:visited {
+    color:#fff;
+}
+
+.purple_button:hover {
+    background:#7c40bc;
+    box-shadow:none;
+    color:#fff;
+    text-decoration:none;
+}
+
+
+.little_bit_of_space_on_top{
+    margin-top:20px;
+}
+
+#film_icon_in_button{
+  position:absolute;
+  right:20px;
+  top:10px;
+}
+
+#watch_video_button{
+    position:relative;
+    padding-right:55px;
+}
+
+.container{
+    margin-top:-25px;
+}
+
+/* Landscape phones and down */
+  @media (max-width: 480px) { 
+    .features_icon{
+      display:none;
+    }
+    
+    #image_next_to_video_on_home {
+     display:none;
+   }
+
+	.purple_button {
+	 display:inline-block;
+    font-family:'Open Sans', sans-serif;
+    font-size:18px;
+    font-weight:400;
+    padding:15px 30px;
+	}
+
+  }
+
+@media (max-width: 767px) { 
+   .features_icon{
+     display:none;
+   }
+
+   #image_next_to_video_on_home{
+     display:none;
+   }
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+  .features_icon{
+    visibility:hidden;
+  }
+
+}
+
+#reviews_delivered{
+    margin-top:-5px;
+}
+
+img.features_icon{
+   max-width:100px;
+}

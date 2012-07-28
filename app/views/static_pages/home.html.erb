@@ -1,14 +1,19 @@
 <% provide(:title, 'Grapevine') %>
 <div class="feature span12">
-	<div class="container">
+	<div class="container" id="reviews_delivered">
 	            <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
 	            <h3 class="hand">Track Online Reviews Said About Your Business!</h3>
 	            <%= image_tag("pics/feature.png", id: "feature-screenshot", alt: "screenshot") %>
 	        </div>
 	    </div>
 	    <div class="row">
+			    <div class="span12 center">
+			    	<!--Inline styling to override bootstrap classes without breaking anything I think-->
+					  <a href="#watch_video" class="signup" id="watch_video_button">Watch Demo Video <%= image_tag 'glyphicons_008_film.png', id: "film_icon_in_button" %></a>
+						<a href="/signup" class="purple_button">Sign up now for you FREE 30-Day trial</a>
+					</div>
 	        <div class="span12 graded center">
-	            <h4 class="hand">Grapevine is for everyone, any industry, any company! Scroll down for more details!</h4>
+	            <h4 class="hand little_bit_of_space_on_top">Grapevine is for everyone, any industry, any company! Scroll down for more details!</h4>
 	        </div>
 	    </div>
 	</div>
@@ -18,36 +23,53 @@
 	    <h2><strong>Features</strong> you'll really dig.</h2>
 	    <h3 class="hand">Hear Everything Through the Grapevine.</h3>
 	    <div class="row">
-	        <div class="span12 box drop-shadow">
-	            <div class="row">
-	                <article class="span6 offset1">
-	                    <h3>24x7 Review Monitoring.</h3>
-	                    <p>We monitor all the popular review sites across the web. Yelp, UrbanSpoon, GoogleLocal, CitySearch, InsiderPages, YellowPages. If there is a review site we're not monitoring for you, get in contact with us and we'll add it! 
-	                    </p>
+	        <div class="span12 box drop-shadow" id="watch_video">
+	            
+
+
+
+            <div class="row">
+            	<div class="span6 offset1" id="video_holder">
+            		<iframe src="http://player.vimeo.com/video/45796412?title=0&amp;byline=0" width="560" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            		<!-- <iframe width="560" height="315" src="http://www.youtube.com/embed/HieBf0G1CqI" frameborder="0" allowfullscreen></iframe> -->
+                </div>
+                <div class="span4">
+                  <%= image_tag 'placeholder_home.png', id: "image_next_to_video_on_home" %>
+                </div>
+            </div><br><br>
+
+
+	            <div class="row features-sales-page">
+	                <div class="span1 offset1">
+	                    <%= image_tag "pics/email.png", alt: "Daily Email Notices", class: "features_icon" %>
+	                </div>
+	                <article class="span9">
+	                    <h3>30 Day Free Trial.<br /> No Long-Term Commitment.</h3>
+	                    <p>We believe that we can offer each other value. We believe that so much, we'll setup monitoring of your business location at no cost plus get 30 days of 24x7 review monitoring. No credit cards, no worries. <br /><em>Sign up below, seriously it can't hurt you!</em>
 	                </article>
-	                <div class="span4">
-	                    <%= image_tag("pics/24x7.png", alt: "24x7 Review Monitoring") %>
-	                </div>
 	            </div>
-	            <div class="row">
-	                <div class="span4 offset1">
-	                    <%= image_tag("pics/email.png", alt: "Daily Email Notices") %>
+
+
+	            <div class="row features-sales-page">
+	                <div class="span1 offset1">
+	                    <%= image_tag "pics/email.png", alt: "Daily Email Notices", class: "features_icon" %>
 	                </div>
-	                <article class="span6">
+	                <article class="span9">
 	                    <h3>Daily Email Notifications</h3>
 	                    <p>Everyday people talk about your business online, some good - some bad. It's tough to keep up with new review sites, let alone checking all of them daily - which is why we do it for you! If a new review pops up online, you'll get an email!</p>
 	                </article>
 	            </div>
-	            <div class="row">
-	                <article class="span6 offset1">
-	                    <h3>30 Days Free Trial.<br /> No Long-Term Commitment.</h3>
-	                    <p>We believe that we can offer each other value. We believe that so much, we'll setup monitoring of your business location at no cost plus get 30 days of 24x7 review monitoring. No credit cards, no worries. <br /><em>Sign up below, seriously it can't hurt you!</em>  
-	                    </p>
-	                </article>
-	                <div class="span4">
-	                    <%= image_tag("pics/free.png", alt: "Free 30 Day Trial") %>
+
+	            <div class="row features-sales-page">
+	                <div class="span1 offset1">
+	                    <%= image_tag "pics/email.png", alt: "Daily Email Notices", class: "features_icon" %>
 	                </div>
+	                <article class="span9">
+	                    <h3>Daily Email Notifications</h3>
+	                    <p>Everyday people talk about your business online, some good - some bad. It's tough to keep up with new review sites, let alone checking all of them daily - which is why we do it for you! If a new review pops up online, you'll get an email!</p>
+	                </article>
 	            </div>
+
 	        </div>
 	    </div>
 	</div>
@@ -74,8 +96,10 @@
 	                    <li>Monitor One Business Location</li>
 	                    <li>Email Notifications</li>
 	                    <li>24x7 Review Monitoring</li>
+	                    <li>Unlimited Review Notices</li>
 	                    <li>Email Support</li>
 	                    <li>No Setup Cost</li>
+	                    <li><em>A little nervous about long term commitments? No problem!</em></li>
 	                </ul>
 	                <h3>$30/month</h3>
 	            </div>
@@ -90,8 +114,10 @@
 	                    <li>Monitor One Business Location</li>
 	                    <li>Email Notifications</li>
 	                    <li>24x7 Review Monitoring</li>
+	                    <li>Unlimited Review Notices</li>
 	                    <li>Email Support</li>
 	                    <li>No Setup Cost</li>
+	                    <li><em>Get 2 months service FREE when you sign up for a year!</em></li>
 	                </ul>
 	                <h3>$300/year</h3>
 	            </div>
@@ -132,7 +158,8 @@
 	    </div>
 	    <div class="row">
 	        <div class="span12 center graded">
-	            <a href="/demo" class="signup">Sign up now</a>
+	            <!-- <a href="/demo" class="signup">Sign up now</a> -->
+				<a href="/signup" class="purple_button">Sign up for your FREE 30-Day Trial</a>
 	            <h3 class="hand">30 day free trial, no credit card, no long-term contracts.</h3>
 	        </div>
 	    </div>
