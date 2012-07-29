@@ -3,19 +3,10 @@ class NotifyMailer < ActionMailer::Base
   default from: "alerts@pickgrapevine.com",
           reply_to: "no-reply@pickgrapevine.com"
 
-  #Friendly amount formats
-  def format_amount(amount)
-    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
-  end
-
-  #Friendly time formats
-  def format_timestamp(timestamp)
-    Time.at(timestamp).strftime("%m/%d/%Y")
-  end
-
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)
     @user = user
+    add_user_to_marketing_list(user)
     mail to: user.email, subject: "Thanks for signing up to Grapevine for 30 days!"
   end
   
@@ -50,6 +41,38 @@ class NotifyMailer < ActionMailer::Base
     puts "We're still working on this..."
   end
 
-  # 
+private
+ 
+  #Friendly amount formats
+  def format_amount(amount)
+    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
+  end
+
+  #Friendly time formats
+  def format_timestamp(timestamp)
+    Time.at(timestamp).strftime("%m/%d/%Y")
+  end
+
+  #Add new signup to Mailchimp list "Free Trial Signup"
+  def add_user_to_marketing_list(user)
+    free_trial_list_id = '45da553fee'
+    location = user.location.last
+    
+    merge_vars = {
+      'FNAME' => user.first_name
+      'LNAME' => user.last_name
+      'PHONE' => user.phone_number
+      'COMPANY' => location.name
+      'WEBSITE' => location.website
+      'ADDRESS' = [:addr1 = location.street_address, 
+                   :addr2 = location.address_line_2, 
+                   :city = location.city, 
+                   :zip = location.zip ]
+    }
+    double_optin = false
+    response = Mailchimp::API.listSubscribe({:id => free_trial_list_id,
+      :email_address => user.email, :merge_vars => merge_vars,
+      :double_optin => double_optin})
+  end
 
 end

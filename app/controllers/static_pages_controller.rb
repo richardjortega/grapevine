@@ -4,7 +4,6 @@ class StaticPagesController < ApplicationController
   end
 
   def signup
-
   	@user			= User.new
   	@plan 			= Plan.find_by_identifier("basic_monthly")
   	@location		= @user.locations.build

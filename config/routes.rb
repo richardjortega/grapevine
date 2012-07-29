@@ -1,4 +1,6 @@
 Grapevine::Application.routes.draw do
+  mount StripeEvent::Engine => "/stripe_event"
+
   devise_for :users
 
   resources :subscriptions
@@ -9,11 +11,15 @@ Grapevine::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  # Main signup form, defaulted to 30 day free trial and builds Stripe connectino
   get '/signup' => 'static_pages#signup',      as: 'signup'
 
+  # Pages and links to be removed once Stripe integration completed
   match '/enroll', to: 'static_pages#enroll'
   match '/demo', to: 'static_pages#demo'
-  match "hooks" => "hooks#receiver"
+  
+  # Disabled because of using stripe_event (in testing mode now)
+  # match "hooks" => "hooks#receiver"
   match '/help',  to: 'static_pages#help'
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
