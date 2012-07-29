@@ -17,7 +17,7 @@ Stripe.api_key    = stripe[:STRIPE_SECRET_KEY]
 # Recommended testing options:
 ## pagekite.me, showoff.io, localtunnel.com
 
-StripeEvent.registration do |event|
+StripeEvent.registration do
 	subscribe 'invoice.payment_failed' do |event|
 		handle_failed_charge event
 	end

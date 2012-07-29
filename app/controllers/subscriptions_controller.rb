@@ -8,15 +8,14 @@ class SubscriptionsController < ApplicationController
 
 
   	@plan = Plan.find params[:subscription][:plan_id]
-  	debugger
 
   	if @subscription.save_without_payment
-  		flash[:success]	= "Thank you trying out Grapevine Free 30 Day Trial!"
+  		flash[:success]	= "Thank you for signup for your 30 Day Free Trial with Grapevine!"
   		redirect_to root_path
   		# Deliver the signup_email
 	    NotifyMailer.free_signup(@subscription.user).deliver
 	    # Send 'ol Erik a notice of a new customer signed up upon completion
-	    NotifyMailer.new_customer(@subcription.user).deliver
+	    NotifyMailer.new_customer(@subscription.user).deliver
   	else
   		flash.now[:error] = "Unable to add your subcription, this has been reported to the Grapevine team"
   		render template: 'static_pages#home'

@@ -6,7 +6,8 @@ Grapevine::Application.configure do
   ENV['IRON_WORKER_PROJECT_ID'] = '4fcc53f5f709a255190125f3'
 
   # specify what domain to use for mailer URLs
-  config.action_mailer.default_url_options = { :host => 'localhost:3000'}
+  config.action_mailer.default_url_options = { :host => 'pickgrapevine.com'}
+  config.action_mailer.raise_delivery_errors = true
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

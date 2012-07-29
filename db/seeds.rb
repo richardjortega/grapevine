@@ -4,10 +4,10 @@ require 'database_cleaner'
   # then, whenever you need to clean the DB
   DatabaseCleaner.clean
 
-
-puts "Setting up default user login"
-user1 = User.create! :first_name => "Erik", :last_name => "Larson", :email => "erik@pickgrapevine.com", :password => 'please', :password_confirmation => 'please'
-puts "New user created: #{user1.first_name} #{user1.last_name}"
+# Add intital user
+# puts "Setting up default user login"
+# user1 = User.create! :first_name => "Erik", :last_name => "Larson", :email => "erik@pickgrapevine.com", :password => 'please', :password_confirmation => 'please'
+# puts "New user created: #{user1.first_name} #{user1.last_name}"
 
 
 # Seed stripe plans
@@ -17,6 +17,7 @@ stripe_plans = [
   { amount: 30000, interval: 'year', currency: 'usd', id: 'basic_yearly',  name: 'Grapevine Alerts - Basic Yearly'}
 ]
 
+# If a plan is already created inside of Stripe, it will return an error.
 stripe_plans.each { |plan| Stripe::Plan.create plan rescue puts "Skipping #{ plan[:name] }"}
 
 # Seed Plans table, matches what we have in Stripe

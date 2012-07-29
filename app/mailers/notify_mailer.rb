@@ -23,7 +23,7 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Email invoice receipt to User's email and Grapevine Support - successful
-  # Called in HooksController
+  # NEEEDS TO BE UPDATED!!! 7/28/2012
   def successfully_invoiced(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
@@ -56,23 +56,26 @@ private
   #Add new signup to Mailchimp list "Free Trial Signup"
   def add_user_to_marketing_list(user)
     free_trial_list_id = '45da553fee'
-    location = user.location.last
+    location = user.locations.last
     
     merge_vars = {
-      'FNAME' => user.first_name
-      'LNAME' => user.last_name
-      'PHONE' => user.phone_number
-      'COMPANY' => location.name
-      'WEBSITE' => location.website
-      'ADDRESS' = [:addr1 = location.street_address, 
-                   :addr2 = location.address_line_2, 
-                   :city = location.city, 
-                   :zip = location.zip ]
+      'FNAME' => user.first_name,
+      'LNAME' => user.last_name,
+      'PHONE' => user.phone_number,
+      'COMPANY' => location.name,
+      'WEBSITE' => location.website,
+      'ADDRESS' => [:addr1 => location.street_address, 
+                   :addr2 => location.address_line_2, 
+                   :city => location.city, 
+                   :zip => location.zip ]
     }
     double_optin = false
     response = Mailchimp::API.listSubscribe({:id => free_trial_list_id,
       :email_address => user.email, :merge_vars => merge_vars,
       :double_optin => double_optin})
+  rescue => e
+    puts "Error from Mailchimp"
+    puts e.message
   end
 
 end

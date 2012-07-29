@@ -10,6 +10,10 @@ class StaticPagesController < ApplicationController
   	@subscription 	= Subscription.new
   end
 
-private
+  def concierge
+  end
+
+  def thankyou
+  end
 
 end
