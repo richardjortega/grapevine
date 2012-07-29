@@ -12,7 +12,7 @@ Grapevine::Application.routes.draw do
   get '/signup' => 'static_pages#signup',      as: 'signup'
 
   match '/enroll', to: 'static_pages#enroll'
-  match '/demo', to: 'static_pages#demo'
+  match '/concierge', to: 'static_pages#concierge'
   match "hooks" => "hooks#receiver"
   match '/help',  to: 'static_pages#help'
 
