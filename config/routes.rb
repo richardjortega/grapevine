@@ -16,15 +16,11 @@ Grapevine::Application.routes.draw do
 
   # Pages and links to be removed once Stripe integration completed
   match '/enroll', to: 'static_pages#enroll'
-<<<<<<< HEAD
-  match '/demo', to: 'static_pages#demo'
   
   # Disabled because of using stripe_event (in testing mode now)
   # match "hooks" => "hooks#receiver"
-=======
   match '/concierge', to: 'static_pages#concierge'
   match "hooks" => "hooks#receiver"
->>>>>>> 4c6128a2d25bf9500589f97a36e4fb3df71bafdd
   match '/help',  to: 'static_pages#help'
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
