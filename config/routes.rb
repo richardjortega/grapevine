@@ -23,6 +23,9 @@ Grapevine::Application.routes.draw do
   match "hooks" => "hooks#receiver"
   match '/help',  to: 'static_pages#help'
 
+  #Billing/payment page
+  # match '/upgrade', to: 'subscriptions#upgrade'
+
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
   as :user do

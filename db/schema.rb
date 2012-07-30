@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(:version => 20120727051631) do
   end
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id",               :null => false
-    t.integer  "plan_id",               :null => false
-    t.string   "status"
+    t.integer  "user_id",                                  :null => false
+    t.integer  "plan_id",                                  :null => false
+    t.boolean  "status",                :default => false
     t.string   "current_period_end"
     t.string   "current_period_start"
     t.string   "trial_end"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20120727051631) do
     t.string   "card_type"
     t.date     "next_bill_on"
     t.string   "card_expiration"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id", :unique => true

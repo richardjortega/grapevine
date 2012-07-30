@@ -22,6 +22,15 @@ class NotifyMailer < ActionMailer::Base
     mail to: "erik@pickgrapevine.com", subject: "New customer signed up"
   end
 
+  # Send a notice 3 days before trial ends
+  def trial_about_to_expire(user)
+
+  end
+
+  # Send a notice on trial expiration
+  def trial_expired(user) 
+  end
+
   # Email invoice receipt to User's email and Grapevine Support - successful
   # NEEEDS TO BE UPDATED!!! 7/28/2012
   def successfully_invoiced(invoice, user)
@@ -40,7 +49,7 @@ class NotifyMailer < ActionMailer::Base
   def unsuccessfully_invoiced(invoice, user)
     puts "We're still working on this..."
   end
-
+ 
 private
  
   #Friendly amount formats
