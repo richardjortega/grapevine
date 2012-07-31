@@ -23,16 +23,16 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Send a notice 3 days before trial ends
-  def trial_about_to_expire(user)
-
+  def trial_ending(user)
+    mail to: user.email, subject: "Only 72 Hours Left of Review Alerts!"
   end
 
   # Send a notice on trial expiration
-  def trial_expired(user) 
+  def account_expired(user) 
+    mail to: user.email, subject: "Sorry to see you go the way of the Dodo..."
   end
 
   # Email invoice receipt to User's email and Grapevine Support - successful
-  # NEEEDS TO BE UPDATED!!! 7/28/2012
   def successfully_invoiced(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
@@ -41,13 +41,18 @@ class NotifyMailer < ActionMailer::Base
     @subscription_start = format_timestamp(@subscription.period.start)
     @subscription_end = format_timestamp(@subscription.period.end)
     # Mail invoice 
-    mail to: user.email, subject: "Grapevine Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Grapevine Payment Receipt", bcc: "erik@pickgrapevine.com"
   end
 
   # Email invoice receipt to User's email and Grapevine Support - failed
   # Called in HooksController
-  def unsuccessfully_invoiced(invoice, user)
-    puts "We're still working on this..."
+  def unsuccessfully_invoiced(user)
+    @user = user
+    @subscription_plan = @subscription.plan.name
+    @subscription_amount = format_amount(invoice.total)
+    
+    # Mail invoice 
+    mail to: user.email, subject: "Grapevine Receipt", bcc: "erik@pickgrapevine.com"
   end
  
 private

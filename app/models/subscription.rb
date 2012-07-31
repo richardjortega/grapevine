@@ -12,9 +12,9 @@ class Subscription < ActiveRecord::Base
   validates :stripe_customer_token,	presence: true
 
   
-
-  def save_without_payment # 30 Day Free Trial Signups
-  	customer = stripe_customer_without_credit_card #Create stripe signup
+  # Create new customer on Stripe and internal, 30 Day Free Trial Signups
+  def save_without_payment 
+  	customer = stripe_customer_without_credit_card 
   	self.stripe_customer_token	= customer.id
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts

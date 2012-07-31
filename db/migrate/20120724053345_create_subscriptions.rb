@@ -3,7 +3,8 @@ class CreateSubscriptions < ActiveRecord::Migration
     create_table :subscriptions do |t|
       t.integer :user_id,             null: false
       t.integer :plan_id,             null: false
-      t.boolean :status,              default: false
+      t.boolean :status,              default: false # Tells us if user is actively paid.
+      t.string :status_info
       t.string :current_period_end
       t.string :current_period_start
       t.string :trial_end
