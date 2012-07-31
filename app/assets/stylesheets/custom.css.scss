@@ -61,6 +61,15 @@ h4 {
     
 }
 
+.bullet ul li {
+    text-align:left;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+    font-size:18px;
+    line-height:24px;
+    
+}
+
 /** NAV **/
 
 .navbar {
@@ -242,7 +251,7 @@ h4 {
 /*** PRICING ****/
 
 .pricing {
-    padding-top:38px;
+    /*** padding-top:38px; ***/
     margin-bottom:30px;
 }
 
