@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120727051631) do
     t.integer  "user_id",                                  :null => false
     t.integer  "plan_id",                                  :null => false
     t.boolean  "status",                :default => false
+    t.string   "status_info"
     t.string   "current_period_end"
     t.string   "current_period_start"
     t.string   "trial_end"
