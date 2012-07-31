@@ -20,6 +20,8 @@ Grapevine::Application.routes.draw do
   # Disabled because of using stripe_event (in testing mode now)
   # match "hooks" => "hooks#receiver"
   match '/concierge', to: 'static_pages#concierge'
+  match '/landing', to: 'static_pages#landing'
+  match '/landing2', to: 'static_pages#landing2'
   match "hooks" => "hooks#receiver"
   match '/help',  to: 'static_pages#help'
 
