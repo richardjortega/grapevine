@@ -21,7 +21,7 @@ StripeEvent.registration do
 	# Update customer's plan to whatever Stripe lets us know.
 	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
-		if event.status == 'unpaid' 
+		if event.data.object.status == 'unpaid' 
 			handle_unpaid_customer event.data.object
 		else render :nothing => true, :status => 200
 		end
@@ -46,33 +46,40 @@ private
 
 # Inform user of failed payment. Accepts Stripe Invoice object
 def handle_failed_charge(invoice)
-	user = User.find_by_stripe_customer_token(invoice.customer)
-	debugger
-	NotifyMailer.unsuccessfully_invoiced(user).deliver
+	if user = Subscription.find_by_stripe_customer_token(invoice.customer)
+		NotifyMailer.unsuccessfully_invoiced(user).deliver
+	else render :nothing => true, :status => 200
+	end
 end
 
 # Provide user with payment receipt. Accepts Stripe Invoice object
 def handle_successful_charge(invoice)
-	user = User.find_by_stripe_customer_token(invoice.customer)
-	user.subscription.status = true
-	user.save!
-	
-	NotifyMailer.successfully_invoiced(invoice, user).deliver
+	if user = Subscription.find_by_stripe_customer_token(invoice.customer)
+		user.subscription.status = true
+		user.save!
+		
+		NotifyMailer.successfully_invoiced(invoice, user).deliver
+	else render :nothing => true, :status => 200
+	end
 end
 
 # Send an email to the customer informing them the trial is ending in 3 days
 def handle_trial_ending(subscription)
-	user = User.find_by_stripe_customer_token(subscription.customer)
-	NotifyMailer.trial_ending(user).deliver
+	if user = Subscription.find_by_stripe_customer_token(subscription.customer)
+		NotifyMailer.trial_ending(user).deliver
+	else render :nothing => true, :status => 200
+	end
 end
 
 # Suspend user for not paying after 3 retries to credit card
 # Same for trials that expire (on the 31st day)
 def handle_unpaid_customer(subscription)
-	user = User.find_by_stripe_customer_token(subscription.customer)
-	user.subscription.status = false
-	user.subscription.status_info = subscription.status
-	user.save!
+	if user = Subscription.find_by_stripe_customer_token(subscription.customer)
+		user.subscription.status = false
+		user.subscription.status_info = subscription.status
+		user.save!
 
-	NotifyMailer.account_expired(user).deliver
+		NotifyMailer.account_expired(user).deliver
+	else render :nothing => true, :status => 200
+	end
 end
