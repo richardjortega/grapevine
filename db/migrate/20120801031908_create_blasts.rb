@@ -16,7 +16,7 @@ class CreateBlasts < ActiveRecord::Migration
       t.string :review_description
       t.string :review_dine_date
       t.string :marketing_url
-      t.integer :marketing_id
+      t.string :marketing_id
 
       t.timestamps
     end

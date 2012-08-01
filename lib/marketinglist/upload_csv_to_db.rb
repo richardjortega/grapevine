@@ -7,6 +7,7 @@ class UploadMarketingList
         @filename = filename
     end
     def main
+        count = 1
         CSV.foreach(@filename, :encoding => 'windows-1251:utf-8') do |row|
             record = Blast.new(
                 :name               => row[0], 
@@ -26,8 +27,9 @@ class UploadMarketingList
                 :marketing_url      => row[14],
                 :marketing_id       => row[15]
             )
-            puts "Saved #{record.marketing_id} : #{record.name} into the Blast table"
+            puts "Saved #{count} : #{record.name} into the Blast table"
             record.save!
+            count += 1
         end
     end
 end

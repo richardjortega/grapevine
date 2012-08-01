@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20120801031908) do
     t.string   "review_description"
     t.string   "review_dine_date"
     t.string   "marketing_url"
-    t.integer  "marketing_id"
+    t.string   "marketing_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
