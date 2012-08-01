@@ -19,7 +19,7 @@ Grapevine::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   #Heroku Cedar stack having issue with assets:precompile with Rails 3.2+ (works with :true, default is :false)
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
