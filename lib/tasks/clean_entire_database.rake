@@ -1,3 +1,4 @@
+Rails.env = 'development'
 require 'database_cleaner'
 namespace :db do
 	desc "Cleans and truncates entire database - Dev ENV only"
