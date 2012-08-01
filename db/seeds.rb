@@ -1,8 +1,4 @@
-require 'database_cleaner'
-  # whipe a hoe db!
-  DatabaseCleaner.strategy = :truncation
-  # then, whenever you need to clean the DB
-  DatabaseCleaner.clean
+
 
 # Add intital user
 # puts "Setting up default user login"
