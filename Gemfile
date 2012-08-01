@@ -13,6 +13,10 @@ gem 'devise', '>= 2.1.0.rc'
 gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
 
+#used only in testing, but heroku needs all rake to pass before using other rakes
+#needs to be configured correctly later
+gem 'database_cleaner', '>= 0.7.2'
+
 group :production do
 	# gem 'mysql2'
 	gem 'pg'
@@ -39,7 +43,6 @@ end
 group :test do
 	gem 'email_spec'
 	gem 'capybara'
-	gem 'database_cleaner', '>= 0.7.2'
 	gem 'launchy'
 end
 
