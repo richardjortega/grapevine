@@ -1,5 +1,9 @@
 class HooksController < ApplicationController
 
+	def return_ok
+		render :nothing => true, :status => 200
+	end
+
 	protect_from_forgery :except => :receiver
 
 	require 'json'

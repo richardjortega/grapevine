@@ -1,0 +1,60 @@
+<% provide(:title, 'Grapevine') %>
+<div class="span12">
+    <div>
+    &nbsp;
+    </div>
+  <!-- OpenTable review goes here -->
+  <div class="container">
+      <h2>Want <strong>More</strong> ?</h2>
+      <h3 class="hand">Check out your OpenTable Review below!</h3>
+      <div class="row">
+          <div class="span7 hero-unit">
+            <%= image_tag "pics/opentable-logo.png", alt: "OpenTable" %>
+              <div>
+          &nbsp;
+          </div>
+            <p><strong>Restaurant:</strong> <%= @blast.name %></p>
+            <br />
+            <p><strong>Customer Rating:</strong> <%= @blast.rating %> stars</p>
+            <br />
+            <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
+            <br />
+            <p><strong>The Review:</strong><br />
+            <%= @blast.review_description %></p>
+            </div>
+
+    <div class="pricing landing">
+
+          <div class="span3">
+              <div class="well">
+                  <h3>Monthly <br />Email Alerts<br /><em><small>Simple and Smart!</small></em></h3>
+                  <ul>
+                      <li>Monitor One Business Location Anywhere In The USA</li>
+                      <li>Email Notifications</li>
+                      <li>24x7 Review Monitoring</li>
+                      <li>Unlimited Review Notices</li>
+                      <li>Email Support</li>
+                      <li>No Long-Term Contracts</li>
+                      <li><em>Perfect for small businesses wanting to monitor their reviews.</em></li>
+                  </ul>
+                  <h3>$30/month</h3>
+                  <div align="center"><a href="/signup" class="purple_button">Start Free Trial</a></div>
+              </div>
+          </div>
+      </div>
+
+        </div>
+
+  </div>
+
+  <div class="container">
+      <h2>Stop <strong>wasting</strong> your time searching.</h2>
+      <br />
+      <div class="row">
+          <div class="span12 center graded">
+        <!-- <a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a> -->
+              <h3 class="hand">30 day free trial, no credit card, no long-term contracts.</h3>
+          </div>
+      </div>
+  </div>
+</div>
