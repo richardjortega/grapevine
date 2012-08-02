@@ -22,7 +22,7 @@
       Password  			: <%= user_form.password_field :password %><br />
       Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
 
-      <%= fields_for :location do |location_fields| %>
+      <%= fields_for @locations do |location_fields| %>
        
         Business Name       : <%= location_fields.text_field :name %><br />
         Street Address      : <%= location_fields.text_field :street_address %><br />
@@ -33,7 +33,7 @@
         Website             : <%= location_fields.url_field :website %><br /><br />
       <% end %>
 
-      <%= fields_for :subscription do |subscription_field| %>
+      <%= fields_for @subscription do |subscription_field| %>
       	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
       <% end %>
 
@@ -41,35 +41,4 @@
     <% end %>
     </div>
   </div>
-</div><!-- 
-=======
-<%= form_for @user, :url => subscriptions_path(@user) do |user_form| %>
-  First name 			: <%= user_form.text_field :first_name %><br />
-  Last name 			: <%= user_form.text_field :last_name %><br />
-  Email 				: <%= user_form.email_field :email %><br />
-  Phone Number          : <%= user_form.phone_field :phone_number %><br />
-  Password  			: <%= user_form.password_field :password %><br />
-  Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
-
-  <%= fields_for @location do |location_fields| %>
-   
-    Business Name       : <%= location_fields.text_field :name %><br />
-    Street Address      : <%= location_fields.text_field :street_address %><br />
-    Address Line 2      : <%= location_fields.text_field :address_line_2 %><br />
-    City                : <%= location_fields.text_field :city %><br />
-    State               : <%= location_fields.text_field :state %><br />
-    Zip                 : <%= location_fields.text_field :zip %><br />
-    Website             : <%= location_fields.url_field :website %><br />
-  <% end %>
-
-  <%= fields_for @subscription do |subscription_field| %>
-  	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
-  <% end %>
-
-  <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn primary large' %></div>
-<% end %>
->>>>>>> 4e85115d8b7d89079dc278499ddc483e52719a0c
- -->
-<%#= render :partial => "devise/shared/links" %>
-
-
+</div>\

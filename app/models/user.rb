@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_one :plan, :through => :subscription
   has_many :relationships
   has_many :locations, :through => :relationships
-  accepts_nested_attributes_for :locations, :subscription
+  accepts_nested_attributes_for :locations
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
                   :remember_me, 
                   :stripe_token,
                   :phone_number,
-                  :plan_id
+                  :plan_id,
+                  :locations_attributes
   
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create

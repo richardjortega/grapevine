@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
   	user				= User.create! params[:user]
   	@subscription.user  = user
   	user.locations << Location.create!(params[:location])
+    debugger
 
 
   	@plan = Plan.find params[:subscription][:plan_id]
