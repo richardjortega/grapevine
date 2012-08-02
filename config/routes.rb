@@ -4,7 +4,6 @@ Grapevine::Application.routes.draw do
 
   devise_for  :users
   resources   :subscriptions
-  resources   :blasts,      only: [:show]
   resources   :wantmore,    only: [:show], :controller => 'blasts'
 
   authenticated :user do
@@ -16,10 +15,9 @@ Grapevine::Application.routes.draw do
 
   # Pages and links to be removed once Stripe integration completed
   match '/enroll', to: 'static_pages#enroll'
-
   match '/concierge', to: 'static_pages#concierge'
   match '/thankyou', to: 'static_pages#thankyou'
-  match "hooks" => "hooks#receiver"
+  match '/signup2', to: 'static_pages#signup2'
   match '/help',  to: 'static_pages#help'
 
   #Billing/payment page
