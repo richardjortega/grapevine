@@ -22,7 +22,7 @@
       Password  			: <%= user_form.password_field :password %><br />
       Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
 
-      <%= fields_for @locations do |location_fields| %>
+      <%= fields_for @location do |location_fields| %>
        
         Business Name       : <%= location_fields.text_field :name %><br />
         Street Address      : <%= location_fields.text_field :street_address %><br />

@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_one :plan, :through => :subscription
   has_many :relationships
   has_many :locations, :through => :relationships
-  accepts_nested_attributes_for :locations
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
