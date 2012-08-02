@@ -1,8 +1,11 @@
 <div class="page-header">
 	<h2>Sign in</h2>
 </div>
-<div class="row">
-	<div class="span6 columns">
+<div class="container">
+	<div>
+		&nbsp;
+	</div>
+	<div class="span10 offset1">
 		<%= form_for(resource, :as => resource_name, :class => "form-inline", :url => session_path(resource_name)) do |f| %>
 		  <div><%= f.label :email %><br />
 		  <%= f.email_field :email %></div>
@@ -18,5 +21,10 @@
 		<% end %>
 	</div>
 </div>
-
+<div class="container">
+	<div>
+		&nbsp;
+	</div>
+	<div class="span10 offset1">
 <%= render :partial => "devise/shared/links" %>
+</div>

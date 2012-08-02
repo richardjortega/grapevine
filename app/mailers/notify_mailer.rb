@@ -1,7 +1,7 @@
 class NotifyMailer < ActionMailer::Base
   #Alerts email from pickgrapevine; auto-reply to no-reply!
   default from: "alerts@pickgrapevine.com",
-          reply_to: "no-reply@pickgrapevine.com"
+          reply_to: "info@pickgrapevine.com"
 
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)
