@@ -20,8 +20,7 @@ class User < ActiveRecord::Base
                   :password_confirmation, 
                   :remember_me, 
                   :stripe_token,
-                  :phone_number,
-                  :plan_id
+                  :phone_number
   
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create

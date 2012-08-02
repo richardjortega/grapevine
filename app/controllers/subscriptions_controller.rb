@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
   	@subscription.user  = @user
     #@location = user.locations.build(params[:location])
     #@location.save!
-  	user.locations << Location.create!(params[:location])
+  	@user.locations << Location.create!(params[:location])
     #debugger
 
 

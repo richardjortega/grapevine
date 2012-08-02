@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  attr_accessible :address_line_2, :city, :lat, :long, :name, :state, :street_address, :website, :zip, :phone_number
+  attr_accessible :address_line_2, :city, :lat, :long, :name, :state, :street_address, :website, :zip, :phone_number, :user_id
 
   #Associations
   has_many :relationships
