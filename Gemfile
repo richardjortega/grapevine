@@ -19,15 +19,16 @@ gem 'database_cleaner', '>= 0.7.2'
 
 group :production do
 	# gem 'mysql2'
-	gem 'pg'
 	gem 'newrelic_rpm'
 end
+
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
 	gem 'foreman'
-	gem 'sqlite3'
+	#gem 'sqlite3'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'rb-fsevent', :require => false
