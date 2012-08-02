@@ -2,11 +2,11 @@ class SubscriptionsController < ApplicationController
 
   def create
   	@subscription 		= Subscription.new params[:subscription]
-  	user				= User.create! params[:user]
-  	@subscription.user  = user
-    @location = user.locations.build(params[:location])
-    @location.save!
-  	#user.locations << Location.create!(params[:location])
+  	@user				= User.create! params[:user]
+  	@subscription.user  = @user
+    #@location = user.locations.build(params[:location])
+    #@location.save!
+  	user.locations << Location.create!(params[:location])
     #debugger
 
 
