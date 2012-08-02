@@ -4,7 +4,6 @@
 	<h3>30 Day Free Trial, No Credit Card</h3>
 
 <div>
-<<<<<<< HEAD
   &nbsp;
 </div>
 <div>
@@ -23,7 +22,7 @@
       Password  			: <%= user_form.password_field :password %><br />
       Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
 
-      <%= fields_for @location do |location_fields| %>
+      <%= fields_for :location do |location_fields| %>
        
         Business Name       : <%= location_fields.text_field :name %><br />
         Street Address      : <%= location_fields.text_field :street_address %><br />
@@ -34,7 +33,7 @@
         Website             : <%= location_fields.url_field :website %><br /><br />
       <% end %>
 
-      <%= fields_for @subscription do |subscription_field| %>
+      <%= fields_for :subscription do |subscription_field| %>
       	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
       <% end %>
 
@@ -42,7 +41,7 @@
     <% end %>
     </div>
   </div>
-</div>
+</div><!-- 
 =======
 <%= form_for @user, :url => subscriptions_path(@user) do |user_form| %>
   First name 			: <%= user_form.text_field :first_name %><br />
@@ -52,7 +51,7 @@
   Password  			: <%= user_form.password_field :password %><br />
   Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
 
-  <%= fields_for :location do |location_fields| %>
+  <%= fields_for @location do |location_fields| %>
    
     Business Name       : <%= location_fields.text_field :name %><br />
     Street Address      : <%= location_fields.text_field :street_address %><br />
@@ -63,14 +62,14 @@
     Website             : <%= location_fields.url_field :website %><br />
   <% end %>
 
-  <%= fields_for :subscription do |subscription_field| %>
+  <%= fields_for @subscription do |subscription_field| %>
   	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
   <% end %>
 
   <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn primary large' %></div>
 <% end %>
 >>>>>>> 4e85115d8b7d89079dc278499ddc483e52719a0c
-
+ -->
 <%#= render :partial => "devise/shared/links" %>
 
 
