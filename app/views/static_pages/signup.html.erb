@@ -14,7 +14,7 @@
   Password  			: <%= user_form.password_field :password %><br />
   Password Confirmation : <%= user_form.password_field :password_confirmation %><br />
 
-  <%= fields_for @location do |location_fields| %>
+  <%= fields_for :location do |location_fields| %>
    
     Business Name       : <%= location_fields.text_field :name %><br />
     Street Address      : <%= location_fields.text_field :street_address %><br />
@@ -25,7 +25,7 @@
     Website             : <%= location_fields.url_field :website %><br />
   <% end %>
 
-  <%= fields_for @subscription do |subscription_field| %>
+  <%= fields_for :subscription do |subscription_field| %>
   	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
   <% end %>
 
