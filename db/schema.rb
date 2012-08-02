@@ -11,25 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801031908) do
+ActiveRecord::Schema.define(:version => 20120802003232) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
-    t.string   "url"
+    t.text     "url"
     t.string   "rating"
     t.string   "address"
     t.string   "total_reviews"
     t.string   "cuisine"
     t.string   "price"
     t.string   "neighborhood"
-    t.string   "website"
+    t.text     "website"
     t.string   "email"
     t.string   "phone"
     t.string   "review_rating"
-    t.string   "review_description"
+    t.text     "review_description"
     t.string   "review_dine_date"
-    t.string   "marketing_url"
-    t.string   "marketing_id"
+    t.text     "marketing_url"
+    t.text     "marketing_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
