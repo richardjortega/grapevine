@@ -19,4 +19,7 @@ class StaticPagesController < ApplicationController
   def signup2
   end
 
+  def error404
+  end
+
 end

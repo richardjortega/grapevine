@@ -19,6 +19,7 @@ Grapevine::Application.routes.draw do
   match '/thankyou', to: 'static_pages#thankyou'
   match '/signup2', to: 'static_pages#signup2'
   match '/help',  to: 'static_pages#help'
+  match '/error404',  to: 'static_pages#error404'
 
   #Billing/payment page
   # match '/upgrade', to: 'subscriptions#upgrade'

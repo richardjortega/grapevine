@@ -8,42 +8,51 @@
       <h2>Want <strong>More</strong> ?</h2>
       <h3 class="hand">Check out your OpenTable Review below!</h3>
       <div class="row">
-          <div class="span7 hero-unit">
+          <div class="span5 hero-unit">
             <%= image_tag "pics/opentable-logo.png", alt: "OpenTable" %>
               <div>
-          &nbsp;
-          </div>
-            <p><strong>Restaurant:</strong> <%= @blast.name %></p>
-            <br />
-            <p><strong>Customer Rating:</strong> <%= @blast.rating %> stars</p>
-            <br />
-            <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
-            <br />
-            <p><strong>The Review:</strong><br />
-            <%= @blast.review_description %></p>
-            </div>
-
-    <div class="pricing landing">
-
-          <div class="span3">
-              <div class="well">
-                  <h3>Monthly <br />Email Alerts<br /><em><small>Simple and Smart!</small></em></h3>
-                  <ul>
-                      <li>Monitor One Business Location Anywhere In The USA</li>
-                      <li>Email Notifications</li>
-                      <li>24x7 Review Monitoring</li>
-                      <li>Unlimited Review Notices</li>
-                      <li>Email Support</li>
-                      <li>No Long-Term Contracts</li>
-                      <li><em>Perfect for small businesses wanting to monitor their reviews.</em></li>
-                  </ul>
-                  <h3>$30/month</h3>
-                  <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a></div>
+              &nbsp;
               </div>
+                <p><strong>Restaurant:</strong> <%= @blast.name %></p>
+                <br />
+                <p><strong>Customer Rating:</strong> <%= @blast.rating %> stars</p>
+                <br />
+                <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
+                <br />
+                <p><strong>The Review:</strong><br />
+                <%= @blast.review_description %></p>
           </div>
-      </div>
 
-        </div>
+          <div class="span1">
+              <%= image_tag "pics/arrow.png", alt: "Try Grapevine", class: "features_icon" %>
+          </div>
+
+          <div class="pricing landing">
+
+                <div class="span4">
+                    <div class="well">
+                        <!-- <h4><em>We don't stop at just OpenTable...</em><br /><br />Monitor UrbanSpoon, Yelp, Google, and more with Grapevine Monthly Email Alerts</h4> -->
+                        
+                        <%= image_tag "pics/review-site-logos.png", alt: "We track Google, Yelp and more" %>
+                        <div>
+                          &nbsp;
+                        </div>
+                        <div align="center"><a href="/signup2" class="purple_button">Start Your Free Trial</a>
+                        <ul>
+                            <li></li>
+                            <li>Follow Online Reviews About Your Business</li>
+                            <li>24 hours a day, 7 days a week<br /> Email Review Notifications<br />Delivered To Your Inbox</li>
+                            <li>No Long-Term Contracts</li>
+                            <li><em>What are you waiting for? Sign up now!</em></li>
+                        </ul>
+                        <h3 class="hand">$30/month</h3>
+                        <!-- <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a> -->
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+      </div>
 
   </div>
 
