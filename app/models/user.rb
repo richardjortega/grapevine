@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
 
   # Associations
-  has_one :subscription
-  has_one :plan, :through => :subscription
-  has_many :relationships
-  has_many :locations, :through => :relationships
+  has_one :subscription, dependent: :destroy
+  has_one :plan, through: :subscription
+  has_many :relationships, dependent: :destroy
+  has_many :locations, through: :relationships
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
