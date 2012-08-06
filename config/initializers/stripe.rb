@@ -9,8 +9,8 @@ else
   YAML.load(file).with_indifferent_access
 end
 
-STRIPE_PUBLIC_KEY = stripe[:STRIPE_PUBLISHABLE_KEY]
-Stripe.api_key    = stripe[:STRIPE_SECRET_KEY]
+STRIPE_PUBLIC_KEY = stripe[:app_id]
+Stripe.api_key    = stripe[:secret]
 
 
 
