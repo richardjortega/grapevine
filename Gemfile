@@ -28,7 +28,7 @@ gem 'pg'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
 	gem 'foreman'
-	#gem 'sqlite3'
+	gem 'sqlite3'
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'rb-fsevent', :require => false
