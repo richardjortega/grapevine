@@ -18,6 +18,11 @@ module Grapevine
     #Forces application to not access the DB/load models when precompiling assets.
     config.assets.initialize_on_precompile = false
 
+    # Own exception handling views
+    # Per suggestion: http://blog.plataformatec.com.br/2012/01/my-five-favorite-hidden-features-in-rails-3-2/
+    config.exceptions_app = self.routes
+
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
