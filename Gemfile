@@ -13,6 +13,11 @@ gem 'devise', '>= 2.1.0.rc'
 gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
 
+#Forms
+gem 'simple_form'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
+
 #used only in testing, but heroku needs all rake to pass before using other rakes
 #needs to be configured correctly laterhero
 gem 'database_cleaner', '>= 0.7.2'
