@@ -1,12 +1,24 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Grapevine" %></title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- <title><%= content_for?(:title) ? yield(:title) : "Grapevine" %></title> -->
+    <%= display_meta_tags :site => 'Grapevine' %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Grapevine">
+    <meta name="robots" content="index,follow,archive" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/apple-touch-icon-iphone.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/apple-touch-icon-ipad.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/apple-touch-icon-iphone4.png" />
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <meta property='og:description' content='Grapevine sends you an email alert each time a customer leaves a review for your business on Yelp, TripAdvisor, Google, Open Table and many more.'/>
+    <meta property='og:image' content='/assets/grapevine-opengraph.png'/>
+    <meta property='og:site_name' content='Grapevine'/>
+    <meta property='og:title' content='Customer Review Reporting and Concierge Service | Grapevine'/>
+    <meta property='og:type' content='website'/>
+    <meta property='og:url' content='http://pickgrapevine.com/'/>
     <%= stylesheet_link_tag    "application", :media => "all" %>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600" rel="stylesheet">

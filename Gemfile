@@ -12,6 +12,7 @@ gem 'roadie'
 gem 'devise', '>= 2.1.0.rc'
 gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
+gem 'meta-tags', :require => 'meta_tags'
 
 #used only in testing, but heroku needs all rake to pass before using other rakes
 #needs to be configured correctly laterhero
