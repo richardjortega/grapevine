@@ -5,6 +5,10 @@ Grapevine::Application.routes.draw do
   devise_for  :users, :controllers => {:registrations => "registrations"}
   resources   :subscriptions
   resources   :wantmore,    only: [:show], :controller => 'blasts'
+  #for testing multiple variations of wantmore page
+  get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'
+  get '/wantmore3/:id', to: 'blasts#wantmore3', as: 'wantmore3'
+  get '/wantmore4/:id', to: 'blasts#wantmore4', as: 'wantmore4'
 
   authenticated :user do
     root to: 'accounts#index'
