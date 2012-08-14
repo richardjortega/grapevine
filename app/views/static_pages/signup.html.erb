@@ -18,17 +18,16 @@
       
       <div>
 
-      <%= simple_form_for @user, :url => subscriptions_path(@user), 
+      <%= simple_form_for @user, :url => subscriptions_path(@user), :validate => true,
                 :html => {:class => 'form-horizontal'} do |u| %>
-        <%= u.error_notification %>
         <%= u.input :first_name, label: 'First name' %>
         <%= u.input :last_name, label: 'Last name' %>
         <%= u.input :email, placeholder: 'name@example.com'  %>
         <%= u.input :phone_number, placeholder: '2102224444' %>
-        <%= u.input :password, hint: 'Minimum length 6 characters' %>
-        <%= u.input :password_confirmation, hint: 'Must match password provided' %>
+        <%= u.input :password, placeholder: 'Minimum length 6 characters' %>
+        <%= u.input :password_confirmation, placeholder: 'Must match password provided' %>
 
-          <%= simple_fields_for @location do |l| %>
+          <%= simple_fields_for @location, :validate => true do |l| %>
             <%= l.input :name, label: 'Business Name' %> 
             <%= l.input :street_address, label: 'Street Address' %>
             <%= l.input :address_line_2, label: 'Street Address 2' %>
@@ -42,37 +41,8 @@
             <%= s.input :plan_id, as: :hidden, :input_html => { :value => @plan.id } %>
           <% end %>
 
-        <%= u.submit 'Sign up for Grapevine Email Alerts', :wrapper_html => { :class => 'btn primary large' } %>
+        <%= u.submit 'Sign up for Grapevine Email Alerts', :class => 'btn primary large' %>
       <% end %>
-
-
-       <!-- <%= form_for @user, :url => subscriptions_path(@user) do |user_form| %>
-          <%= render 'shared/error_messages', object: user_form.object %>
-          First Name 			: <%= user_form.text_field :first_name %> <em>(*Required)</em><br />
-          Last Name 			: <%= user_form.text_field :last_name %> <em>(*Required)</em><br />
-          Email 				: <%= user_form.email_field :email %> <em>(*Required)</em><br />
-          Phone Number          : <%= user_form.phone_field :phone_number %><br />
-          Password  			: <%= user_form.password_field :password %> <em>(*Required - MUST BE AT LEAST 6 CHARACTERS)</em><br />
-          Password Confirmation : <%= user_form.password_field :password_confirmation %> <em>(*Required - REPEAT ABOVE)</em><br />
-
-          <%= fields_for @location do |location_fields| %>
-           
-            Business Name       : <%= location_fields.text_field :name %>  <em>(*Required)</em><br />
-            Street Address      : <%= location_fields.text_field :street_address %>  <em>(*Required)</em><br />
-            Address Line 2      : <%= location_fields.text_field :address_line_2 %><br />
-            City                : <%= location_fields.text_field :city %>  <em>(*Required)</em><br />
-            State               : <%= location_fields.text_field :state %>  <em>(*Required)</em><br />
-            Zip                 : <%= location_fields.text_field :zip %>  <em>(*Required)</em><br />
-            Website             : <%= location_fields.url_field :website %><br /><br />
-          <% end %>
-
-          <%= fields_for @subscription do |subscription_field| %>
-          	<%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
-          <% end %>
-
-          <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn primary large' %>
-        <% end %> -->
-
       </div>
     </div>
 </div>
