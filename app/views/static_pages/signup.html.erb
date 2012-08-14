@@ -1,3 +1,68 @@
+<% content_for :head do %>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+  <style type="text/css">
+    * { font-family: Verdana; font-size: 96%; }
+    label { width: 10em; float: left; }
+    label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+    p { clear: both; }
+    .submit { margin-left: 12em; }
+    em { font-weight: bold; padding-right: 1em; vertical-align: top; }
+  </style>
+  <script>
+  $(document).ready(function(){
+    $("#new_user").validate({
+      debug: true,
+      rules: {
+        user[first_name]: "required",
+        user[last_name]: "required",
+        user[email]: {
+          required: true,
+          email: true
+        },
+        user[phone_number]: {
+          phoneUS: true
+        },
+        user[password]: {
+          required: true,
+          minlegth: 6
+        },
+        user[password_confirmation]: {
+          required: true,
+          minlength: 6,
+          equalTo: "#user[password]"
+        },
+        location[name]: "required",
+        location[street_address]: "required",
+        location[city]: "required",
+        location[state]: "required",
+        location[zip]: "required"
+      },
+      messages: {
+        user[first_name]: "Please enter your first name",
+        user[last_name]: "Please enter your last name",
+        user[email]: "Please enter a valid email",
+        user[password]: {
+          required: "Please enter a password",
+          minlength: "Password must be at least 6 characters"
+        },
+        user[password_confirmation]: {
+          required: "Please re-enter your previous password",
+          minlength: "Password at least 6 characters",
+          equalTo: "Passwords need to match"
+        },
+        location[name]: "Please enter your Business' Name",
+        location[street_address]: "Can't be blank",
+        location[city]: "Can't be blank",
+        location[state]: "Can't be blank",
+        location[zip]: "Can't be blank"
+      }
+    });
+  });
+</script>
+<% end %>
+
+
 <div class="page-header">
 	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
             <h3 class="hand">Track every review posted online, good and bad!</h3>
@@ -18,16 +83,16 @@
       
       <div>
 
-      <%= simple_form_for @user, :url => subscriptions_path(@user), :validate => true,
+      <%= simple_form_for @user, :url => subscriptions_path(@user),
                 :html => {:class => 'form-horizontal'} do |u| %>
-        <%= u.input :first_name, label: 'First name' %>
-        <%= u.input :last_name, label: 'Last name' %>
+        <%= u.input :first_name, label: 'First Name' %>
+        <%= u.input :last_name, label: 'Last Name' %>
         <%= u.input :email, placeholder: 'name@example.com'  %>
-        <%= u.input :phone_number, placeholder: '2102224444' %>
+        <%= u.input :phone_number, label: 'Phone Number', placeholder: '2105555555' %>
         <%= u.input :password, placeholder: 'Minimum length 6 characters' %>
-        <%= u.input :password_confirmation, placeholder: 'Must match password provided' %>
+        <%= u.input :password_confirmation, label: 'Password Confirmation', placeholder: 'Must match password provided' %>
 
-          <%= simple_fields_for @location, :validate => true do |l| %>
+          <%= simple_fields_for @location do |l| %>
             <%= l.input :name, label: 'Business Name' %> 
             <%= l.input :street_address, label: 'Street Address' %>
             <%= l.input :address_line_2, label: 'Street Address 2' %>

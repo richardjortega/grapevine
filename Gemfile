@@ -1,20 +1,28 @@
 source 'https://rubygems.org'
 
+# Main
 gem 'rails', '3.2.5'
-gem 'bootstrap-sass', '2.0.3'
+gem 'thin'
+gem 'jquery-rails'
+
+# Payment
 gem 'stripe'
 gem 'stripe_event'
-gem 'thin'
 
-gem 'jquery-rails'
-gem 'mailchimp'
-gem 'roadie'
+# Auth/Auth
 gem 'devise', '>= 2.1.0.rc'
 gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
+
+# Mailers
+gem 'mailchimp'
+gem 'roadie'
+
+# Design
+gem 'bootstrap-sass', '2.0.3'
 gem 'meta-tags', :require => 'meta_tags'
 
-#Forms
+# Forms
 gem 'simple_form'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
@@ -26,9 +34,9 @@ gem 'database_cleaner', '>= 0.7.2'
 group :production do
 	# gem 'mysql2'
 	gem 'newrelic_rpm'
+	gem 'pg'
 end
 
-gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
