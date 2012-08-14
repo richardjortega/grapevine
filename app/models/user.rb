@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :email_regexp =>  /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name,
@@ -23,12 +23,10 @@ class User < ActiveRecord::Base
                   :phone_number,
                   :location
 
-  #validates :first_name, :presence => {:message => 'Name cannot be blank, Task not saved'}
-  validates_presence_of :first_name
-  validates_presence_of :last_name
+  validates_presence_of :first_name, :last_name, :email
   validates_presence_of :password, :on => :create
+  validates_length_of :password, :minimum => 6
   validates_confirmation_of :password
-  validates_presence_of :email
   validates_uniqueness_of :email
 
 end
