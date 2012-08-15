@@ -6,11 +6,7 @@ class Location < ActiveRecord::Base
   has_many :users, through: :relationships
 
   #Model Validations
-  validates_presence_of :name
-  validates_presence_of :street_address
-  validates_presence_of :city
-  validates_presence_of :state
-  validates_presence_of :zip
-
+  validates_presence_of :name, :street_address, :city, :state, :zip
+  validates_length_of :zip, :minimum => 5
 
 end

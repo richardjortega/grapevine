@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+<% end %>
+
 <div class="page-header">
 	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
             <h3 class="hand">Track every review posted online, good and bad!</h3>
