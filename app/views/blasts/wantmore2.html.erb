@@ -20,7 +20,19 @@
                 <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
                 <br />
                 <p><strong>The Review:</strong><br />
-                <%= @blast.review_description %></p>
+                <%= @blast.review_description %></p><br />
+                <p><strong>Share This Review:</strong></p>
+                  <!-- AddThis Button BEGIN -->
+                  <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                  <a class="addthis_button_preferred_1"></a>
+                  <a class="addthis_button_preferred_2"></a>
+                  <a class="addthis_button_preferred_3"></a>
+                  <a class="addthis_button_preferred_4"></a>
+                  <a class="addthis_button_compact"></a>
+                  </div>
+                  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-502ac7c92b987d5b"></script>
+                  <!-- AddThis Button END -->
+
           </div>
 
           <div class="span1">
@@ -37,7 +49,7 @@
                         <div>
                           &nbsp;
                         </div>
-                        <div align="center"><a href="/signup2" class="purple_button">Start Your Free Trial</a>
+                        <div align="center"><a href="/signup2" class="purple_button">Yes</a>&nbsp;&nbsp;<a href="/concierge" class="signup">No</a>
                         <ul>
                             <li></li>
                             <li>Follow Online Reviews About Your Business</li>
