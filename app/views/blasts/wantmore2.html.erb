@@ -38,22 +38,15 @@
                   <!-- AddThis Button END -->
           </div>
 
-          <!-- <div class="span1">
-              <%= image_tag "pics/arrow.png", alt: "Try Grapevine", class: "features_icon" %>
-          </div> -->
-
           <div class="pricing landing">
 
                 <div class="span3">
                     <div class="well">
-                        <h4><em>Were you aware of this review on OpenTable?</h4>
-                        
-                        <!-- <%= image_tag "pics/review-site-logos.png", alt: "We track Google, Yelp and more" %> -->
-                        <div>
-                          &nbsp;
-                        </div>
-                        <div align="center"><a href="#" class="purple_button">Yes</a>&nbsp;&nbsp;
-                        <a href="#" class="signup">No</a>
+                        <div align="center">
+                          <%= image_tag "pics/did-you-know.png", alt: "We track Google, Yelp and more" %><br />&nbsp;<br />
+                          <p>And be honest...</p>&nbsp;<br />
+                          <a href="#yes" class="purple_button">Yes</a>&nbsp;&nbsp;
+                        <a href="#no" class="signup">No</a>
                         </div>
                     </div>
                 </div>
@@ -63,18 +56,20 @@
 
   </div>
 
-<script type="text/javascript">
-function showDiv(toggle){
-document.getElementById(toggle).style.display = 'block';
-}
-</script>
-
-<input type="button" name="answer" onclick="showDiv('toggle')">Show</input>
-
-<div id="toggle" style="display:none">Hello</div>
-
+  <a name="yes"></a> 
   <div class="container">
-      <h2>Stop <strong>wasting</strong> your time searching.</h2>
+      <h2><strong>Great Job!</strong> We can help you save time too!</h2>
+      <br />
+      <div class="row">
+          <div class="span12 center graded">
+        <!-- <a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a> -->
+              <h3 class="hand">30 day free trial, no credit card, no long-term contracts.</h3>
+          </div>
+      </div>
+  </div>
+  <a name="no"></a> 
+  <div class="container">
+      <h2>NO <strong>wasting</strong> your time searching.</h2>
       <br />
       <div class="row">
           <div class="span12 center graded">
