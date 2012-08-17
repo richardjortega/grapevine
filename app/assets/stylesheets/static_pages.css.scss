@@ -147,3 +147,16 @@ img.features_icon{
 }
 
 
+@media (min-width: 768px) and (max-width: 979px) { 
+  .slider-wrapper{
+    width:750px;
+    margin:0 auto;
+  }
+}
+
+@media (min-width: 1200px) { 
+ .slider-wrapper{
+    width:960px;
+    margin:0 auto;
+  } 
+}
