@@ -4,3 +4,4 @@
 
 $ ->
   $('#video_holder').fitVids();
+  $('#slider').nivoSlider();
