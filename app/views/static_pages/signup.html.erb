@@ -32,7 +32,7 @@
         <%= u.input :password_confirmation, label: 'Password Confirmation', placeholder: 'Must match password provided' %>
 
           <%= simple_fields_for @location, :validate => true do |l| %>
-            <%= l.input :name, label: 'Business Name' %> 
+            <%= l.input :name, label: 'Business Name', :validate => true %> 
             <%= l.input :street_address, label: 'Street Address' %>
             <%= l.input :address_line_2, label: 'Street Address 2' %>
             <%= l.input :city %>

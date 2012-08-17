@@ -1,12 +1,11 @@
 class SubscriptionsController < ApplicationController
 
   def create
-  	@subscription 		= Subscription.new params[:subscription]
+  	@subscription = Subscription.new params[:subscription]
     #Note need to break out user so that it isn't saved if issue with stripe.
-  	@user				= User.create! params[:user]
+  	@user	= User.create!(params[:user])
   	@subscription.user  = @user
   	@user.locations << Location.create!(params[:location])
-
 
   	@plan = Plan.find params[:subscription][:plan_id]
 
