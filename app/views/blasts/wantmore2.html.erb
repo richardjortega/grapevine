@@ -6,19 +6,20 @@
   <!-- OpenTable review goes here -->
   <div class="container">
       <h2>Want <strong>More</strong> ?</h2>
-      <h3 class="hand">Wantmore 2 template!</h3>
+      <h3 class="hand">Your OpenTable review is below.</h3>
       <div class="row">
-          <div class="span5 hero-unit">
+          <div class="span7 hero-unit">
             <%= image_tag "pics/opentable-logo.png", alt: "OpenTable" %>
               <div>
               &nbsp;
               </div>
-                <p><strong>Restaurant:</strong> <%= @blast.name %></p>
+                <p><strong>Restaurant:</strong> <%= @blast.name %>
                 <br />
-                <p><strong>Customer Rating:</strong> <%= @blast.rating %> stars</p>
+                <strong>Customer Rating:</strong> <%= @blast.rating %> stars
                 <br />
-                <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
+                <strong>Review posted on:</strong> <%= @blast.review_dine_date %>
                 <br />
+<<<<<<< HEAD
                 <p><strong>The Review:</strong><br />
                 <%= @blast.review_description %></p><br />
                 <p><strong>Share This Review:</strong></p>
@@ -34,15 +35,32 @@
                   <!-- AddThis Button END -->
 
           </div>
+=======
+                <strong>The Review:</strong> <%= @blast.review_description %><br />
+                <strong>Share This Review:</strong><br />
+                </p>
 
-          <div class="span1">
-              <%= image_tag "pics/arrow.png", alt: "Try Grapevine", class: "features_icon" %>
+>>>>>>> emails
+
+                  <!-- AddThis Button BEGIN -->
+                  <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                  <a class="addthis_button_preferred_1"></a>
+                  <a class="addthis_button_preferred_4"></a>
+                  <a class="addthis_button_google_plusone_badge" g:plusone:size="medium" g:plusone:href="https://plus.google.com/b/108923085544433086106/"></a>
+                  <a class="addthis_button_preferred_2"></a>
+                  <a class="addthis_button_preferred_3"></a>
+                  <a class="addthis_button_compact"></a>
+                  </div>
+                  <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+                  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-502d1cd300f5b00e"></script>
+                  <!-- AddThis Button END -->
           </div>
 
           <div class="pricing landing">
 
-                <div class="span4">
+                <div class="span3">
                     <div class="well">
+<<<<<<< HEAD
                         <!-- <h4><em>We don't stop at just OpenTable...</em><br /><br />Monitor UrbanSpoon, Yelp, Google, and more with Grapevine Monthly Email Alerts</h4> -->
                         
                         <%= image_tag "pics/review-site-logos.png", alt: "We track Google, Yelp and more" %>
@@ -59,6 +77,13 @@
                         </ul>
                         <h3 class="hand">$30/month</h3>
                         <!-- <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a> -->
+=======
+                        <div align="center">
+                          <%= image_tag "pics/did-you-know.png", alt: "We track Google, Yelp and more" %><br />&nbsp;<br />
+                          <p>And be honest...</p>&nbsp;<br />
+                          <a href="#yes" class="purple_button">Yes</a>&nbsp;&nbsp;
+                        <a href="#no" class="signup">No</a>
+>>>>>>> emails
                         </div>
                     </div>
                 </div>
@@ -68,8 +93,31 @@
 
   </div>
 
+  <a name="yes"></a> 
   <div class="container">
-      <h2>Stop <strong>wasting</strong> your time searching.</h2>
+      <h2>You clikced 'Yes'... <strong>Nice Job!</strong><h2>
+        <h3 class="hand">But you could be wasting 10 hours a month doing it! <em>(Let me show you)</em></h3>
+      <br />
+      <div class="row">
+          <div class="span12 graded">
+            <div class="well"><p><strong>A little about us first:</strong><br />
+              Every day Grapevine sends you new customer reviews directly to your email. Check out our visualization of that process below:
+            </div>
+              <p>
+                Image spending all your valuable time each day trying to monitor all the top review web sites?  That includes OpenTable, Urban Spoon, Yelp, Google, CitySearch, InsiderPages and more.<br /><br />
+                Let's do some simple math to see how much time <strong>Grapevine</strong> <em>(that's us)</em> can save you...<br /><br />
+                Your task: Monitor the top 10 review sites every day.<br /><br />
+                Your daily time wasted: 10 websites X 2 minutes each = 20 minutes<br /><br />
+                Your total monthly time: 20 minutes (daily) X 30 days = 10 HOURS
+              </p>
+            <div class="well"><h4>Wouldn't you like to save up to 10 hours a month?</h4></div>
+            <a href="/" class="signup">Learn More</a><a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a>
+          </div>
+      </div>
+  </div>
+  <a name="no"></a> 
+  <div class="container">
+      <h2>NO <strong>wasting</strong> your time searching.</h2>
       <br />
       <div class="row">
           <div class="span12 center graded">
