@@ -19,29 +19,9 @@
                 <br />
                 <strong>Review posted on:</strong> <%= @blast.review_dine_date %>
                 <br />
-<<<<<<< HEAD
-                <p><strong>The Review:</strong><br />
-                <%= @blast.review_description %></p><br />
-                <p><strong>Share This Review:</strong></p>
-                  <!-- AddThis Button BEGIN -->
-                  <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-                  <a class="addthis_button_preferred_1"></a>
-                  <a class="addthis_button_preferred_2"></a>
-                  <a class="addthis_button_preferred_3"></a>
-                  <a class="addthis_button_preferred_4"></a>
-                  <a class="addthis_button_compact"></a>
-                  </div>
-                  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-502ac7c92b987d5b"></script>
-                  <!-- AddThis Button END -->
-
-          </div>
-=======
                 <strong>The Review:</strong> <%= @blast.review_description %><br />
                 <strong>Share This Review:</strong><br />
                 </p>
-
->>>>>>> emails
-
                   <!-- AddThis Button BEGIN -->
                   <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
                   <a class="addthis_button_preferred_1"></a>
@@ -60,30 +40,11 @@
 
                 <div class="span3">
                     <div class="well">
-<<<<<<< HEAD
-                        <!-- <h4><em>We don't stop at just OpenTable...</em><br /><br />Monitor UrbanSpoon, Yelp, Google, and more with Grapevine Monthly Email Alerts</h4> -->
-                        
-                        <%= image_tag "pics/review-site-logos.png", alt: "We track Google, Yelp and more" %>
-                        <div>
-                          &nbsp;
-                        </div>
-                        <div align="center"><a href="/signup2" class="purple_button">Yes</a>&nbsp;&nbsp;<a href="/concierge" class="signup">No</a>
-                        <ul>
-                            <li></li>
-                            <li>Follow Online Reviews About Your Business</li>
-                            <li>24 hours a day, 7 days a week<br /> Email Review Notifications<br />Delivered To Your Inbox</li>
-                            <li>No Long-Term Contracts</li>
-                            <li><em>What are you waiting for? Sign up now!</em></li>
-                        </ul>
-                        <h3 class="hand">$30/month</h3>
-                        <!-- <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a> -->
-=======
                         <div align="center">
                           <%= image_tag "pics/did-you-know.png", alt: "We track Google, Yelp and more" %><br />&nbsp;<br />
                           <p>And be honest...</p>&nbsp;<br />
-                          <a href="#yes" class="purple_button">Yes</a>&nbsp;&nbsp;
-                        <a href="#no" class="signup">No</a>
->>>>>>> emails
+                          <a href="#yes" class="purple_button" id="yes-button">Yes</a>&nbsp;&nbsp;
+                        <a href="#no" class="signup" id="no-button">No</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +55,7 @@
   </div>
 
   <a name="yes"></a> 
-  <div class="container">
+  <div class="container" id="yes_info">
       <h2>You clikced 'Yes'... <strong>Nice Job!</strong><h2>
         <h3 class="hand">But you could be wasting 10 hours a month doing it! <em>(Let me show you)</em></h3>
       <br />
@@ -116,7 +77,7 @@
       </div>
   </div>
   <a name="no"></a> 
-  <div class="container">
+  <div class="container" id="no_info">
       <h2>NO <strong>wasting</strong> your time searching.</h2>
       <br />
       <div class="row">
