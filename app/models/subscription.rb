@@ -32,7 +32,7 @@ private
 
 	def stripe_customer_without_credit_card
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
-	end
+  end
 
 	# def set_card_info new_card
 	# 	self.last_four		 = new_card.last4

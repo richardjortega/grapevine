@@ -8,5 +8,6 @@ class Location < ActiveRecord::Base
   #Model Validations
   validates_presence_of :name, :street_address, :city, :state, :zip
   validates_length_of :zip, :minimum => 5
+  validates_uniqueness_of :name
 
 end
