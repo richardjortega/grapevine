@@ -6,7 +6,6 @@
   <!-- OpenTable review goes here -->
   <div class="container">
       <h2>Want <strong>More</strong> ?</h2>
-      <h3 class="hand">Your OpenTable review is below.</h3>
       <div class="row">
           <div class="span7 hero-unit">
             <%= image_tag "pics/opentable-logo.png", alt: "OpenTable" %>
@@ -35,18 +34,35 @@
                   <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-502d1cd300f5b00e"></script>
                   <!-- AddThis Button END -->
           </div>
-
           <div class="pricing landing">
 
                 <div class="span3">
-                    <div class="well">
+                    <!-- <div class="well"> -->
                         <div align="center">
-                          <%= image_tag "pics/did-you-know.png", alt: "Did you know about this OpenTable review" %><br />&nbsp;<br />
-                          <p>And be honest...</p>&nbsp;<br />
+                          <div>
+              &nbsp;
+              </div>
+              <div>
+              &nbsp;
+              </div>
+              <div>
+              &nbsp;
+              </div>
+              <div>
+              &nbsp;
+              </div>
+              <div>
+              &nbsp;
+              </div>
+              <div>
+              &nbsp;
+              </div>
+                          <%= image_tag "pics/did-you-know.png", alt: "Did you know about this OpenTable review" %>
+                          <p><em>And be honest...</em></p>&nbsp;<br />
                           <a href="#set_focus" class="purple_button" id="yes-button">Yes</a>&nbsp;&nbsp;
                         <a href="#set_focus" class="signup" id="no-button">No</a>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
           </div>
 
@@ -56,34 +72,115 @@
 
   <a name="set_focus"></a>
   <div class="container" id="yes_info">
-      <h2>You clikced 'Yes'... <strong>Nice Job!</strong><h2>
-        <h3 class="hand">But you could be wasting 10 hours a month monitoring reviews by hand!<br /><em>(Let me show you)</em></h3>
-      <br />
-      <div class="row">
-          <div class="span12 graded">
-            <div class="well"><p><strong>A little about us first:</strong><br />
-              Every day Grapevine sends you new customer reviews directly to your email. Check out our visualization of that process below:
-            </div>
-              <p>
-                Image spending all your valuable time each day trying to monitor all the top review web sites?  That includes OpenTable, Urban Spoon, Yelp, Google, CitySearch, InsiderPages and more.<br /><br />
-                Let's do some simple math to see how much time <strong>Grapevine</strong> <em>(that's us)</em> can save you...<br /><br />
-                Your task: Monitor the top 10 review sites every day.<br /><br />
-                Your daily time wasted: 10 websites X 2 minutes each = 20 minutes<br /><br />
-                Your total monthly time: 20 minutes (daily) X 30 days = 10 HOURS
-              </p>
-            <div class="well"><h4>Wouldn't you like to save up to 10 hours a month?</h4></div>
-            <a href="/" class="signup">Learn More</a><a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a>
+      <h2>You clicked 'Yes'... <strong>Nice Job!</strong></h2>
+        <div class="span11">
+          <div class="well">
+            <h3 class="hand">But you could be wasting 10 hours a month monitoring reviews by hand!</h3>
           </div>
-      </div>
+
+          <div class="graded center">
+              <%= image_tag "pics/do-the-math.png", alt: "Save 10 hours every month" %>
+          </div>
+          <div class="well">
+                  <h3 class="hand">Grapevine sends you new customer reviews directly to your email</h3>
+          </div>
+        </div>
+
+          <div class="pricing landing">
+
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/bad-review.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/plus.png", alt: "Did you know about this OpenTable review", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/review-sites.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/equals.png", alt: "Did you know about this OpenTable review", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/gadgets-we-deliver-to.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div>
+              &nbsp;
+              </div><div>
+              &nbsp;
+              </div>
+          <div align="center">
+            <a href="/" class="signup">Learn More</a>&nbsp;<a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a>
+          </div>
   </div>
   <div class="container" id="no_info">
-      <h2>NO <strong>wasting</strong> your time searching.</h2>
-      <br />
-      <div class="row">
-          <div class="span12 center graded">
-        <!-- <a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a> -->
-              <h3 class="hand">30 day free trial, no credit card, no long-term contracts.</h3>
+      <h2><strong>You're in luck,</strong> that's what Grapevine does!</h2>
+      <div class="span11">
+          <div class="well">
+                  <h3 class="hand">Grapevine sends you new customer reviews directly to your email</h3>
           </div>
-      </div>
+        </div>
+
+          <div class="pricing landing">
+
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/bad-review.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/arrow2.png", alt: "Did you know about this OpenTable review", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/review-sites.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/arrow2.png", alt: "Did you know about this OpenTable review", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/gadgets-we-deliver-to.png", alt: "Did you know about this OpenTable review" %>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div>
+              &nbsp;
+              </div><div>
+              &nbsp;
+              </div>
+          <div align="center">
+            <div>
+              &nbsp;
+              </div>
+            <a href="/" class="signup">Learn More</a>&nbsp;<a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a>
+          </div>
   </div>
 </div>
