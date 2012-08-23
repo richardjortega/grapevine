@@ -5,7 +5,7 @@ namespace :upload do
 	task :csv_of_emails => :environment do
 		puts "Dropping data from Blasts table"
 		Blast.delete_all
-		filename = "#{Rails.root}/lib/marketinglist/ot_portland-oregon-restaurant-listings.csv"
+		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/ot_portland-oregon-restaurant-listings.csv"
 		run = UploadMarketingList.new filename
 		run.main
 	end
