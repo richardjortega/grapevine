@@ -49,7 +49,7 @@ class OpenTableParser
 
 		# Uses CSV from Ruby Core lib, this data has no owner so won't interact with our DB.
 		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb") do |row|
-			row << [ "name", "url", "rating", "address", "total reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review rating", "review description", "review dine date" ]
+			row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
 			found_details.each do |location|
 				row << [ location[:name],
@@ -65,7 +65,9 @@ class OpenTableParser
 					location[:phone], 
 					location[:review_rating], 
 					location[:review_description], 
-					location[:review_dine_date] ]
+					location[:review_dine_date],
+					location[:marketing_url],
+					location[:marketing_id] ]
 			end
 		end
 		puts "File outputted as '#{@source}_#{@directory_listing}.csv'"
@@ -114,11 +116,15 @@ class OpenTableParser
 				parsed_detail[:website] = detail.css('ul.detailsList li#ProfileOverview_Website a').text
 				parsed_detail[:email] = detail.css('ul.detailsList li#ProfileOverview_Email a').text
 				parsed_detail[:phone] = detail.css('ul.detailsList li#ProfileOverview_Phone span.value').text
-				
+
 				# Grabs last review
 				parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
 				parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
+				stubbed_link = URI.parse("#{url}").path[1..-1]
+				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore2/#{stubbed_link}"
+				parsed_detail[:marketing_id] = stubbed_link
+
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
 				parsed_detail
 			end

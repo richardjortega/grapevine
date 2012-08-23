@@ -1,2 +1,1 @@
-anchorage-alaska-restaurant-listings
-hawaii-restaurant-listings
+portland-oregon-restaurant-listings
