@@ -7,7 +7,7 @@ namespace :upload do
 		#Uncomment blast to delete all prior data
 		#Blast.delete_all
 		#Make sure to update the CSV at end of filename var in order to script to run
-		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/ot_portland-oregon-restaurant-listings.csv"
+		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/opentable.com_central-coast-restaurant-listings.csv"
 		run = UploadMarketingList.new filename
 		run.main
 	end
