@@ -1,69 +1,160 @@
 <% provide(:title, 'Grapevine') %>
+    <div>&nbsp;</div><div>&nbsp;</div>
 <div class="span12">
-    <div>
-    &nbsp;
-    </div>
+    <div>&nbsp;</div>
   <!-- OpenTable review goes here -->
   <div class="container">
-      <h2>Want <strong>More</strong> ?</h2>
-      <h3 class="hand">Wantmore 3 template!</h3>
       <div class="row">
-          <div class="span5 hero-unit">
-            <%= image_tag "pics/opentable-logo.png", alt: "OpenTable" %>
-              <div>
+          <div class="span11 hero-unit">
+            <div class="span7">
+              <h4 align="left"><strong>The Review:</strong><em> "<%= @blast.review_description %>"</em></h4><br />
+              <p>
+                <strong>Restaurant:</strong> <%= @blast.name %>
+                <br />
+                <strong>Customer Rating:</strong> <%= @blast.rating %> stars
+                <br />
+                <strong>Review posted on:</strong> <%= @blast.review_dine_date %>
+                </p>
+                <div>
               &nbsp;
               </div>
-                <p><strong>Restaurant:</strong> <%= @blast.name %></p>
-                <br />
-                <p><strong>Customer Rating:</strong> <%= @blast.rating %> stars</p>
-                <br />
-                <p><strong>Review posted on:</strong> <%= @blast.review_dine_date %></p>
-                <br />
-                <p><strong>The Review:</strong><br />
-                <%= @blast.review_description %></p>
-          </div>
+                <%= image_tag "pics/opentable-logo.png", width: "200", height: "40", alt: "OpenTable" %>
+            </div>
+            <div class="pricing landing">
 
-          <div class="span1">
-              <%= image_tag "pics/arrow.png", alt: "Try Grapevine", class: "features_icon" %>
-          </div>
-
-          <div class="pricing landing">
-
-                <div class="span4">
-                    <div class="well">
-                        <!-- <h4><em>We don't stop at just OpenTable...</em><br /><br />Monitor UrbanSpoon, Yelp, Google, and more with Grapevine Monthly Email Alerts</h4> -->
-                        
-                        <%= image_tag "pics/review-site-logos.png", alt: "We track Google, Yelp and more" %>
-                        <div>
-                          &nbsp;
-                        </div>
-                        <div align="center"><a href="/signup2" class="purple_button">Start Your Free Trial</a>
-                        <ul>
-                            <li></li>
-                            <li>Follow Online Reviews About Your Business</li>
-                            <li>24 hours a day, 7 days a week<br /> Email Review Notifications<br />Delivered To Your Inbox</li>
-                            <li>No Long-Term Contracts</li>
-                            <li><em>What are you waiting for? Sign up now!</em></li>
-                        </ul>
-                        <h3 class="hand">$30/month</h3>
-                        <!-- <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a> -->
-                        </div>
-                    </div>
-                </div>
+                  <div class="span3">
+                      <!-- <div class="well"> -->
+                          <div align="center">
+                            <%= image_tag "pics/did-you-know.png", alt: "Did you know about this OpenTable review" %>
+                            <p><em>Knowing is half the battle...</em></p>&nbsp;<br />
+                            <a href="#set_focus" class="purple_button" id="yes-button">Yes</a>&nbsp;&nbsp;
+                          <a href="#set_focus" class="signup" id="no-button">No</a>
+                          </div>
+                      <!-- </div> -->
+                  </div>
+            </div>
           </div>
 
       </div>
 
   </div>
-
-  <div class="container">
-      <h2>Stop <strong>wasting</strong> your time searching.</h2>
-      <br />
-      <div class="row">
-          <div class="span12 center graded">
-        <!-- <a href="/signup" class="purple_button">FREE 30-Day Trial for Email Alerts</a> -->
-              <h3 class="hand">30 day free trial, no credit card, no long-term contracts.</h3>
+  <!-- YES reply info goes here -->
+  <a name="set_focus"></a>
+  <div class="container" id="yes_info">
+      <h2>You clicked 'Yes'... <strong>Nice Job!</strong></h2>
+        <div class="span11">
+          <div class="well">
+            <h3 class="hand">But you could be wasting 10 hours a month monitoring reviews by hand!</h3>
           </div>
-      </div>
+          <div class="graded center">
+              <%= image_tag "pics/do-the-math2.png", alt: "Save 10 hours every month" %>
+          </div>
+          <h2>How <strong>Grapevine Works</strong></h2>
+          <div class="well">
+                  <h3 class="hand">Grapevine sends you new customer reviews directly to your email</h3>
+          </div>
+        </div>
+
+          <div class="pricing landing">
+
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <h4 class="hand">Customer leaves your business a Review</h4>
+                          <%= image_tag "pics/angry-customer.png", alt: "DO not miss another online review thanks to Grapevine." %><br />
+                          <p>Customer leaves you a 2-star angry review on OpenTable.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/plus.png", alt: "", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/review-sites.png", alt: "We monitor CitySearch Hotels.com Bing and more" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/equals.png", alt: "", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/gadgets-we-deliver-to.png", alt: "Grapevine delivers reviews to your email" %>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div>
+              &nbsp;
+              </div><div>
+              &nbsp;
+              </div>
+          <div align="center">
+            <a href="/signup2" class="purple_button">Try It FREE for 30 Days - No strings!</a><br />
+            <a href="/">*Learn more about Grapevine</a>
+          </div>
+  </div>
+
+  <!-- NO reply info goes here -->
+  <div class="container" id="no_info">
+      <h2><strong>You're in luck,</strong> that's what Grapevine does!</h2>
+      <div class="span11">
+          <div class="well">
+            <h3 class="hand">Grapevine sends you new customer reviews directly to your email</h3>
+          </div>
+        </div>
+
+          <div class="pricing landing">
+
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/bad-review.png", alt: "Do you track all your customer reviews online?" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/plus.png", alt: "", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/review-sites.png", alt: "We monitor OpenTable Yelp Google TripAdvisor and more" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                  <div align="center">
+                    <%= image_tag "pics/equals.png", alt: "", class: "features_icon" %>
+                  </div>
+                </div>
+                <div class="span3">
+                    <div class="well">
+                        <div align="center">
+                          <%= image_tag "pics/gadgets-we-deliver-to.png", alt: "Grapevine delivers reviews to all your mobile devices" %>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div>
+              &nbsp;
+              </div><div>
+              &nbsp;
+              </div>
+          <div align="center">
+            <div>
+              &nbsp;
+              </div>
+            <a href="/" class="signup">Learn More</a>&nbsp;<a href="/signup2" class="purple_button">Try It for Free</a>
+          </div>
   </div>
 </div>

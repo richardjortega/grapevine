@@ -22,6 +22,7 @@ Grapevine::Application.routes.draw do
   match '/concierge', to: 'static_pages#concierge'
   match '/thankyou', to: 'static_pages#thankyou'
   match '/signup2', to: 'static_pages#signup2'
+  match '/signupnow', to: 'static_pages#signupnow'
   match '/help',  to: 'static_pages#help'
   match '/404',  to: 'static_pages#error404'
 
