@@ -7,8 +7,8 @@
       <div class="row">
           <div class="span11 hero-unit">
             <div class="span7">
-              <h4 align="left"><strong>The Review:</strong><em> "<%= @blast.review_description %>"</em></h4><br />
-              <p>
+                <p>
+                <%= image_tag "pics/avatar.gif", alt: "OpenTable" %><br /><strong>The Review:</strong><em> "<%= @blast.review_description %>"</em><br />
                 <strong>Restaurant:</strong> <%= @blast.name %>
                 <br />
                 <strong>Customer Rating:</strong> <%= @blast.rating %> stars
@@ -18,7 +18,6 @@
                 <div>
               &nbsp;
               </div>
-                <%= image_tag "pics/opentable-logo.png", width: "200", height: "40", alt: "OpenTable" %>
             </div>
             <div class="pricing landing">
 
