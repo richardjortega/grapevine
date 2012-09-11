@@ -123,7 +123,7 @@ class OpenTableParser
 				parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 				stubbed_link = URI.parse("#{url}").path[1..-1]
-				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore2/#{stubbed_link}"
+				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore3/#{stubbed_link}"
 				parsed_detail[:marketing_id] = stubbed_link
 
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
