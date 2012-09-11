@@ -5,7 +5,7 @@ namespace :upload do
 	task :csv_of_emails => :environment do
 		puts "Dropping data from Blasts table"
 		#Uncomment blast to delete all prior data
-		#Blast.delete_all
+		Blast.delete_all
 		#Make sure to update the CSV at end of filename var in order to script to run
 		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/opentable.com_central-coast-tahoe-restaurant-listings.csv"
 		run = UploadMarketingList.new filename
