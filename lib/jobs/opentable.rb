@@ -103,7 +103,7 @@ class OpenTableParser
 
 				# General information
 				parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text
-				parsed_detail[:rating] = detail.css('span.Star').attr("title")
+				parsed_detail[:rating] = detail.css('span.Star').attr("title").text
 				
 				# This string interpolation allows for single line address where breaks are converted to spaces
 				parsed_detail[:address] = "#{address_parts[0]} #{address_parts[1]} #{address_parts[2]}"
