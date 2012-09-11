@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$purple: #7c40bc;
+
     .box .row + .row{
     	margin-top:0px;
     }
@@ -159,4 +161,35 @@ img.features_icon{
     width:960px;
     margin:0 auto;
   } 
+}
+
+.steps {
+  margin-top:45px;
+  h4 {
+    position:relative;
+    margin-bottom:40px;
+    font-size:30px;
+    text-align:center;
+  }
+  h4 span {
+    background: #916BBA;
+    color: white;
+    font-size: 36px;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius: 50px;
+    padding-top: 10px;
+    display: inline-block;
+    padding: 12px 11px;
+    border: 2px solid white;
+    -moz-box-shadow:0 0 2px 0 $purple;
+    box-shadow: 0 0 2px 0 $purple;
+    position:relative;
+    top:10px;
+    
+  }
+}
+.did-you-know {
+  padding-left:60px;
+  border-left:1px solid #ccc;
 }
