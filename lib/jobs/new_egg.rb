@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-# require 'ap'
+require 'ap'
 require 'json'
 require 'csv'
 require 'HTTParty'
@@ -41,5 +41,6 @@ def parse_product_page(prod_id)
 	end
 end
 
-parse_product_listing("http://www.newegg.com/Store/Brand.aspx?Brand=1459&name=Corsair")
+ap parse_product_page("N82E16820145579")
+#parse_product_listing("http://www.newegg.com/Store/Brand.aspx?Brand=1459&name=Corsair")
 
