@@ -8,26 +8,75 @@
 
 /* Want me more 4 */
 .wantmore4 {
-	.hero-unit;
-	overflow:hidden;
-	background:;
+	margin-bottom:40px;
+	.review-hero {
+		padding:38px;
+		overflow:hidden;
+		background:#eee;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+		border:1px solid #ccc;
+	}
 	.review {
 		float:left;
 		width:60%;
+		padding-right:40px;
 		img {
 			float:left;
 			margin-right:2%;
+			padding:6px;
+		}
+		span.quote {
+			font-size:20px;
+			color:#ccc;
 		}
 		ul {
 			margin:0;
 			padding:0;
 			list-style-type:none;
+			li:first-child {
+				margin-bottom:10px;
+				font-size:16px;
+				line-height:24px;
+				strong { 
+					font-size:18px;
+					span {
+						font-size:12px;
+						font-weight:normal;
+						}
+					}
+				em { 
+					display:block;
+					border-bottom:1px dotted #ccc;
+					padding-bottom:15px; 
+					padding-left:100px;
+					margin-top:6px;
+				}
+			}
+			li:nth-child(2), li:nth-child(3), li:nth-child(4) {
+				white-space:nowrap;
+				display:inline;
+				margin-right:10px;
+				&:after {
+					content:'•';
+					margin-left:10px;
+				}
+			}
+			li:last-child:after { content:none;}
 		}
 	}
 	.did-you-know {
 		float:right;
-		width:30%;
-		border-left:1px solid #ccc;
-		padding-left:40px;
+		width:33%;
+		text-align:center;
+		a { display:inline-block; }
+		a.purple_button {margin-right:10px;}
+		h4 {
+			font-family:'Courgette', cursive;
+			color:#634583;
+			font-size:34px;
+			line-height:40px;
+		}
 	}
 }

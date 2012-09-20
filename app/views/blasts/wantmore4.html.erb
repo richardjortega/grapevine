@@ -1,26 +1,27 @@
 <% provide(:title, 'Grapevine') %>
     <div>&nbsp;</div><div>&nbsp;</div>
-<div class="row wantmore4">
+<div class="wantmore4">
     <div>&nbsp;</div>
   <!-- OpenTable review goes here -->
   <div class="review-hero">
             <div class="review">
 				<%= image_tag "pics/avatar.gif", alt: "OpenTable" %>
                 <ul class="review-content">
-					<li><strong>The Review:</strong><em> "<%= @blast.review_description %>"</em></li>
+					<li><em> <span class="quote">&ldquo;</span><%= @blast.review_description %><span class="quote">&rdquo;</span></em></li>
                 	<li><strong>Restaurant:</strong> <%= @blast.name %></li>
                 	<li><strong>Customer Rating:</strong> <%= @blast.rating %> stars</li>
-                	<li><strong>Review posted on:</strong> <%= @blast.review_dine_date %></li>
+                	<li><strong>Posted on:</strong> <%= @blast.review_dine_date %></li>
                 </ul>
             </div><!-- /.span -->
 
 			<div class="did-you-know">
-	            <%= image_tag "pics/did-you-know.png", alt: "Did you know about this OpenTable review" %>
+	            <h4>Did you know about this review?</h4>
 	            <p><em>Knowing is half the battle...</em></p>
 	            <a href="#set_focus" class="purple_button" id="yes-button">Yes</a>
 	            <a href="#set_focus" class="signup" id="no-button">No</a>
 	        </div><!-- /.did-you-know -->
   </div><!-- /.review-hero -->
+</div><!-- /.wantmore4 -->
 
 
 
