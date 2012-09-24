@@ -4,10 +4,10 @@ namespace :upload do
 	desc "Uploads a given CSV file to AR table: Blast"
 	task :csv_of_emails => :environment do
 		#Uncomment blast to delete all prior data
-		# puts "Dropping data from Blasts table"
-		# Blast.delete_all
-		#Make sure to update the CSV at end of filename var in order to script to run
-		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/ot_portland-oregon-sa-restaurant-listings.csv"
+		puts "Dropping data from Blasts table"
+		Blast.delete_all
+		# Will use most recent update of the full_upload_list, keep adding to this file.
+		filename = "#{Rails.root}/lib/marketinglist/filtered_lists/full_upload_list.csv"
 		run = UploadMarketingList.new filename
 		run.main
 	end
