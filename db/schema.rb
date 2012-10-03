@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802003232) do
+ActiveRecord::Schema.define(:version => 20121003033336) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20120802003232) do
     t.string   "long"
     t.string   "street_address", :null => false
     t.string   "address_line_2"
-    t.string   "city",           :null => false
-    t.string   "state",          :null => false
-    t.string   "zip",            :null => false
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
     t.string   "website"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20120802003232) do
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "email",                                  :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
                   :phone_number,
                   :location
 
-  validates_presence_of :first_name, :last_name, :email
+  validates_presence_of :email
   validates_presence_of :password, :on => :create
   validates_length_of :password, :minimum => 6
   validates_confirmation_of :password
