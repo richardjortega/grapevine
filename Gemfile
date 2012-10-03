@@ -22,11 +22,6 @@ gem 'roadie'
 gem 'bootstrap-sass', '2.0.3'
 gem 'meta-tags', :require => 'meta_tags'
 
-# Forms
-gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
-
 #used only in testing, but heroku needs all rake to pass before using other rakes
 #needs to be configured correctly laterhero
 gem 'database_cleaner', '>= 0.7.2'
