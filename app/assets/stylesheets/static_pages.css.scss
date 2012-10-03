@@ -190,3 +190,56 @@ img.features_icon{
     
   }
 }
+header.navbar .navbar-inner {
+  border:none; /*border applied after updating bootstrap*/
+}
+
+/*===================================
+SIGNUP PAGE 
+====================================*/
+ul.ui-autocomplete {
+    list-style-type:none;
+    padding:5px;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #ccc;
+    width:224px;
+    background:#fff;
+    a {
+      color:$purple;
+    }
+  }
+#signup-page {
+
+  
+.ui-autocomplete-input, .input input {
+  border: none; 
+  font-size: 14px;
+  height: 24px;
+  margin-bottom: 5px;
+  padding-top: 2px;
+}
+
+.ui-autocomplete-input {
+  border: 1px solid #DDD !important;
+  padding-top: 0px !important;
+}
+#addresspicker_map {
+  margin-bottom:26px;/*space between input and map*/
+}
+
+#map {
+  border: 1px solid #DDD; 
+  width:384px;
+  height: 170px;
+  float:left;  
+  margin: 0px 0 0 10px;
+  -webkit-box-shadow: #AAA 0px 0px 15px;
+}
+.signup-btn {
+  display:block;
+  margin:20px auto;
+
+}
+}

@@ -16,3 +16,6 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require jquery-ui-1.8.7.min.js
+//= require jquery.ui.addresspicker.js
+//= require custom.js

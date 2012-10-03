@@ -1,52 +1,104 @@
 <% content_for :head do %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
 <% end %>
 
+<div id="signup-page">
 <div class="page-header">
 	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
             <h3 class="hand">Track every review posted online, good and bad!</h3>
 	<h3>30 Day Free Trial, No Credit Card</h3>
-
-<div>
-  &nbsp;
-</div>
-<div>
-  &nbsp;
 </div>
 
-  <div class="container">
-    <div class="span10 offset1"><p>We just need a little information from you to start tracking your business reviews!</p>
-      <div>
-      &nbsp;
-      </div>
-      
-      <div>
 
-      <%= simple_form_for @user, :url => subscriptions_path(@user), :validate => true,
-                :html => {:class => 'form-horizontal'} do |u| %>
-        <%= u.input :first_name, label: 'First Name' %>
-        <%= u.input :last_name, label: 'Last Name' %>
-        <%= u.input :email, placeholder: 'name@example.com', :validate => true %>
-        <%= u.input :phone_number, label: 'Phone Number', placeholder: '2105555555' %>
-        <%= u.input :password, placeholder: 'Minimum length 6 characters' %>
-        <%= u.input :password_confirmation, label: 'Password Confirmation', placeholder: 'Must match password provided' %>
+  <div class="row">
+    <p style="text-align:center;">We just need a little information from you to start tracking your business reviews!</p>
 
-          <%= simple_fields_for @location, :validate => true do |l| %>
-            <%= l.input :name, label: 'Business Name', :validate => true %> 
-            <%= l.input :street_address, label: 'Street Address' %>
-            <%= l.input :address_line_2, label: 'Street Address 2' %>
-            <%= l.input :city %>
-            <%= l.input :state %>
-            <%= l.input :zip %>
-            <%= l.input :website %>  
+    <%= form_for @user, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
+
+        <div class="span5 offset1 user-info">
+          <h3>Your Information</h3>
+
+            <div class="control-group">
+              <label class="control-label">First Name</label>
+              <div class="controls">
+                <%= user_form.text_field :first_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Last Name</label>
+              <div class="controls">
+                <%= user_form.text_field :last_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Email</label>
+              <div class="controls">
+                <%= user_form.email_field :email %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Phone Number</label>
+              <div class="controls">
+                <%= user_form.phone_field :phone_number %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Password</label>
+              <div class="controls">
+                <%= user_form.password_field :password %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Password</label>
+              <div class="controls">
+                <%= user_form.password_field :password_confirmation %>
+              </div>
+            </div>
+
+        
+        </div><!-- /.user-info -->
+
+      <div class="span5 biz-info">
+        <h3>Your Business Information</h3>
+          <%= fields_for @location do |location_fields| %>
+ 
+            <div class="control-group">
+              <label class="control-label">Business Name</label>
+              <div class="controls">
+                <%= location_fields.text_field :name %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Address</label>
+              <div class="controls">
+                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
+
+              </div>
+              <div id="map"></div>
+            </div>
+
+
+            <!-- Address Line 2      : <%= location_fields.text_field :address_line_2 %>
+            City                : <%= location_fields.text_field :city %>
+            State               : <%= location_fields.text_field :state %>
+            Zip                 : <%= location_fields.text_field :zip %>
+            Website             : <%= location_fields.url_field :website %> -->
           <% end %>
 
-          <%= simple_fields_for @subscription do |s| %>
-            <%= s.input :plan_id, as: :hidden, :input_html => { :value => @plan.id } %>
+          <%= fields_for @subscription do |subscription_field| %>
+            <%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
           <% end %>
+          
+          
+      </div><!-- /.biz-info -->
 
-        <%= u.submit 'Sign up for Grapevine Email Alerts', :class => 'btn primary large' %>
-      <% end %>
-      </div>
-    </div>
-</div>
+          
+         
+      <div class="span12">
+         <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn signup-btn primary purple_button large' %>
+          <% end %>
+     
+      </div><!-- /.span12 -->
+  </div><!-- /.row -->
+</div><!-- /#signup-page -->
