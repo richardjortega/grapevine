@@ -242,4 +242,12 @@ ul.ui-autocomplete {
   margin:20px auto;
 
 }
+label.error {
+  color:red;
+  margin:0;
+  position:absolute;
+}
+input.error {
+  border-color:red;
+}
 }
