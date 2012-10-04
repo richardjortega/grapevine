@@ -7,6 +7,5 @@ class Location < ActiveRecord::Base
 
   #Model Validations
   validates_presence_of :name, :street_address
-  validates_uniqueness_of :name
 
 end

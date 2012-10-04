@@ -112,8 +112,12 @@
 <script type="text/javascript">
   $("form").validate({
     rules: {
+      "user[password]": {
+        minlength: 6
+      },
       "user[password_confirmation]": {
-        equalTo: "#user_password"
+        equalTo: "#user_password",
+        minlength: 6
       }
     }
   });
