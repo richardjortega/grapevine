@@ -55,9 +55,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Password</label>
+              <label class="control-label">Retype Password</label>
               <div class="controls">
-                <%= user_form.password_field :password_confirmation, :class => 'required', :equalTo => 'user[password]' %>
+                <%= user_form.password_field :password_confirmation, :class => 'required password', :equalTo => 'user_password'%>
               </div>
             </div>
 
@@ -110,6 +110,12 @@
   </div><!-- /.row -->
 </div><!-- /#signup-page -->
 <script type="text/javascript">
-  $("form").validate();
+  $("form").validate({
+    rules: {
+      "user[password_confirmation]": {
+        equalTo: "#user_password"
+      }
+    }
+  });
 </script>
 
