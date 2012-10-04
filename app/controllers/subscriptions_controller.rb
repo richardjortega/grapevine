@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
 
   def create
+    debugger
   	@subscription = Subscription.new params[:subscription]
     #Note need to break out user so that it isn't saved if issue with stripe.
   	@user	= User.create!(params[:user])
