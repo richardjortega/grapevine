@@ -24,10 +24,10 @@ $(document).ready(function() {
 		gmarker.setVisible(true);
 		addresspickerMap.addresspicker( "updatePosition");
 
-		$('#signup-page #map').css('opacity', '0');
+		/*$('#signup-page #map').css('opacity', '0');
 		$('input#addresspicker_map').focus(function() {
 			$('#signup-page #map').animate({
 				opacity: '1'
 			}, 700, function() {});
-		});
+		});*/
 });
