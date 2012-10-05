@@ -1,8 +1,1 @@
-phoenix-restaurant-listings
-austin-texas-restaurant-listings
-corpus-christi-texas-restaurant-listings
-dallas-texas-restaurant-listings
-el-paso-southwest-texas-restaurant-listings
-houston-texas-restaurant-listings
-san-antonio-texas-restaurant-listings
-texas-panhandle-restaurant-listings
+seattle-washington-restaurant-listings

@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'csv'
 require 'pp'
+require 'watir-webdriver'
 
 class OpenTableParser
 
@@ -90,7 +91,10 @@ class OpenTableParser
 			url = "http://www.#{@source}/#{link}"
 			puts "Scrapping: " + url
 			job_start_time = Time.now
-			doc = Nokogiri::HTML(open(url)).css('div.section.main')
+			browser = Watir::Browser.new :firefox
+			browser.goto url
+			doc = Nokogiri::HTML(browser.html).css('div.section.main')
+			browser.close
 
 			doc.collect do |detail|
 				parsed_detail = Hash.new
