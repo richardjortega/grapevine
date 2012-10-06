@@ -34,7 +34,7 @@ class OpenTableParser
 			parse_location_page(location_link, browser)
 		end
 
-		# Close browser after on saucelabs
+		# Close browser session on saucelabs
 		browser.close
 		
 		# Remove any nil values from the returned array then flatten array of hashes to one-dimensional array of hashes
@@ -85,8 +85,8 @@ class OpenTableParser
 		caps = Selenium::WebDriver::Remote::Capabilities.chrome
 		#version not needed for chrome
 		#caps.version = "5.0"
-		caps.platform = :MAC
-		caps[:name] = "Testing Selenium 2 with Ruby on Sauce"
+		caps.platform = 'Windows 2008'
+		caps[:name] = "Saucing: #{@directory_listing}"
 
 		browser = Watir::Browser.new(
 		  :remote,
@@ -101,17 +101,11 @@ class OpenTableParser
 			job_start_time = Time.now
 			
 			browser.goto url
+			sleep 0.5
 			doc = Nokogiri::HTML(browser.html).css('div.section.main')
-			#browser.close
-
-
-			# browser = Watir::Browser.new :firefox
-			# browser.goto url
-			# doc = Nokogiri::HTML(browser.html).css('div.section.main')
-			# browser.close
 
 			doc.collect do |detail|
-				parsed_detail = Hash.new
+				parsed_detail = {}
 					
 				parsed_detail[:url] = "#{url}&tab=2"
 
@@ -121,8 +115,14 @@ class OpenTableParser
 
 				# General information
 				parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text
-				parsed_detail[:rating] = detail.css('span.Star').attr("title").text
-				
+
+				# Set overall rating default in case it returns nil
+				if detail.css('span.Star').nil?
+					parsed_detail[:rating] = ""
+				else
+					parsed_detail[:rating] = detail.css('span.Star').attr("title").text
+				end
+
 				# This string interpolation allows for single line address where breaks are converted to spaces
 				parsed_detail[:address] = "#{address_parts[0]} #{address_parts[1]} #{address_parts[2]}"
 
@@ -136,12 +136,17 @@ class OpenTableParser
 				parsed_detail[:email] = detail.css('ul.detailsList li#ProfileOverview_Email a').text
 				parsed_detail[:phone] = detail.css('ul.detailsList li#ProfileOverview_Phone span.value').text
 
-				# Grabs last review
-				parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
+				# Set review rating default in case it returns nil
+				if detail.at_css("img.BVImgOrSprite").nil?
+					parsed_detail[:review_rating] = ""
+				else
+					parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
+				end
+			
 				parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 				stubbed_link = URI.parse("#{url}").path[1..-1]
-				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore3/#{stubbed_link}"
+				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore4/#{stubbed_link}"
 				parsed_detail[:marketing_id] = stubbed_link
 
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
