@@ -26,24 +26,19 @@ class OpenTableParser
 
 		puts "Scraping Data from Each Location..."
 
-		### For quick testing, only uses two links
-		# twolinks = Array.new
-		# twolinks << links[0] << links[1]
-		# found_details = twolinks.collect do |location_link|
-		# 	parse_location_page(location_link)
-		# end
+		# Spin up a cloud browser to execute JS with (Mac desktop with Chrome)
+		browser = get_saucy
 
-		# Probably should be broken to another method
 		# Parse all pages on the returned pages
 		found_details = links.collect do |location_link|
-			parse_location_page(location_link)
+			parse_location_page(location_link, browser)
 		end
-		
-		# Remove any nil values from the returned array
-		found_details.compact!
 
-		# Flatten array or array of hashes to one-dimensional array of hashes
-	    found_details.flatten!
+		# Close browser after on saucelabs
+		browser.close
+		
+		# Remove any nil values from the returned array then flatten array of hashes to one-dimensional array of hashes
+		found_details.compact!.flatten!
 
 		puts "Finished Scrapping All Locations' Data."
 		puts "Total Time to Scrape All Data: #{((Time.now - job_start_time)/60).to_i} minutes"
@@ -86,15 +81,34 @@ class OpenTableParser
 		listing.css('td.ReCol a.r').first[:href]
 	end
 
-	def parse_location_page(link)
+	def get_saucy
+		caps = Selenium::WebDriver::Remote::Capabilities.chrome
+		#version not needed for chrome
+		#caps.version = "5.0"
+		caps.platform = :MAC
+		caps[:name] = "Testing Selenium 2 with Ruby on Sauce"
+
+		browser = Watir::Browser.new(
+		  :remote,
+		  :url => "http://richardjortega:c9192142-8576-4adf-a427-9b19e6b9b218@ondemand.saucelabs.com:80/wd/hub",
+		  :desired_capabilities => caps)
+	end
+
+	def parse_location_page(link, browser)
 		begin
 			url = "http://www.#{@source}/#{link}"
 			puts "Scrapping: " + url
 			job_start_time = Time.now
-			browser = Watir::Browser.new :firefox
+			
 			browser.goto url
 			doc = Nokogiri::HTML(browser.html).css('div.section.main')
-			browser.close
+			#browser.close
+
+
+			# browser = Watir::Browser.new :firefox
+			# browser.goto url
+			# doc = Nokogiri::HTML(browser.html).css('div.section.main')
+			# browser.close
 
 			doc.collect do |detail|
 				parsed_detail = Hash.new
