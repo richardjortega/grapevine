@@ -61,7 +61,9 @@ begin
 			parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
 		end
 		
+
 		parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
+
 
 		parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 		puts "Finished scrapping: " + parsed_detail[:name]

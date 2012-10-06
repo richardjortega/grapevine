@@ -142,8 +142,10 @@ class OpenTableParser
 				else
 					parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
 				end
-			
+
+				# Possiblity of no review descriptions, therefore we shouldn't track this location as it wouldn't have good data anyway.
 				parsed_detail[:review_description] = detail.at_css('span.BVRRReviewText').text
+				
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 				stubbed_link = URI.parse("#{url}").path[1..-1]
 				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore4/#{stubbed_link}"
