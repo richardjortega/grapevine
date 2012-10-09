@@ -13,10 +13,14 @@ caps = Selenium::WebDriver::Remote::Capabilities.chrome
 caps.platform = 'Windows 2008'
 caps[:name] = "Testing Selenium 2 with Ruby on Sauce"
 
-browser = Watir::Browser.new(
-  :remote,
-  :url => "http://richardjortega:c9192142-8576-4adf-a427-9b19e6b9b218@ondemand.saucelabs.com:80/wd/hub",
-  :desired_capabilities => caps)
+# for when you want to run locally
+browser = Watir::Browser.new :firefox
+
+# for when you want to run on Saucelabs
+# browser = Watir::Browser.new(
+#   :remote,
+#   :url => "http://richardjortega:c9192142-8576-4adf-a427-9b19e6b9b218@ondemand.saucelabs.com:80/wd/hub",
+#   :desired_capabilities => caps)
 
 url = "http://www.opentable.com/artisan-hotel-boutiques-mood-restaurant?scpref=110&tab=2"
 browser.goto url

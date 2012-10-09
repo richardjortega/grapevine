@@ -27,7 +27,10 @@ class OpenTableParser
 		puts "Scraping Data from Each Location..."
 
 		# Spin up a cloud browser to execute JS with (Mac desktop with Chrome)
-		browser = get_saucy
+		# browser = get_saucy
+
+		# Spin up browser locally
+		browser = run_browser_locally
 
 		# Parse all pages on the returned pages
 		found_details = links.collect do |location_link|
@@ -79,6 +82,10 @@ class OpenTableParser
 
 	def parse_listing(listing)
 		listing.css('td.ReCol a.r').first[:href]
+	end
+
+	def run_browser_locally
+		Watir::Browser.new :firefox
 	end
 
 	def get_saucy
@@ -148,7 +155,7 @@ class OpenTableParser
 				
 				parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 				stubbed_link = URI.parse("#{url}").path[1..-1]
-				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore4/#{stubbed_link}"
+				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore5/#{stubbed_link}"
 				parsed_detail[:marketing_id] = stubbed_link
 
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
