@@ -18,6 +18,7 @@ Grapevine::Application.routes.draw do
   get '/signup' => 'static_pages#signup',      as: 'signup'
 
   # Pages and links to be removed once Stripe integration completed
+  match '/blog', to: 'pickgrapevine.tumblr.com'
   match '/enroll', to: 'static_pages#enroll'
   match '/concierge', to: 'static_pages#concierge'
   match '/thankyou', to: 'static_pages#thankyou'
