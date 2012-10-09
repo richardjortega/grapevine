@@ -15,7 +15,6 @@ gem 'cancan', '>= 1.6.7'
 gem 'rolify', '>= 3.1.0'
 
 # Some crawling madness
-gem 'capybara-webkit'
 gem 'nokogiri'
 gem 'watir-webdriver'
 gem 'headless'
