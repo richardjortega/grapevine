@@ -24,5 +24,5 @@ $(document).ready(function() {
 		addresspickerMap.addresspicker( "updatePosition");
 
 	/* Jquery masked plugin for user's phone number */
-	$("input.phone_number").mask("(999) 999-9999");
+	$("#user_phone_number").mask("(999) 999-9999");
 });
