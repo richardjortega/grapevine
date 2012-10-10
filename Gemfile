@@ -5,6 +5,9 @@ gem 'rails', '3.2.5'
 gem 'thin'
 gem 'jquery-rails'
 
+# Front-end
+gem 'client_side_validations'
+
 # Payment
 gem 'stripe'
 gem 'stripe_event'

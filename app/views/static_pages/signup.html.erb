@@ -4,7 +4,8 @@
   <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
   <%= javascript_include_tag "jquery.ui.addresspicker.js" %>
   <%= javascript_include_tag "signup.js" %>
-  <%= javascript_include_tag "jquery.validate.js" %>
+<!--   <%= javascript_include_tag "jquery.validate.js" %> -->
+  <%= javascript_include_tag "rails.validations" %>
 
 <% end %>
 
@@ -19,7 +20,7 @@
   <div class="row">
     <p style="text-align:center;">We just need a little information from you to start tracking your business reviews!</p>
 
-    <%= form_for @user, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
+    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
 
         <div class="span5 offset1 user-info">
           <h3>Your Information</h3>
@@ -109,7 +110,7 @@
       </div><!-- /.span12 -->
   </div><!-- /.row -->
 </div><!-- /#signup-page -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $("form").validate({
     rules: {
       "user[password]": {
@@ -121,5 +122,5 @@
       }
     }
   });
-</script>
+</script> -->
 
