@@ -27,6 +27,6 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_length_of :password, :minimum => 6
   validates_confirmation_of :password
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :case_sensitive => false
 
 end
