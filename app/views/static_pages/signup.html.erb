@@ -4,9 +4,7 @@
   <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
   <%= javascript_include_tag "jquery.ui.addresspicker.js" %>
   <%= javascript_include_tag "signup.js" %>
-<!--   <%= javascript_include_tag "jquery.validate.js" %> -->
   <%= javascript_include_tag "rails.validations" %>
-
 <% end %>
 
 <div id="signup-page">
@@ -28,19 +26,19 @@
             <div class="control-group">
               <label class="control-label">First Name</label>
               <div class="controls">
-                <%= user_form.text_field :first_name, :class => 'required' %>
+                <%= user_form.text_field :first_name %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Last Name</label>
               <div class="controls">
-                <%= user_form.text_field :last_name, :class => 'required' %>
+                <%= user_form.text_field :last_name %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Email</label>
               <div class="controls">
-                <%= user_form.email_field :email, :class => 'required email' %>
+                <%= user_form.email_field :email, :validate => true %>
               </div>
             </div>
             <div class="control-group">
@@ -52,13 +50,13 @@
             <div class="control-group">
               <label class="control-label">Password</label>
               <div class="controls">
-                <%= user_form.password_field :password, :class => 'required password' %>
+                <%= user_form.password_field :password %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Retype Password</label>
               <div class="controls">
-                <%= user_form.password_field :password_confirmation, :class => 'required password', :equalTo => 'user_password'%>
+                <%= user_form.password_field :password_confirmation %>
               </div>
             </div>
 
