@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011052633) do
+ActiveRecord::Schema.define(:version => 20121011061154) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -36,8 +36,6 @@ ActiveRecord::Schema.define(:version => 20121011052633) do
 
   create_table "locations", :force => true do |t|
     t.string   "name",                                           :null => false
-    t.decimal  "lat",            :precision => 15, :scale => 10
-    t.decimal  "long",           :precision => 15, :scale => 10
     t.string   "street_address",                                 :null => false
     t.string   "address_line_2"
     t.string   "city"
@@ -46,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20121011052633) do
     t.string   "website"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
+    t.decimal  "lat",            :precision => 15, :scale => 10
+    t.decimal  "long",           :precision => 15, :scale => 10
   end
 
   add_index "locations", ["name"], :name => "index_locations_on_name"
