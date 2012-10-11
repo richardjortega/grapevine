@@ -1,5 +1,5 @@
 class FckThisColumnInLocations < ActiveRecord::Migration
-  def change
+  def self.up
   	rename_column :locations, :lat, :lat_string
   	rename_column :locations, :long, :long_string
   	add_column :locations, :lat, :decimal, :precision => 15, :scale => 10
