@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004030148) do
+ActiveRecord::Schema.define(:version => 20121011052633) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20121004030148) do
     t.datetime "updated_at",                                     :null => false
   end
 
-  add_index "locations", ["name"], :name => "index_locations_on_name", :unique => true
+  add_index "locations", ["name"], :name => "index_locations_on_name"
 
   create_table "plans", :force => true do |t|
     t.string   "name",              :null => false
