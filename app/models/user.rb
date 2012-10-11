@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  # Pre-validators!
+  before_save :format_phone_number
+
   # Associations
   has_one :subscription, dependent: :destroy
   has_one :plan, through: :subscription
@@ -30,5 +33,13 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 6
   validates_confirmation_of :password
   validates_uniqueness_of :email, :case_sensitive => false
+
+private
+
+  def format_phone_number
+    #will remove all but integers, only if a phone number has been provided
+    self.phone_number = self.phone_number.gsub(/[^0-9]/,"") if self.phone_number.present?
+  end
+
 
 end
