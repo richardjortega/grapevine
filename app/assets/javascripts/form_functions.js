@@ -1,8 +1,7 @@
 /* Custom JS */
 
 $(document).ready(function() {
-	
-	//var = addresspicker = $( '.addresspicker' ).addresspicker();
+	/* Google Maps Address Picker */
 	var addresspickerMap = $( "#addresspicker_map" ).addresspicker({
 			regionBias: "us",
 			mapOptions: {
@@ -24,10 +23,7 @@ $(document).ready(function() {
 		gmarker.setVisible(true);
 		addresspickerMap.addresspicker( "updatePosition");
 
-		/*$('#signup-page #map').css('opacity', '0');
-		$('input#addresspicker_map').focus(function() {
-			$('#signup-page #map').animate({
-				opacity: '1'
-			}, 700, function() {});
-		});*/
+	/* Jquery masked plugin for user's phone number */
+	$("#user_phone_number").mask("(999) 999-9999");
+
 });

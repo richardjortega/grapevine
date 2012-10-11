@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
 # Main
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.8'
 gem 'thin'
 gem 'jquery-rails'
+
+# Front-end
+gem 'client_side_validations'
 
 # Payment
 gem 'stripe'

@@ -1,11 +1,6 @@
 <% content_for :head do %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
-  <%= javascript_include_tag "jquery-ui-1.8.7.min.js" %>
-  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
-  <%= javascript_include_tag "jquery.ui.addresspicker.js" %>
-  <%= javascript_include_tag "signup.js" %>
-  <%= javascript_include_tag "jquery.validate.js" %>
-
+  <%= render 'shared/form_js_includes' %>
 <% end %>
 
 <div id="signup-page">
@@ -19,7 +14,7 @@
   <div class="row">
     <p style="text-align:center;">We just need a little information from you to start tracking your business reviews!</p>
 
-    <%= form_for @user, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
+    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
 
         <div class="span5 offset1 user-info">
           <h3>Your Information</h3>
@@ -27,19 +22,19 @@
             <div class="control-group">
               <label class="control-label">First Name</label>
               <div class="controls">
-                <%= user_form.text_field :first_name, :class => 'required' %>
+                <%= user_form.text_field :first_name %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Last Name</label>
               <div class="controls">
-                <%= user_form.text_field :last_name, :class => 'required' %>
+                <%= user_form.text_field :last_name %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Email</label>
               <div class="controls">
-                <%= user_form.email_field :email, :class => 'required email' %>
+                <%= user_form.email_field :email, :validate => true %>
               </div>
             </div>
             <div class="control-group">
@@ -51,13 +46,13 @@
             <div class="control-group">
               <label class="control-label">Password</label>
               <div class="controls">
-                <%= user_form.password_field :password, :class => 'required password' %>
+                <%= user_form.password_field :password %>
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Retype Password</label>
               <div class="controls">
-                <%= user_form.password_field :password_confirmation, :class => 'required password', :equalTo => 'user_password'%>
+                <%= user_form.password_field :password_confirmation %>
               </div>
             </div>
 
@@ -66,7 +61,7 @@
 
       <div class="span5 biz-info">
         <h3>Your Business Information</h3>
-          <%= fields_for @location do |location_fields| %>
+          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
             <div class="control-group">
               <label class="control-label">Business Name</label>
@@ -77,20 +72,13 @@
             <div class="control-group">
               <label class="control-label">Address</label>
               <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map', :class => 'required' %>
+                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
 
               </div>
               <div id="map"></div>
                 <%= location_fields.hidden_field :lat, :id => 'lat' %>
                 <%= location_fields.hidden_field :long, :id => 'lng' %>
             </div>
-
-
-            <!-- Address Line 2      : <%= location_fields.text_field :address_line_2 %>
-            City                : <%= location_fields.text_field :city %>
-            State               : <%= location_fields.text_field :state %>
-            Zip                 : <%= location_fields.text_field :zip %>
-            Website             : <%= location_fields.url_field :website %> -->
           <% end %>
 
           <%= fields_for @subscription do |subscription_field| %>
@@ -108,18 +96,4 @@
      
       </div><!-- /.span12 -->
   </div><!-- /.row -->
-</div><!-- /#signup-page -->
-<script type="text/javascript">
-  $("form").validate({
-    rules: {
-      "user[password]": {
-        minlength: 6
-      },
-      "user[password_confirmation]": {
-        equalTo: "#user_password",
-        minlength: 6
-      }
-    }
-  });
-</script>
-
+</div>

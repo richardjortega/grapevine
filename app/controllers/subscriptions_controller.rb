@@ -1,15 +1,14 @@
 class SubscriptionsController < ApplicationController
+  # before_filter :format_phone_number, :on => :create
 
   def create
-    debugger
   	@subscription = Subscription.new params[:subscription]
     #Note need to break out user so that it isn't saved if issue with stripe.
   	@user	= User.create!(params[:user])
   	@subscription.user  = @user
-  	@user.locations << Location.create!(params[:location])
 
   	@plan = Plan.find params[:subscription][:plan_id]
-
+    
   	if @subscription.save_without_payment
   		redirect_to thankyou_path
 	    NotifyMailer.free_signup(@subscription.user).deliver
@@ -20,5 +19,12 @@ class SubscriptionsController < ApplicationController
   	end
 
   end
+
+# private
+
+#   def format_phone_number
+#     #will remove all but integers, only if a phone number has been provided
+#     params[:user][:phone_number].gsub!(/[^0-9]/,"") if params[:user][:phone_number].present?
+#   end
 
 end

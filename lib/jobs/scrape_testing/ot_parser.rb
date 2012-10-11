@@ -26,6 +26,7 @@ url = "http://www.opentable.com/artisan-hotel-boutiques-mood-restaurant?scpref=1
 browser.goto url
 sleep 1
 doc = Nokogiri::HTML(browser.html).css('div.section.main')
+debugger
 browser.close
 
 begin
