@@ -61,7 +61,7 @@
 
       <div class="span5 biz-info">
         <h3>Your Business Information</h3>
-          <%= fields_for @location do |location_fields| %>
+          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
             <div class="control-group">
               <label class="control-label">Business Name</label>
@@ -72,7 +72,7 @@
             <div class="control-group">
               <label class="control-label">Address</label>
               <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map', :class => 'required' %>
+                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
 
               </div>
               <div id="map"></div>

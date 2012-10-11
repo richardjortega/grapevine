@@ -25,4 +25,5 @@ $(document).ready(function() {
 
 	/* Jquery masked plugin for user's phone number */
 	$("#user_phone_number").mask("(999) 999-9999");
+
 });
