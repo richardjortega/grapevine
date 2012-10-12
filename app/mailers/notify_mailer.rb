@@ -14,7 +14,7 @@ class NotifyMailer < ActionMailer::Base
   def paid_signup(user)
     @user = user
     mail to: user.email, subject: "Thanks for signing up!"
-  end
+  endUser
 
   # Update Grapevine team about important account changes
   def update_grapevine_team(user, message)
@@ -25,7 +25,7 @@ class NotifyMailer < ActionMailer::Base
 
   # Send canceled email
   def account_canceled(user)
-    # code here....
+    mail to: user.email, subject: "We're sorry to see you go!"
   end
 
   # Send a notice 3 days before trial ends
