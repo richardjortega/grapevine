@@ -14,7 +14,7 @@ class NotifyMailer < ActionMailer::Base
   def paid_signup(user)
     @user = user
     mail to: user.email, subject: "Thanks for signing up!"
-  endUser
+  end
 
   # Update Grapevine team about important account changes
   def update_grapevine_team(user, message)
