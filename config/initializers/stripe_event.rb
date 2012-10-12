@@ -21,8 +21,13 @@ StripeEvent.registration do
 	# Update customer's plan to whatever Stripe lets us know.
 	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
-		event.data.object.status == 'unpaid' 
-		handle_unpaid_customer event.data.object
+		case event.data.object.status
+			when 'unpaid'
+				handle_unpaid_customer event.data.object
+			when 'canceled'
+				asdfasdf
+			else update_customer_subscription
+		end
 	end
 
 end
@@ -59,4 +64,15 @@ private
 		user.save!
 
 		NotifyMailer.account_expired(user).deliver
+	end
+
+	# Update all items on customer to match stripe webhook
+	def update_customer_subscription(subscription)
+		user = Subscription.find_by_stripe_customer_token(subscription.customer)
+		user.subscription.status_info = subscription.status
+		user.subscription.start = subscription.start
+		user.subscription.current_period_start = subscription.current_period_start
+		user.subscription.current_period_end = subscription.current_period_end
+		user.subscription.trial_start = subscription.trial_start if subscription.trial_start.present?
+		user.subscription.trial_end = subscription.trial_end if subscription.trial_end.present?
 	end
