@@ -16,10 +16,16 @@ class NotifyMailer < ActionMailer::Base
     mail to: user.email, subject: "Thanks for signing up!"
   end
 
-  # Send signup email notification to Grapevine support when we have a new customer
-  def new_customer(user)
+  # Update Grapevine team about important account changes
+  def update_grapevine_team(user, message)
     @user = user
-    mail to: "erik@pickgrapevine.com", subject: "New customer signed up"
+    @message = message
+    mail to: "erik@pickgrapevine.com", subject: "Update Alert: #{@message}"
+  end
+
+  # Send canceled email
+  def account_canceled(user)
+    mail to: user.email, subject: "We're sorry to see you go!"
   end
 
   # Send a notice 3 days before trial ends

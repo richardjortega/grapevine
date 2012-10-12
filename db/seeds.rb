@@ -9,8 +9,8 @@
 # Seed stripe plans
 # Stripe can give an Stripe::InvalidRequestError: Plan already exists. If that occurs, simply move on
 stripe_plans = [
-  { amount: 3000, interval: 'month', currency: 'usd', id: 'basic_monthly', name: 'Grapevine Alerts - Basic Monthly',  trial_period_days: '30' },
-  { amount: 30000, interval: 'year', currency: 'usd', id: 'basic_yearly',  name: 'Grapevine Alerts - Basic Yearly'}
+  { amount: 3000, interval: 'month', currency: 'usd', id: 'basic_monthly', name: 'Grapevine Alerts - Basic Monthly Plan',  trial_period_days: '30' },
+  { amount: 30000, interval: 'year', currency: 'usd', id: 'basic_yearly',  name: 'Grapevine Alerts - Basic Yearly Plan'}
 ]
 
 # If a plan is already created inside of Stripe, it will return an error.
