@@ -91,5 +91,3 @@ private
 		user.subscription.trial_start = subscription.trial_start if subscription.trial_start.present?
 		user.subscription.trial_end = subscription.trial_end if subscription.trial_end.present?
 	end
-
-	# 
