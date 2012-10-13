@@ -1,14 +1,27 @@
-<div class="container">
-	<h3 class="hand">Howdy, Cowboy! Welcome to your Grapevine Profile<br />Here's what we got on your file right now</h3>
-	<div class="row">
-		<div class="span12 box drop-shadow">
-			<div>
-				<br />
-				<p>
-				<%= current_user.first_name %> <%= current_user.	last_name %>
-				<br />
-				<%= current_user.email %></p>
-			</div>
-		</div>
-	</div>
-</div
+<div class="container signed-in">
+
+	<h3>Welcome, <%= current_user.first_name %></h3>
+	<p class="muted">Here&rsquo;s what we have on file for you now.</p>
+
+	
+
+		<dl>
+			<dt>Name</dt>
+			<dd><%= current_user.first_name %> <%= current_user.	last_name %></dd>
+
+			<dt>Email</dt>
+			<dd><%= current_user.email %></dd>
+
+			<dt>Plan</dt>
+			<dd>$30 Monthly <span>Start Date: August 13, 2012</span></dd>
+
+
+			<dt>Business Tracking</dt>
+			<dd>Drew&rsquo;s American Grill</dd>
+		</dl>
+
+		<p class="muted">Need to update your information? No problem, call us at: <a href="tel:12105497799" class="purple">210-549-7799</span></p>
+
+
+</div><!-- /.container -->
+	

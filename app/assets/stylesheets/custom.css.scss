@@ -1,7 +1,10 @@
 @import url("bootstrap.min.css");
 @import url("bootstrap-responsive.min.css");
 @import url(http://fonts.googleapis.com/css?family=Courgette);
-
+$purple: #7c40bc;
+.purple {
+    color:$purple !important;
+}
 body {
     background:#fcfcfc image-url("bg/top.png") top left repeat-x;
     padding:40px 0 0;
@@ -509,5 +512,30 @@ form h4 {
     .pricing {
         padding-top:0;
         margin-top:30px;
+    }
+}
+
+
+
+.container.signed-in {
+    margin-top:30px;
+    h3 {
+        text-align:left;
+        margin:20px 0 10px 0;
+        color:$purple;
+    }
+    dl {
+        font-size:14px;
+        dt {
+            margin-top:15px;
+        }
+        dd {
+            font-size:18px;
+        }
+        span {
+            font-size:14px;
+            display:block;
+            color:#999;
+        }
     }
 }
