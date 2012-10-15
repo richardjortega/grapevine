@@ -1,27 +1,79 @@
 <div class="container signed-in">
 
-	<h3>Welcome, <%= current_user.first_name %></h3>
-	<p class="muted">Here&rsquo;s what we have on file for you now.</p>
+	<div class="row-fluid">
+		<div class="span8">
+			<h3>Welcome, <%= current_user.first_name %></h3>
+			<p class="muted">Here&rsquo;s what we have on file for you now.</p>
 
-	
+			<dl>
+				<dt>Name</dt>
+				<dd><%= current_user.first_name %> <%= current_user.	last_name %></dd>
 
-		<dl>
-			<dt>Name</dt>
-			<dd><%= current_user.first_name %> <%= current_user.	last_name %></dd>
+				<dt>Email</dt>
+				<dd><%= current_user.email %></dd>
 
-			<dt>Email</dt>
-			<dd><%= current_user.email %></dd>
-
-			<dt>Plan</dt>
-			<dd><%= @plan.name %>  <span>Start date asshole</span></dd>
-			
+				<dt>Plan</dt>
+				<dd><%= @plan.name %>  <span>Start date asshole</span></dd>
+				<p>
 
 
-			<dt>Business Tracking</dt>
-			<dd><%= @location.name %></dd>
-		</dl>
+				<dt>Business Tracking</dt>
+				<dd><%= @location.name %></dd>
+			</dl>
 
-		<p class="muted">Need to update your information? No problem, call us at: <a href="tel:12105497799" class="purple">210-549-7799</span></p>
+			<p class="muted">Need to update your information? No problem, call us at: <a href="tel:12105497799" class="purple">210-549-7799</span></p>
+		</div><!-- /.span6 -->
+
+		<div class="span4 well">
+
+			<h4><span>You&rsquo;re currently on our Trial Plan.</span> <span>Your trial period has expired</span> Upgrade today.</h4>
+
+			<form class="payment-form">
+				<div class="control-group">
+					<label class="control-label">Name on card</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Card Number</label>
+					<div class="controls">
+						<input type="text" class="input-large">
+						<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
+					</div>
+				</div>
+				<!-- <div class="control-group">
+					<label class="control-label">Address</label>
+					<div class="controls">
+						<input type="text" placeholder="Street Address" class="input-large">
+						<input type="text" placeholder="City" class="input-medium">
+						<input type="text" placeholder="TX" class="input-mini">
+						<input type="text" placeholder="Zip Code" class="input-small">
+					</div>
+				</div> -->
+				<div class="control-group">
+					<label class="control-label">Expiration</label>
+					<div class="controls controls-row">
+						<input type="text" class="input-mini" placeholder="MM">
+						<input type="text" class="input-small" placeholder="YYYY">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">CVC</label>
+					<div class="controls">
+						<input type="text" class="input-mini">
+						<span class="help-block">3 digit number on back of card</span>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn purple_button">$30/month</button>
+					<span class="or-pay">- OR PAY -</span>
+					<button type="submit" class="btn purple_button">$300/year <span>Get 2 Months Free</span></button>
+				</div>
+
+
+			</form><!-- /.payment-form -->
+		</div><!-- /.span6 -->
 
 
 </div><!-- /.container -->

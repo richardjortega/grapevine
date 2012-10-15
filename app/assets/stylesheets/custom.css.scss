@@ -538,4 +538,45 @@ form h4 {
             color:#999;
         }
     }
+    
+    .span4.well {
+        background:#efefef;
+    }
+    .span4.well h4 { 
+        line-height:30px;
+        span {
+            color:#666;
+            display:block;
+        }
+    }
+    form {
+        margin-bottom:0;
+        .form-actions {
+            padding:19px 0 0 0;
+            margin-bottom:0;
+            background:none;
+        }
+        button[type="submit"] {
+            -webkit-border-radius:4px;
+            -moz-border-radius:4px;
+            border-radius:4px;
+            width:100%;
+            span {
+                font-size:14px;
+                display:block;
+                margin-top:5px;
+            }
+        }
+        .or-pay {
+            
+            font-style:italic;
+            text-transform:uppercase;
+            font-size:14px;
+            display:block;
+            text-align:center;
+            color:#666;
+            margin:10px 0;
+        }
+    }
+    
 }
