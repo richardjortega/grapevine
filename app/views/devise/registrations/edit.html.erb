@@ -1,23 +1,83 @@
-<%= render 'devise/registrations/stripe_tag_includes' %>
+<% content_for :head do %>
+  <%= render 'devise/registrations/stripe_tag_includes' %>
+  <%= render 'shared/form_js_includes' %>
+<% end %>
+
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<div class="row">
+    <p style="text-align:center;">Feel free to update your user and location information in case anything has changed.</p>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-horizontal', :method => :put }) do |user_form| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <div class="span5 offset1 user-info">
+          <h3>Your Information</h3>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+            <div class="control-group">
+              <label class="control-label">First Name</label>
+              <div class="controls">
+                <%= user_form.text_field :first_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Last Name</label>
+              <div class="controls">
+                <%= user_form.text_field :last_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Email</label>
+              <div class="controls">
+                <%= user_form.email_field :email, :validate => true %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Phone Number</label>
+              <div class="controls">
+                <%= user_form.phone_field :phone_number %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Password</label>
+              <div class="controls">
+                <%= user_form.password_field :password, :validate => { :presence => true, :format => true } %><i>(leave blank if you don't want to change it)</i><br />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Retype Password</label>
+              <div class="controls">
+                <%= user_form.password_field :password_confirmation %><i>(we need your current password to confirm your changes)</i><br />
+              </div>
+            </div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+        
+        </div><!-- /.user-info -->
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+      <div class="span5 biz-info">
+        <h3>Your Business Information</h3>
+          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
+ 
+            <div class="control-group">
+              <label class="control-label">Business Name</label>
+              <div class="controls">
+                <%= location_fields.text_field :name %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Address</label>
+              <div class="controls">
+                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
 
-  <div><%= f.submit "Update" %></div>
+              </div>
+              <div id="map"></div>
+                <%= location_fields.hidden_field :lat, :id => 'lat' %>
+                <%= location_fields.hidden_field :long, :id => 'lng' %>
+            </div>
+          <% end %>
+
+  <div><%= user_form.submit "Update" %></div>
 <% end %>
 
 <h3>Cancel my account</h3>

@@ -6,7 +6,7 @@ gem 'thin'
 gem 'jquery-rails'
 
 # Front-end
-gem 'client_side_validations'
+gem 'client_side_validations', '3.2.0'
 
 # Payment
 gem 'stripe'
