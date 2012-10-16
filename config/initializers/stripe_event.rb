@@ -3,7 +3,7 @@
 # Incoming webhook requests are authenticated by retrieving the event object from Stripe. 
 # Authenticated events are published to subscribers.
 
-StripeEvent.registration do
+StripeEvent.setup do
 	require 'pp'
 
 	subscribe 'invoice.payment_failed' do |event|

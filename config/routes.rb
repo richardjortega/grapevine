@@ -2,7 +2,7 @@ Grapevine::Application.routes.draw do
   
   mount StripeEvent::Engine => "/stripe_event"
 
-  devise_for  :users, :controllers => {:registrations => "registrations"}
+  devise_for  :users
   resources   :subscriptions
   resources   :wantmore,    only: [:show], :controller => 'blasts'
   #for testing multiple variations of wantmore page
