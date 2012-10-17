@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(params[:user])
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
-      redirect_to root_path
+      redirect_to root_path, :notice => "Your profile has been updated"
     else
       render "edit"
     end
