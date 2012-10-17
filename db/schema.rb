@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011061154) do
+ActiveRecord::Schema.define(:version => 20121017205228) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20121011061154) do
     t.string   "card_expiration"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.date     "start_date"
   end
 
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id", :unique => true

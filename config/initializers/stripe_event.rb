@@ -85,7 +85,7 @@ private
 	def update_customer_subscription(subscription)
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
 		user.subscription.status_info = subscription.status
-		user.subscription.start = subscription.start
+		user.subscription.start_date = subscription.start
 		user.subscription.current_period_start = subscription.current_period_start
 		user.subscription.current_period_end = subscription.current_period_end
 		user.subscription.trial_start = subscription.trial_start if subscription.trial_start.present?
