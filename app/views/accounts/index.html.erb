@@ -1,7 +1,7 @@
 <div class="container signed-in">
 
 	<div class="row-fluid">
-		<div class="span8">
+		<div class="span7">
 			<h3>Welcome, <%= current_user.first_name %></h3>
 			<p class="muted">Here&rsquo;s what we have on file for you now.</p>
 
@@ -13,7 +13,7 @@
 				<dd><%= current_user.email %></dd>
 
 				<dt>Plan</dt>
-				<dd><%= @plan.name %>  <span>Start date asshole</span></dd>
+				<dd><%= @plan.name %>  <span><!-- start date here --></span></dd>
 				<p>
 
 
@@ -24,7 +24,7 @@
 			<%= link_to "Edit Profile", edit_user_registration_path, :class => 'btn' %>
 		</div><!-- /.span6 -->
 
-		<div class="span4 well">
+		<div class="span5 well">
 
 			<h4><span>You&rsquo;re currently on our Trial Plan.</span> <span>Your trial period has expired</span> Upgrade today.</h4>
 

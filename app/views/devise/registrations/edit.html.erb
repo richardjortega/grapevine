@@ -3,60 +3,65 @@
   <%= render 'shared/form_js_includes' %>
 <% end %>
 
+<div class="container signed-in">
+  <div class="row-fluid">
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<div class="row">
-    <p style="text-align:center;">Feel free to update your user and location information in case anything has changed.</p>
+<h3>Edit <%= resource_name.to_s.humanize %></h3>
+<p class="muted">Feel free to update your user and location information in case anything has changed.</p>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-horizontal', :method => :put }) do |user_form| %>
   <%= devise_error_messages! %>
 
-  <div class="span5 offset1 user-info">
-          <h3>Your Information</h3>
 
-            <div class="control-group">
-              <label class="control-label">First Name</label>
-              <div class="controls">
-                <%= user_form.text_field :first_name %>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Last Name</label>
-              <div class="controls">
-                <%= user_form.text_field :last_name %>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Email</label>
-              <div class="controls">
-                <%= user_form.email_field :email, :validate => true %>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Phone Number</label>
-              <div class="controls">
-                <%= user_form.phone_field :phone_number %>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Password</label>
-              <div class="controls">
-                <%= user_form.password_field :password, :validate => { :presence => true, :format => true } %><i>(leave blank if you don't want to change it)</i><br />
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Retype Password</label>
-              <div class="controls">
-                <%= user_form.password_field :password_confirmation %><i>(we need your current password to confirm your changes)</i><br />
-              </div>
-            </div>
+  <div class="control-group">
+    <label class="control-label">First Name</label>
+    <div class="controls">
+      <%= user_form.text_field :first_name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Last Name</label>
+    <div class="controls">
+      <%= user_form.text_field :last_name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Email</label>
+    <div class="controls">
+      <%= user_form.email_field :email, :validate => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Phone Number</label>
+    <div class="controls">
+      <%= user_form.phone_field :phone_number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Password</label>
+    <div class="controls">
+      <%= user_form.password_field :password, :validate => { :presence => true, :format => true } %>
+      <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
+    </div>
+  </div>
+  <div class="control-group password-two">
+    <label class="control-label">Retype Password</label>
+    <div class="controls">
+      <%= user_form.password_field :password_confirmation %>
+      
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('.password-two').hide();
+      $('#user_password').focus(function() {
+        $('.password-two').fadeIn('slow');
+      });
+    });
+  </script>
 
-        
-        </div><!-- /.user-info -->
 
-      <div class="span5 biz-info">
-        <h3>Your Business Information</h3>
+        <h3>Edit Business Information</h3>
           <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
             <div class="control-group">
@@ -77,11 +82,12 @@
             </div>
           <% end %>
 
-  <div><%= user_form.submit "Update" %></div>
+<div class="form-actions" style="margin:60px 0 20px 0;">
+<%= link_to "Back", :back, :class => 'btn' %> <%= user_form.submit "Update", :class => 'btn' %>
+</div>
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too, just call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
 
-<%= link_to "Back", :back %>
+
