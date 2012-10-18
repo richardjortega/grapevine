@@ -21,6 +21,7 @@ StripeEvent.setup do
 	# Update customer's plan to whatever Stripe lets us know.
 	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
+		debugger
 		case event.data.object.status
 			when 'unpaid'
 				handle_unpaid_customer event.data.object
