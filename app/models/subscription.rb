@@ -20,6 +20,8 @@ class Subscription < ActiveRecord::Base
   	# This assigns user to Grapevine Alerts - Monthly Alerts
   	customer.update_subscription({:plan => "basic_monthly"})
   	self.status = true
+    self.status_info = "trialing"
+    self.start_date = Date.today
   	save!
   end
 

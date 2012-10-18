@@ -13,7 +13,10 @@
 				<dd><%= current_user.email %></dd>
 
 				<dt>Plan</dt>
-				<dd><%= @plan.name %>  <span><!-- start date here --></span></dd>
+				<dd><%= @plan.name %>  <span>Start date: <%= @subscription.start_date %></span></dd>
+
+				<dt>Status</dt>
+				<dd><%= @subscription.status_info.capitalize %></dd>
 				<p>
 
 
