@@ -3,31 +3,41 @@
 <% end %>
 <% provide(:title, 'Grapevine') %>
     <div>&nbsp;</div><div>&nbsp;</div>
-<div class="wantmore4">
+<div class="span12">
     <div>&nbsp;</div>
   <!-- OpenTable review goes here -->
-  <div class="review-hero">
-            <div class="review">
-        <%= image_tag "pics/avatar.gif", alt: "OpenTable" %>
-                <ul class="review-content">
-          <li><em> <span class="quote">&ldquo;</span><%= @blast.review_description %><span class="quote">&rdquo;</span></em></li>
-                  <li><strong>Restaurant:</strong> <%= @blast.name %></li>
-                  <li><strong>Customer Rating:</strong> <%= @blast.rating %> stars</li>
-                  <li><strong>Posted on:</strong> <%= @blast.review_dine_date %></li>
-                </ul>
-            </div><!-- /.span -->
+  <div class="container">
+      <div class="row">
+          <div class="span11 hero-unit">
+            <div class="span7">
+                <p>
+                <%= image_tag "pics/avatar.gif", alt: "OpenTable" %><br /><strong>The Review:</strong><em> "<%= @blast.review_description %>"</em><br />
+                <strong>Restaurant:</strong> <%= @blast.name %>
+                <br />
+                <strong>Customer Rating:</strong> <%= @blast.rating %> stars
+                <br />
+                <strong>Review posted on:</strong> <%= @blast.review_dine_date %>
+                </p>
+                <div>
+              &nbsp;
+              </div>
+            </div>
+            <!-- <div class="pricing landing"> -->
 
-      <div class="did-you-know">
-              <h4>Did you know about this review?</h4>
-              <p><em>Knowing is half the battle...</em></p>
-              <a href="#set_focus" class="purple_button" id="yes-button">Yes</a>
-              <a href="#set_focus" class="signup" id="no-button">No</a>
-          </div><!-- /.did-you-know -->
-  </div><!-- /.review-hero -->
-</div><!-- /.wantmore4 -->
+                  <div class="span3 did-you-know">
+                          <div align="center">
+                            <%= image_tag "pics/did-you-know.png", alt: "Did you know about this OpenTable review" %>
+                            <p><br /><em>Knowing is half the battle...</em></p>&nbsp;<br />
+                            <a href="#set_focus" class="purple_button" id="yes-button">Yes</a>&nbsp;&nbsp;
+                          <a href="#set_focus" class="signup" id="no-button">No</a>
+                          </div>
+                  </div>
+            <!-- </div> -->
+          </div>
 
+      </div>
 
-
+  </div>
   <!-- YES reply info goes here -->
   <a name="set_focus"></a>
   <div class="container" id="yes_info">
@@ -45,7 +55,7 @@
           </div>
         </div>
 
-          <div class="pricing landing row steps wantmore4-steps">
+          <div class="pricing landing row steps">
 
                 <div class="span4">
                   <h4 class="hand"><span>1</span> Customer Reviews</h4>
@@ -115,7 +125,7 @@
           </div>
         </div>
 
-          <div class="pricing landing row steps wantmore4-steps">
+          <div class="pricing landing row steps">
 
                 <div class="span4">
                   <h4 class="hand"><span>1</span> Customer Reviews</h4>
