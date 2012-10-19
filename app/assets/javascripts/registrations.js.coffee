@@ -4,11 +4,12 @@ jQuery ->
 
 subscription =
   setupForm: ->
-    $('.payment-form').submit ->
-      $('input[type=submit]').attr('disabled', true)
+    $('#payment-form').submit ->
+      # disable the submit button to prevent repeated clicks
+      $('input[type=submit]').attr('disabled', 'disabled')
       if $('#credit_card_number').length
         subscription.processCard()
-        false
+        false # submit from callback
       else
         true
   
@@ -18,21 +19,27 @@ subscription =
       cvc: $('.card-cvc').val()
       exp_month: $('.card-expiry-month').val()
       exp_year: $('.card-expiry-year').val()
+    # createToken returns immediately - the supplied callback submits the form if there are no errors
     Stripe.createToken(card, subscription.handleStripeResponse)
   
   handleStripeResponse: (status, response) ->
     if status == 200
-      $('#subscription_last_four').val(response.card.last4)
-      $('#subscription_stripe_card_token').val(response.id)
-      console.log("Haven't hit the conditional")
+      form$ = $('#payment-form')
+      # token contains id, last4, and card type
+      token = response['id']
+      # insert the token into the form so it gets submitted to the server
+      form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />")
+      #$('#subscription_last_four').val(response.card.last4)
+      #$('#subscription_stripe_card_token').val(response.id)
+      
+      # and submit
+      form$.get(0).submit()
 
-      $('.payment-form')[0].submit ->
-        if $('input[type=submit]').attr('value') == '$30/month'
-          console.log("we are in the conditional")
-          $('#subscription_plan').attr('value') == '$30/month'
-          false
-        else
-          true
+
+      #$('input[name=pick-plan]').attr('id')
+      #$('#payment-form')[0].submit()
     else
+      # re-enable the submit button
+      $('input[type=submit]').removeAttr('disabled')
+      # show the errors on the form
       $('.payment-errors').text(response.error.message)
-      $('input[type=submit]').attr('disabled', false)

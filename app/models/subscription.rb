@@ -14,7 +14,8 @@ class Subscription < ActiveRecord::Base
                   :stripe_customer_token, 
                   :trial_end, 
                   :trial_start, 
-                  :user_id
+                  :user_id,
+                  :plan
 
   belongs_to :plan
   belongs_to :user
