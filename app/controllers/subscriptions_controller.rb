@@ -17,7 +17,22 @@ class SubscriptionsController < ApplicationController
   		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
   		render template: 'static_pages#signup'
   	end
+  end
+
+  def update
+    debugger
+    @subscription.update_attributes(params[:subscription])
+    @plan = Plan.find params[:plan_id]
+
+    if @subscription.update_stripe
+      redirect_to thankyou_path
+    else
+      flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
+      render template: 'accounts#index'
+    end
 
   end
+
+
 
 end

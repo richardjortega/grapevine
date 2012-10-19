@@ -2,7 +2,19 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
 
-  attr_accessible :card_expiration, :card_type, :card_zip, :current_period_end, :current_period_start, :last_four, :next_bill_on, :plan_id, :status, :stripe_customer_token, :trial_end, :trial_start, :user_id
+  attr_accessible :card_expiration, 
+                  :card_type, 
+                  :card_zip, 
+                  :current_period_end, 
+                  :current_period_start, 
+                  :last_four, 
+                  :next_bill_on, 
+                  :plan_id, 
+                  :status, 
+                  :stripe_customer_token, 
+                  :trial_end, 
+                  :trial_start, 
+                  :user_id
 
   belongs_to :plan
   belongs_to :user
@@ -25,6 +37,51 @@ class Subscription < ActiveRecord::Base
   	save!
   end
 
+  def save_with_payment
+    if valid?
+      customer = stripe_customer_with_credit_card
+      self.stripe_customer_token = customer.id
+      save!
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+
+  def update_stripe
+    # if stripe_customer_token.nil?
+    #   if !stripe_token.present?
+    #     raise "We're doing something wrong -- this isn't supposed to happen"
+    #   end
+
+    #   customer = Stripe::Customer.create(
+    #     :email => email,
+    #     :description => stripe_description,
+    #     :card => stripe_token
+    #   )
+    #   self.last_four = customer.active_card.last4
+    #   response = customer.update_subscription({:plan => "premium"})
+    # else
+      customer = Stripe::Customer.retrieve(stripe_customer_token)
+
+      if stripe_token.present?
+        customer.card = stripe_token
+      end
+
+      # in case they've changed
+      customer.email = email
+      customer.description = stripe_description
+
+      customer.save
+
+      self.last_four = customer.active_card.last4
+    # end
+
+    self.stripe_customer_token = customer.id
+    self.stripe_token = nil
+  end
+
 
 
 private
@@ -36,14 +93,18 @@ private
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
   end
 
-	# def set_card_info new_card
-	# 	self.last_four		 = new_card.last4
-	# 	self.card_type		 = new_card.type
-	# 	self.card_expiration = "#{ new_card.exp_month }-#{ new_card.exp_year }"
-	# end
+  def stripe_customer_with_credit_card
+    Stripe::Customer.create(email: user.email, description: stripe_description, plan: plan.identifier, card: stripe_card_token)
+  end
 
-	# def stripe_customer
-	# 	@stripe_customer ||= Stripe::Customer.retrieve stripe_customer_token
-	# end
+	def set_card_info new_card
+		self.last_four		 = new_card.last4
+		self.card_type		 = new_card.type
+		self.card_expiration = "#{ new_card.exp_month }-#{ new_card.exp_year }"
+	end
+
+	def stripe_customer
+		@stripe_customer ||= Stripe::Customer.retrieve stripe_customer_token
+	end
 
 end

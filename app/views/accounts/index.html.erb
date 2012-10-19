@@ -31,17 +31,26 @@
 
 			<h4><span>You&rsquo;re currently on our Trial Plan.</span> <span>Your trial period has expired</span> Upgrade today.</h4>
 
-			<form class="payment-form">
+			<%= form_for @subscription, :html => { :class => 'payment-form' } do |f| %>
+
+				<%= f.hidden_field :stripe_token %>
+				<%= f.hidden_field :last_4_digits %>
+				
+				<noscript>
+		          <p>This form requires Javascript to use</p>
+		        </noscript>
+		        <!-- these fields are disabled before submission and are never transmitted back to rails -->
 				<div class="control-group">
 					<label class="control-label">Name on card</label>
 					<div class="controls">
-						<input type="text" class="span12">
+						<%= text_field_tag :name_on_card, :class => 'field', :disabled => true %>
 					</div>
+
 				</div>
 				<div class="control-group">
 					<label class="control-label">Card Number</label>
 					<div class="controls">
-						<input type="text" class="input-large">
+						<%= text_field_tag :credit_card_number, params[:credit_card_number], :class => 'input-large', :disabled => true %>
 						<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
 					</div>
 				</div>
@@ -55,27 +64,33 @@
 					</div>
 				</div> -->
 				<div class="control-group">
-					<label class="control-label">Expiration</label>
+					<%= label_tag :expiry_date, 'Expiration', :class => 'control-label' %>
+					<!-- <label class="control-label">Expiration</label> -->
 					<div class="controls controls-row">
-						<input type="text" class="input-mini" placeholder="MM">
-						<input type="text" class="input-small" placeholder="YYYY">
+						<%= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true}, {:class => "input-small"} %>
+						<!-- <input type="text" class="input-mini" placeholder="MM">
+						<input type="text" class="input-small" placeholder="YYYY"> -->
+						<span>Your credit card details will be sent directly to our payment processor</span>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">CVC</label>
+					<label class="control-label">CVV</label>
 					<div class="controls">
-						<input type="text" class="input-mini">
+						<%= text_field_tag :cvv, params[:cvv], :class => 'input-mini', :disabled => true %>
 						<span class="help-block">3 digit number on back of card</span>
 					</div>
 				</div>
 				<div class="form-actions">
-					<button type="submit" class="btn purple_button">$30/month</button>
+					<%= f.submit "$30/month", :class => "btn purple_button",  %>
 					<span class="or-pay">- OR PAY -</span>
-					<button type="submit" class="btn purple_button">$300/year <span>Get 2 Months Free</span></button>
+					<%= f.submit "$300/year", :class => "btn purple_button" %>
+					<span>Get 2 Months Free</span>
+					<!--
+					<button type="submit" class="btn purple_button">$30/month</button>
+					<button type="submit" class="btn purple_button">$300/year </button> -->
 				</div>
 
-
-			</form><!-- /.payment-form -->
+			<% end %><!-- /.payment-form -->
 		</div><!-- /.span6 -->
 
 
