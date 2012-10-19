@@ -26,7 +26,7 @@ StripeEvent.setup do
 				handle_unpaid_customer event.data.object
 			when 'canceled'
 				handle_canceled_customer event.data.object
-			else update_customer_subscription
+			else update_customer_subscription event.data.object
 		end
 	end
 
