@@ -372,8 +372,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     }
     .col {
       float:left;
-      width:30%;
-      margin-left:5%;
+      width:26%;
+      margin-left:3%;
+      padding-left:60px;
+      position:relative;
+      img.col-icon {
+        width:40px;
+        height:40px;
+        position:absolute;
+        left:0px;
+        top:0px;
+      }
     }
     .col.first {
       margin-left:0;
