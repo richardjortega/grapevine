@@ -97,12 +97,6 @@ private
     Stripe::Customer.create(email: user.email, description: stripe_description, plan: plan.identifier, card: stripe_card_token)
   end
 
-	def set_card_info new_card
-		self.last_four		 = new_card.last4
-		self.card_type		 = new_card.type
-		self.card_expiration = "#{ new_card.exp_month }-#{ new_card.exp_year }"
-	end
-
 	def stripe_customer
 		@stripe_customer ||= Stripe::Customer.retrieve stripe_customer_token
 	end

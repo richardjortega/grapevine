@@ -36,12 +36,13 @@
 
 			<h4><span>You&rsquo;re currently on our Trial Plan.</span> <span>Your trial period has expired</span> Upgrade today.</h4>
 
+			<!-- to display errors returned by createToken -->
+		    <span class="payment-errors"></span>
+
 			<%= form_for @subscription, :html => { :class => 'payment-form' } do |f| %>
 
 				<%= f.hidden_field :stripe_card_token %>
 				<%= f.hidden_field :last_four %>
-				
-
 
 				<noscript>
 		          <p>This form requires Javascript to use</p>
@@ -52,19 +53,13 @@
 					<div class="controls">
 						<%= text_field_tag :name_on_card %>
 					</div>
-
 				</div>
 
 				<div id="credit-card" style="<%= @subscription.last_four ? "display:none" : "display:block" %>">
-		          <div id="credit-card-errors" style="display:none">
-		            <div id="stripe-error-message" class="alert-message block-message error">
-		            </div>
-		          </div>
-
 					<div class="control-group">
 						<label class="control-label">Card Number</label>
 						<div class="controls">
-							<%= text_field_tag :credit_card_number, params[:credit_card_number], :class => 'input-large', :disabled => true %>
+							<%= text_field_tag :credit_card_number, params[:credit_card_number], :class => 'credit-card-number', :disabled => true %>
 							<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
 						</div>
 					</div>
@@ -81,7 +76,9 @@
 						<%= label_tag :expiry_date, 'Expiration', :class => 'control-label' %>
 						<!-- <label class="control-label">Expiration</label> -->
 						<div class="controls controls-row">
-							<%= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true}, {:class => "input-small"} %>
+							<%= date_select "", :exp_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true, :disabled => true }, {:class => "card-expiry-month"} %>
+							<%= date_select "", :exp_year, {:discard_month => true, :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true }, {:class => "card-expiry-year"} %>
+							
 							<!-- <input type="text" class="input-mini" placeholder="MM">
 							<input type="text" class="input-small" placeholder="YYYY"> -->
 							<span>Your credit card details will be sent directly to our payment processor</span>
@@ -90,14 +87,17 @@
 					<div class="control-group">
 						<label class="control-label">CVV</label>
 						<div class="controls">
-							<%= text_field_tag :cvv, params[:cvv], :class => 'input-mini', :disabled => true %>
+							<%= text_field_tag :cvv, params[:cvv], :class => 'card-cvc', :disabled => true %>
 							<span class="help-block">3 digit number on back of card</span>
 						</div>
 					</div>
 				</div>
 				<div class="form-actions">
+					<%= f.hidden_field :plan %>
 					<!-- Don't change form submit text like $30/month unless you update subscriptions controller -->
 					<%= f.submit "$30/month", :class => "btn purple_button" %>
+					 
+					<!-- TODO: Need a selection for either plan, save that to an updated plan id value then have only one submit button -->
 					<span class="or-pay">- OR PAY -</span>
 					<%= f.submit "$300/year", :class => "btn purple_button" %>
 					<span>Get 2 Months Free</span>

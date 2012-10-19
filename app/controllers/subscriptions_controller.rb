@@ -21,6 +21,8 @@ class SubscriptionsController < ApplicationController
 
   def update
     @subscription = current_user.subscription
+    pp params
+    debugger
     # Update user's plan based on text in form submit
     case params[:commit]
       when "$30/month"

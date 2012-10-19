@@ -1,36 +1,38 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-$ ->
-  $("#credit-card input, #credit-card select").attr "disabled", false
-  $("form:has(#credit-card)").submit ->
-    form = this
-    $("#subscription_submit").attr "disabled", true
-    $("#credit-card input, #credit-card select").attr "name", ""
-    $("#credit-card-errors").hide()
-    unless $("#credit-card").is(":visible")
-      $("#credit-card input, #credit-card select").attr "disabled", true
-      return true
-    card =
-      number: $("#credit_card_number").val()
-      expMonth: $("#_expiry_date_2i").val()
-      expYear: $("#_expiry_date_1i").val()
-      cvc: $("#cvv").val()
+jQuery ->
+  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+  subscription.setupForm()
 
-    Stripe.createToken card, (status, response) ->
-      if status is 200
-        $("#subscription_last_four").val response.card.last4
-        $("#subscription_stripe_card_token").val response.id
-        form.submit()
+subscription =
+  setupForm: ->
+    $('.payment-form').submit ->
+      $('input[type=submit]').attr('disabled', true)
+      if $('#credit_card_number').length
+        subscription.processCard()
+        false
       else
-        $("#stripe-error-message").text response.error.message
-        $("#credit-card-errors").show()
-        $("#subscription_submit").attr "disabled", false
+        true
+  
+  processCard: ->
+    card =
+      number: $('.credit-card-number').val()
+      cvc: $('.card-cvc').val()
+      exp_month: $('.card-expiry-month').val()
+      exp_year: $('.card-expiry-year').val()
+    Stripe.createToken(card, subscription.handleStripeResponse)
+  
+  handleStripeResponse: (status, response) ->
+    if status == 200
+      $('#subscription_last_four').val(response.card.last4)
+      $('#subscription_stripe_card_token').val(response.id)
+      console.log("Haven't hit the conditional")
 
-    false
-
-  $("#change-card a").click ->
-    $("#change-card").hide()
-    $("#credit-card").show()
-    $("#credit_card_number").focus()
-    false
+      $('.payment-form')[0].submit ->
+        if $('input[type=submit]').attr('value') == '$30/month'
+          console.log("we are in the conditional")
+          $('#subscription_plan').attr('value') == '$30/month'
+          false
+        else
+          true
+    else
+      $('.payment-errors').text(response.error.message)
+      $('input[type=submit]').attr('disabled', false)
