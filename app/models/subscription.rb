@@ -65,14 +65,14 @@ class Subscription < ActiveRecord::Base
     # else
       customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-      if stripe_token.present?
-        customer.card = stripe_token
+      if stripe_card_token.present?
+        customer.card = stripe_card_token
       end
 
       # in case they've changed
-      customer.email = email
+      customer.email = user.email
       customer.description = stripe_description
-
+      debugger
       customer.save
 
       self.last_four = customer.active_card.last4

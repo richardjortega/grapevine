@@ -4,7 +4,7 @@ class SubscriptionsController < ApplicationController
   	@subscription = Subscription.new params[:subscription]
     #Note need to break out user so that it isn't saved if issue with stripe.
   	@user	= User.create!(params[:user])
-  	@subscription.user  = @user
+  	@subscription.user = @user
 
   	@plan = Plan.find params[:subscription][:plan_id]
     
@@ -20,9 +20,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    debugger
-    @subscription.update_attributes(params[:subscription])
-    @plan = Plan.find params[:plan_id]
+    @subscription = current_user.subscription
+    # Update user's plan based on text in form submit
+    case params[:commit]
+      when "$30/month"
+        current_user.subscription.plan = Plan.find_by_identifier('basic_monthly')
+      when "$300/year"
+        current_user.subscription.plan = Plan.find_by_identifier('basic_yearly')
+    end
 
     if @subscription.update_stripe
       redirect_to thankyou_path
