@@ -251,3 +251,132 @@ input.error {
   border-color:red;
 }
 }
+
+
+/* WANT MORE 5 */
+
+#wantmore5 {
+  .signup-bar {
+    margin-bottom:20px;
+    text-align:center;
+    a {
+      font-size:20px;
+    }
+  }
+  .wufoo input.text {
+    border:1px solid #ccc !important;
+    border-radius:4px;
+    height:30px;
+  }
+  padding-top:40px;
+  .review-wrapper {
+    margin-bottom:40px;
+  }
+  .review {
+    box-shadow:1px 1px 15px 0 rgba(0, 0, 0, .2);
+    -moz-transform: rotate(-3deg);
+    -webkit-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+    float:left;
+    padding:20px;
+    border:1px solid #ccc;
+    width:50%;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    background: #ffffff;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYWVhZWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea));
+background: -webkit-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+background: -o-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+background: -ms-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+background: linear-gradient(to bottom, #ffffff 0%,#eaeaea 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
+    p.the-review {
+      overflow:hidden;
+      font-style:italic;
+      font-size:20px;
+      line-height:28px;
+      font-family:georgia, serif;
+    }
+    p.opentable-logo img {
+      width:180px;
+      height:auto;
+      float:right;
+    }
+
+  }
+  .review-tag {
+    width:40%;
+    float:left;
+    margin-left:40px;
+    h2, p, h3 {
+      text-align:left;
+    }
+    p.other-logos img {
+      width:180px;
+      height:auto;
+      &.yelp {
+        width:100px;
+      }
+      &.yahoo {
+        width:76px;
+      }
+    }
+  }
+
+  blockquote {
+    margin:50px -100%;
+    padding:20px;
+    border:none;
+    background: #EDE8F4;
+    text-align:center;
+    text-shadow:none;
+    p {
+      width:500px;
+      margin:0 auto;
+      min-height:90px;
+      font-size:20px;
+      text-align:left;
+      text-shadow:none !important;
+      span {
+        font-size:13px;
+        display:block;
+      }
+    }
+    img {
+      vertical-align:top;
+      border:4px solid #fff;
+      float:left;
+      margin-right:20px;
+      -webkit-box-shadow:0 0 0 1px #ccc;
+      -moz-box-shadow:0 0 0 1px #ccc;
+      box-shadow:0 0 0 1px #ccc;
+    }
+  }
+  .grapevine-helps {
+    margin-bottom:40px;
+  }
+  .col-wrapper {
+    h3 {
+      color:$purple;
+      font-size:40px;
+      margin:40px 0;
+    }
+    h4 {
+      font-size:22px;
+      margin-bottom:18px;
+    }
+    .col {
+      float:left;
+      width:30%;
+      margin-left:5%;
+    }
+    .col.first {
+      margin-left:0;
+    }
+  }
+}
