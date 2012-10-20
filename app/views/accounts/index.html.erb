@@ -83,11 +83,12 @@
 					<div class="control-group">
 						<label class="control-label">CVV</label>
 						<div class="controls">
-							<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 3, :class => "input-mini", :disabled => true %>
-							<span class="help-block">3 digit number on back of card</span>
+							<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 4, :class => "input-mini", :disabled => true %>
+							<span class="help-block">3 digit number on back of card, 4 digit on front for AMEX</span>
 						</div>
 					</div>
 				</div>
+				<%= f.hidden_field :end_trial, { :value => true } %>
 				<div class="form-actions">
 					<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn purple_button" %>
 					<span class="help-block">Call us for </span>

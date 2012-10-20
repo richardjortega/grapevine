@@ -63,10 +63,15 @@ class Subscription < ActiveRecord::Base
     #   self.last_four = customer.active_card.last4
     #   response = customer.update_subscription({:plan => "premium"})
     # else
+
       customer = Stripe::Customer.retrieve(stripe_customer_token)
 
       if params[:stripe_card_token].present?
         customer.card = params[:stripe_card_token]
+      end
+      
+      if params[:end_trial] == 'true'
+        end_trial customer
       end
 
       # in case they've changed
@@ -86,6 +91,13 @@ private
 	def stripe_description
 	  	"#{user.first_name} #{user.last_name}: #{user.email}"
 	end
+
+  def end_trial customer
+    set_trial_end = Time.now.utc + 5
+    current_plan = customer.subscription.plan.id
+    customer.update_subscription(:plan => current_plan, :trial_end => set_trial_end.to_i)
+
+  end
 
 	def stripe_customer_without_credit_card
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
