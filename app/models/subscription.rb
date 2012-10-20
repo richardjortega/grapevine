@@ -2,7 +2,19 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
 
-  attr_accessible :card_expiration, :card_type, :card_zip, :current_period_end, :current_period_start, :last_four, :next_bill_on, :plan_id, :status, :stripe_customer_token, :trial_end, :trial_start, :user_id
+  attr_accessible :card_expiration, 
+                  :card_type, 
+                  :card_zip, 
+                  :current_period_end, 
+                  :current_period_start, 
+                  :last_four, 
+                  :next_bill_on, 
+                  :plan_id, 
+                  :status, 
+                  :stripe_customer_token, 
+                  :trial_end, 
+                  :trial_start, 
+                  :user_id
 
   belongs_to :plan
   belongs_to :user
@@ -25,6 +37,54 @@ class Subscription < ActiveRecord::Base
   	save!
   end
 
+  def save_with_payment
+    if valid?
+      customer = stripe_customer_with_credit_card
+      self.stripe_customer_token = customer.id
+      save!
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+
+  def update_stripe params
+    # if stripe_customer_token.nil?
+    #   if !stripe_token.present?
+    #     raise "We're doing something wrong -- this isn't supposed to happen"
+    #   end
+
+    #   customer = Stripe::Customer.create(
+    #     :email => email,
+    #     :description => stripe_description,
+    #     :card => stripe_token
+    #   )
+    #   self.last_four = customer.active_card.last4
+    #   response = customer.update_subscription({:plan => "premium"})
+    # else
+
+      customer = Stripe::Customer.retrieve(stripe_customer_token)
+
+      if params[:stripe_card_token].present?
+        customer.card = params[:stripe_card_token]
+      end
+      
+      if params[:end_trial] == 'true'
+        end_trial customer
+      end
+
+      # in case they've changed
+      customer.email = user.email
+      customer.description = stripe_description
+      customer.save
+
+      self.last_four = params[:last_four]
+    # end
+
+    self.stripe_customer_token = customer.id
+  end
+
 
 
 private
@@ -32,18 +92,23 @@ private
 	  	"#{user.first_name} #{user.last_name}: #{user.email}"
 	end
 
+  def end_trial customer
+    set_trial_end = Time.now.utc + 5
+    current_plan = customer.subscription.plan.id
+    customer.update_subscription(:plan => current_plan, :trial_end => set_trial_end.to_i)
+
+  end
+
 	def stripe_customer_without_credit_card
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
   end
 
-	# def set_card_info new_card
-	# 	self.last_four		 = new_card.last4
-	# 	self.card_type		 = new_card.type
-	# 	self.card_expiration = "#{ new_card.exp_month }-#{ new_card.exp_year }"
-	# end
+  def stripe_customer_with_credit_card
+    Stripe::Customer.create(email: user.email, description: stripe_description, plan: plan.identifier, card: stripe_card_token)
+  end
 
-	# def stripe_customer
-	# 	@stripe_customer ||= Stripe::Customer.retrieve stripe_customer_token
-	# end
+	def stripe_customer
+		@stripe_customer ||= Stripe::Customer.retrieve stripe_customer_token
+	end
 
 end
