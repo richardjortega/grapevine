@@ -44,7 +44,7 @@ private
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(invoice)
 		user = Subscription.find_by_stripe_customer_token(invoice.customer)
-		user.subscription.status = true
+		user.status = true
 		user.save!
 		
 		NotifyMailer.successfully_invoiced(invoice, user).deliver
@@ -60,8 +60,8 @@ private
 	# Handle canceled user
 	def handle_canceled_customer(subscription)
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.subscription.status = false
-		user.subscription.status_info = subscription.status
+		user.status = false
+		user.status_info = subscription.status
 		user.save!
 
 		# TODO: create account canceled email
@@ -73,8 +73,8 @@ private
 	# Same for trials that expire (on the 31st day)
 	def handle_unpaid_customer(subscription)
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.subscription.status = false
-		user.subscription.status_info = subscription.status
+		user.status = false
+		user.status_info = subscription.status
 		user.save!
 
 		NotifyMailer.account_expired(user).deliver
@@ -84,10 +84,10 @@ private
 	# Update all items on customer to match stripe webhook
 	def update_customer_subscription(subscription)
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.subscription.status_info = subscription.status
-		user.subscription.start_date = subscription.start
-		user.subscription.current_period_start = subscription.current_period_start
-		user.subscription.current_period_end = subscription.current_period_end
-		user.subscription.trial_start = subscription.trial_start if subscription.trial_start.present?
-		user.subscription.trial_end = subscription.trial_end if subscription.trial_end.present?
+		user.status_info = subscription.status
+		user.start_date = subscription.start
+		user.current_period_start = subscription.current_period_start
+		user.current_period_end = subscription.current_period_end
+		user.trial_start = subscription.trial_start if subscription.trial_start.present?
+		user.trial_end = subscription.trial_end if subscription.trial_end.present?
 	end
