@@ -41,6 +41,9 @@
 
 			<%= form_for @subscription, :html => { :class => 'payment-form', :id => 'payment-form' } do |f| %>
 
+				<%= f.hidden_field :stripe_card_token %>
+				<%= f.hidden_field :last_four %>
+
 				<noscript>
 		          <p>This form requires Javascript to use</p>
 		        </noscript>
@@ -56,7 +59,7 @@
 					<div class="control-group">
 						<label class="control-label">Card Number</label>
 						<div class="controls">
-							<%= text_field_tag :credit_card_number, params[:credit_card_number], :class =>  'credit-card-number', :disabled => true %>
+							<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :disabled => true %>
 							<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
 						</div>
 					</div>
@@ -72,31 +75,22 @@
 					<div class="control-group">
 						<%= label_tag :expiry_date, 'Expiration', :class => 'control-label' %>
 						<div class="controls controls-row">
-							<%= date_select "", :exp_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true, :disabled => true }, {:class => "card-expiry-month"} %>
-							<%= date_select "", :exp_year, {:discard_month => true, :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true }, {:class => "card-expiry-year"} %>
+							<%= date_select "", :exp_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true, :disabled => true }, {:id => "card-expiry-month", :class => "input-mini"} %>
+							<%= date_select "", :exp_year, {:discard_month => true, :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true }, { :id => 'card-expiry-year', :class => "input-small"} %>
 							<span class="help-block">Your credit card details will be sent directly to our payment processor</span>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">CVV</label>
 						<div class="controls">
-							<%= text_field_tag :cvv, params[:cvv], :class => "card-cvc", :disabled => true %>
+							<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 3, :class => "input-mini", :disabled => true %>
 							<span class="help-block">3 digit number on back of card</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">Pick your plan</label>
-						<div class="controls">
-							<label class="radio">
-							<%= radio_button_tag :plan, 'monthly-plan' %> $30 per month</label>
-							<label class="radio">
-							<%= radio_button_tag :plan, 'yearly-plan' %>
-							 $300 per year</label>
 						</div>
 					</div>
 				</div>
 				<div class="form-actions">
-					<%= f.button "$30/month", :id => 'monthly-plan', :type => 'submit', :class => "btn purple_button" %>
+					<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn purple_button" %>
+					<span class="help-block">Call us for </span>
 				</div>
 
 			<% end %><!-- /.payment-form -->

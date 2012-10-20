@@ -14,8 +14,7 @@ class Subscription < ActiveRecord::Base
                   :stripe_customer_token, 
                   :trial_end, 
                   :trial_start, 
-                  :user_id,
-                  :plan
+                  :user_id
 
   belongs_to :plan
   belongs_to :user
@@ -50,7 +49,7 @@ class Subscription < ActiveRecord::Base
     false
   end
 
-  def update_stripe
+  def update_stripe params
     # if stripe_customer_token.nil?
     #   if !stripe_token.present?
     #     raise "We're doing something wrong -- this isn't supposed to happen"
@@ -66,21 +65,19 @@ class Subscription < ActiveRecord::Base
     # else
       customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-      if stripe_card_token.present?
-        customer.card = stripe_card_token
+      if params[:stripe_card_token].present?
+        customer.card = params[:stripe_card_token]
       end
 
       # in case they've changed
       customer.email = user.email
       customer.description = stripe_description
-      debugger
       customer.save
 
-      self.last_four = customer.active_card.last4
+      self.last_four = params[:last_four]
     # end
 
     self.stripe_customer_token = customer.id
-    self.stripe_token = nil
   end
 
 
