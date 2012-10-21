@@ -30,7 +30,7 @@
 			    <div class="span12 center">
 			    	<!--Inline styling to override bootstrap classes without breaking anything I think-->
 					  <a href="#watch_video" class="signup" id="watch_video_button">Watch Demo Video <%= image_tag 'glyphicons_008_film.png', id: "film_icon_in_button" %></a>
-						<a href="/signup2" class="purple_button">Sign up for your FREE 30-Day trial</a>
+						<%= link_to "Sign up for your FREE 30-Day trial", signup_path, { :class => 'purple_button' } %>
 					</div>
 	        <div class="span12 graded center">
 	            <h4 class="hand little_bit_of_space_on_top">Grapevine is for everyone, any industry, any company! Scroll down for more details!</h4>
@@ -122,7 +122,9 @@
 	                    <li><em>Perfect for any small business wanting to monitor their reviews.</em></li>
 	                </ul>
 	                <h3>$30/month</h3>
-	                <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a></div>
+	                <div align="center">
+	                	<%= link_to "Start Free trial", signup_path, { :class => 'purple_button' } %>
+	                </div>
 	            </div>
 	        </div>
 
@@ -140,7 +142,9 @@
 	                    <li><em>Get 2 months service FREE when you sign up for a year!</em></li>
 	                </ul>
 	                <h3>$300/year</h3>
-	                <div align="center"><a href="/signup2" class="purple_button">Start Free Trial</a></div>
+	                <div align="center">
+	                	<%= link_to "Start Free Trial", signup_path, { :class => 'purple_button' } %>
+	                </div>
 	            </div>
 	        </div>
 
