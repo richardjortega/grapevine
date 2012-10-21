@@ -5,8 +5,6 @@ class AccountsController < ApplicationController
       @location = current_user.locations[0]
       @subscription = current_user.subscription
       @status = current_user.subscription.status_info
-
-      
 	end
 
 end
