@@ -26,58 +26,9 @@
 
 			<%= link_to "Edit Profile", edit_user_registration_path, :class => 'btn' %>
 		</div><!-- /.span6 -->
-
-		<div class="span5 well">
-
-			<h4><span>You&rsquo;re currently on our Trial Plan.</span> <span>Your trial period has expired</span> Upgrade today.</h4>
-
-			<form class="payment-form">
-				<div class="control-group">
-					<label class="control-label">Name on card</label>
-					<div class="controls">
-						<input type="text" class="span12">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Card Number</label>
-					<div class="controls">
-						<input type="text" class="input-large">
-						<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
-					</div>
-				</div>
-				<!-- <div class="control-group">
-					<label class="control-label">Address</label>
-					<div class="controls">
-						<input type="text" placeholder="Street Address" class="input-large">
-						<input type="text" placeholder="City" class="input-medium">
-						<input type="text" placeholder="TX" class="input-mini">
-						<input type="text" placeholder="Zip Code" class="input-small">
-					</div>
-				</div> -->
-				<div class="control-group">
-					<label class="control-label">Expiration</label>
-					<div class="controls controls-row">
-						<input type="text" class="input-mini" placeholder="MM">
-						<input type="text" class="input-small" placeholder="YYYY">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">CVC</label>
-					<div class="controls">
-						<input type="text" class="input-mini">
-						<span class="help-block">3 digit number on back of card</span>
-					</div>
-				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn purple_button">$30/month</button>
-					<span class="or-pay">- OR PAY -</span>
-					<button type="submit" class="btn purple_button">$300/year <span>Get 2 Months Free</span></button>
-				</div>
-
-
-			</form><!-- /.payment-form -->
-		</div><!-- /.span6 -->
-
-
+		
+		<% if @status != "active" %>
+			<%= render :partial => 'shared/payment_form', :object => @status %>
+		<% end %>
 </div><!-- /.container -->
 	

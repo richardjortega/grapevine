@@ -1,3 +1,2 @@
-hawaii-restaurant-listings
-sacramento-california-restaurant-listings
-anchorage-alaska-restaurant-listings
+new-mexico-restaurant-listings
+jackson-hole-wyoming-restaurant-listings

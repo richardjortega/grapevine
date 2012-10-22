@@ -26,7 +26,6 @@ url = "http://www.opentable.com/artisan-hotel-boutiques-mood-restaurant?scpref=1
 browser.goto url
 sleep 1
 doc = Nokogiri::HTML(browser.html).css('div.section.main')
-debugger
 browser.close
 
 begin
@@ -63,7 +62,7 @@ begin
 		if detail.at_css("img.BVImgOrSprite").nil?
 			parsed_detail[:review_rating] = ""
 		else
-			parsed_detail[:review_rating] = detail.at_css("img.BVImgOrSprite").attr("title")
+			parsed_detail[:review_rating] = detail.at_css("#BVReviewsContainer .BVRRRatingNormalImage img.BVImgOrSprite").attr("title")
 		end
 		
 
@@ -72,6 +71,7 @@ begin
 
 		parsed_detail[:review_dine_date] = detail.at_css('div.BVRRAdditionalFieldValueContainer.BVRRAdditionalFieldValueContainerdinedate').text[/\d+\/\d+\/\d+/]
 		puts "Finished scrapping: " + parsed_detail[:name]
+		debugger
 		puts parsed_detail
 		parsed_detail
 	end			
