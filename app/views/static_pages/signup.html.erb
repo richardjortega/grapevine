@@ -1,6 +1,5 @@
 <% content_for :head do %>
-  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
-  <%= render 'shared/form_js_includes' %>
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
 <% end %>
 
 <div id="signup-page">
