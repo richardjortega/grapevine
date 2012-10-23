@@ -41,6 +41,7 @@ class OpenTableParser
 		browser.close
 		
 		# Remove any nil values from the returned array then flatten array of hashes to one-dimensional array of hashes
+		debugger
 		found_details.compact!.flatten!
 
 		puts "Finished Scrapping All Locations' Data."
@@ -52,6 +53,7 @@ class OpenTableParser
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
 			found_details.each do |location|
+				next if location[:email].empty? #skip adding rows if no email is present
 				row << [ location[:name],
 					location[:url], 
 					location[:rating], 
@@ -147,7 +149,8 @@ class OpenTableParser
 				if detail.at_css("img.BVImgOrSprite").nil?
 					parsed_detail[:review_rating] = ""
 				else
-					parsed_detail[:review_rating] = detail.at_css("#BVReviewsContainer .BVRRRatingNormalImage img.BVImgOrSprite").attr("title")
+					review_rating = detail.at_css("#BVReviewsContainer .BVRRRatingNormalImage img.BVImgOrSprite").attr("title")
+					parsed_detail[:review_rating] = "#{review_rating.to_f}" + " out of 5"
 				end
 
 				# Possiblity of no review descriptions, therefore we shouldn't track this location as it wouldn't have good data anyway.
@@ -157,7 +160,6 @@ class OpenTableParser
 				stubbed_link = URI.parse("#{url}").path[1..-1]
 				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore5/#{stubbed_link}"
 				parsed_detail[:marketing_id] = stubbed_link
-				debugger
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
 				parsed_detail
 			end
