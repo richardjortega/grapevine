@@ -52,7 +52,7 @@
 					<div class="control-group">
 						<label class="control-label">Card Number</label>
 						<div class="controls">
-							<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large' %>
+							<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
 							<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
 						</div>
 					</div>

@@ -90,4 +90,5 @@ private
 		user.current_period_end = subscription.current_period_end
 		user.trial_start = subscription.trial_start if subscription.trial_start.present?
 		user.trial_end = subscription.trial_end if subscription.trial_end.present?
+		user.save!
 	end
