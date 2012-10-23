@@ -64,25 +64,25 @@ class Subscription < ActiveRecord::Base
     #   response = customer.update_subscription({:plan => "premium"})
     # else
 
-      customer = Stripe::Customer.retrieve(stripe_customer_token)
+    customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-      if params[:stripe_card_token].present?
-        customer.card = params[:stripe_card_token]
-      end
-      
-      if params[:end_trial] == 'true'
-        end_trial customer
-      end
+    if params[:stripe_card_token].present?
+      customer.card = params[:stripe_card_token]
+    end
+    
+    if params[:end_trial] == 'true'
+      end_trial customer
+    end
 
-      # in case they've changed
-      customer.email = user.email
-      customer.description = stripe_description
-      customer.save
+    # in case they've changed
+    customer.email = user.email
+    customer.description = stripe_description
+    customer.save
 
-      self.last_four = params[:last_four]
-    # end
-
+    self.last_four = params[:last_four]
+    self.status_info = "active"
     self.stripe_customer_token = customer.id
+    save!
   end
 
 
