@@ -33,6 +33,7 @@ class Subscription < ActiveRecord::Base
   	customer.update_subscription({:plan => "basic_monthly"})
   	self.status = true
     self.status_info = "trialing"
+    debugger
     self.start_date = Date.today
   	save!
   end

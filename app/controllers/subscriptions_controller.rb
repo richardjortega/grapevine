@@ -3,13 +3,12 @@ class SubscriptionsController < ApplicationController
   def create
   	@subscription = Subscription.new params[:subscription]
     #Note need to break out user so that it isn't saved if issue with stripe.
-  	@user	= User.new params[:user]
+  	@user	= User.create!(params[:user])
   	@subscription.user = @user
 
   	@plan = Plan.find params[:subscription][:plan_id]
     
   	if @subscription.save_without_payment
-      @user.save!
   		redirect_to thankyou_path
 	    NotifyMailer.free_signup(@subscription.user).deliver
 
