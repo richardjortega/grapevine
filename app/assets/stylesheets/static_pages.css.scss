@@ -226,7 +226,7 @@ ul.ui-autocomplete {
   padding-top: 0px !important;
 }
 #addresspicker_map {
-  margin-bottom:26px;/*space between input and map*/
+  /*margin-bottom:26px;/*space between input and map*/
 }
 
 #map {
@@ -234,8 +234,20 @@ ul.ui-autocomplete {
   width:384px;
   height: 170px;
   float:left;  
-  margin: 0px 0 0 36px;
+  margin: 20px 0 0 36px;
   -webkit-box-shadow: #AAA 0px 0px 15px;
+}
+span.ui-helper-hidden-accessible {
+  position:absolute;
+  margin-left:50px;
+  width:200px;
+}
+.field_with_errors input {
+  border:1px solid red;
+}
+.field_with_errors .message {
+  margin:0;
+  color:red;
 }
 .signup-btn {
   display:block;
