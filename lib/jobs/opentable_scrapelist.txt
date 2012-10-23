@@ -1,2 +1,5 @@
-new-mexico-restaurant-listings
-jackson-hole-wyoming-restaurant-listings
+springfield-missouri-restaurant-listings
+oklahoma-restaurant-listings
+arkansas-restaurant-listings
+mississippi-restaurant-listings
+new-orleans-louisiana-restaurant-listings

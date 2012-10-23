@@ -52,6 +52,7 @@ class OpenTableParser
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
 			found_details.each do |location|
+				next if location[:email].empty? #skip adding rows if no email is present
 				row << [ location[:name],
 					location[:url], 
 					location[:rating], 
@@ -157,7 +158,6 @@ class OpenTableParser
 				stubbed_link = URI.parse("#{url}").path[1..-1]
 				parsed_detail[:marketing_url] = "http://www.pickgrapevine.com/wantmore5/#{stubbed_link}"
 				parsed_detail[:marketing_id] = stubbed_link
-				debugger
 				puts "Finished scrapping: " + parsed_detail[:name] + " in #{(Time.now - job_start_time)} seconds"
 				parsed_detail
 			end
