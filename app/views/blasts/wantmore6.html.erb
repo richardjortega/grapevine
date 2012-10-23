@@ -1,0 +1,92 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "blasts.js.coffee" %>
+<% end %>
+<% provide(:title, 'Grapevine') %>
+
+<div id="wantmore5">
+  <!-- Restaurant: <%= @blast.name %> -->
+        
+    <div class="review-wrapper clearfix">
+      <div class="review">
+        
+        <p class="the-review">&ldquo;<%= @blast.review_description %>&rdquo;</p>
+        <p class="rating">Customer Rating: <strong><%= @blast.rating %> stars</strong></p>
+        <p class="posted">Posted on: <%= @blast.review_dine_date %></p>
+        <p class="opentable-logo"><%= image_tag 'pics/opentable-logo.png' %></p>
+      </div>
+      
+
+      <div class="review-tag">
+        <h2>Did you know about this review?</h2>
+        <h3 class="purple">Can you respond to all of them?</h3>
+        <!-- <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.</p> -->
+        <p class="other-logos"><%= image_tag 'pics/logo-yelp.gif', :class => 'yelp' %> <%= image_tag 'pics/Google-Places.jpg' %> <%= image_tag 'pics/bing-logo.png', :class => 'yahoo' %> <%= image_tag 'pics/logo_urbanspoon.png' %> <%= image_tag 'pics/citysearch-logo.png' %>
+      </div><!-- /.review-tag -->
+    </div><!-- /.review-wrapper -->
+
+    <div class="reviews-matter col-wrapper clearfix">
+      <h3>Why do Reviews Matter?</h3>
+
+      <div class="col first">
+        <h4>Diners Read Reviews</h4>
+        <%= image_tag 'icons/icon-fork-spoon.png', :class => 'col-icon fork-spoon' %>
+        <p>&ldquo;70% of people eating out look at reviews first before choosing a dining location.&rdquo; <br>- <em>The place we found this quote</em></p>
+
+      </div><!-- /.col -->
+
+      <div class="col">
+        <h4>Every Review Counts</h4>
+        <%= image_tag 'icons/icon-star.png', :class => 'col-icon star' %>
+        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.<br> - <em>Another Source</em></p>
+
+      </div><!-- /.col -->
+
+      <div class="col">
+        <h4>Reviews Affect Profits</h4>
+        <%= image_tag 'icons/icon-graph.png', :class => 'col-icon graph' %>
+        <p>&ldquo;In 2011, a one star drop in review ratings resulted in an average of $8,393 in lost revenue for restaurants.&rdquo;<br>
+                     - <em>National Restaurant Association</em></p>
+        
+
+      </div><!-- /.col -->
+    </div><!-- /.col-wrapper -->
+
+    <blockquote>
+
+      <p><img src="http://flickholdr.com/80/80/headshot"> &ldquo;Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor.&rdquo; <span class="author">Peter North, Malibu Burger Shack</span></p>
+    </blockquote>
+
+
+    <div class="grapevine-helps col-wrapper clearfix">
+      <h3>How does Grapevine help?</h3>
+
+      <div class="col first">
+        <h4>Save Time</h4>
+        <%= image_tag 'icons/icon-time.png', :class => 'col-icon time' %>
+        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.</p>
+
+      </div><!-- /.col -->
+
+      <div class="col">
+        <h4>Track all the things</h4>
+        <%= image_tag 'icons/icon-group.png', :class => 'col-icon group' %>
+        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.</p>
+
+      </div><!-- /.col -->
+
+      <div class="col">
+        <h4>Simple Email Notifications</h4>
+        <%= image_tag 'icons/icon-email.png', :class => 'col-icon email' %>
+        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.</p>
+
+      </div><!-- /.col -->
+
+    </div><!-- /.col-wrapper -->
+
+    <div class="signup-bar">
+      <a class="show-form purple_button btn">30 Day Free Trial - Sign Up Today</a>
+
+    </div>
+  
+
+</div><!-- /#wantmore5 -->
