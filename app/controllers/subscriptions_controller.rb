@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
   	@plan = Plan.find params[:subscription][:plan_id]
     
   	if @subscription.save_without_payment
-  		redirect_to thankyou_path
+      redirect_to thankyou_path
 	    NotifyMailer.free_signup(@subscription.user).deliver
 
 	    NotifyMailer.update_grapevine_team(@subscription.user, "New customer signed up").deliver
