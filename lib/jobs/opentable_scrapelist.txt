@@ -1,4 +1,3 @@
-springfield-missouri-restaurant-listings
 oklahoma-restaurant-listings
 arkansas-restaurant-listings
 mississippi-restaurant-listings
