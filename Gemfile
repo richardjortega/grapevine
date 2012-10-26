@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Additions for AppFog
+gem 'cloudfoundry-jquery-rails'
+gem 'cloudfoundry-devise', :require => 'devise'
+
 # Main
 gem 'rails', '3.2.8'
 gem 'thin'
@@ -43,7 +47,7 @@ end
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-group :development, :test do
+group :development do
 	gem 'foreman'
 	gem 'sqlite3'
 	gem 'rspec-rails'
