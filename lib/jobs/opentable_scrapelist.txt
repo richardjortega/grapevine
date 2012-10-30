@@ -1,4 +1,5 @@
-oklahoma-restaurant-listings
-arkansas-restaurant-listings
-mississippi-restaurant-listings
-new-orleans-louisiana-restaurant-listings
+east-tennessee-restaurant-listings
+memphis-tennessee-restaurant-listings
+nashville-tennessee-restaurant-listings
+alabama-restaurant-listings
+minneapolis-minnesota-restaurant-listings
