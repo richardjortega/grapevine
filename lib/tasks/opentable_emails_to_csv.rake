@@ -13,7 +13,7 @@ namespace :crawl do
 		end
 
 		# Array for csv filename locations from parser output
-		input_files = []
+		input_files = ["/Users/iMac/Dropbox/Code/grapevine/lib/exported_lists/opentable.com_san-antonio-texas-restaurant-listings.csv", "/Users/iMac/Dropbox/Code/grapevine/lib/exported_lists/opentable.com_north-dakota-restaurant-listings.csv"]
 
 		# Actual parser command, exports a csv for the city and returns a csv filename
 		File.open(filename, "r") do |aFile|
@@ -30,14 +30,17 @@ namespace :crawl do
 
 		# Iterate through each row in all csvs outputted.
 		input_files.each do |input_file|
-			csv = CSV.table(input_file, :headers => false)
+			# Add UTF-8 encoding so csv's can live happy
+			csv = CSV.table(input_file, :headers => false, encoding: "ISO8859-1")
 			in_rows = csv.to_a
 			all_rows.concat(in_rows)
 		end
 
 		# Store the file into a familiar name for exporting to mailchimp
-		CSV.open("#{Rails.root}/lib/marketinglist/filtered_lists/ot_#{outputted_csv_name}.csv", 'w') do |csv|
+		CSV.open("#{Rails.root}/lib/marketinglist/filtered_lists/ot_#{outputted_csv_name}.csv", 'w', encoding: "ISO8859-1") do |csv|
 			all_rows.each {|row| csv << row}
 		end
+
+		puts "Outputted all scraped listings to: grapevine/lib/marketinglist/filtered_lists/ot_#{outputted_csv_name}.csv"
 	end
 end
