@@ -1,36 +1,35 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-$ ->
-  $("#credit-card input, #credit-card select").attr "disabled", false
-  $("form:has(#credit-card)").submit ->
-    form = this
-    $("#user_submit").attr "disabled", true
-    $("#credit-card input, #credit-card select").attr "name", ""
-    $("#credit-card-errors").hide()
-    unless $("#credit-card").is(":visible")
-      $("#credit-card input, #credit-card select").attr "disabled", true
-      return true
-    card =
-      number: $("#credit_card_number").val()
-      expMonth: $("#_expiry_date_2i").val()
-      expYear: $("#_expiry_date_1i").val()
-      cvc: $("#cvv").val()
+jQuery ->
+  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+  subscription.setupForm()
 
-    Stripe.createToken card, (status, response) ->
-      if status is 200
-        $("#user_last_4_digits").val response.card.last4
-        $("#user_stripe_token").val response.id
-        form.submit()
+subscription =
+  setupForm: ->
+    $('#payment-form').submit ->
+      # disable the submit button to prevent repeated clicks
+      $('input[type=submit]').attr('disabled', true)
+      if $('#credit-card-number').length
+        subscription.processCard()
+        false # submit from callback
       else
-        $("#stripe-error-message").text response.error.message
-        $("#credit-card-errors").show()
-        $("#user_submit").attr "disabled", false
-
-    false
-
-  $("#change-card a").click ->
-    $("#change-card").hide()
-    $("#credit-card").show()
-    $("#credit_card_number").focus()
-    false
+        true
+  
+  processCard: ->
+    card =
+      number: $('#credit-card-number').val()
+      cvc: $('#card-cvc').val()
+      exp_month: $('#card-expiry-month').val()
+      exp_year: $('#card-expiry-year').val()
+    # createToken returns immediately - the supplied callback submits the form if there are no errors
+    Stripe.createToken(card, subscription.handleStripeResponse)
+  
+  handleStripeResponse: (status, response) ->
+    if status == 200
+      $('#subscription_last_four').val(response.card.last4)
+      $('#subscription_stripe_card_token').val(response.id)
+      $('#payment-form')[0].submit()
+    else
+      # show the errors on the form
+      $('.payment-errors').text(response.error.message)
+      # re-enable the submit button
+      $('input[type=submit]').attr('disabled', false)
+      

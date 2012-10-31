@@ -47,7 +47,7 @@ class OpenTableParser
 		puts "Total Time to Scrape All Data: #{((Time.now - job_start_time)/60).to_i} minutes"
 
 		# Uses CSV from Ruby Core lib, this data has no owner so won't interact with our DB.
-		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb") do |row|
+		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb", encoding: "ISO8859-1") do |row|
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
@@ -72,6 +72,8 @@ class OpenTableParser
 			end
 		end
 		puts "File outputted as '#{@source}_#{@directory_listing}.csv'"
+		exported_csv = "#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv"
+		exported_csv
 	end
 
 	def parse_locations
@@ -148,7 +150,8 @@ class OpenTableParser
 				if detail.at_css("img.BVImgOrSprite").nil?
 					parsed_detail[:review_rating] = ""
 				else
-					parsed_detail[:review_rating] = detail.at_css("#BVReviewsContainer .BVRRRatingNormalImage img.BVImgOrSprite").attr("title")
+					review_rating = detail.at_css("#BVReviewsContainer .BVRRRatingNormalImage img.BVImgOrSprite").attr("title")
+					parsed_detail[:review_rating] = "#{review_rating.to_f}" + " out of 5"
 				end
 
 				# Possiblity of no review descriptions, therefore we shouldn't track this location as it wouldn't have good data anyway.
