@@ -44,22 +44,6 @@
       <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
     </div>
   </div>
-  <div class="control-group password-two">
-    <label class="control-label">Retype Password</label>
-    <div class="controls">
-      <%= user_form.password_field :password_confirmation %>
-      
-    </div>
-  </div>
-  <script>
-    $(document).ready(function() {
-      $('.password-two').hide();
-      $('#user_password').focus(function() {
-        $('.password-two').fadeIn('slow');
-      });
-    });
-  </script>
-
 
         <h3>Edit Business Information</h3>
           <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
