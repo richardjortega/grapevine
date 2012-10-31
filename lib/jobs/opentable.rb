@@ -41,7 +41,6 @@ class OpenTableParser
 		browser.close
 		
 		# Remove any nil values from the returned array then flatten array of hashes to one-dimensional array of hashes
-		debugger
 		found_details.compact!.flatten!
 
 		puts "Finished Scrapping All Locations' Data."
@@ -73,6 +72,8 @@ class OpenTableParser
 			end
 		end
 		puts "File outputted as '#{@source}_#{@directory_listing}.csv'"
+		exported_csv = "#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv"
+		exported_csv
 	end
 
 	def parse_locations

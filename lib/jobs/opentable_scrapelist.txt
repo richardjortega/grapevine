@@ -1,2 +1,2 @@
-new-mexico-restaurant-listings
-jackson-hole-wyoming-restaurant-listings
+north-dakota-restaurant-listings
+south-dakota-restaurant-listings
