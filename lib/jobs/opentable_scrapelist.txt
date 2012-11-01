@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-east-tennessee-restaurant-listings
-memphis-tennessee-restaurant-listings
-nashville-tennessee-restaurant-listings
-alabama-restaurant-listings
-minneapolis-minnesota-restaurant-listings
-=======
-north-dakota-restaurant-listings
-san-antonio-texas-restaurant-listings
->>>>>>> a0d2f81d78cc0932a8182c891c2ab6b5f18822c3
+wisconsin-restaurant-listings
+indiana-restaurant-listings
+kentucky-restaurant-listings
+michigan-restaurant-listings
+grand-rapids-restaurants
+northern-michigan-restaurants
+cleveland-ohio-restaurant-listings
+cincinnati-dayton-restaurant-listings
+toledo-ohio-restaurant-listings
+columbus-ohio-restaurant-listings
