@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017205228) do
+ActiveRecord::Schema.define(:version => 20121031230444) do
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -72,23 +72,23 @@ ActiveRecord::Schema.define(:version => 20121017205228) do
   end
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id",                                  :null => false
-    t.integer  "plan_id",                                  :null => false
-    t.boolean  "status",                :default => false
+    t.integer  "user_id",                                                 :null => false
+    t.integer  "plan_id",                                                 :null => false
+    t.boolean  "status",                               :default => false
     t.string   "status_info"
-    t.string   "current_period_end"
-    t.string   "current_period_start"
-    t.string   "trial_end"
-    t.string   "trial_start"
+    t.integer  "current_period_end",    :limit => 255
+    t.integer  "current_period_start",  :limit => 255
+    t.integer  "trial_end",             :limit => 255
+    t.integer  "trial_start",           :limit => 255
     t.string   "stripe_customer_token"
     t.string   "card_zip"
     t.string   "last_four"
     t.string   "card_type"
     t.date     "next_bill_on"
     t.string   "card_expiration"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.date     "start_date"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+    t.integer  "start_date"
   end
 
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id", :unique => true

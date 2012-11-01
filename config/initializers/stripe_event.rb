@@ -7,14 +7,17 @@ StripeEvent.setup do
 	require 'pp'
 
 	subscribe 'invoice.payment_failed' do |event|
+		next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
 		handle_failed_charge event.data.object
 	end
 
 	subscribe 'invoice.payment_succeeded' do |event|
+		next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
 		handle_successful_charge event.data.object
 	end
 
 	subscribe 'customer.subscription.trial_will_end' do |event|
+		next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
 		handle_trial_ending event.data.object
 	end
 
@@ -23,10 +26,14 @@ StripeEvent.setup do
 	subscribe 'customer.subscription.updated' do |event|
 		case event.data.object.status
 			when 'unpaid'
+				next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
 				handle_unpaid_customer event.data.object
 			when 'canceled'
+				next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
 				handle_canceled_customer event.data.object
-			else update_customer_subscription event.data.object
+			else
+				next if Subscription.find_by_stripe_customer_token(event.data.object.customer).present?
+				update_customer_subscription event.data.object
 		end
 	end
 

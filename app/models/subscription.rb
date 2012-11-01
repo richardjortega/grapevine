@@ -19,8 +19,8 @@ class Subscription < ActiveRecord::Base
   belongs_to :plan
   belongs_to :user
 
-  validates :plan_id,				presence: true
-  validates :user_id, 				presence: true, uniqueness: true
+  validates :plan_id,	presence: true
+  validates :user_id, presence: true, uniqueness: true
   validates :stripe_customer_token,	presence: true
 
   
@@ -31,9 +31,10 @@ class Subscription < ActiveRecord::Base
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts
   	customer.update_subscription({:plan => "basic_monthly"})
-  	self.status = true
-    self.status_info = "trialing"
-    self.start_date = Date.today
+  	self.status                 = true
+    self.status_info            = "trialing"
+    self.next_bill_on           = Date.parse customer.next_recurring_charge.date
+    self.start_date             = Date.today.beginning_of_day.to_i
   	save!
   end
 
@@ -41,6 +42,7 @@ class Subscription < ActiveRecord::Base
     if valid?
       customer = stripe_customer_with_credit_card
       self.stripe_customer_token = customer.id
+      self.next_bill_on          = Date.parse customer.next_recurring_charge.date
       save!
     end
   rescue Stripe::InvalidRequestError => e
@@ -75,12 +77,13 @@ class Subscription < ActiveRecord::Base
     end
 
     # in case they've changed
-    customer.email = user.email
-    customer.description = stripe_description
+    customer.email             = user.email
+    customer.description       = stripe_description
     customer.save
 
-    self.last_four = params[:last_four]
-    self.status_info = "active"
+    self.last_four             = params[:last_four]
+    self.status_info           = "active"
+    self.next_bill_on          = Date.parse customer.next_recurring_charge.date
     self.stripe_customer_token = customer.id
     save!
   end
@@ -94,7 +97,7 @@ private
 
   def end_trial customer
     set_trial_end = Time.now.utc + 5
-    current_plan = customer.subscription.plan.id
+    current_plan  = customer.subscription.plan.id
     customer.update_subscription(:plan => current_plan, :trial_end => set_trial_end.to_i)
 
   end
