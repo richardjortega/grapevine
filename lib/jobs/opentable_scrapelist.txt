@@ -1,10 +1,2 @@
-wisconsin-restaurant-listings
-indiana-restaurant-listings
-kentucky-restaurant-listings
 michigan-restaurant-listings
 grand-rapids-restaurants
-northern-michigan-restaurants
-cleveland-ohio-restaurant-listings
-cincinnati-dayton-restaurant-listings
-toledo-ohio-restaurant-listings
-columbus-ohio-restaurant-listings

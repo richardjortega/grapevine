@@ -2,6 +2,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'csv'
+require 'iconv'
 require 'pp'
 require 'watir-webdriver'
 
@@ -51,7 +52,7 @@ class OpenTableParser
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
-			found_details.each do |location|
+			utf8_found_details.each do |location|
 				next if location[:email].empty? #skip adding rows if no email is present
 				row << [ location[:name],
 					location[:url], 

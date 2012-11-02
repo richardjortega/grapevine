@@ -13,7 +13,7 @@ namespace :crawl do
 		end
 
 		# Array for csv filename locations from parser output
-		input_files = ["/Users/iMac/Dropbox/Code/grapevine/lib/exported_lists/opentable.com_san-antonio-texas-restaurant-listings.csv", "/Users/iMac/Dropbox/Code/grapevine/lib/exported_lists/opentable.com_north-dakota-restaurant-listings.csv"]
+		input_files = []
 
 		# Actual parser command, exports a csv for the city and returns a csv filename
 		File.open(filename, "r") do |aFile|
