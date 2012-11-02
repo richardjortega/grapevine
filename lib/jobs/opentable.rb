@@ -54,7 +54,22 @@ class OpenTableParser
 			
 			found_details.each do |location|
 				next if location[:email].empty? #skip adding rows if no email is present
-				row << [ location[:name], location[:url], location[:rating], location[:address],location[:total_reviews], location[:cuisine], location[:price], location[:neighborhood], location[:website], location[:email], location[:phone], location[:review_rating], location[:review_description], location[:review_dine_date],location[:marketing_url],location[:marketing_id] ]
+				row << [ location[:name], 
+						 location[:url], 
+						 location[:rating], 
+						 location[:address],
+						 location[:total_reviews], 
+						 location[:cuisine], 
+						 location[:price], 
+						 location[:neighborhood], 
+						 location[:website], 
+						 location[:email], 
+						 location[:phone], 
+						 location[:review_rating], 
+						 location[:review_description], 
+						 location[:review_dine_date],
+						 location[:marketing_url],
+						 location[:marketing_id] ]
 			end
 		end
 		puts "File outputted as '#{@source}_#{@directory_listing}.csv'"
