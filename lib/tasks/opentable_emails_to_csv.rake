@@ -31,13 +31,13 @@ namespace :crawl do
 		# Iterate through each row in all csvs outputted.
 		input_files.each do |input_file|
 			# Add UTF-8 encoding so csv's can live happy
-			csv = CSV.table(input_file, :headers => false, encoding: "ISO8859-1")
+			csv = CSV.table(input_file, :headers => false, encoding: "UTF-8")
 			in_rows = csv.to_a
 			all_rows.concat(in_rows)
 		end
 
 		# Store the file into a familiar name for exporting to mailchimp
-		CSV.open("#{Rails.root}/lib/marketinglist/filtered_lists/ot_#{outputted_csv_name}.csv", 'w', encoding: "ISO8859-1") do |csv|
+		CSV.open("#{Rails.root}/lib/marketinglist/filtered_lists/ot_#{outputted_csv_name}.csv", 'w', encoding: "UTF-8") do |csv|
 			all_rows.each {|row| csv << row}
 		end
 
