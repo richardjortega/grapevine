@@ -37,7 +37,6 @@ private
 
 	# Inform user of failed payment. Accepts Stripe Invoice object
 	def handle_failed_charge(invoice)
-		next if Subscription.find_by_stripe_customer_token(invoice.customer).present?
 		user = Subscription.find_by_stripe_customer_token(invoice.customer)
 		NotifyMailer.unsuccessfully_invoiced(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has failed a charge").deliver
@@ -45,7 +44,6 @@ private
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(invoice)
-		next if Subscription.find_by_stripe_customer_token(invoice.customer).present?
 		user = Subscription.find_by_stripe_customer_token(invoice.customer)
 		user.status = true
 		user.save!
@@ -55,7 +53,6 @@ private
 
 	# Send an email to the customer informing them the trial is ending in 3 days
 	def handle_trial_ending(subscription)
-		next if Subscription.find_by_stripe_customer_token(subscription.customer).present?
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
 		NotifyMailer.trial_ending(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has 3 days left on trial").deliver
@@ -63,7 +60,6 @@ private
 
 	# Handle canceled user
 	def handle_canceled_customer(subscription)
-		next if Subscription.find_by_stripe_customer_token(subscription.customer).present?
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
 		user.status = false
 		user.status_info = subscription.status
@@ -77,7 +73,6 @@ private
 	# Suspend user for not paying after 3 retries to credit card
 	# Same for trials that expire (on the 31st day)
 	def handle_unpaid_customer(subscription)
-		next if Subscription.find_by_stripe_customer_token(subscription.customer).present?
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
 		user.status = false
 		user.status_info = subscription.status
@@ -89,7 +84,6 @@ private
 
 	# Update all items on customer to match stripe webhook
 	def update_customer_subscription(subscription)
-		next if Subscription.find_by_stripe_customer_token(subscription.customer).present?
 		user = Subscription.find_by_stripe_customer_token(subscription.customer)
 		user.status_info = subscription.status
 		user.start_date = subscription.start
