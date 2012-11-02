@@ -48,7 +48,7 @@ class OpenTableParser
 		puts "Total Time to Scrape All Data: #{((Time.now - job_start_time)/60).to_i} minutes"
 
 		# Uses CSV from Ruby Core lib, this data has no owner so won't interact with our DB.
-		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb", encoding: "ISO8859-1") do |row|
+		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb", encoding: "u") do |row|
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
