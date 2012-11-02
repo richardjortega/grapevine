@@ -1,2 +1,2 @@
 michigan-restaurant-listings
-grand-rapids-restaurants
+rest_list.aspx?m=367

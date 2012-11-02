@@ -47,29 +47,16 @@ class OpenTableParser
 		puts "Finished Scrapping All Locations' Data."
 		puts "Total Time to Scrape All Data: #{((Time.now - job_start_time)/60).to_i} minutes"
 
+		debugger
+
 		# Uses CSV from Ruby Core lib, this data has no owner so won't interact with our DB.
-		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb", encoding: "UTF-8") do |row|
+		CSV.open("#{Rails.root}/lib/exported_lists/#{@source}_#{@directory_listing}.csv", "wb") do |row|
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
 			found_details.each do |location|
 				next if location[:email].empty? #skip adding rows if no email is present
-				row << [ location[:name],
-					location[:url], 
-					location[:rating], 
-					location[:address],
-					location[:total_reviews], 
-					location[:cuisine], 
-					location[:price], 
-					location[:neighborhood], 
-					location[:website], 
-					location[:email], 
-					location[:phone], 
-					location[:review_rating], 
-					location[:review_description], 
-					location[:review_dine_date],
-					location[:marketing_url],
-					location[:marketing_id] ]
+				row << [ location[:name], location[:url], location[:rating], location[:address],location[:total_reviews], location[:cuisine], location[:price], location[:neighborhood], location[:website], location[:email], location[:phone], location[:review_rating], location[:review_description], location[:review_dine_date],location[:marketing_url],location[:marketing_id] ]
 			end
 		end
 		puts "File outputted as '#{@source}_#{@directory_listing}.csv'"
@@ -125,7 +112,7 @@ class OpenTableParser
 				address_parts = address.split("<br>")
 
 				# General information
-				parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text
+				parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text.encode('ISO-8859-1')
 
 				# Set overall rating default in case it returns nil
 				if detail.css('span.Star').nil?

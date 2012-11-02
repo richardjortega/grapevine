@@ -22,7 +22,10 @@ browser = Watir::Browser.new :firefox
 #   :url => "http://richardjortega:c9192142-8576-4adf-a427-9b19e6b9b218@ondemand.saucelabs.com:80/wd/hub",
 #   :desired_capabilities => caps)
 
-url = "http://www.opentable.com/acenar"
+# url has really weird characters
+url = "http://www.opentable.com/mortons-the-steakhouse-troy?scpref=110&tab=2"
+# url has a degree (special character in restaurant name)
+#url = "http://www.opentable.com/42-degrees-north?scpref=110"
 browser.goto url
 sleep 1
 doc = Nokogiri::HTML(browser.html).css('div.section.main')
@@ -39,7 +42,7 @@ begin
 		address_parts = address.split("<br>")
 
 		# General information
-		parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text
+		parsed_detail[:name] = detail.css('span#ProfileOverview_RestaurantName.title').text.encode('ISO-8859-1')
 
 		# Set overall rating default in case it returns nil
 		if detail.css('span.Star').nil?
@@ -89,12 +92,14 @@ end
 found_details.compact!
 found_details.flatten!
 
+#debugger
+
 @source = "testsource"
 @directory_listing = "somecity"
 
 # CSV export
 
-CSV.open("/Users/iMac/Dropbox/Code/grapevine/lib/jobs/scrape_testing/#{@source}_#{@directory_listing}.csv", "wb", encoding: "UTF-8") do |row|
+CSV.open("/Users/iMac/Dropbox/Code/grapevine/lib/jobs/scrape_testing/#{@source}_#{@directory_listing}.csv", "wb") do |row|
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
