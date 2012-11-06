@@ -5,3 +5,5 @@ $(document).ready ->
 	$('#no-button').click (event) ->
 		$('#yes_info').hide()
 		$('#no_info').fadeIn()	
+	$('#purple-button').click (event) ->
+		$('#signup').fadeIn()
