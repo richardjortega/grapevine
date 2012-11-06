@@ -1,2 +1,1 @@
-michigan-restaurant-listings
-rest_list.aspx?m=367
+chicago-illinois-restaurant-listings
