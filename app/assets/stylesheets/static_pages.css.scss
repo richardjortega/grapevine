@@ -395,9 +395,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
         left:0px;
         top:0px;
       }
+      p {
+        font-size:16px;
+      }
     }
     .col.first {
       margin-left:0;
     }
   }
+  p.last-tag {
+    width: 65%;
+  margin: 20px auto;
+  font-size: 24px;
+  line-height: 33px;
+  
+  }
+
 }
