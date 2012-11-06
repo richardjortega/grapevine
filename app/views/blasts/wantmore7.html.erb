@@ -4,13 +4,14 @@
 <% provide(:title, 'Grapevine') %>
 
 <div id="wantmore5">
-  <!-- Restaurant: <%= @blast.name %> -->
+  
         
     <div class="review-wrapper clearfix">
       <div class="review">
+        <h4>A review about <span class="purple"><%= @blast.name %></span>:</h4>
         
         <p class="the-review">&ldquo;<%= @blast.review_description %>&rdquo;</p>
-        <p class="rating">Customer Rating: <strong><%= @blast.rating %> stars</strong></p>
+        <p class="rating purple">Customer Rating: <strong><%= @blast.rating %> stars</strong></p>
         <p class="posted">Posted on: <%= @blast.review_dine_date %></p>
         <p class="opentable-logo"><%= image_tag 'pics/opentable-logo.png' %></p>
       </div>
@@ -18,81 +19,126 @@
 
       <div class="review-tag">
         <h2>Did you know about this review?</h2>
-        <h3 class="purple">Can you respond to all of them?</h3>
+        <h3 class="purple">What about all the rest?</h3>
         <!-- <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum.</p> -->
-        <p class="other-logos"><%= image_tag 'pics/logo-yelp.gif', :class => 'yelp' %> <%= image_tag 'pics/Google-Places.jpg' %> <%= image_tag 'pics/bing-logo.png', :class => 'yahoo' %> <%= image_tag 'pics/logo_urbanspoon.png' %> <%= image_tag 'pics/citysearch-logo.png' %>
+        <p class="other-logos"><%= image_tag 'pics/logo-yelp.gif', :class => 'yelp' %> <%= image_tag 'pics/Google-Places.jpg' %> <%= image_tag 'pics/bing-logo.png', :class => 'yahoo' %> <%= image_tag 'pics/logo_urbanspoon.png' %> <%= image_tag 'pics/citysearch-logo.png' %> <%= image_tag 'pics/tripavisor_logo.png', :class => 'tripadvisor' %></p>
+
+        <a href="#signup" class="top-button show-form purple_button btn"><span>Receive email alerts for new online reviews.</span>30 Day Free Trial - Sign Up Today</a>
+        <p class="learn-more"><a href="#reviews-matter">Learn more below</a></span>
       </div><!-- /.review-tag -->
     </div><!-- /.review-wrapper -->
 
-    <div class="reviews-matter col-wrapper clearfix">
+    <div id="reviews-matter" class="reviews-matter col-wrapper clearfix">
       <h3>Why do Reviews Matter?</h3>
 
       <div class="col first">
         <h4>Diners Read Reviews</h4>
         <%= image_tag 'icons/icon-fork-spoon.png', :class => 'col-icon fork-spoon' %>
         <p>You already have a reputation before a diner walks through your door and today its even easier for your potential customer to gauge your restaurant.</p>
-        <p>&ldquo;70% of potential diners read online reviews before selecting a restaurant.&rdquo; <br>- <em>Business Week</em></p>
+        <p class="stat">&ldquo;70% of potential diners read online reviews before selecting a restaurant.&rdquo; <br>- <em>Business Week</em></p>
 
       </div><!-- /.col -->
 
       <div class="col">
         <h4>Reviews Are Everywhere</h4>
         <%= image_tag 'icons/icon-star.png', :class => 'col-icon star' %>
-        <p>Focusing on just one review website doesn&rsquo;t cut it anymore.</p>
-        <p>&ldquo;There are over 6 million restaurant reviews online right now and that number is growing.&rdquo;<br> - <em>Entrepreneur.com</em></p>
+        <p>Focusing on just one review website doesn&rsquo;t cut it anymore. There are just too many to track by hand.</p>
+        <p class="stat">&ldquo;There are over 6 million restaurant reviews online right now and that number is growing.&rdquo;<br> - <em>Entrepreneur.com</em></p>
 
       </div><!-- /.col -->
 
       <div class="col">
-        <h4>Reviews Affect Profits</h4>
+        <h4>Reviews Mean Money</h4>
         <%= image_tag 'icons/icon-graph.png', :class => 'col-icon graph' %>
-        <p>It can now be tracked just how much impact reviews have on your bottom line in the restaurant industry</p>
-        <p>&ldquo;In 2011, a one star drop in review ratings resulted in an average of $8,393 in lost revenue for restaurants.&rdquo;<br>
+        <p>It can now be tracked how much impact reviews have on your bottom line in the restaurant industry.</p>
+        <p class="stat">&ldquo;In 2011, a one star drop in review ratings resulted in an average of $8,393 in lost revenue for restaurants.&rdquo;<br>
                      - <em>National Restaurant Association</em></p>
         
 
       </div><!-- /.col -->
     </div><!-- /.col-wrapper -->
 
-    <blockquote>
+    <div class="happy-customers clearfix">
 
-      <p><img src="http://flickholdr.com/80/80/headshot"> &ldquo;Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor.&rdquo; <span class="author">Peter North, Malibu Burger Shack</span></p>
-    </blockquote>
+      <!-- <p><img src="http://flickholdr.com/80/80/headshot"> &ldquo;Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor.&rdquo; <span class="author">Peter North, Malibu Burger Shack</span></p> -->
+      <h4>A few of our customers that care about reviews</h4>
+      <ul class="clearfix">
+        <li><%= image_tag 'pics/msg-logo.png' %> <span>San Antonio, TX</span></li>
+        <li><%= image_tag 'pics/7m-logo.png' %> <span>Omaha, NE</span></li>
+        <li><%= image_tag 'pics/calico-logo.png' %> <span>Jackson, WY</span></li>
+        <li><%= image_tag 'pics/riverhorse-logo.png' %> <span>Park City, UT</span></li>
+        <li><%= image_tag 'pics/wilfs-logo.png' %> <span>Portland, OR</span></li>
+      </ul>
+    </div>
 
 
     <div class="grapevine-helps col-wrapper clearfix">
-      <h3>How does Grapevine help?</h3>
+      <h3>How can Grapevine help you?</h3>
 
       <div class="col first">
         <h4>Track Major Review Sites</h4>
         <%= image_tag 'icons/icon-group.png', :class => 'col-icon group' %>
-        <p>We monitor all the popular review sites across the web&mdash;including OpenTable, Yelp, TripAdvisor, UrbanSpoon, GoogleLocal, CitySearch, InsiderPages, YellowPages and more. If there is a review site we&rsquo;re not monitoring for you, contact us and we&rsquo;ll add it.</p>
+        <p>We monitor all the popular review sites across the web.<!-- &mdash;including OpenTable, Yelp, TripAdvisor, UrbanSpoon, GoogleLocal, CitySearch, InsiderPages, YellowPages and more. --> If there is a review site we&rsquo;re not monitoring for you, contact us and we&rsquo;ll add it.</p>
 
       </div><!-- /.col -->
 
       <div class="col">
         <h4>Receive Email Notifications</h4>
         <%= image_tag 'icons/icon-email.png', :class => 'col-icon email' %>
-        <p>Every day, people talk about your business online&mdash;sometimes good, sometimes not so much. It&rsquo;s tough to keep up with checking for new reviews each day - which is why we do it for you! If a new review pops up online, you&rsquo;ll get an email alert from us automatically.</p>
+        <p>Every day, people talk about your business online&mdash;sometimes good, sometimes not. <!--It&rsquo;s tough to keep up with checking for new reviews each day - which is why we do it for you! -->If a new review pops up online, you&rsquo;ll get an email alert from us automatically.</p>
 
       </div><!-- /.col -->
 
       <div class="col">
         <h4>Save Time &amp; Energy</h4>
         <%= image_tag 'icons/icon-time.png', :class => 'col-icon time' %>
-        <p>How much time does Grapevine save you?</p>
-        <p><strong>10</strong> sites at <strong>2 mins</strong> per site = <strong>20 mins per day or 10 hours a month</strong>.</p>
-        <p>Rather than spend time searching for reviews, we deliver them to you!</p>
+        <p>Downtime should be focused on preparation and managing your restaurant. Don&rsquo;t spend that time searching for reviews by hand - we deliver them to you!.</p>
+        <!-- <p><strong>10</strong> sites at <strong>2 mins</strong> per site =<hr style="margin:2px 0 5px 0; border-top:1px solid #ccc;"/> <strong class="purple">20 minutes per day (10 hours a month)</strong>.</p> -->
 
       </div><!-- /.col -->
 
     </div><!-- /.col-wrapper -->
 
     <div class="signup-bar">
-      <p class="last-tag">No service out there makes knowing what your customers are saying about your business as quick &amp; simple as <span class="purple">Grapevine</span>.</p>
-      <a class="show-form purple_button btn">30 Day Free Trial - Sign Up Today</a>
+      <p class="last-tag">No service out there makes knowing what your customers are saying about your business as quick, simple &amp; affordable as <span class="purple">Grapevine</span>.</p>
+      <a href="#signup" class="show-form purple_button btn">30 Day Free Trial - Sign Up Today</a>
+      <h4 style="margin-top:50px; font-weight:400;">That&rsquo;s all wonderful, but how much will it cost? <span class="purple">After 30 days, only $30 a month</span>.</h4>
+
+      <p style="margin-top:10px;">Still unsure? Call us! 210-549-7799</p>
 
     </div>
+
+    <a name="signup"></a>
+    <div id="wufoo_signup">
+      <!-- wufoo signup code -->
+        <div id="wufoo-m7p8m7">
+          Fill out my <a href="http://grapevine.wufoo.com/forms/m7p8m7">online form</a>.
+        </div>
+        <script type="text/javascript">var m7p8m7;(function(d, t) {
+          var s = d.createElement(t), options = {
+            'userName':'grapevine', 
+            'formHash':'m7p8m7', 
+            'autoResize':true,
+            'height':'284',
+            'async':true,
+            'header':'show'};
+            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'wufoo.com/scripts/embed/form.js';
+            s.onload = s.onreadystatechange = function() {
+              var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+              try { m7p8m7 = new WufooForm();m7p8m7.initialize(options);m7p8m7.display(); } catch (e) {}};
+              var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+            })(document, 'script');</script>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $('#wufoo_signup').hide();
+        $('.show-form').click(function() {
+          $('#wufoo_signup').fadeIn();
+        })
+
+      })
+    </script>
   
 
 </div><!-- /#wantmore5 -->
