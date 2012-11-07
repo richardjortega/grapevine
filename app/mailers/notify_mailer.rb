@@ -4,11 +4,12 @@ class NotifyMailer < ActionMailer::Base
           reply_to: "info@pickgrapevine.com"
 
   # All agruements accept strings
-  def review_alert(email, review, rating, source, location_link)
+  def review_alert(email, review, rating, source, location, location_link)
     @email = email
     @review = review
     @rating = rating
     @source = source
+    @location = location
     @location_link = location_link
     
     if source == 'yelp'
