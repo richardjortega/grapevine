@@ -1,38 +1,38 @@
-<%= form_tag 'static_pages/reviewalert' do  %>
+<%= form_tag 'static_pages/review_alert' do  %>
   <fieldset class="fields">
     <div class="field">
-      <%= form.label_tag 'email' %>
-      <%= form.text_field_tag 'email' %>
+      <%= label_tag 'email' %>
+      <%= text_field_tag 'email' %>
     </div>
     <div class="field">
-      <%= form.label_tag 'review' %>
-      <%= form.text_area_tag 'review' %>
+      <%= label_tag 'review' %>
+      <%= text_area_tag 'review' %>
     </div>
     <div class="field">
-      <%= form.label_tag 'rating' %>
-      <%= form.text_area_tag 'rating' %>
+      <%= label_tag 'rating' %>
+      <%= text_area_tag 'rating' %>
     </div>
     
     <div class="radio">
-      <%= form.radio_button_tag 'source', 'yelp' %>
+      <%= radio_button_tag 'source', 'yelp' %>
       <%= label_tag 'Yelp' %>
-      <%= form.radio_button_tag 'source' 'opentable' %>
+      <%= radio_button_tag 'source', 'opentable' %>
       <%= label_tag 'OpenTable' %>
-      <%= form.radio_button_tag 'source' 'google' %>
+      <%= radio_button_tag 'source', 'google' %>
       <%= label_tag 'Google Places' %>
-      <%= form.radio_button_tag 'source' 'tripadvisor' %>
+      <%= radio_button_tag 'source', 'tripadvisor' %>
       <%= label_tag 'TripAdvisor' %>
-      <%= form.radio_button_tag 'source' 'urbanspoon' %>
+      <%= radio_button_tag 'source', 'urbanspoon' %>
       <%= label_tag 'Urbanspoon' %>
     </div>
     
     <div class="field">
-      <%= form.label_tag 'location_link' %>
-      <%= form.text_field 'location_link' %>
+      <%= label_tag 'location_link' %>
+      <%= text_field_tag 'location_link' %>
     </div>
   </fieldset>
   
   <fieldset class="actions">
-    <%= form.submit_tag "Send" %>
+    <%= submit_tag "Send" %>
   </fieldset>
 <% end %>

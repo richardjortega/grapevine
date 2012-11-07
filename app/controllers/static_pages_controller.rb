@@ -25,4 +25,9 @@ class StaticPagesController < ApplicationController
   def thor_of_asgard
   end
 
+  def review_alert params
+    pp params
+    debugger
+  end
+
 end
