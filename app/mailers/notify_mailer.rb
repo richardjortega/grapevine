@@ -5,36 +5,37 @@ class NotifyMailer < ActionMailer::Base
 
   # All agruements accept strings
   def review_alert(email, review, rating, source, location_link)
-    @email = email.to_s
-    mail to: email, bcc: "alerts+logs@pickgrapevine.com", subject: "You have a new #{source.to_s.capitalize} review"
-    @review = review.to_s
-    @rating = rating.to_s
-    @location_link = location_link.to_s
-    # Determine which variables from which source to use
-    if source.downcase == 'yelp'
+    @email = email
+    @review = review
+    @rating = rating
+    @source = source
+    @location_link = location_link
+    
+    if source == 'yelp'
         @source = "Yelp"
         @logo = "http://www.pickgrapevine.com/assets/email/yelp_logo_small.png"
         @response_link = "http://biz.yelp.com"
-      elsif source.downcase == 'opentable'
-        @source = "OpenTable"
+      elsif source == 'opentable'
+        @source = "Opentable"
         @logo = "http://www.pickgrapevine.com/assets/email/open-table-logo_small.png"
         @response_link = "http://www.otrestaurant.com"
-      elsif source.downcase == 'google'
+      elsif source == 'google'
         @source = "Google Places"
         @logo = "http://www.pickgrapevine.com/assets/pics/Google-Places.jpg"
         @response_link = "http://www.google.com/placesforbusiness"
-      elsif source.downcase == 'tripadvisor'
-        @source = "TripAdvisor"
+      elsif source == 'tripadvisor'
+        @source = "Tripadvisor"
         @logo = "http://www.pickgrapevine.com/assets/email/tripadvisor_logo_small.png"
         @response_link = "http://www.tripadvisor.com/Owners"
-      elsif source.downcase == 'urbanspoon'
-        @source = "UrbanSpoon"
+      elsif source == 'urbanspoon'
+        @source = "Urbanspoon"
         @logo = "http://www.pickgrapevine.com/assets/email/urbanspoon_logo_small.png"
         @response_link = "http://www.urbanspoon.com/u/signin"
 
       else
         return false
     end
+    mail to: @email, bcc: "alerts+logs@pickgrapevine.com", subject: "You have a new #{source.to_s.titleize} review"
   
   end
 
