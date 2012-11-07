@@ -25,9 +25,21 @@ class StaticPagesController < ApplicationController
   def thor_of_asgard
   end
 
-  def review_alert params
+  def review_alert
     pp params
-    debugger
+
+    # Associate all params to appropiate 
+    email = params[:email]
+    review = params[:review]
+    rating = params[:rating]
+    source = params[:source]
+    location_link = params[:location_link]
+
+    # Send review alert to a person (BCC sent to alerts+logs@pickgrapevine.com)
+    NotifyMailer.review_alert(email, review, rating, source, location_link).deliver
+
+    # Ensure Erik knows shit was sent
+    redirect_to thor_of_asgard_path, :notice => "Your review alert has been sent successfully to: #{email}"
   end
 
 end
