@@ -25,6 +25,4 @@ class StaticPagesController < ApplicationController
   def thor_of_asgard
   end
 
-  def 
-
 end
