@@ -22,4 +22,7 @@ class StaticPagesController < ApplicationController
   def error404
   end
 
+  def thor_of_asgard
+  end
+
 end

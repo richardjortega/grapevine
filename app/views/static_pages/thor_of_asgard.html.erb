@@ -1,0 +1,38 @@
+<%= form_for @message, :url => reviewalert_path do |form| %>
+  <fieldset class="fields">
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <div class="field">
+      <%= form.label :review %>
+      <%= form.text_area :review %>
+    </div>
+    <div class="field">
+      <%= form.label :rating %>
+      <%= form.text_area :rating %>
+    </div>
+    
+    <div class="radio">
+      <%= form.radio_button :source, 'yelp' %>
+      <%= label :source, 'Yelp' %>
+      <%= form.radio_button :source, 'opentable' %>
+      <%= label :source, 'OpenTable' %>
+      <%= form.radio_button :source, 'google' %>
+      <%= label :source, 'Google Places' %>
+      <%= form.radio_button :source, 'tripadvisor' %>
+      <%= label :source, 'TripAdvisor' %>
+      <%= form.radio_button :source, 'urbanspoon' %>
+      <%= label :source, 'Urbanspoon' %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :location_link %>
+      <%= form.text_field :location_link %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="actions">
+    <%= form.submit "Send" %>
+  </fieldset>
+<% end %>
