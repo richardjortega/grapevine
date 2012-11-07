@@ -3,6 +3,23 @@ class NotifyMailer < ActionMailer::Base
   default from: "alerts@pickgrapevine.com",
           reply_to: "info@pickgrapevine.com"
 
+  # All agruements accept strings
+  def review_alert(email, review, rating, source)
+    @email = email.to_s
+    @review = review.to_s
+    @rating = rating.to_s
+    if source.downcase == 'yelp'
+      elsif source.downcase == 'opentable'
+      elsif source.downcase == 'google'
+      elsif source.downcase == 'tripadvisor'
+      elsif source.downcase == 'urbanspoon'
+      else
+        return false
+    end
+  
+  end
+
+
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)
     @user = user
