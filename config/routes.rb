@@ -29,6 +29,7 @@ Grapevine::Application.routes.draw do
   match '/signuptoday', to: 'static_pages#signuptoday'
   match '/help',  to: 'static_pages#help'
   match '/404',  to: 'static_pages#error404'
+  match '/thor_of_asgard', to: 'static_pages#thor_of_asgard'
 
   #Billing/payment page
   # match '/upgrade', to: 'subscriptions#upgrade'
