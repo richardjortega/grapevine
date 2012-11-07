@@ -238,7 +238,7 @@
                                                                 	<td colspan="2" valign="top" class="couponContent" style="border-collapse: collapse;color: #505050;font-family: Helvetica;font-size: 12px;line-height: 150%;text-align: left;">
 
                                                                     	<h1 style="color: #8d6db1;display: block;font-family: Helvetica;font-size: 30px;font-weight: normal;letter-spacing: -1px;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">You have a new review</h1>
-                                                                        <h4 style="color: #694f80;display: block;font-family: Helvetica;font-size: 14px;font-weight: normal;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">posted on your <strong>Yelp</strong> account.</h4>
+                                                                        <h4 style="color: #694f80;display: block;font-family: Helvetica;font-size: 14px;font-weight: normal;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">posted on your <strong><%= @source %></strong> account.</h4>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -250,17 +250,17 @@
                                                                 <tr>
                                                                     <td valign="top" style="padding-top: 20px;border-collapse: collapse;">
                                                                     	<div class="couponContent" style="color: #694f80;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left; font-weight:bold;">
-																			Rating: 4 out of 5 stars
-																			<p style="font-weight:normal; font-size:12px;"><a style="color:#8d6db1;" href="http://www.yelp.com/biz/the-friendly-spot-ice-house-san-antonio">Read the full review</a> | <a style="color:#8d6db1;" href="https://biz.yelp.com">Respond to this review</a></p>
+																			Rating: <%= @rating %>
+																			<p style="font-weight:normal; font-size:12px;"><a style="color:#8d6db1;" href="<%= @location_link %>">See the full review on <%= @source %></a> | <a style="color:#8d6db1;" href="<%= @response_link %>">Respond to this review</a></p>
 																		</div>
-																		<div style="text-align:right;"><img src="http://pickgrapevine.com/assets/email/yelp_logo_small.png" alt border="0" style="margin: 0;padding: 0;max-width: 200px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"></div>
+																		<div style="text-align:right;"><img src="<%= @logo %>" alt border="0" style="margin: 0;padding: 0;width: 200px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"></div>
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <img src="http://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/couponshadow.png" height="20" width="560" style="display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;">
+                                                <img src="http://www.pickgrapevine.com/assets/email/couponshadow.png" height="20" width="560" style="display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;">
                                             </td>
                                         </tr>
                                     </table>
