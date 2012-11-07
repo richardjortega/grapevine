@@ -1,38 +1,38 @@
-<%= form_for @message, :url => reviewalert_path do |form| %>
+<%= form_tag 'static_pages/reviewalert' do  %>
   <fieldset class="fields">
     <div class="field">
-      <%= form.label :email %>
-      <%= form.text_field :email %>
+      <%= form.label_tag 'email' %>
+      <%= form.text_field_tag 'email' %>
     </div>
     <div class="field">
-      <%= form.label :review %>
-      <%= form.text_area :review %>
+      <%= form.label_tag 'review' %>
+      <%= form.text_area_tag 'review' %>
     </div>
     <div class="field">
-      <%= form.label :rating %>
-      <%= form.text_area :rating %>
+      <%= form.label_tag 'rating' %>
+      <%= form.text_area_tag 'rating' %>
     </div>
     
     <div class="radio">
-      <%= form.radio_button :source, 'yelp' %>
-      <%= label :source, 'Yelp' %>
-      <%= form.radio_button :source, 'opentable' %>
-      <%= label :source, 'OpenTable' %>
-      <%= form.radio_button :source, 'google' %>
-      <%= label :source, 'Google Places' %>
-      <%= form.radio_button :source, 'tripadvisor' %>
-      <%= label :source, 'TripAdvisor' %>
-      <%= form.radio_button :source, 'urbanspoon' %>
-      <%= label :source, 'Urbanspoon' %>
+      <%= form.radio_button_tag 'source', 'yelp' %>
+      <%= label_tag 'Yelp' %>
+      <%= form.radio_button_tag 'source' 'opentable' %>
+      <%= label_tag 'OpenTable' %>
+      <%= form.radio_button_tag 'source' 'google' %>
+      <%= label_tag 'Google Places' %>
+      <%= form.radio_button_tag 'source' 'tripadvisor' %>
+      <%= label_tag 'TripAdvisor' %>
+      <%= form.radio_button_tag 'source' 'urbanspoon' %>
+      <%= label_tag 'Urbanspoon' %>
     </div>
     
     <div class="field">
-      <%= form.label :location_link %>
-      <%= form.text_field :location_link %>
+      <%= form.label_tag 'location_link' %>
+      <%= form.text_field 'location_link' %>
     </div>
   </fieldset>
   
   <fieldset class="actions">
-    <%= form.submit "Send" %>
+    <%= form.submit_tag "Send" %>
   </fieldset>
 <% end %>
