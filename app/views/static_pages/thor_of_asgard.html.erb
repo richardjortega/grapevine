@@ -1,38 +1,103 @@
 <%= form_tag 'static_pages/review_alert' do  %>
-  <fieldset class="fields">
-    <div class="field">
-      <%= label_tag 'email' %>
-      <%= text_field_tag 'email' %>
+<style>
+.select-source {
+  margin:50px 0;
+}
+label.radio {
+  height:40px;
+  margin-right:20px;
+}
+textarea {
+  width:400px;
+  height:150px;
+}
+ label.radio img { width:100px; height:auto; vertical-align: middle;}
+ label.radio input { margin-top:15px;}
+
+ .thor-fun {
+  position: absolute;
+top: 200px;
+right: 40px;
+width: 300px;
+ }
+ .thor-fun img {
+  width:300px;
+  height:auto;
+ }
+
+</style>
+<div class="controls inline select-source">
+      <%= label_tag 'Yelp', :class => 'radio inline' do %><%= radio_button_tag 'source', 'yelp' %> <%= image_tag 'email/yelp_logo_small.png' %><% end %>
+      
+      <%= label_tag 'OpenTable', :class => 'radio inline' do %><%= radio_button_tag 'source', 'opentable' %> <%= image_tag 'email/open-table-logo_small.png' %><% end %>
+      
+      <%= label_tag 'Google Places', :class => 'radio inline' do %><%= radio_button_tag 'source', 'google' %> <%= image_tag 'pics/Google-Places.jpg' %><% end %>
+      
+      <%= label_tag 'TripAdvisor', :class => 'radio inline' do %><%= radio_button_tag 'source', 'tripadvisor' %> <%= image_tag 'email/tripadvisor_logo_small.png' %><% end %>
+      
+      <%= label_tag 'Urbanspoon', :class => 'radio inline' do %><%= radio_button_tag 'source', 'urbanspoon' %> <%= image_tag 'email/urbanspoon_logo_small.png' %><% end %>
+      
     </div>
-    <div class="field">
-      <%= label_tag 'review' %>
-      <%= text_area_tag 'review' %>
+  <fieldset>
+    <div class="control-group">
+      <%= label_tag 'email', nil, :class => 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag 'email', nil, :class => 'input-xlarge', :placeholder => 'somebody@someplace.com' %>
+        <div class="thor-fun" style="display:none;">
+          <h3>What else do you do with these lovely hands?</h3>
+          <%= image_tag 'email/hand-kiss.gif' %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= label_tag 'rating' %>
-      <%= text_area_tag 'rating' %>
+    <div class="control-group">
+      <%= label_tag 'review', nil, :class => 'control-label' %>
+      <div class="controls">
+        <%= text_area_tag 'review' %>
+        <div class="thor-fun" style="display:none;">
+          <h3>That's lookin' like a good email, handsome.</h3>
+          <%= image_tag 'email/good-job.gif' %>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= label_tag 'rating', nil, :class => 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag 'rating', nil, :class => 'input-small' %>
+        <div class="thor-fun" style="display:none;">
+          <h3>Thats a big rating you got there.</h3>
+          <%= image_tag 'email/still-so-good.gif' %>
+        </div>
+      </div>
     </div>
     
-    <div class="radio">
-      <%= radio_button_tag 'source', 'yelp' %>
-      <%= label_tag 'Yelp' %>
-      <%= radio_button_tag 'source', 'opentable' %>
-      <%= label_tag 'OpenTable' %>
-      <%= radio_button_tag 'source', 'google' %>
-      <%= label_tag 'Google Places' %>
-      <%= radio_button_tag 'source', 'tripadvisor' %>
-      <%= label_tag 'TripAdvisor' %>
-      <%= radio_button_tag 'source', 'urbanspoon' %>
-      <%= label_tag 'Urbanspoon' %>
-    </div>
     
-    <div class="field">
-      <%= label_tag 'location_link' %>
+    
+    <div class="control-group">
+      <%= label_tag 'location_link', nil, :class => 'control-label' %>
+      <div class="controls">
       <%= text_field_tag 'location_link' %>
+        <div class="thor-fun" style="display:none;">
+          <h3>Wait.. We'll go at the same time... for Asgard... yeah.</h3>
+          <%= image_tag 'email/shake-weight.gif' %>
+        </div>
+      </div>
     </div>
   </fieldset>
   
   <fieldset class="actions">
-    <%= submit_tag "Send" %>
+    <%= submit_tag "Send - Don't Fuck Up", :class => 'btn' %>
   </fieldset>
+
+  
+
+  <script>
+    $(document).ready(function() {
+      $('input, textarea').focus(function() {
+        $('.thor-fun').fadeOut();
+        $(this).next('.thor-fun').fadeIn();
+      })
+
+
+    })
+  </script>
 <% end %>
