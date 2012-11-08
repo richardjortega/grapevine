@@ -37,59 +37,70 @@ private
 
 	# Inform user of failed payment. Accepts Stripe Invoice object
 	def handle_failed_charge(invoice)
-		user = Subscription.find_by_stripe_customer_token(invoice.customer)
+		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
+		
+		user = subscription.user
 		NotifyMailer.unsuccessfully_invoiced(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has failed a charge").deliver
 	end
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(invoice)
-		user = Subscription.find_by_stripe_customer_token(invoice.customer)
-		user.status = true
-		user.save!
-		
-		NotifyMailer.successfully_invoiced(invoice, user).deliver
+		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
+
+		if subscription.status_info == 'trialing' 
+			return false
+		else
+			subscription.status = true
+			subscription.save!
+			
+			user = subscription.user
+			NotifyMailer.successfully_invoiced(invoice, user).deliver
+		end
 	end
 
 	# Send an email to the customer informing them the trial is ending in 3 days
-	def handle_trial_ending(subscription)
-		user = Subscription.find_by_stripe_customer_token(subscription.customer)
+	def handle_trial_ending(customer_subscription)
+		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
+		
+		user = subscription.user
 		NotifyMailer.trial_ending(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has 3 days left on trial").deliver
 	end
 
 	# Handle canceled user
-	def handle_canceled_customer(subscription)
-		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.status = false
-		user.status_info = subscription.status
-		user.save!
+	def handle_canceled_customer(customer_subscription)
+		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
+		subscription.status = false
+		subscription.status_info = customer_subscription.status
+		subscription.save!
 
-		# TODO: create account canceled email
+		user = subscription.user
 		NotifyMailer.account_canceled(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has just canceled").deliver
 	end
 
 	# Suspend user for not paying after 3 retries to credit card
 	# Same for trials that expire (on the 31st day)
-	def handle_unpaid_customer(subscription)
-		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.status = false
-		user.status_info = subscription.status
-		user.save!
+	def handle_unpaid_customer(customer_subscription)
+		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
+		subscription.status = false
+		subscription.status_info = customer_subscription.status
+		subscription.save!
 
+		user = subscription.user
 		NotifyMailer.account_expired(user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has been set to unpaid status").deliver
 	end
 
 	# Update all items on customer to match stripe webhook
-	def update_customer_subscription(subscription)
-		user = Subscription.find_by_stripe_customer_token(subscription.customer)
-		user.status_info = subscription.status
-		user.start_date = subscription.start
-		user.current_period_start = subscription.current_period_start
-		user.current_period_end = subscription.current_period_end
-		user.trial_start = subscription.trial_start if subscription.trial_start.present?
-		user.trial_end = subscription.trial_end if subscription.trial_end.present?
-		user.save!
+	def update_customer_subscription(customer_subscription)
+		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
+		subscription.status_info = customer_subscription.status
+		subscription.start_date = customer_subscription.start
+		subscription.current_period_start = customer_subscription.current_period_start
+		subscription.current_period_end = customer_subscription.current_period_end
+		subscription.trial_start = customer_subscription.trial_start if customer_subscription.trial_start.present?
+		subscription.trial_end = customer_subscription.trial_end if customer_subscription.trial_end.present?
+		subscription.save!
 	end
