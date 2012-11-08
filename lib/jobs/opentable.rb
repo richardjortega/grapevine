@@ -40,9 +40,9 @@ class OpenTableParser
 
 		# Close browser session on saucelabs
 		browser.close
-		
+
 		# Remove any nil values from the returned array then flatten array of hashes to one-dimensional array of hashes
-		found_details.compact!.flatten!
+		details = found_details.compact.flatten
 
 		puts "Finished Scrapping All Locations' Data."
 		puts "Total Time to Scrape All Data: #{((Time.now - job_start_time)/60).to_i} minutes"
@@ -52,7 +52,7 @@ class OpenTableParser
 			#Headers for reference, uncomment if you need headers. Each website doesn't need them.
 			#row << [ "name", "url", "rating", "address", "total_reviews", "cuisine", "price", "neighborhood", "website", "email", "phone", "review_rating", "review_description", "review_dine_date", "marketing_url", "marketing_id" ]
 			
-			found_details.each do |location|
+			details.each do |location|
 				next if location[:email].empty? #skip adding rows if no email is present
 				row << [ location[:name], 
 						 location[:url], 
