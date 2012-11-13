@@ -41,6 +41,18 @@ class NotifyMailer < ActionMailer::Base
   
   end
 
+  # Follow up email for people after calling
+
+  def follow_up(email, name, body, pg_link)
+    @name = name  
+    @email = email
+    @body = body
+    @pg_link = pg_link
+
+    mail to: email, subject: "Follow-up info from Grapevine"
+
+  end
+
 
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)
