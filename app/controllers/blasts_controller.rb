@@ -34,7 +34,7 @@ class BlastsController < ApplicationController
     end
   end
 
-   def wantmore5
+  def wantmore5
     @blast = Blast.find_by_marketing_id(params[:id])
 
     respond_to do |format|
@@ -42,7 +42,7 @@ class BlastsController < ApplicationController
     end
   end
 
-   def wantmore6
+  def wantmore6
     @blast = Blast.find_by_marketing_id(params[:id])
 
     respond_to do |format|
@@ -50,7 +50,15 @@ class BlastsController < ApplicationController
     end
   end
 
-   def wantmore7
+  def wantmore7
+    @blast = Blast.find_by_marketing_id(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
+  end
+
+  def wantmore8
     @blast = Blast.find_by_marketing_id(params[:id])
 
     respond_to do |format|

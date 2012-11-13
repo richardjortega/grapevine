@@ -12,6 +12,7 @@ Grapevine::Application.routes.draw do
   get '/wantmore5/:id', to: 'blasts#wantmore5', as: 'wantmore5'
   get '/wantmore6/:id', to: 'blasts#wantmore6', as: 'wantmore6'
   get '/wantmore7/:id', to: 'blasts#wantmore7', as: 'wantmore7'
+  get '/wantmore8/:id', to: 'blasts#wantmore8', as: 'wantmore8'
 
   authenticated :user do
     root to: 'accounts#index'
