@@ -49,7 +49,8 @@ class NotifyMailer < ActionMailer::Base
     @body_part2 = body_part2
     @location_link = location_link
 
-    mail to: email, subject: "Follow-up info from Grapevine"
+    mail to: email, subject: "Follow-up info from Grapevine", from: "erik@pickgrapevine.com", reply_to: 
+    "erik@pickgrapevine.com"
 
   end
 
