@@ -13,6 +13,7 @@ Grapevine::Application.routes.draw do
   get '/wantmore6/:id', to: 'blasts#wantmore6', as: 'wantmore6'
   get '/wantmore7/:id', to: 'blasts#wantmore7', as: 'wantmore7'
   get '/wantmore8/:id', to: 'blasts#wantmore8', as: 'wantmore8'
+  get '/follow_up/:id', to: 'blasts#follow_up', as: 'follow_up'
 
   authenticated :user do
     root to: 'accounts#index'
@@ -31,7 +32,7 @@ Grapevine::Application.routes.draw do
   match '/help',  to: 'static_pages#help'
   match '/404',  to: 'static_pages#error404'
   match '/thor_of_asgard', to: 'static_pages#thor_of_asgard'
-  match '/follow_up', to: 'static_pages#follow_up'
+  match '/send_follow_up', to: 'static_pages#send_follow_up'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
 

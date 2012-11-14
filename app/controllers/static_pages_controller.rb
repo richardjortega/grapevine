@@ -25,7 +25,7 @@ class StaticPagesController < ApplicationController
   def thor_of_asgard
   end
 
-  def follow_up
+  def send_follow_up
   end
 
   def review_alert
@@ -54,7 +54,7 @@ class StaticPagesController < ApplicationController
 
     NotifyMailer.follow_up_alert(email, name, body, body_part2, location_link).deliver
 
-    redirect_to follow_up_path, :notice => "Your follow-up email has been sent successfully to: #{email}"
+    redirect_to send_follow_up_path, :notice => "Your follow-up email has been sent successfully to: #{email}"
 
   end
 
