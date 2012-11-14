@@ -25,6 +25,9 @@ class StaticPagesController < ApplicationController
   def thor_of_asgard
   end
 
+  def follow_up
+  end
+
   def review_alert
 
     # Associate all params to appropiate 
@@ -40,6 +43,19 @@ class StaticPagesController < ApplicationController
 
     # Ensure Erik knows shit was sent
     redirect_to thor_of_asgard_path, :notice => "Your review alert has been sent successfully to: #{email}"
+  end
+
+  def follow_up_alert
+    email = params[:email]
+    name = params[:name]
+    body = params[:body]
+    body_part2 = params[:body_part2]
+    location_link = params[:location_link]
+
+    NotifyMailer.follow_up_alert(email, name, body, body_part2, location_link).deliver
+
+    redirect_to follow_up_path, :notice => "Your follow-up email has been sent successfully to: #{email}"
+
   end
 
 end

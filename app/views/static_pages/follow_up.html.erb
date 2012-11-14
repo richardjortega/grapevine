@@ -1,4 +1,4 @@
-<%= form_tag 'static_pages/review_alert' do  %>
+<%= form_tag 'static_pages/follow_up_alert' do  %>
 <style>
 .select-source {
   margin:50px 0;
@@ -26,59 +26,31 @@ width: 300px;
  }
 
 </style>
-<div class="controls inline select-source">
-      <%= label_tag 'Yelp', :class => 'radio inline' do %><%= radio_button_tag 'source', 'yelp' %> <%= image_tag 'email/yelp_logo_small.png' %><% end %>
-      
-      <%= label_tag 'OpenTable', :class => 'radio inline' do %><%= radio_button_tag 'source', 'opentable' %> <%= image_tag 'email/open-table-logo_small.png' %><% end %>
-      
-      <%= label_tag 'Google Places', :class => 'radio inline' do %><%= radio_button_tag 'source', 'google' %> <%= image_tag 'pics/Google-Places.jpg' %><% end %>
-      
-      <%= label_tag 'TripAdvisor', :class => 'radio inline' do %><%= radio_button_tag 'source', 'tripadvisor' %> <%= image_tag 'email/tripadvisor_logo_small.png' %><% end %>
-      
-      <%= label_tag 'Urbanspoon', :class => 'radio inline' do %><%= radio_button_tag 'source', 'urbanspoon' %> <%= image_tag 'email/urbanspoon_logo_small.png' %><% end %>
-      
-    </div>
   <fieldset>
+    <div class="control-group">
+      <%= label_tag 'name', nil, :class => 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag 'name', 'Manager', :class => 'input-xlarge' %>
+      </div>
+    </div>
     <div class="control-group">
       <%= label_tag 'email', nil, :class => 'control-label' %>
       <div class="controls">
         <%= text_field_tag 'email', nil, :class => 'input-xlarge', :placeholder => 'somebody@someplace.com' %>
-        <div class="thor-fun" style="display:none;">
-          <h3>What else do you do with these lovely hands?</h3>
-          <%= image_tag 'email/hand-kiss.gif' %>
-        </div>
       </div>
     </div>
     <div class="control-group">
-      <%= label_tag 'review', nil, :class => 'control-label' %>
+      <%= label_tag 'body', nil, :class => 'control-label' %>
       <div class="controls">
-        <%= text_area_tag 'review' %>
-        <div class="thor-fun" style="display:none;">
-          <h3>That's lookin' like a good email, handsome.</h3>
-          <%= image_tag 'email/good-job.gif' %>
-        </div>
+        <%= text_area_tag 'body', 
+        "Thanks for speaking with me recently on the phone. Just as a recap, Grapevine alerts you via email about new customer reviews posted online at review sites like OpenTable, Google Local, TripAdvisor, Yelp, CitySearch, InsiderPages, UrbanSpoon and more."  %>
       </div>
     </div>
-
     <div class="control-group">
-      <%= label_tag 'rating', nil, :class => 'control-label' %>
+      <%= label_tag 'body continued', nil, :class => 'control-label' %>
       <div class="controls">
-        <%= text_field_tag 'rating', nil, :class => 'input-small' %>
-        <div class="thor-fun" style="display:none;">
-          <h3>Thats a big rating you got there.</h3>
-          <%= image_tag 'email/still-so-good.gif' %>
-        </div>
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <%= label_tag 'location', nil, :class => 'control-label' %>
-      <div class="controls">
-        <%= text_field_tag 'location', nil %>
-        <div class="thor-fun" style="display:none;">
-          <h3>I just checked-in, into you.</h3>
-          <%= image_tag 'email/no_homo.gif' %>
-        </div>
+        <%= text_area_tag 'body_part2', 
+        "Below, I've included a link to the review I sent you previously. Customer reviews matter for your restuarant so give Grapevine a test drive. All it takes to get started is you confirming your email address, nothing else."  %>
       </div>
     </div>
     
@@ -86,28 +58,13 @@ width: 300px;
       <%= label_tag 'location_link', nil, :class => 'control-label' %>
       <div class="controls">
       <%= text_field_tag 'location_link' %>
-        <div class="thor-fun" style="display:none;">
-          <h3>Wait.. We'll go at the same time... for Asgard... yeah.</h3>
-          <%= image_tag 'email/shake-weight.gif' %>
-        </div>
       </div>
     </div>
   </fieldset>
   
   <fieldset class="actions">
-    <%= submit_tag "Send - Don't Fuck Up", :class => 'btn' %>
+    <%= submit_tag "Send - Fuck Up and Die!", :class => 'btn' %>
   </fieldset>
 
   
-
-  <script>
-    $(document).ready(function() {
-      $('input, textarea').focus(function() {
-        $('.thor-fun').fadeOut();
-        $(this).next('.thor-fun').fadeIn();
-      })
-
-
-    })
-  </script>
 <% end %>

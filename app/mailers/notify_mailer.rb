@@ -43,11 +43,11 @@ class NotifyMailer < ActionMailer::Base
 
   # Follow up email for people after calling
 
-  def follow_up(email, name, body, pg_link)
+  def follow_up_alert(email, name, body, body_part2, location_link)
     @name = name  
-    @email = email
     @body = body
-    @pg_link = pg_link
+    @body_part2 = body_part2
+    @location_link = location_link
 
     mail to: email, subject: "Follow-up info from Grapevine"
 
