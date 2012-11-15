@@ -8,17 +8,19 @@ require 'watir-webdriver'
 
 def check_for_new_reviews(new_reviews, current_reviews) 
 	# checks new reviews against old reviews in array and only returns new ones.
+	# Use order for AR when referencing DB
+	# latest_review_date = Location.Reviews.order("review_dine_date DESC").first.review_dine_date
 	latest_review_date = Date.strptime(current_reviews.first[:review_dine_date], "%m/%d/%Y")
 
+	new_reviews_to_add = []
 	new_reviews.each do |review|
 		# compare each review  and check if their dates are newer than latest in DB/array
 		parsed_review_date = Date.strptime(review[:review_dine_date], "%m/%d/%Y")
 		if parsed_review_date > latest_review_date
-			current_reviews << review
+			new_reviews_to_add << review
 		end
 	end
-	# Use order for AR when referencing DB
-	# latest_review_date = Location.Reviews.order("review_dine_date DESC").first.review_dine_date
+	new_reviews_to_add
 end
 
 caps = Selenium::WebDriver::Remote::Capabilities.chrome
@@ -90,10 +92,15 @@ rescue => e
 end
 
 details = found_details.compact.flatten
+puts "------- \n\n Current Reviews on Page \n\n-------"
 ap details
 
-check_for_new_reviews(new_reviews, details)
-ap details
+puts "------- \n\n New Reviews to Test Against Previous Reviews \n\n-------"
+ap new_reviews
+
+found_reviews = check_for_new_reviews(new_reviews, details)
+puts "------- \n\n Return of New Reviews with Reviews with Newer Review Dates \n\n-------"
+ap found_reviews
 
 
 
