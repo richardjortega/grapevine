@@ -2,7 +2,7 @@ class NotifyMailer < ActionMailer::Base
   #Alerts email from pickgrapevine; auto-reply to no-reply!
   default from: "alerts@pickgrapevine.com",
           reply_to: "info@pickgrapevine.com",
-          bcc: "alerts+logs@pickgrapevine"
+          bcc: "alerts+logs@pickgrapevine.com"
 
   # All agruements accept strings
   def review_alert(email, review, rating, source, location, location_link)
