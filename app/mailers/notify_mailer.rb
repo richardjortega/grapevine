@@ -3,6 +3,7 @@ class NotifyMailer < ActionMailer::Base
   default from: "alerts@pickgrapevine.com",
           reply_to: "info@pickgrapevine.com",
           bcc: "alerts+logs@pickgrapevine.com"
+  # alerts logging added
 
   # All agruements accept strings
   def review_alert(email, review, rating, source, location, location_link)
