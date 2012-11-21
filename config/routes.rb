@@ -22,7 +22,6 @@ Grapevine::Application.routes.draw do
   root to: 'static_pages#home'
   get '/signup' => 'static_pages#signup',      as: 'signup'
 
-  # Pages and links to be removed once Stripe integration completed
   match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')
   match '/enroll', to: 'static_pages#enroll'
   match '/concierge', to: 'static_pages#concierge'
@@ -33,6 +32,7 @@ Grapevine::Application.routes.draw do
   match '/404',  to: 'static_pages#error404'
   match '/thor_of_asgard', to: 'static_pages#thor_of_asgard'
   match '/send_follow_up', to: 'static_pages#send_follow_up'
+  match '/upgradetoday', to: 'static_pages#upgradetoday'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
 
