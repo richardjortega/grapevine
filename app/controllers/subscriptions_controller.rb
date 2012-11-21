@@ -10,7 +10,7 @@ class SubscriptionsController < ApplicationController
     
   	if @subscription.save_without_payment
       redirect_to thankyou_path
-	    NotifyMailer.free_signup(@subscription.user).deliver
+	    # NotifyMailer.free_signup(@subscription.user).deliver
 	    NotifyMailer.update_grapevine_team(@subscription.user, "New customer signed up").deliver
   	else
   		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
