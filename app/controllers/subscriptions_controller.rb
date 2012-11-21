@@ -20,7 +20,6 @@ class SubscriptionsController < ApplicationController
 
   def update
     @subscription = current_user.subscription
-    # @subscription.plan = Plan.find_by_identifier('basic_monthly')
 
     if @subscription.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
