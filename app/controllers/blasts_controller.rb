@@ -66,6 +66,14 @@ class BlastsController < ApplicationController
     end
   end
 
+  def wantmore9
+    @blast = Blast.find_by_marketing_id(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
+  end
+
   def follow_up
     @blast = Blast.find_by_marketing_id(params[:id])
 
