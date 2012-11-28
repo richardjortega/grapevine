@@ -30,6 +30,9 @@ gem 'headless'
 gem 'mailchimp'
 gem 'roadie'
 
+# Background Processes/Workers
+gem 'iron_worker_ng'
+
 # Design
 gem 'bootstrap-sass', '2.0.3'
 gem 'meta-tags', :require => 'meta_tags'
