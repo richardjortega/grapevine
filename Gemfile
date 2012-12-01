@@ -32,6 +32,7 @@ gem 'roadie'
 
 # Background Processes/Workers
 gem 'iron_worker_ng'
+gem 'poltergeist'
 
 # Design
 gem 'bootstrap-sass', '2.0.3'
