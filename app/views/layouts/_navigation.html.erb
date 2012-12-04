@@ -1,5 +1,5 @@
-
-<%= link_to image_tag( "logo_333x71.png", :class => "brand", :alt => "Grapevine"), root_path %>
+<div class="wrapper">
+	<h1><%= link_to image_tag( "logo-white.png", :class => "brand", :alt => "Grapevine"), root_path %></h1>
 
 
 	<ul class="global-nav">
@@ -14,6 +14,7 @@
 		  <% else %>
 		  <li><%= link_to "Pricing", pricing_path %></li>
 			<li><%= link_to "Sign In", new_user_session_path %></li>
-		  <li><%= link_to "Sign Up", signup_path %></li>
+		  <li class="signup"><%= link_to "Sign Up", signup_path %></li>
 		<% end %>
 	</ul><!-- /.global-nav -->
+</div><!-- /.wrapper -->

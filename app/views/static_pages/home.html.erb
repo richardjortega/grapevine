@@ -1,155 +1,19 @@
 <% content_for :head do %>
-	<%= javascript_include_tag "jquery.fitvids.js" %>
-	<%= javascript_include_tag "jquery.nivo.slider.js" %>
-	<%= javascript_include_tag "static_pages.js.coffee" %>
+	
 <% end %>
 <% set_meta_tags :title => 'Email Alerts for Online Customer Reviews',
 				 :description => 'Grapevine sends you an email alert each time a customer leaves a review for you online.',
                  :keywords => 'customer reviews, email alerts, review reporting, grapevine, review sites, reputation concierge, review responses' %>
-<div class="feature span12">
-	<div>
-    &nbsp;
-    </div>
-	<div class="container" id="reviews_delivered">
-	            <h2 class="motto"><strong>Know</strong> what they say. <strong>Respond</strong> instantly.</h2>
-	            <h3 class="hand">Receive an Email Alert Each Time a Customer Leaves a Review for You!</h3>
 
-	       <!--SLIDER STARTS HERE-->
-			<div class="slider-wrapper theme-default">
-			    <div id="slider" class="nivoSlider theme-default">
-			        <%= image_tag("pics/feature.jpg", id: "feature-screenshot", alt: "Grapevine tracks Yelp Reviews") %>
-			        <%= image_tag("pics/feature2.jpg", id: "feature-screenshot", alt: "Use Grapevine to save you time searching for customer reviews") %>
-			        <%= image_tag("pics/feature3.jpg", id: "feature-screenshot", alt: "We monitor OpenTable customer feedback postings") %>
-			    </div>
-			</div>
-          <!--SLIDER ENDS HERE-->
-	            
-	</div>
-</div>
-	    <div class="row">
-			    <div class="span12 center">
-			    	<!--Inline styling to override bootstrap classes without breaking anything I think-->
-					  <a href="#watch_video" class="signup" id="watch_video_button">Watch Demo Video <%= image_tag 'glyphicons_008_film.png', id: "film_icon_in_button" %></a>
-						<%= link_to "Sign up for your FREE 30-Day trial", signup_path, { :class => 'purple_button' } %>
-					</div>
-	        <div class="span12 graded center">
-	            <h4 class="hand little_bit_of_space_on_top">Grapevine is for everyone, any industry, any company! Scroll down for more details!</h4>
-	        </div>
-	    </div>
-	</div>
-
-
-	<div class="container">
-	    <h2><strong>Features</strong> you'll really dig.</h2>
-	    <h3 class="hand">You Can Hear Everything Through the Grapevine.</h3>
-	    <div class="row">
-	        <div class="span12 box drop-shadow" id="watch_video">
-
-            <div class="row">
-            	<div class="span6 offset1" id="video_holder">
-            		<iframe src="http://player.vimeo.com/video/45796412?title=0&amp;byline=0" width="560" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                </div>
-                <div class="span4">
-                  <%= image_tag 'placeholder_home.png', id: "image_next_to_video_on_home" %>
-                </div>
-            </div><br><br>
-
-
-	            <div class="row features-sales-page">
-	                <div class="span1 offset1">
-	                    <%= image_tag "pics/index-box-24x7.png", alt: "Constant Review Monitoring", class: "features_icon" %>
-	                </div>
-	                <article class="span9">
-	                    <h3>24x7 Review Monitoring</h3>
-	                    <p>We monitor all the popular review sites across the web. OpenTable, Yelp, UrbanSpoon, GoogleLocal, CitySearch, InsiderPages, YellowPages. If there is a review site we're not monitoring for you, get in contact with us and we'll add it!</p>
-	                </article>
-	            </div>
-
-
-	            <div class="row features-sales-page">
-	                <div class="span1 offset1">
-	                    <%= image_tag "pics/index-box-email.png", alt: "Daily Email Notices", class: "features_icon" %>
-	                </div>
-	                <article class="span9">
-	                    <h3>Daily Email Notifications</h3>
-	                    <p>Everyday people talk about your business online, some good - some bad. It's tough to keep up with new review sites, let alone checking all of them daily - which is why we do it for you! If a new review pops up online, you'll get an email!</p>
-	                </article>
-	            </div>
-
-	            <div class="row features-sales-page">
-	                <div class="span1 offset1">
-	                    <%= image_tag "pics/index-box-free.png", alt: "Free 30 Day Trial", class: "features_icon" %>
-	                </div>
-	                <article class="span9">
-	                    <h3>30 Day Free Trial & No Long-Term Commitment</h3>
-	                    <p>We believe that we can offer each other value. We believe that so much, we'll setup monitoring of your business location at no cost plus get 30 days of 24x7 review monitoring. No credit cards, no worries. <br /><em>Sign up below, seriously it can't hurt you!</em>
-	                </article>
-	            </div>
-
-	        </div>
-	    </div>
-	</div>
-	<div class="container">
-	    <h2>Things <strong>people have said</strong> about us.</h2>
-	    <table class="table table-bordered quotes">
-	        <tr>
-	            <td width="33%"><h4>Malibu Burger Shack</h4><br />"Grapevine helps me spot problems fast."</td>
-	            <td width="33%"><h4>Whispering Waters Day Spa</h4><br />"I'm tired of searching daily to see reviews <em>thank you</em>!"</td>
-	            <td width="33%"><h4>Schertz Car Care Center</h4><br />"I dislike dashboards. Emails keep it simple."</td>
-	        </tr>
-	    </table>
-	</div>
-	<div class="container">
-	    <h2>Keep it simple <strong>pricing</strong> and plans.<br /><em><small>Don't worry, you don't pay anything now, but we want to be upfront and honest with our offerings!</small></em></h2>
-	    <div>
-		&nbsp;
-		</div>
-		<div>
-		&nbsp;
-		</div>
-		<!-- Ask Josh about padding fix -->
-	    <div class="row pricing">
-
-	        <div class="span6">
-	            <div class="well">
-	                <h3>Unlimited Email Alerts for Reviews<br /><em><small>Simple and Smart!</small></em></h3>
-	                <ul>
-	                    <li>Unlimited Review Forwards &amp;<br />Email Alert Notifications</li>
-	                    <li>Monitor Any Business In The USA</li>
-	                    <li>24 hours a day, 7 days a week</li>
-	                    <li>Excellent Email Support</li>
-	                    <li>No Long-Term Contracts<br />&amp; No Setup Fees</li>
-	                    <li><em>Perfect for any small business wanting to monitor their reviews.</em></li>
-	                </ul>
-	                <h3>$30/month</h3>
-	                <div align="center">
-	                	<%= link_to "Start Free trial", signup_path, { :class => 'purple_button' } %>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="span6">
-	            <div class="well">
-	                <h3>Reputation Concierge<br /><em><small>Tier 1 Package</small></em></h3>
-	                <ul>
-	                    <li>A Fully Managed, Review Response &amp; Reporting Service</li>
-	                    <li>Dedicated Account Manager</li>
-	                    <li>24 Hour Response Turnaround</li>
-	                    <li>Professional Review Responses</li>
-	                    <li>Month-to-Month Invoiced Billing &amp; No Setup Cost</li>
-	                    <li><em>For Companies Who Receive 30 Monthly Reviews on Average</em></li>
-	                </ul>
-	                <h3>$250/month</h3>
-	                <div align="center"><a href="/concierge" class="signup">Request Info</a></div>
-	            </div>
-	        </div>
-	    </div>
-    </div>
-</div>
-	 	<div class="row">
-		    <h3 class="hand">About Us</h3>
-			    <div class="span10 offset1 footer">
-			    Grapevine was founded on November 2011 by Richard Ortega and Erik Larson and realizing that companies weren't listening to customers' reviews. Grapevine was born to fix the issue of managers and owners not being aware of online reviews. <em>Also, our epic name - Grapevine - was a function of subconscious-market research. Ahem...</em>
-            	</div>
-        </div>
-	</div>
-</div>
+<section class="home-panel">
+	<h3>Why do reivews matter?</h3>
+	<p>Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+</section>
+<section class="home-panel">
+	<h3>How can Grapevine help?</h3>
+	<p>Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+</section>
+<section class="home-panel">
+	<h3>Some other kinda title</h3>
+	<p>Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero, a pharetra augue. Nullam quis risus eget urna mollis ornare vel eu leo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+</section>

@@ -21,6 +21,7 @@
     <meta property='og:title' content='Customer Review Reporting and Concierge Service | Grapevine'/>
     <meta property='og:type' content='website'/>
     <meta property='og:url' content='http://pickgrapevine.com/'/>
+    <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application", :media => "all" %>
 
     
@@ -34,8 +35,8 @@
     <![endif]-->
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
+    <header id="global-header" class="clearfix">
+      <nav><%= render 'layouts/navigation' %></nav>
     </header>
 
       <%= render 'layouts/messages' %>
@@ -43,8 +44,10 @@
       <% if current_page?(root_url) %>
         <%= render 'static_pages/home_hero' %>
       <% end %>
-      
-      <%= yield %>
+
+      <div id="main-container" class="clearfix">
+        <%= yield %>
+      </div><!-- /#main-container -->
       
   </body>
 
