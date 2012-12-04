@@ -19,8 +19,8 @@ namespace :crawl do
 	task :opentable, [:location_id] => :environment do |t, location_id|
 		
 		run = OpenTable.new
-		run.parse_review_page(location_id)
+		response = run.parse_review_page(location_id)
+
 	end
 
-	desc "Check "
 end
