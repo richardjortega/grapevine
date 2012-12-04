@@ -1,0 +1,10 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'csv'
+require 'logger'
+require 'ap'
+require 'debugger'
+require 'watir-webdriver'
+
+# http://reviews.opentable.com/data/reviews.json?apiversion=4.9&passkey=tjp43pshizud7jpex6rokvyop&sort=submissiontime:desc&limit=15&filter=ProductId:28474&filter=IsRatingsOnly:false&include=products&stats=reviews&RestaurantID=28474'
