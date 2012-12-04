@@ -7,7 +7,7 @@ require_relative "../../app/models/location"
 
 namespace :crawl do
 	desc "Check All Locations for New Reviews Across All Sites"
-	task :all => :environment
+	task :all => :environment do
 		zinc = Location.find('13')
 		# Check OpenTable
 		Rake::Task['crawl:opentable'].reenable
