@@ -22,8 +22,8 @@ StripeEvent.setup do
 	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
 		case event.data.object.status
-			when 'unpaid'
-				handle_unpaid_customer event.data.object
+			# when 'unpaid'
+			# 	handle_unpaid_customer event.data.object
 			when 'canceled'
 				handle_canceled_customer event.data.object
 			else
