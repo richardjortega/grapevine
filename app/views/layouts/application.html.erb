@@ -37,8 +37,14 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
+
       <%= render 'layouts/messages' %>
-            <%= yield %>
+
+      <% if current_page?(root_url) %>
+        <%= render 'static_pages/home_hero' %>
+      <% end %>
+      
+      <%= yield %>
       
   </body>
 

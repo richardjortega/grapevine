@@ -21,21 +21,32 @@ Grapevine::Application.routes.draw do
   end
 
   root to: 'static_pages#home'
-  get '/signup' => 'static_pages#signup',      as: 'signup'
+  
 
+  # deez be my new pages yo
+  match '/about', :to => 'static_pages#about', as: 'about'
+  match '/signup', :to => 'static_pages#signup', as: 'signup'
+  match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
+  match '/contact', :to => 'static_pages#contact', as: 'contact'
+
+  # some older but relevant shit
   match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')
-  match '/enroll', to: 'static_pages#enroll'
-  match '/concierge', to: 'static_pages#concierge'
   match '/thankyou', to: 'static_pages#thankyou'
-  match '/signup2', to: 'static_pages#signup2'
-  match '/signuptoday', to: 'static_pages#signuptoday'
   match '/help',  to: 'static_pages#help'
   match '/404',  to: 'static_pages#error404'
+
+  # Review posting for Erik
   match '/thor_of_asgard', to: 'static_pages#thor_of_asgard'
   match '/send_follow_up', to: 'static_pages#send_follow_up'
-  match '/upgradetoday', to: 'static_pages#upgradetoday'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
+
+  # Shit we may not use... (double check to for deletion)
+  match '/signup2', to: 'static_pages#signup2'
+  match '/signuptoday', to: 'static_pages#signuptoday'
+  match '/enroll', to: 'static_pages#enroll'
+  match '/concierge', to: 'static_pages#concierge'
+  match '/upgradetoday', to: 'static_pages#upgradetoday'
 
   #Billing/payment page
   # match '/upgrade', to: 'subscriptions#upgrade'

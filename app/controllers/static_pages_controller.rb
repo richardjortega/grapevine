@@ -3,11 +3,20 @@ class StaticPagesController < ApplicationController
   def home
   end
 
+  def about
+  end
+
   def signup
   	@user			      = User.new
   	@plan 			    = Plan.find_by_identifier("basic_monthly")
   	@location       = @user.locations.build
   	@subscription 	= Subscription.new
+  end
+
+  def pricing
+  end
+
+  def contact
   end
 
   def concierge
