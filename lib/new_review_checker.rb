@@ -1,5 +1,5 @@
-module NewReviewsChecker
-	def check_for_new_reviews(new_reviews, current_reviews) 
+module NewReviewsChecker	
+	def self.check_for_new_reviews(new_reviews, current_reviews) 
 		# checks new reviews against old reviews in array and only returns new ones.
 		# Use order for AR when referencing DB
 		# latest_review_date = Location.Reviews.order("review_dine_date DESC").first.review_dine_date
@@ -9,7 +9,8 @@ module NewReviewsChecker
 		new_reviews.each do |review|
 			# compare each review  and check if their dates are newer than latest in DB/array
 			parsed_review_date = Date.strptime(review[:review_dine_date], "%m/%d/%Y")
-			if parsed_review_date > latest_review_date
+			if parsed_review_date >= latest_review_date
+				next if current_reviews.first[:review_description].chomp == review[:review_description].chomp
 				new_reviews_to_add << review
 			end
 		end

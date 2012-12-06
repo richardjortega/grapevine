@@ -6,6 +6,8 @@ require 'ap'
 require 'debugger'
 require 'watir-webdriver'
 
+NewReviewsChecker.check_for_new_reviews
+
 def check_for_new_reviews(new_reviews, current_reviews) 
 	# checks new reviews against old reviews in array and only returns new ones.
 	# Use order for AR when referencing DB
@@ -17,7 +19,7 @@ def check_for_new_reviews(new_reviews, current_reviews)
 		# compare each review  and check if their dates are newer than latest in DB/array
 		parsed_review_date = Date.strptime(review[:review_dine_date], "%m/%d/%Y")
 		if parsed_review_date >= latest_review_date
-			next if current_reviews.first[:review_description] == review[:review_description]
+			next if current_reviews.first[:review_description].chomp == review[:review_description].chomp
 			new_reviews_to_add << review
 		end
 	end
