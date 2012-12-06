@@ -54,6 +54,17 @@ class NotifyMailer < ActionMailer::Base
 
   end
 
+  def submit_contact_us(email, name, body, subject)
+    @email = email
+    @name = name
+    @body = body
+    @subject = subject
+
+    mail to: 'info@pickgrapevine.com', subject: "Contact form submitted", from: "#{email}", reply_to: 
+    "#{email}"
+
+  end
+
 
   # Send a signup email to the user, pass user object that contains the user's email address
   def free_signup(user)

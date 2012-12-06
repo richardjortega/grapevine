@@ -40,6 +40,7 @@ Grapevine::Application.routes.draw do
   match '/send_follow_up', to: 'static_pages#send_follow_up'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
+  post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
 
   # Shit we may not use... (double check to for deletion)
   match '/signup2', to: 'static_pages#signup2'

@@ -4,5 +4,24 @@
 	<p class="description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
 </header>
 
+<%= form_tag 'static_pages/submit_contact_us' do %>
+
+	<%= label_tag 'name' %>
+	<%= text_field_tag 'name' %>
+
+	<%= label_tag 'email' %>
+	<%= email_field_tag 'email' %>
+
+	<%= label_tag 'subject' %>
+	<%= text_field_tag 'subject' %>
+
+	<%= label_tag 'body' %>
+	<%= text_area_tag 'body' %>
+
+	<br />
+	
+	<%= submit_tag 'Click if you are gay', :class => 'btn' %>
+
+<% end %>
 
 </section>
