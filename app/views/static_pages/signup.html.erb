@@ -2,21 +2,21 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= render 'shared/form_js_includes' %>
 <% end %>
+<% set_meta_tags :title => 'Sign up : Grapevine' %>
 
-<div id="signup-page">
-<div class="page-header">
-	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
-            <h3 class="hand">Track every review posted online, good and bad!</h3>
-	<h3>30 Day Free Trial, No Credit Card</h3>
-</div>
+<section class="subpage">
+  <header>
+    <h2 class="title">I can't believe you fell for it.</h2>
+    <p class="description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
+  </header>
+
+ <div class="section-content clearfix">
 
 
-  <div class="row">
-    <p style="text-align:center;">We just need a little information from you to start tracking your business reviews!</p>
+    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal signup-form'}, :url => subscriptions_path(@user) do |user_form| %>
 
-    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
 
-        <div class="span5 offset1 user-info">
+        <div class="user-info">
           <h3>Your Information</h3>
 
             <div class="control-group">
@@ -53,7 +53,7 @@
         
         </div><!-- /.user-info -->
 
-      <div class="span5 biz-info">
+      <div class="biz-info">
         <h3>Your Business Information</h3>
           <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
@@ -84,10 +84,11 @@
 
           
          
-      <div class="span12">
+      <div class="clear action">
          <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn signup-btn primary purple_button large' %>
-          <% end %>
+      </div>
+      <% end %>
      
-      </div><!-- /.span12 -->
-  </div><!-- /.row -->
-</div>
+      
+  </div><!-- /.section-content -->
+</section>

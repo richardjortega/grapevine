@@ -29,11 +29,34 @@ html, body {
 .subtitle {
     font-size:40px;
 }
+section.subpage {
+    h3, h4 {
+        font-weight: 200;
+    }
+    h3 {
+        font-size:26px;
+        letter-spacing: 1px;
+    }
+    h4 {
+        font-size:20px;
+    }
+}
+section.subpage aside, aside {
+    h3, h4 { font-weight: 200; }
+    h3 { font-size:22px;}
+    h4 { font-size:18px;}
+    h5 { font-size:16px; font-weight: bold;}
+}
 p {
     font-size:16px;
     line-height: 24px;
     color:$textGray;
 }
+a, a:visited {
+    color:$purple;
+}
+
+
 
 /* BASIC LAYOUT
 =================================
@@ -52,7 +75,7 @@ body { background: url(grid.png) repeat; }
     @include radius(3px);
 
 }
-
+.clear { clear:both;}
 
 
 .btn {
@@ -60,9 +83,35 @@ body { background: url(grid.png) repeat; }
     display:inline-block;
     padding:10px 15px;
     font-size:24px;
-    color:#fff;
-    box-shadow:0 0 5px 1px #444;
     text-decoration: none;
+
+    display: inline-block;
+      *display: inline;
+      margin-bottom: 0;
+      color: #333333;
+      text-align: center;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #f5f5f5;
+      *background-color: #e6e6e6;
+      background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+      background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+      background-repeat: repeat-x;
+      border: 1px solid #bbbbbb;
+      *border: 0;
+      border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      border-bottom-color: #a2a2a2;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+      *zoom: 1;
+      -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+         -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+              box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .btn.primary {
     background: rgb(239,184,65);
@@ -74,6 +123,11 @@ body { background: url(grid.png) repeat; }
     background: -ms-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     background: linear-gradient(to bottom, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efb841', endColorstr='#eaa207',GradientType=0 );
+}
+.btn.alt {
+    background:#a499b1;
+    color:#fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
 }
 
 
@@ -239,6 +293,17 @@ section.home-panel {
 =================================
 ===============================*/
 section.subpage {
+
+    h3, h4 {
+        font-weight: 200;
+    }
+    h3 {
+        font-size:26px;
+        letter-spacing: 1px;
+    }
+    h4 {
+        font-size:20px;
+    }
     header {
         background: url('sub-title-border.png') repeat-x bottom;
         text-align: center;
@@ -249,9 +314,173 @@ section.subpage {
             margin-bottom: 10px;
             margin-top:0;
         }
+        .description {
+            width:80%;
+            margin:0 auto;
+            text-align: center;
+        }
+    }
+    div.section-content {
+        padding:20px 20px 40px 20px;
+        h3:first-child, h4:first-child { margin-top:0;}
+    }
+    &.with-aside {
+        .section-content {
+            float:left;
+            width:60%;
+            padding-top:0;
+        }
+        aside {
+            float:right;
+            width:30%;
+            padding:0 20px 20px 20px;
+            h2:first-child, h3:first-child, h4:first-child {
+                margin-top:5px;
+            }
+
+        }
     }
 }
 
+/* PRICING
+=================================
+===============================*/
+ul#price-list {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    text-align: center;
+    > li {
+        float:left;
+        width: 260px;
+        padding:20px;
+        background:#ebebeb;
+        height:400px;
+        margin-top:30px;
+        position: relative;
+        @include radius(3px);
+        h3 {
+            font-size:22px;
+            font-weight: 200;
+            margin:0 -20px;
+            padding-bottom:20px;
+            border-bottom: 1px solid #ccc;
+        }
+        h4 {
+            font-size:30px;
+            text-transform: uppercase;
+            font-weight: 200;
+            margin:0 -20px 20px -20px;
+            padding:20px 0 0 0;
+            border-top:1px solid #fff;
+            span {
+                display: block;
+                margin-top:0;
+                font-size:12px;
+            }
+        }
+        &.free {
+            margin-left:30px;
+        }
+        &.thirty {
+            box-shadow: 0 0 10px 0px rgba(0, 0, 0, .5);
+            height:445px;
+            margin-top:0px;
+            z-index: 10;
+            h4 {
+                font-size:50px;
+                sup {
+                    font-size:14px;
+                    top:-2em;
+                }
+            }
+            ul li {
+                font-size:20px;
+                line-height: 32px;
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            margin:0;
+            padding:0;
+            li {
+                margin:0;
+                padding:0;
+                font-size:18px;
+                line-height: 24px;
+                font-weight: 200;
+            }
+        }
+        .btn {
+            width:60%;
+            position: absolute;
+            bottom:20px;
+            left:46px;
+        }
+    }
+    .details {
+        font-size:14px;
+        line-height:18px;
+    }
+
+}
+.disclaimer {
+        width:80%;
+        margin:0 auto;
+        text-align: center;
+        font-size:13px;
+        margin-top:20px;
+        line-height: 16px;
+    }
+
+/* FORMS
+=================================
+===============================*/
+input, textarea {
+    font-size:16px;
+    padding:10px;
+    color:$lightGray;
+    @include radius(4px);
+    border:1px solid #d4d4d4;
+    margin-bottom:10px;
+}
+form label {
+    margin-bottom:5px;
+    display: block;
+}
+
+/* SIGNUP
+=================================
+===============================*/
+.signup-form {
+    width:80%;
+    margin:0 auto;
+    .user-info {
+        width:48%;
+        float:left;
+    }
+    .biz-info {
+        width:48%;
+        float:right;
+    }
+    .action {
+        text-align: center;
+        padding-top:20px;
+    }
+    
+}
+.ui-autocomplete.ui-menu.ui-widget.ui-widget-content.ui-corner-all {
+        background:#fff;
+        list-style-type: none;
+        padding:10px;
+        width:300px !important;
+        border:1px solid #d4d4d4 !important;
+        li {
+
+        }
+    }
+span.ui-helper-hidden-accessible { display: block;}
 
 /* FOOTER
 =================================

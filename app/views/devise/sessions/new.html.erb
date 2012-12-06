@@ -1,30 +1,22 @@
-<div class="page-header">
-	<h2>Sign in</h2>
-</div>
-<div class="container">
-	<div>
-		&nbsp;
-	</div>
-	<div class="span10 offset1">
+<% set_meta_tags :title => 'Sign In : Grapevine' %>
+<section class="subpage">
+	
+	<div class="section-content">
+		<h3>Sign In below</h3>
 		<%= form_for(resource, :as => resource_name, :class => "form-inline", :url => session_path(resource_name)) do |f| %>
-		  <div><%= f.label :email %><br />
+		  <div><%= f.label :email %>
 		  <%= f.email_field :email %></div>
 
-		  <div><%= f.label :password %><br />
+		  <div><%= f.label :password %>
 		  <%= f.password_field :password %></div>
 
 		  <% if devise_mapping.rememberable? -%>
-		    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+		    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
 		  <% end -%>
 
-		  <div><%= f.submit "Sign in", :class => "btn primary" %></div>
+		  <%= f.submit "Sign in", :class => "btn primary" %>
 		<% end %>
-	</div>
-</div>
-<div class="container">
-	<div>
-		&nbsp;
-	</div>
-	<div class="span10 offset1">
-<%= render :partial => "devise/shared/links" %>
-</div>
+		<%= render :partial => "devise/shared/links" %>
+	</div><!-- /.section-content -->
+</section>
+
