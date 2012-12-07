@@ -10,10 +10,35 @@
 		<% if current_user %>
 
 			<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-			<li><%= link_to "Sign Out", destroy_user_session_path %></li>
+			<li><%= link_to "Log Out", destroy_user_session_path %></li>
 		  <% else %>
 		  <li><%= link_to "Pricing", pricing_path %></li>
-			<li><%= link_to "Sign In", new_user_session_path %></li>
+			<li class="sign-in"><%= link_to "Login", new_user_session_path %>
+				<div class="sign-in-form">
+					<%= form_for(resource, :as => resource_name, :class => "form-inline", :url => session_path(resource_name)) do |f| %>
+					  <%= f.email_field :email, :placeholder => 'Email Address' %>
+					  <%= f.password_field :password, :placeholder => 'Password' %>
+
+					  <% if devise_mapping.rememberable? -%>
+					    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+					  <% end -%>
+
+					  <%= f.submit "Sign in", :class => "btn primary" %>
+					<% end %>
+					<%= render :partial => "devise/shared/links" %>
+				</div>
+
+			</li>
 		<% end %>
 	</ul><!-- /.global-nav -->
 </div><!-- /.wrapper -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('li.sign-in a').click(function() {
+			event.preventDefault();
+			$('.sign-in-form').toggleClass('active');
+		});
+	});
+</script>

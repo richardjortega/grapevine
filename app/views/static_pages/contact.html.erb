@@ -1,10 +1,14 @@
-<section class="subpage">
+<section class="subpage with-aside">
 <header>
 	<h2 class="title">Something on your mind?</h2>
 	<p class="description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
 </header>
 
-<%= form_tag 'static_pages/submit_contact_us' do %>
+<div class="section-content">
+	<h3>Have questions? Wanna hug it out?</h3>
+	<p>Cras mattis consectetur purus sit amet fermentum. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui.</p>
+
+<%= form_tag 'static_pages/submit_contact_us', :class => 'contact-form' do %>
 
 	<%= label_tag 'name' %>
 	<%= text_field_tag 'name' %>
@@ -20,8 +24,14 @@
 
 	<br />
 	
-	<%= submit_tag 'Click if you are gay', :class => 'btn' %>
+	<%= submit_tag 'Send', :class => 'btn primary' %>
 
 <% end %>
 
+</div><!-- /.section-content -->
+
+<aside>
+	<h3>Some kind of title</h3>
+	<p>Cras mattis consectetur purus sit amet fermentum. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui.</p>
+</aside>
 </section>
