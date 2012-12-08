@@ -1,7 +1,6 @@
-# require all apis and scrappers to search against.
-# Dir["../vineyard/*.rb"].each {|file| require file }
 require_relative '../vineyard/opentable.rb'
 require_relative '../vineyard/yelp.rb'
+require_relative '../vineyard/googleplus.rb'
 # require_relative "../../app/models/review"
 require_relative "../../app/models/location"
 
@@ -32,16 +31,31 @@ namespace :crawl do
 	end
 
 
-	desc "Check OpenTable for new reviews"
+	desc "Check Yelp for new reviews"
 	task :yelp => :environment do
 		# Location.all.each do |location|
-			# location_id = location.source('opentable').matchingid
+			# location_id = location.source('yelp').matchingid
 
 			# for testing
 			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
 			location_id = 'rosarios-mexican-cafe-y-cantina-san-antonio'
 
 			run = Yelp.new location_id
+			response = run.get_new_reviews latest_review
+			puts response
+		# end
+	end
+
+	desc "Check GooglePlus for new reviews"
+	task :googleplus => :environment do
+		# Location.all.each do |location|
+			# location_id = location.source('opentable').matchingid
+
+			# for testing
+			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
+			location_id = 'CnRmAAAAGg321uK8xOiQRZguEZvxKwZXqwzShD1Mx5rW7bolqViOIC4anBbtDrqZDaJ2KSdrEoDgdOhxuwtwI35QlDEgvhFmkPek-MDkV3Gj8ZGMz-wQlAWjbiSIjeVu8pB6Yy8iE5dMIK0fLl4e4Mh0Lu9ihhIQwUApDK4XMZazepOYt6XJQBoUgvF1h4j1OCCNCfVnRmcpbvJwIpE'
+
+			run = GooglePlus.new location_id
 			response = run.get_new_reviews latest_review
 			puts response
 		# end

@@ -2,7 +2,6 @@ require 'oauth'
 require 'json'
 
 class Yelp
-
 	def initialize(location_id)
 	 	consumer_key = 'CoPn_PDLyBIom28EwW_vcg'
 		consumer_secret = 'v6VqDXMzGUpLEnbCGx6xDAwG4OM'
@@ -24,10 +23,10 @@ class Yelp
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
 				next if review["excerpt"].chomp == latest_review[:comment].chomp
 				new_review = {}
-				new_review[:rating] = review["rating"]
-				new_review[:author] = review["user"]["name"]
-				new_review[:comment] = review["excerpt"]
 				new_review[:post_date] = Time.at(review["time_created"]).to_date
+				new_review[:comment] = review["excerpt"]
+				new_review[:author] = review["user"]["name"]
+				new_review[:rating] = review["rating"].to_i
 				new_reviews << new_review
 			end
 		end

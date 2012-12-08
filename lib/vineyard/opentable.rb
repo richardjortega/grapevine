@@ -23,7 +23,7 @@ class OpenTable
 				new_review[:post_date] = Date.strptime(review["AdditionalFields"][1]["Value"], "%m/%d/%Y")
 				new_review[:comment] = review["ReviewText"]
 				new_review[:author] = 'OpenTable Diner'
-				new_review[:rating] = review["Rating"]
+				new_review[:rating] = review["Rating"].to_i
 				new_review[:title] = review["Title"]
 				new_reviews << new_review
 			end

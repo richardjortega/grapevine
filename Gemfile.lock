@@ -305,6 +305,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rails-erd
   rb-fsevent
+  rest-client
   roadie
   rolify (>= 3.1.0)
   rspec-rails

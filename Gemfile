@@ -38,7 +38,7 @@ gem 'poltergeist'
 # Gems for the Vineyard
 gem 'oauth'
 gem 'httparty'
-
+gem 'rest-client'
 
 # Design
 gem 'bootstrap-sass', '2.0.3'
