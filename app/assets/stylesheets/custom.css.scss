@@ -494,12 +494,12 @@ span.ui-helper-hidden-accessible { display: block;}
 /* SIGN IN
 =================================
 ===============================*/
-.global-nav .sign-in {
+header#global-header .global-nav .sign-in {
     position: relative;
     .sign-in-form {
         display: block;
         position: absolute;
-        top:-200px;
+        top:-220px;
         right:0;
         width:233px;
         background: rgba(0, 0, 0, .7);
@@ -519,6 +519,7 @@ span.ui-helper-hidden-accessible { display: block;}
         .btn {
             font-size:14px;
             padding:5px 10px;
+            margin-bottom: 10px;
         }
         &:before {
             content:'';
@@ -533,6 +534,27 @@ span.ui-helper-hidden-accessible { display: block;}
             top:40px;
             opacity: 1;
             filter: alpha(opacity=100);
+        }
+    }
+    span.remember-me {
+        text-align: left;
+        color:#fff;
+        font-size:12px;
+        float:left;
+        width:150px;
+        label { display: inline;}
+        input {
+            display: inline;
+            margin-right:5px;
+        }
+    }
+    span.sign-up-forgot-pass {
+        font-size:12px;
+        a, a:visited, a:link {
+            color:#fff !important;
+            font-size:12px !important;
+            margin-left:5px;
+            text-decoration: underline;
         }
     }
 

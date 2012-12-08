@@ -15,17 +15,28 @@
 		  <li><%= link_to "Pricing", pricing_path %></li>
 			<li class="sign-in"><%= link_to "Login", new_user_session_path %>
 				<div class="sign-in-form">
-					<%= form_for(resource, :as => resource_name, :class => "form-inline", :url => session_path(resource_name)) do |f| %>
-					  <%= f.email_field :email, :placeholder => 'Email Address' %>
-					  <%= f.password_field :password, :placeholder => 'Password' %>
+					<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+					  <%= f.email_field :email, :placeholder => 'Email Address', :size => '20' %>
+					  <%= f.password_field :password, :placeholder => 'Password', :size => '20' %>
 
 					  <% if devise_mapping.rememberable? -%>
+					  	<span class="remember-me">
 					    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+					  	</span>
 					  <% end -%>
 
 					  <%= f.submit "Sign in", :class => "btn primary" %>
 					<% end %>
-					<%= render :partial => "devise/shared/links" %>
+
+					<span class="sign-up-forgot-pass">
+						<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+	  					<%= link_to "Sign up", signup_path %>
+						<% end -%>
+
+						<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+						  <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+						<% end -%>
+					</span>
 				</div>
 
 			</li>
