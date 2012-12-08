@@ -3,19 +3,18 @@ require 'HTTParty'
 require 'debugger'
 
 class OpenTable
-	def initialize()
+	def initialize(location_id)
 		apiversion = '4.9'
 		passkey = 'tjp43pshizud7jpex6rokvyop'
 		limit = 5
-		@url = "http://reviews.opentable.com/data/reviews.json?apiversion=#{apiversion}&passkey=#{passkey}&sort=submissiontime:desc&limit=#{limit}&filter=IsRatingsOnly:false&include=products&stats=reviews"
+		url = "http://reviews.opentable.com/data/reviews.json?apiversion=#{apiversion}&passkey=#{passkey}&sort=submissiontime:desc&limit=#{limit}&filter=IsRatingsOnly:false&include=products&stats=reviews"
+		@request = url + URI.encode("&filter=ProductId:#{location_id}&RestaurantID=#{location_id}")
 	end
 
-	def get_new_reviews(location_id, latest_review)
-		request = @url + URI.encode("&filter=ProductId:#{location_id}&RestaurantID=#{location_id}")
-		response = HTTParty.get(request)
+	def get_new_reviews(latest_review)
+		response = HTTParty.get(@request)
 
 		new_reviews = []
-		latest_review = latest_review
 		response["Results"].each do |review|
 			review_date = Date.strptime(review["AdditionalFields"][1]["Value"], "%m/%d/%Y")
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
@@ -32,7 +31,3 @@ class OpenTable
 		new_reviews
 	end
 end
-
-
-
-# http://reviews.opentable.com/data/reviews.json?apiversion=4.9&passkey=tjp43pshizud7jpex6rokvyop&sort=submissiontime:desc&limit=15&filter=ProductId:28474&filter=IsRatingsOnly:false&include=products&stats=reviews&RestaurantID=28474

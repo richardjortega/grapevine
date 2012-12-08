@@ -18,15 +18,17 @@ namespace :crawl do
 
 	desc "Check OpenTable for new reviews"
 	task :opentable => :environment do
-		Location.all.each do |location|
-			location_id = location.source('opentable').matchingid
+		#Location.all.each do |location|
+			#location_id = location.source('opentable').matchingid
 
+			#for testing
+			location_id = '28474'
 			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
 
-			run = OpenTable.new
-			response = run.get_new_reviews(location_id, latest_review)
+			run = OpenTable.new location_id
+			response = run.get_new_reviews latest_review
 			puts response
-		end
+		#end
 	end
 
 
@@ -35,6 +37,7 @@ namespace :crawl do
 		# Location.all.each do |location|
 			# location_id = location.source('opentable').matchingid
 
+			# for testing
 			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
 			location_id = 'rosarios-mexican-cafe-y-cantina-san-antonio'
 
@@ -43,6 +46,5 @@ namespace :crawl do
 			puts response
 		# end
 	end
-
 
 end

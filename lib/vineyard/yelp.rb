@@ -19,8 +19,6 @@ class Yelp
 		response = JSON.parse(@access_token.get(@path).body)
 
 		new_reviews = []
-		latest_review = latest_review
-
 		response["reviews"].each do |review|
 			review_date = Time.at(review["time_created"]).to_date
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
