@@ -35,6 +35,11 @@ gem 'roadie'
 gem 'iron_worker_ng'
 gem 'poltergeist'
 
+# Gems for the Vineyard
+gem 'oauth'
+gem 'httparty'
+
+
 # Design
 gem 'bootstrap-sass', '2.0.3'
 gem 'meta-tags', :require => 'meta_tags'
