@@ -316,7 +316,8 @@ section.subpage {
         font-weight: 200;
     }
     h3 {
-        font-size:26px;
+        font-size: 36px;
+        font-weight: 100;
         letter-spacing: 1px;
     }
     h4 {
@@ -458,7 +459,7 @@ ul#price-list {
 input, textarea {
     font-size:16px;
     padding:10px;
-    color:$lightGray;
+    color:#666;
     @include radius(4px);
     border:1px solid #d4d4d4;
     margin-bottom:10px;
@@ -492,6 +493,7 @@ form #credit-card {
         width:48%;
         float:left;
     }
+    h3 { font-size:30px !important;}
     .biz-info {
         width:48%;
         float:right;
@@ -599,6 +601,12 @@ header#global-header .global-nav .sign-in {
 
 
 }
+.login-incorrect {
+    input[type=checkbox] {
+        float:left;
+        margin-right:5px;
+    }
+}
 
 
 /* ACCOUNT PAGE
@@ -627,6 +635,17 @@ header#global-header .global-nav .sign-in {
 
 
 
+
+
+.thankyou {
+    #feature-screenshot {
+        margin:0 auto;
+        text-align: center;
+        width:454px;
+        display: block;
+    }
+    h3 { text-align: center;}
+}
 /* FOOTER
 =================================
 ===============================*/
