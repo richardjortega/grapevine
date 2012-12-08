@@ -52,10 +52,21 @@
         <%= yield %>
       </div><!-- /#main-container -->
       
-  </body>
 
-  <footer>
+    <footer>
       <%= render 'layouts/footer' %>
       <%= render 'layouts/analytics' %>
-  </footer>
+    </footer>
+
+    <script>
+      $(document).ready(function() {
+        setTimeout(function(){ 
+          $(".alert").fadeOut("slow"); 
+        }, 1000 ); 
+      });
+    </script>
+
+  </body>
+
+  
 </html>

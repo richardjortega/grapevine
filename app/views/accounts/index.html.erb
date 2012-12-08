@@ -1,34 +1,37 @@
-<div class="container signed-in">
+<section class="subpage with-aside">
+	<header>
+		<h2 class="title">Welcome, <%= current_user.first_name %></h2>
+	</header>
 
-	<div class="row-fluid">
-		<div class="span7">
-			<h3>Welcome, <%= current_user.first_name %></h3>
-			<p class="muted">Here&rsquo;s what we have on file for you now.</p>
+	<div class="section-content">
+	
+	<h3>Your Information</h3>
+	
+	<ul class="unstyled user-details-list">
+		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.	last_name %></span></li>
+		<li><strong>Email</strong> <span><%= current_user.email %></span></li>
+		<li><strong>Plan</strong> <span><%= @plan.name %></li>
+		<li><strong>Status</strong> <span><%= @status %></span></li>
+		<li><strong>Business Tracking</strong> <span><%= @location.name %></span></li>
+	</ul>
 
-			<dl>
-				<dt>Name</dt>
-				<dd><%= current_user.first_name %> <%= current_user.	last_name %></dd>
+			<%= link_to "Edit Profile", edit_user_registration_path %>
 
-				<dt>Email</dt>
-				<dd><%= current_user.email %></dd>
-
-				<dt>Plan</dt>
-				<dd><%= @plan.name %>  <span>Start date: <%= @start_date %></span></dd>
-
-				<dt>Status</dt>
-				<dd><%= @status %></dd>
-				<p>
+			<hr />
 
 
-				<dt>Business Tracking</dt>
-				<dd><%= @location.name %></dd>
-			</dl>
-
-			<%= link_to "Edit Profile", edit_user_registration_path, :class => 'btn' %>
-		</div><!-- /.span6 -->
-		
-		<% if @status != "active" %>
+			<% if @status != "active" %>
+			<h3>Update your account</h3>
 			<%= render :partial => 'shared/payment_form', :object => @status %>
 		<% end %>
-</div><!-- /.container -->
+	</div>
+		<aside>
+			<h3>Subtitle</h3>
+			<p>Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+			<h3>Subtitle</h3>
+			<p>Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+		
+		</aside>
+</section>
 	
