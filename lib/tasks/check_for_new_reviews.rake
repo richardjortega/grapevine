@@ -17,16 +17,15 @@ namespace :crawl do
 
 	desc "Check OpenTable for new reviews"
 	task :opentable => :environment do
-		
-		# array of restaurant ids passed with corresponding latest review date
-		# loop through each one
+		Location.all.each do |location|
+			location_id = location.source('opentable').matchingid
 
-		location_id = '28474'
-		latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
+			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
 
-		run = OpenTable.new
-		response = run.get_new_reviews(location_id, latest_review)
-		puts response
+			run = OpenTable.new
+			response = run.get_new_reviews(location_id, latest_review)
+			puts response
+		end
 	end
 
 end
