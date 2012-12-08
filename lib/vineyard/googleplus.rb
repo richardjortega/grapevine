@@ -38,6 +38,7 @@ class GooglePlus
 				end
 
 				# handle google's crazy rating system, only checking for 'service'
+				# some reviews only have 'overall', neeed to fix
 				google_review_rating = review["aspects"][2]["rating"].to_i
 				case google_review_rating
 					when 3
@@ -49,7 +50,7 @@ class GooglePlus
 					else
 						new_review[:rating] = 2
 				end
-
+				debugger
 				new_reviews << new_review
 			end
 		end
