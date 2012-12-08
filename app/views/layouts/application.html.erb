@@ -41,8 +41,11 @@
 
       <%= render 'layouts/messages' %>
 
+
       <% if current_page?(root_url) %>
-        <%= render 'static_pages/home_hero' %>
+        <% if !current_user %>
+          <%= render 'static_pages/home_hero' %>
+        <% end %>
       <% end %>
 
       <div id="main-container" class="clearfix">
