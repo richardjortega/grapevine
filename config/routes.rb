@@ -28,6 +28,8 @@ Grapevine::Application.routes.draw do
   match '/signup', :to => 'static_pages#signup', as: 'signup'
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
+  post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
+
 
   # some older but relevant shit
   match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')
@@ -40,7 +42,7 @@ Grapevine::Application.routes.draw do
   match '/send_follow_up', to: 'static_pages#send_follow_up'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
-  post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
+  
 
   # Shit we may not use... (double check to for deletion)
   match '/signup2', to: 'static_pages#signup2'
@@ -50,7 +52,7 @@ Grapevine::Application.routes.draw do
   match '/upgradetoday', to: 'static_pages#upgradetoday'
 
   #Billing/payment page
-  # match '/upgrade', to: 'subscriptions#upgrade'
+  match '/upgrade', to: 'accounts#upgrade'
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)

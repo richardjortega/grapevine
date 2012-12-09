@@ -11,6 +11,8 @@
 		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.	last_name %></span></li>
 		<li><strong>Email</strong> <span><%= current_user.email %></span></li>
 		<li><strong>Plan</strong> <span><%= @plan.name %></li>
+		
+		<li><strong><%= link_to 'Upgrade now', upgrade_path %></strong></li>
 		<li><strong>Status</strong> <span><%= @status %></span></li>
 		<li><strong>Business Tracking</strong> <span><%= @location.name %></span></li>
 	</ul>
@@ -18,12 +20,6 @@
 			<%= link_to "Edit Profile", edit_user_registration_path %>
 
 			<hr />
-
-
-			<% if @status != "active" %>
-			<h3>Update your account</h3>
-			<%= render :partial => 'shared/payment_form', :object => @status %>
-		<% end %>
 	</div>
 		<aside>
 			<h3>Subtitle</h3>
