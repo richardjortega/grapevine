@@ -87,7 +87,7 @@ body { background: url(grid.png) repeat; }
     width: 100%;
     color:#fff;
     background: rgba(0, 0, 0, .5);
-    #flash_message, #flash_notice {
+    > div {
         width: 80%;
         color: #fff !important;
         margin: 0 auto;
@@ -359,6 +359,19 @@ section.subpage {
 
         }
     }
+    h3.has-actions {
+        position: relative;
+        span.title-actions {
+            position: absolute;
+            right:0;
+            bottom:10px;
+            font-weight: 300;
+            font-size: 14px;
+            a {
+                margin-left:10px;
+            }
+        }
+    }
 }
 
 /* PRICING
@@ -619,7 +632,7 @@ header#global-header .global-nav .sign-in {
         position: relative;
         strong {
             font-size: 18px;
-            width:130px;
+            width:180px;
             display: inline-block;
         }
         span {
@@ -632,6 +645,7 @@ header#global-header .global-nav .sign-in {
         }
     }
 }
+
 
 
 

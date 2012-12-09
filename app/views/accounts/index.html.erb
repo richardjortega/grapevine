@@ -1,25 +1,21 @@
-<section class="subpage with-aside">
+<section id="profile" class="subpage with-aside">
 	<header>
 		<h2 class="title">Welcome, <%= current_user.first_name %></h2>
 	</header>
 
 	<div class="section-content">
 	
-	<h3>Your Information</h3>
+	<h3 class="has-actions">Your Information <span class="title-actions"><%= link_to "Edit Profile", edit_user_registration_path %><%= link_to 'Upgrade now', upgrade_path %></span></h3>
+
 	
 	<ul class="unstyled user-details-list">
 		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.	last_name %></span></li>
 		<li><strong>Email</strong> <span><%= current_user.email %></span></li>
 		<li><strong>Plan</strong> <span><%= @plan.name %></li>
-		
-		<li><strong><%= link_to 'Upgrade now', upgrade_path %></strong></li>
 		<li><strong>Status</strong> <span><%= @status %></span></li>
 		<li><strong>Business Tracking</strong> <span><%= @location.name %></span></li>
 	</ul>
 
-			<%= link_to "Edit Profile", edit_user_registration_path %>
-
-			<hr />
 	</div>
 		<aside>
 			<h3>Subtitle</h3>
