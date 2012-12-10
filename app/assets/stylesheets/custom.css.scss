@@ -280,17 +280,31 @@ header#global-header .global-nav li.signup a:hover {
     }
 }
 
-/* HOME PANELS
+/* SECTION PANELS
 =================================
 ===============================*/
-section.home-panel {
+section.section-panel {
     padding:40px;
     height:300px;
     border-top:1px solid #d4d4d4;
-    &:first-child {
-        border-top:0;
-        background: url('home-browser-bg.png') no-repeat bottom right;
+
+    &.home-panel {
+        &:first-child {
+            border-top:0;
+            background: url('home-browser-bg.png') no-repeat bottom right;
+        }
+        p {
+            width:45%;
+        }
+        &:nth-of-type(2) {
+            background: url('home-displays-bg.png') no-repeat bottom left;
+            h3, p {
+                position: relative;
+                left:56%;
+            }
+        }
     }
+    
     h3 {
         font-size:36px;
         font-weight: 100;
@@ -298,16 +312,7 @@ section.home-panel {
         margin-top:0;
         letter-spacing: 1px;
     }
-    p {
-        width:45%;
-    }
-    &:nth-of-type(2) {
-        background: url('home-displays-bg.png') no-repeat bottom left;
-        h3, p {
-            position: relative;
-            left:56%;
-        }
-    }
+    
 }
 /* SUB PAGES
 =================================
