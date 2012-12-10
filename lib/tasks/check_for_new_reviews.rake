@@ -71,10 +71,12 @@ namespace :crawl do
 			# for testing
 			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
 			location_id = 'r/39/432003/restaurant/Midtown/Sams-Burger-Joint-San-Antonio'
-
+			job_start_time = Time.now
+			puts "Starting job: #{location_id}"
 			run = UrbanSpoon.new location_id
 			response = run.get_new_reviews latest_review
 			puts response
+			puts "Finished job in #{Time.now - job_start_time} seconds"
 		# end
 	end
 

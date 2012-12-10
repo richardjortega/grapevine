@@ -12,6 +12,7 @@ class OpenTable
 	end
 
 	def get_new_reviews(latest_review)
+		begin
 		response = HTTParty.get(@request)
 
 		new_reviews = []
@@ -28,6 +29,13 @@ class OpenTable
 				new_reviews << new_review
 			end
 		end
+
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered error on #{@request} page, moving on..."
+		end
+
 		new_reviews
 	end
 end

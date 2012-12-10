@@ -15,6 +15,7 @@ class GooglePlus
 	end
 
 	def get_new_reviews(latest_review)
+		begin
 		response = RestClient.get "#{@uri}", {:params => {:reference => "#{@location_id}", :sensor => "#{@sensor}", :key => "#{@key}"}}
 		parsed_response = JSON.parse(response)
 
@@ -37,23 +38,36 @@ class GooglePlus
 					new_review[:author] = "A Google User"
 				end
 
-				# handle google's crazy rating system, only checking for 'service'
-				# some reviews only have 'overall', neeed to fix
-				google_review_rating = review["aspects"][2]["rating"].to_i
-				case google_review_rating
+				aspect_ratings = []
+				review["aspects"].each do |aspect|
+					aspect_ratings << aspect["rating"]
+				end
+				overall_review_rating = aspect_ratings.inject{|sum, el| sum + el}.to_f / aspect_ratings.size
+				
+				case overall_review_rating
 					when 3
 						new_review[:rating] = 5
+						new_review[:rating_description] = 'Excellent'
 					when 2
 						new_review[:rating] = 4
+						new_review[:rating_description] = 'Very Good'
 					when 1
 						new_review[:rating] = 3
+						new_review[:rating_description] = 'Fair'
 					else
 						new_review[:rating] = 2
+						new_review[:rating_description] = 'Poor'
 				end
 				debugger
 				new_reviews << new_review
 			end
 		end
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered error on #{@location_id} page, moving on..."
+		end
+
 		new_reviews
 	end
 end
