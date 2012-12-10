@@ -1,14 +1,17 @@
 <!-- from other page -->
-<h3>Upgrade your account</h3>
+<section class="subpage with-aside">
+<header>
+<h2 class="title">Upgrade your account</h2>
+</header>
 
 <% content_for :head do %>
   <%= render 'devise/registrations/stripe_tag_includes' %>
   <%= render 'shared/form_js_includes' %>
 <% end %>
 
-		
+<div class="section-content">
 
-		<h4>
+		<h3>
 			<% if @status == "trialing" %>
 				<span>You&rsquo;re currently on our Trial Plan.</span> 
 				<span>Your trial period will expire soon.</span> 
@@ -29,7 +32,7 @@
 				<span>Something went wrong with your account.</span>
 				Please contact our support team.
 			<% end %>
-		</h4>
+		</h3>
 
 		<!-- to display errors returned by createToken -->
 	    <span class="payment-errors"></span>
@@ -69,9 +72,22 @@
 				<%= f.hidden_field :end_trial, { :value => true } %>
 			<% end %>
 			<div class="form-actions">
+				<%= link_to "Back", :back, :class => 'btn' %>
 				<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn alt" %>
-				<span class="help-block">Call us for annual plans!</span>
+				
 			</div>
 
 		<% end %>
+	</div><!-- /.section-content -->
+
+	<aside>
+		<h3>What does upgrading get me?</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Etiam porta sem malesuada magna mollis euismod.</p>
+
+		<h3>How much does it cost?</h3>
+		<h4>$30 per month.</h4>
+		<p>That&rsquo;s it. Awesome, right?</p>
+
+	</aside>
+</section>
 
