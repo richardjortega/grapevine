@@ -3,9 +3,9 @@ require 'nokogiri'
 
 class TripAdvisor
 	def initialize(location_id)
-		@site = 'http://www.tripadvisor.com/'
+		@site = 'http://www.tripadvisor.com'
 		uri = location_id
-		@url = "#{@site}#{uri}"
+		@url = "#{@site}/#{uri}"
 	end
 
 	def get_new_reviews(latest_review)

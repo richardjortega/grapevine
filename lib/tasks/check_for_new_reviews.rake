@@ -84,7 +84,7 @@ namespace :crawl do
 			#location_id = location.source('tripadvisor').matchingid
 
 			#for testing
-			location_id = 'Restaurant_Review-g60956-d819714-Reviews-Las_Ramblas-San_Antonio_Texas.html'
+			location_id = 'Restaurant_Review-g60956-d437237-Reviews-Las_Canarias_Restaurant-San_Antonio_Texas.html'
 			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
 
 			run = TripAdvisor.new location_id
