@@ -15,9 +15,12 @@
 
 	<%= label_tag 'email' %>
 	<%= email_field_tag 'email' %>
-
+<!-- 
 	<%= label_tag 'subject' %>
 	<%= text_field_tag 'subject' %>
+ -->
+	<%= select_tag 'subject', options_for_select(['Agency Related', 'General Sales', 'Tech Support', 'Other'], params[:subject]) %>
+
 
 	<%= label_tag 'body' %>
 	<%= text_area_tag 'body' %>
