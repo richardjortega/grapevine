@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
                   :password, 
                   :password_confirmation, 
                   :remember_me, 
-                  :stripe_token,
                   :phone_number,
                   :location,
                   :locations_attributes
