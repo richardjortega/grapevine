@@ -1,14 +1,14 @@
 require 'open-uri'
 require 'HTTParty'
-require 'debugger'
 
 class OpenTable
 	def initialize(location_id)
+		@location_id = location_id
 		apiversion = '4.9'
 		passkey = 'tjp43pshizud7jpex6rokvyop'
 		limit = 5
 		url = "http://reviews.opentable.com/data/reviews.json?apiversion=#{apiversion}&passkey=#{passkey}&sort=submissiontime:desc&limit=#{limit}&filter=IsRatingsOnly:false&include=products&stats=reviews"
-		@request = url + URI.encode("&filter=ProductId:#{location_id}&RestaurantID=#{location_id}")
+		@request = url + URI.encode("&filter=ProductId:#{@location_id}&RestaurantID=#{@location_id}")
 	end
 
 	def get_new_reviews(latest_review)
@@ -27,6 +27,7 @@ class OpenTable
 				new_review[:author] = 'OpenTable Diner'
 				new_review[:rating] = review["Rating"].to_i
 				new_review[:title] = review["Title"]
+				new_review[:url] = "http://www.opentable.com/rest_profile.aspx?rid=#{@location_id}&tab=2"
 				new_reviews << new_review
 			end
 		end

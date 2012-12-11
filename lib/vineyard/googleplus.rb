@@ -14,6 +14,7 @@ class GooglePlus
 		begin
 		response = RestClient.get "#{@uri}", {:params => {:reference => "#{@location_id}", :sensor => "#{@sensor}", :key => "#{@key}"}}
 		parsed_response = JSON.parse(response)
+		url = parsed_response["result"]["url"]
 
 		new_reviews = []
 
@@ -25,7 +26,7 @@ class GooglePlus
 				new_review = {}
 				new_review[:post_date] = review_date
 				new_review[:comment] = review["text"].chomp
-				
+				new_review[:url] = url
 
 				if !review["author_name"].nil?
 					new_review[:author] = review["author_name"]

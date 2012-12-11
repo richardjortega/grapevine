@@ -22,7 +22,7 @@ namespace :crawl do
 			#location_id = location.source('opentable').matchingid
 
 			#for testing
-			location_id = '28474'
+			location_id = '86449'
 			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
 
 			run = OpenTable.new location_id

@@ -35,6 +35,7 @@ class UrbanSpoon
 				new_review[:author] = review.at_css('div.with_stats div.title').text.strip
 				new_review[:rating] = review.at_css('div.opinion').text
 				new_review[:title] = review.at_css('div.details div.title').text.strip
+				new_review[:url] = @url
 				new_reviews << new_review
 			end
 		end

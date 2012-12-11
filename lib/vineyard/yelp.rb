@@ -16,6 +16,7 @@ class Yelp
 
 	def get_new_reviews(latest_review)		
 		response = JSON.parse(@access_token.get(@path).body)
+		url = response["url"]
 
 		new_reviews = []
 		response["reviews"].each do |review|
@@ -24,9 +25,10 @@ class Yelp
 				next if review["excerpt"].chomp == latest_review[:comment].chomp
 				new_review = {}
 				new_review[:post_date] = Time.at(review["time_created"]).to_date
-				new_review[:comment] = review["excerpt"]
+				new_review[:comment] = review["excerpt"].strip
 				new_review[:author] = review["user"]["name"]
 				new_review[:rating] = review["rating"].to_i
+				new_review[:url] = url
 				new_reviews << new_review
 			end
 		end
