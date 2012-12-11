@@ -17,7 +17,7 @@ class TripAdvisor
 		new_reviews = []
 		doc.each do |review|
 			review_date = Date.parse(review.at_css('span.ratingDate').text.strip.slice(9..-1))
-			review_comment = review.at_css('p.partial_entry').text.strip
+			review_comment = review.at_css('p.partial_entry').children.first.text.strip
 
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
