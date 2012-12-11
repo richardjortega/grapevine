@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(:version => 20121219223504) do
 
   add_index "locations", ["name"], :name => "index_locations_on_name"
 
-  create_table "matches", :force => true do |t|
-    t.integer  "review_id"
-    t.integer  "source_id"
-    t.integer  "overall_rating"
-    t.string   "source_refer_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "plans", :force => true do |t|
     t.string   "name",              :null => false
     t.string   "identifier",        :null => false
@@ -80,32 +71,6 @@ ActiveRecord::Schema.define(:version => 20121219223504) do
     t.integer  "location_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "reviews", :force => true do |t|
-    t.integer  "location_id"
-    t.integer  "source_id"
-    t.string   "author"
-    t.string   "author_url"
-    t.string   "comment"
-    t.datetime "post_date"
-    t.integer  "rating"
-    t.string   "rating_description"
-    t.string   "title"
-    t.boolean  "management_response"
-    t.boolean  "verified"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  create_table "sources", :force => true do |t|
-    t.string   "name"
-    t.string   "category"
-    t.integer  "max_rating"
-    t.string   "main_url"
-    t.string   "management_response_url"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
   end
 
   create_table "subscriptions", :force => true do |t|
