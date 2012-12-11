@@ -84,10 +84,10 @@ namespace :crawl do
 			#location_id = location.source('tripadvisor').matchingid
 
 			#for testing
-			location_id = '86449'
+			location_id = 'Restaurant_Review-g60956-d819714-Reviews-Las_Ramblas-San_Antonio_Texas.html'
 			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
 
-			run = OpenTable.new location_id
+			run = TripAdvisor.new location_id
 			response = run.get_new_reviews latest_review
 			puts response
 		#end

@@ -21,11 +21,13 @@ class Yelp
 		new_reviews = []
 		response["reviews"].each do |review|
 			review_date = Time.at(review["time_created"]).to_date
+			review_comment = review["excerpt"].strip
+			
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
-				next if review["excerpt"].chomp == latest_review[:comment].chomp
+				next if review_comment == latest_review[:comment].chomp
 				new_review = {}
-				new_review[:post_date] = Time.at(review["time_created"]).to_date
-				new_review[:comment] = review["excerpt"].strip
+				new_review[:post_date] = review_date
+				new_review[:comment] = review_comment
 				new_review[:author] = review["user"]["name"]
 				new_review[:rating] = review["rating"].to_i
 				new_review[:url] = url
