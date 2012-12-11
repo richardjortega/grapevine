@@ -2,6 +2,7 @@ require_relative '../vineyard/opentable.rb'
 require_relative '../vineyard/yelp.rb'
 require_relative '../vineyard/googleplus.rb'
 require_relative '../vineyard/urbanspoon.rb'
+require_relative '../vineyard/tripadvisor.rb'
 # require_relative "../../app/models/review"
 require_relative "../../app/models/location"
 
@@ -15,7 +16,6 @@ namespace :crawl do
 		Rake::Task['crawl:opentable'].invoke(zinc)
 	end
 	
-
 	desc "Check OpenTable for new reviews"
 	task :opentable => :environment do
 		#Location.all.each do |location|
@@ -30,7 +30,6 @@ namespace :crawl do
 			puts response
 		#end
 	end
-
 
 	desc "Check Yelp for new reviews"
 	task :yelp => :environment do
@@ -50,7 +49,7 @@ namespace :crawl do
 	desc "Check GooglePlus for new reviews"
 	task :googleplus => :environment do
 		# Location.all.each do |location|
-			# location_id = location.source('opentable').matchingid
+			# location_id = location.source('googelplus').matchingid
 
 			# for testing
 			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
@@ -63,10 +62,9 @@ namespace :crawl do
 	end
 
 	desc "Check UrbanSpoon for new reviews"
-	## TODO - reviews still need to be averaged.
 	task :urbanspoon => :environment do
 		# Location.all.each do |location|
-			# location_id = location.source('opentable').matchingid
+			# location_id = location.source('urbanspoon').matchingid
 
 			# for testing
 			latest_review = {:post_date => '11/15/2012', :comment => 'asdfad'}
@@ -78,6 +76,21 @@ namespace :crawl do
 			puts response
 			puts "Finished job in #{Time.now - job_start_time} seconds"
 		# end
+	end
+
+	desc "Check TripAdvisor for new reviews"
+	task :tripadvisor => :environment do
+		#Location.all.each do |location|
+			#location_id = location.source('tripadvisor').matchingid
+
+			#for testing
+			location_id = '86449'
+			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
+
+			run = OpenTable.new location_id
+			response = run.get_new_reviews latest_review
+			puts response
+		#end
 	end
 
 end

@@ -1,7 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pp'
-require 'debugger'
 
 class UrbanSpoon
 	def initialize(location_id)
