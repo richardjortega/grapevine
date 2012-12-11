@@ -69,7 +69,7 @@ namespace :crawl do
 			# location_id = location.source('opentable').matchingid
 
 			# for testing
-			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
+			latest_review = {:post_date => '11/15/2012', :comment => 'asdfad'}
 			location_id = 'r/39/432003/restaurant/Midtown/Sams-Burger-Joint-San-Antonio'
 			job_start_time = Time.now
 			puts "Starting job: #{location_id}"

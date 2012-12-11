@@ -18,12 +18,12 @@ class GooglePlus
 		new_reviews = []
 
 		parsed_response["result"]["reviews"].each do |review|
-
+			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
 			review_date = Time.at(review["time"]).to_date
 			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
 				next if review["text"].chomp == latest_review[:comment].chomp
 				new_review = {}
-				new_review[:post_date] = Time.at(review["time"]).to_date
+				new_review[:post_date] = review_date
 				new_review[:comment] = review["text"].chomp
 				
 
