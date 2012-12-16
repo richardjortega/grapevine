@@ -5,4 +5,8 @@ class Review < ActiveRecord::Base
   				:management_response, 
   				:post_date, 
   				:rating, :rating_description, :title, :url, :verified
+  has_one :vine
+  has_one :location, through: :vines
+
+  belongs_to :source, through: :vines
 end
