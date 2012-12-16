@@ -17,9 +17,6 @@ class Location < ActiveRecord::Base
   has_many :relationships
   has_many :users, through: :relationships
 
-  has_many :matches
-  has_many :sources, through: :matches
-
   has_many :vines
   has_many :sources, through: :vines
   has_many :reviews, through: :vines

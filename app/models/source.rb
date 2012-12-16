@@ -6,9 +6,7 @@ class Source < ActiveRecord::Base
   				:max_rating, 
   				:name
 
-  has_many :matches
-  has_many :locations, through: :matches
-
   has_many :vines
+  has_many :locations, through: :vines
   has_many :reviews, through: :vines
 end

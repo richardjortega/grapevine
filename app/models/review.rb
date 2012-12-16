@@ -6,7 +6,7 @@ class Review < ActiveRecord::Base
   				:post_date, 
   				:rating, :rating_description, :title, :url, :verified
   has_one :vine
-  has_one :location, through: :vines
+  has_one :location, through: :vine
 
   belongs_to :source, through: :vines
 end
