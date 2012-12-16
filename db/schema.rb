@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(:version => 20121219223504) do
 
   add_index "locations", ["name"], :name => "index_locations_on_name"
 
-  create_table "matches", :force => true do |t|
-    t.integer  "source_id"
-    t.integer  "location_id"
-    t.string   "source_location_uri"
-    t.decimal  "overall_rating"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
   create_table "plans", :force => true do |t|
     t.string   "name",              :null => false
     t.string   "identifier",        :null => false
@@ -150,13 +141,5 @@ ActiveRecord::Schema.define(:version => 20121219223504) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-
-  create_table "vines", :force => true do |t|
-    t.integer  "source_id"
-    t.integer  "location_id"
-    t.integer  "review_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
 end
