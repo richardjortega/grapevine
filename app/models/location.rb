@@ -18,9 +18,10 @@ class Location < ActiveRecord::Base
   has_many :users, through: :relationships
 
   has_many :vines
-  has_many :sources, through: :vines
-  has_many :reviews, through: :vines
 
+  has_many :reviews
+  has_many :sources, through: :vines
+  
   #Model Validations
   validates_presence_of :name, :street_address
 
