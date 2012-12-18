@@ -147,10 +147,10 @@ ActiveRecord::Schema.define(:version => 20121219223504) do
   create_table "vines", :force => true do |t|
     t.integer  "source_id"
     t.integer  "location_id"
-    t.string   "source_lcation_uri"
+    t.string   "source_location_uri"
     t.decimal  "overall_rating"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
 end

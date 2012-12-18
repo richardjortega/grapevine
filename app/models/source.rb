@@ -7,7 +7,9 @@ class Source < ActiveRecord::Base
   				:name
 
   has_many :vines
+  has_many :locations, through: :vines
 
   has_many :reviews
-  has_many :locations, through: :reviews
+  
+
 end
