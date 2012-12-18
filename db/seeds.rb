@@ -18,7 +18,6 @@ stripe_plans = [
 stripe_plans.each { |plan| Stripe::Plan.create plan rescue puts "Skipping #{ plan[:name] } - Already in Stripe Plans"}
 
 # Seed Plans table, matches what we have in Stripe
-<<<<<<< HEAD
 gv_free = stripe_plans[0]
 gv_30 = stripe_plans[1]
 gv_50 = stripe_plans[2]
@@ -28,22 +27,12 @@ Plan.find_or_create_by_identifier! :identifier => gv_30[:id], :name => gv_30[:na
 puts "Created #{gv_30[:name]} in local database"
 Plan.find_or_create_by_identifier! :identifier => gv_50[:id], :name => gv_50[:name], :amount => gv_50[:amount], :currency => gv_50[:currency], :interval => gv_50[:interval], :location_limit => 3
 puts "Created #{gv_50[:name]} in local database"
-=======
-basic_monthly = stripe_plans[0]
-basic_yearly = stripe_plans[1]
-Plan.create! :name => basic_monthly[:name], :amount => basic_monthly[:amount], :identifier => basic_monthly[:id], :currency => basic_monthly[:currency], :interval => basic_monthly[:interval], :trial_period_days => basic_monthly[:trial_period_days]
-puts "Created #{basic_monthly[:name]} in local database"
-Plan.create! :name => basic_yearly[:name], :amount => basic_yearly[:amount], :identifier => basic_yearly[:id], :currency => basic_yearly[:currency], :interval => basic_yearly[:interval]
-puts "Created #{basic_yearly[:name]} in local database"
 
 
 # Add Sources to Source Tables
 # Source(id: integer, name: string, category: string, max_rating: decimal, accepts_management_response: boolean, management_response_url: string, main_url: string, created_at: datetime, updated_at: datetime) 
-Source.create! name: 'yelp', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: '', main_url: 'http://www.yelp.com'
-
-# Review test data
-# Review(id: integer, location_id: integer, source_id: integer, author: string, author_url: string, comment: string, post_date: date, rating: decimal, title: string, management_response: string, verified: boolean, rating_description: string, url: string, created_at: datetime, updated_at: datetime) 
-Review.create! location_id: 14, source_id: 1, author: 'Richard Ortega', author_url: '', comment: 'I love this place so much', post_date: Date.today, rating: 5.0, title: 'Amazing time at this place'
-# Vine(id: integer, source_id: integer, location_id: integer, source_location_uri: string, overall_rating: decimal, created_at: datetime, updated_at: datetime) 
-Vine.create! source_id: 1, location_id: 14, source_location_uri: '/biz/las-ramblas-san-antonio', overall_rating: 4.5
->>>>>>> fixed all database schema problems and now all work correctly
+Source.create! name: 'yelp', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'https://biz.yelp.com/', main_url: 'http://www.yelp.com/'
+Source.create! name: 'googleplus', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.google.com/placesforbusiness', main_url: 'http://www.google.com/places/'
+Source.create! name: 'opentable', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.otrestaurant.com/', main_url: 'http://www.yelp.com'
+Source.create! name: 'tripadvisor', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.tripadvisor.com/Owners', main_url: 'http://www.yelp.com'
+Source.create! name: 'urbanspoon', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.urbanspoon.com/u/signin', main_url: 'http://www.yelp.com'

@@ -9,6 +9,7 @@ gem 'rails', '3.2.8'
 gem 'thin'
 gem 'jquery-rails'
 gem 'geocoder'
+gem 'seedbank'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
@@ -70,6 +71,7 @@ group :development do
 	gem 'debugger'
 	gem 'rails-erd'
 	gem 'thoughtbot-shoulda'
+	gem 'awesome_print'
 end
 
 group :test do
