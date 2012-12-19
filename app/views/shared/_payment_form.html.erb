@@ -19,7 +19,7 @@
 				<%= text_field_tag :name_on_card %>
 				
 
-			<div id="credit-card" style="<%= @subscription.last_four ? "display:none" : "display:block" %>">
+			<div id="credit-card">
 				<label class="control-label">Card Number</label>
 				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
 				<span class="help-block">Visa, MasterCard, Discover, AMEX</span>

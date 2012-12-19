@@ -10,34 +10,15 @@
 
 		<h3>
 			Your current plan: <br />
-			<%= @plan.name %><br /><br />
+			<%= @current_user.plan.name %><br /><br />
 			Your plan's status: <br />
 			<%= @status %><br /><br />
 
-			<!-- needs to be relooked at -->
-			<!-- <% if @status == "trialing" %>
-				<span>You&rsquo;re currently on our Trial Plan.</span> 
-				<span>Your trial period will expire soon.</span> 
-				Upgrade today.
-			<% elsif @status == "past_due" %>
-				<span>You&rsquo;re currently past due on your account.</span> 
-				<span>Please update your info immediately.</span> 
-				Update your billing information.
-			<% elsif @status == "unpaid" %>
-				<span>You&rsquo;re currently on our Trial Plan.</span> 
-				<span>Your trial period has expired</span> 
-				Reactive your account now.
-			<% elsif @status == "canceled" %>
-				<span>We&rsquo;re sorry to see you go.</span> 
-				<span>Want to turn back on review monitoring?</span> 
-				Reactivate your account now.
-			<% else %>
-				<span>Something went wrong with your account.</span>
-				Please contact our support team.
-			<% end %> -->
-		</h3>
-
-		<%= render 'shared/payment_form' %>
+			Want to change your plan?
+			Upgrade to a plan:<br />
+			<% @plans.each do |plan| %>
+				<h4><%= plan.name %></h4>
+			<% end %>
 
 	</div><!-- /.section-content -->
 

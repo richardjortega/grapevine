@@ -20,7 +20,7 @@ class AccountsController < ApplicationController
 	end
 
       def update
-            @plan = current_user.subscription.plan
+            @plans = Plan.all
             @location = current_user.locations[0]
             @subscription = current_user.subscription
 
