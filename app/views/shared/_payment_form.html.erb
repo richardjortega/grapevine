@@ -1,6 +1,5 @@
 <% content_for :head do %>
   <%= render 'devise/registrations/stripe_tag_includes' %>
-  <%= render 'shared/form_js_includes' %>
 <% end %>
 <!-- to display errors returned by createToken -->
 	    <span class="payment-errors"></span>
@@ -18,8 +17,10 @@
 				<label class="control-label">Name on card</label>
 				<%= text_field_tag :name_on_card %>
 				
-
-			<div id="credit-card">
+			<% if @subscription.stripe_card_token.present? %>
+    			Credit card has been provided.
+    		<% end %>
+			<div id="credit-card" style="<%= @subscription.last_four ? "display:none" : "display:block" %>">
 				<label class="control-label">Card Number</label>
 				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
 				<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
