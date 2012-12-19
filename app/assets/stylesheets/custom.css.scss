@@ -29,7 +29,7 @@ html, body {
 .subtitle {
     font-size:40px;
 }
-section.subpage {
+section.subpage, .dash-page section {
     h3, h4 {
         font-weight: 200;
     }
@@ -108,7 +108,7 @@ body { background: url(grid.png) repeat; }
 }
 .fl { float:left; margin-right:20px;}
 .fr { float:right; margin-left:20px;}
-.btn {
+.btn, a.btn, input.btn {
     @include radius(3px);
     display:inline-block;
     padding:10px 15px;
@@ -360,6 +360,22 @@ section.section-panel {
 /* SUB PAGES
 =================================
 ===============================*/
+section {
+    &.with-aside {
+        .section-content {
+            float:left;
+            width:55%;
+            padding-top:0;
+        }
+        aside {
+            float:right;
+            width:30%;
+            padding:0 40px 20px 20px;
+            
+
+        }
+    }
+}
 section.subpage {
 
     h3, h4 {
@@ -393,22 +409,7 @@ section.subpage {
         padding:20px 40px 40px 40px;
         h3:first-child, h4:first-child { margin-top:0;}
     }
-    &.with-aside {
-        .section-content {
-            float:left;
-            width:55%;
-            padding-top:0;
-        }
-        aside {
-            float:right;
-            width:30%;
-            padding:0 40px 20px 20px;
-            h2:first-child, h3:first-child, h4:first-child {
-                margin-top:5px;
-            }
-
-        }
-    }
+    
     h3.has-actions {
         position: relative;
         span.title-actions {
@@ -735,14 +736,21 @@ header#global-header .global-nav .sign-in {
 }
 
 
-/* ACCOUNT PAGE
+/* DASHBOARD
 =================================
 ===============================*/
-.dash-page {
+#main-container.dash-page {
+    min-height: 600px;
+    margin-bottom: -15px;
     section {
         header {
             border-bottom: 1px solid #efefef;
             position: relative;
+            h2 {
+                font-size:30px;
+                font-weight: 400;
+                color:$purple;
+            }
         }
     }
 }
@@ -761,11 +769,26 @@ header#global-header .global-nav .sign-in {
             border:1px solid #efefef;
             text-decoration: none;
             color:$textGray;
+            margin-left:-1px;
             &:hover {
                 background:#d7c9e6;
                 color:#fff;
             }
         } 
+    }
+}
+.dash-page {
+    &.welcome {
+        .dashnav li.welcome a { background:#d7c9e6; color:#fff;}
+    }
+    &.edit-profile {
+        .dashnav li.edit a { background:#d7c9e6; color:#fff;}
+    }
+    &.billing {
+        .dashnav li.billing a { background:#d7c9e6; color:#fff;}
+    }
+    &.change-plan {
+        .dashnav li.change-plan a { background:#d7c9e6; color:#fff;}
     }
 }
 .user-details-list {

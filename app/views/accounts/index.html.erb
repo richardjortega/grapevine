@@ -1,5 +1,5 @@
 <div id="main-container" class="dash-page welcome">
-<section id="profile">
+<section id="profile" class="with-aside">
 	<header>
 		<h2>Welcome, <%= current_user.first_name %></h2>
 		<%= render 'layouts/dashnav' %>
@@ -7,7 +7,7 @@
 
 	<div class="section-content">
 	
-	<h3 class="has-actions">Your Information <span class="title-actions"><%= link_to "Edit Profile", edit_user_registration_path %><%= link_to 'Upgrade now', upgrade_path %></span></h3>
+	<h3 class="has-actions">Your Information</h3>
 
 	
 	<ul class="unstyled user-details-list">
@@ -18,15 +18,16 @@
 		<li><strong>Business Tracking</strong> <span><%= @location.name %></span></li>
 	</ul>
 
-	</div>
-		<aside>
-			<h3>Subtitle</h3>
-			<p>Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+	</div><!-- /.section-content -->
 
-			<h3>Subtitle</h3>
-			<p>Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+	<aside>
+		<h3>Thanks for stopping by</h3>
+		<p>When logged in you can edit the business you&rsquo;re tracking, change up your password or personal info, or upgrade.</p>
+		<p>Yes, you can downgrade here too if you&rsquo;re already paying, but seriously, why would you want to do that?</p>
+
+		<p>If you have any questions or concerns while here, don&rsquo;t hesitate to contact us.</p>
+	</aside>
 		
-		</aside>
 </section>
 </div><!-- /#main-container.dash-page -->
 	
