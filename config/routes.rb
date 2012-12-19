@@ -26,6 +26,7 @@ Grapevine::Application.routes.draw do
   # deez be my new pages yo
   match '/about', :to => 'static_pages#about', as: 'about'
   match '/signup', :to => 'static_pages#signup', as: 'signup'
+  match '/freesignup', :to => 'static_pages#free_signup', as: 'free_signup'
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
