@@ -6,11 +6,6 @@
 <%= render 'layouts/dashnav' %>
 </header>
 
-<% content_for :head do %>
-  <%= render 'devise/registrations/stripe_tag_includes' %>
-  <%= render 'shared/form_js_includes' %>
-<% end %>
-
 <div class="section-content">
 
 		<h3>
@@ -36,50 +31,8 @@
 			<% end %>
 		</h3>
 
-		<!-- to display errors returned by createToken -->
-	    <span class="payment-errors"></span>
+		<%= render 'shared/payment_form' %>
 
-		<%= form_for @subscription, :html => { :class => 'payment-form', :id => 'payment-form' } do |f| %>
-
-			<%= f.hidden_field :stripe_card_token %>
-			<%= f.hidden_field :last_four %>
-
-			<noscript>
-	          <p>This form requires Javascript to use</p>
-	        </noscript>
-	        <!-- these fields are disabled before submission and are never transmitted back to rails -->
-			
-				<label class="control-label">Name on card</label>
-				<%= text_field_tag :name_on_card %>
-				
-
-			<div id="credit-card" style="<%= @subscription.last_four ? "display:none" : "display:block" %>">
-				<label class="control-label">Card Number</label>
-				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
-				<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
-					
-				
-				<%= label_tag :expiry_date, 'Expiration', :class => 'control-label' %>
-				
-						<%= date_select "", :exp_month, {:discard_day => true, :discard_year => true, :use_month_numbers => true }, {:id => "card-expiry-month", :class => "input-mini"} %>
-						<%= date_select "", :exp_year, {:discard_month => true, :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25 }, { :id => 'card-expiry-year', :class => "input-small"} %>
-						<span class="help-block">Your credit card details will be sent directly to our payment processor</span>
-				
-					<label class="control-label">Security Code</label>
-					<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 4, :class => "input-mini" %>
-					
-			</div>
-
-			<% if @status == "trialing" %>
-				<%= f.hidden_field :end_trial, { :value => true } %>
-			<% end %>
-			<div class="form-actions">
-				<%= link_to "Back", :back, :class => 'btn' %>
-				<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn alt" %>
-				
-			</div>
-
-		<% end %>
 	</div><!-- /.section-content -->
 
 	<aside>
