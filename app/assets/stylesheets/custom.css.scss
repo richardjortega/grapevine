@@ -146,6 +146,7 @@ body { background: url(grid.png) repeat; }
     background: linear-gradient(to bottom, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efb841', endColorstr='#eaa207',GradientType=0 );
     font-size:24px;
+    color:#333 !important;
 }
 .btn.alt {
     background:#a499b1;
@@ -283,6 +284,19 @@ header#global-header .global-nav li.signup a:hover {
     }
 }
 
+/* HOME MISC
+=================================
+===============================*/
+a.home-bottom-action {
+    margin: 0 auto;
+    display: block;
+    width: 180px;
+    top: 26px;
+    position: relative;
+}
+
+
+
 /* SECTION PANELS
 =================================
 ===============================*/
@@ -310,6 +324,20 @@ section.section-panel {
             background: url('home-stats.png') no-repeat bottom right;
 
         }
+        blockquote {
+            width: 40%;
+            font-family: georgia;
+            line-height: 22px;
+            font-weight: normal;
+            margin:0;
+            padding-left:20px;
+            border-left:10px solid #d7c9e6;
+            border-left:10px solid rgba(215, 201, 230, .4);
+            color:$textGray;
+
+        }
+        h3 { margin-bottom: 0;}
+        &.last { padding-bottom: 70px;}
     }
     
     h3 {
