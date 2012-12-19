@@ -5,16 +5,16 @@ class AccountsController < ApplicationController
             @location = current_user.locations[0]
             @subscription = current_user.subscription
 
-            if current_user.subscription.status_info.nil?
-                  @status = "No status info available, please contact Grapevine"
-            else
+            if current_user.subscription.status_info
                   @status = current_user.subscription.status_info.capitalize
+            else
+                  @status = "No status info available, please contact Grapevine"
             end
 
-            if @subscription.start_date.nil?
-                  @start_date = "No start date found, please contact Grapevine"
-            else
+            if @subscription.start_date
                   @start_date = Time.at(@subscription.start_date).to_date.strftime("%A, %B %d, %Y")
+            else
+                  @start_date = "No start date found, please contact Grapevine"
             end
             
 	end
@@ -24,16 +24,16 @@ class AccountsController < ApplicationController
             @location = current_user.locations[0]
             @subscription = current_user.subscription
 
-            if current_user.subscription.status_info.nil?
-                  @status = "No status info available, please contact Grapevine"
-            else
+            if current_user.subscription.status_info
                   @status = current_user.subscription.status_info.capitalize
+            else
+                  @status = "No status info available, please contact Grapevine"
             end
 
-            if @subscription.start_date.nil?
-                  @start_date = "No start date found, please contact Grapevine"
-            else
+            if @subscription.start_date
                   @start_date = Time.at(@subscription.start_date).to_date.strftime("%A, %B %d, %Y")
+            else
+                  @start_date = "No start date found, please contact Grapevine"
             end
             
 
