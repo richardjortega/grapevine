@@ -397,11 +397,20 @@ ul#price-list {
         float:left;
         width: 260px;
         padding:20px;
-        background:#ebebeb;
+        border:1px solid #efefef;
         height:400px;
         margin-top:30px;
         position: relative;
         @include radius(3px);
+        background: #f4f4f4;
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y0ZjRmNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZGVkZWQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f4f4f4), color-stop(100%,#ededed));
+background: -webkit-linear-gradient(top, #f4f4f4 0%,#ededed 100%);
+background: -o-linear-gradient(top, #f4f4f4 0%,#ededed 100%);
+background: -ms-linear-gradient(top, #f4f4f4 0%,#ededed 100%);
+background: linear-gradient(to bottom, #f4f4f4 0%,#ededed 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#ededed',GradientType=0 );
         h3 {
             font-size:22px;
             font-weight: 200;
@@ -423,6 +432,7 @@ ul#price-list {
             }
             sup {
                     font-size:14px;
+                    top:-26px;
                 }
         }
         &.free {
@@ -430,10 +440,13 @@ ul#price-list {
             h4 { font-size:40px;}
         }
         &.thirty {
-            box-shadow: 0 0 10px 0px rgba(0, 0, 0, .5);
+            -moz-box-shadow:0 0 15px 0px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow:0 0 15px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
             height:445px;
             margin-top:0px;
             z-index: 10;
+            background:#f4f4f4;
             h4 {
                 font-size:50px;
                 
