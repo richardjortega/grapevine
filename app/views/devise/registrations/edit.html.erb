@@ -48,33 +48,16 @@
       <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
     </div>
   </div>
-
-        <h3>Edit Business Information</h3>
-          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
- 
-            <div class="control-group">
-              <label class="control-label">Business Name</label>
-              <div class="controls">
-                <%= location_fields.text_field :name %> 
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Address</label>
-              <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
-
-              </div>
-              <div id="map"></div>
-                <%= location_fields.hidden_field :lat, :id => 'lat' %>
-                <%= location_fields.hidden_field :long, :id => 'lng' %>
-            </div>
-          <% end %>
-
 <div class="form-actions" style="margin:60px 0 20px 0;">
 <%= link_to "Back", :back, :class => 'btn' %> <%= user_form.submit "Update", :class => 'btn alt' %>
 </div>
 <% end %>
-
+<p>
+<h3>Edit Business Information</h3>
+          Currently at this time you cannot change your business information.<br />
+          Please contact us directly if you need your business information updated or changed.<br /><br />
+          Customer Service: 210-549-7799<br /><br />
+          We will be releasing a location management system to handle this in the future.</p>
 
 <p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too, just call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
 </div><!-- /.section-content -->
