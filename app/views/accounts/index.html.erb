@@ -1,6 +1,8 @@
-<section id="profile" class="subpage with-aside">
+<div id="main-container" class="dash-page welcome">
+<section id="profile">
 	<header>
-		<h2 class="title">Welcome, <%= current_user.first_name %></h2>
+		<h2>Welcome, <%= current_user.first_name %></h2>
+		<%= render 'layouts/dashnav' %>
 	</header>
 
 	<div class="section-content">
@@ -26,4 +28,5 @@
 		
 		</aside>
 </section>
+</div><!-- /#main-container.dash-page -->
 	
