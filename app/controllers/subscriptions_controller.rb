@@ -8,14 +8,26 @@ class SubscriptionsController < ApplicationController
 
   	@plan = Plan.find params[:subscription][:plan_id]
     
-  	if @subscription.save_without_payment
-      redirect_to thankyou_path
-	    # NotifyMailer.free_signup(@subscription.user).deliver
-	    NotifyMailer.update_grapevine_team(@subscription.user, "New customer signed up").deliver
-  	else
-  		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
-  		render template: 'static_pages/signup'
-  	end
+    if @plan.identifier('gv_free')
+    	if @subscription.save_without_payment
+        redirect_to thankyou_path
+  	    # NotifyMailer.free_signup(@subscription.user).deliver
+  	    NotifyMailer.update_grapevine_team(@subscription.user, "New customer signed up").deliver
+    	else
+    		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
+    		render template: 'static_pages/signup'
+    	end
+    else
+      # if @subscription.save_with_payment
+      #   redirect_to thankyou_path
+      #   # NotifyMailer.paid_signup(@subscription.user).deliver
+      #   NotifyMailer.update_grapevine_team(@subscription.user, "New PAID customer signed up").deliver
+      # else
+      #   flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
+      #   render template: 'static_pages/signup'
+      # end
+    end
+
   end
 
   def update
