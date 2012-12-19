@@ -2,14 +2,20 @@
 <div id="main-container" class="dash-page change-plan">
 <section class="with-aside">
 <header>
-<h2>Upgrade your account</h2>
+<h2>Change Your Plan</h2>
 <%= render 'layouts/dashnav' %>
 </header>
 
 <div class="section-content">
 
 		<h3>
-			<% if @status == "trialing" %>
+			Your current plan: <br />
+			<%= @plan.name %><br /><br />
+			Your plan's status: <br />
+			<%= @status %><br /><br />
+
+			<!-- needs to be relooked at -->
+			<!-- <% if @status == "trialing" %>
 				<span>You&rsquo;re currently on our Trial Plan.</span> 
 				<span>Your trial period will expire soon.</span> 
 				Upgrade today.
@@ -28,7 +34,7 @@
 			<% else %>
 				<span>Something went wrong with your account.</span>
 				Please contact our support team.
-			<% end %>
+			<% end %> -->
 		</h3>
 
 		<%= render 'shared/payment_form' %>

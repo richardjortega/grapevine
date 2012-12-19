@@ -53,7 +53,7 @@ Grapevine::Application.routes.draw do
   match '/upgradetoday', to: 'static_pages#upgradetoday'
 
   #Billing/payment page
-  match '/upgrade', to: 'accounts#upgrade'
+  match '/changeplan', to: 'accounts#update', as: 'change_plan'
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
