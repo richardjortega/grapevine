@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   def pricing
   end
 
-  def how_it_works
+  def learn_more
   end
 
   def contact
