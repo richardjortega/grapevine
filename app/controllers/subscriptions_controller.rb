@@ -24,10 +24,10 @@ class SubscriptionsController < ApplicationController
 
     if @subscription.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
-      redirect_to root_path
+      redirect_to billing_path
     else
       flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
-      redirect_to root_path
+      redirect_to billing_path
     end
 
   end

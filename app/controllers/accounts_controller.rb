@@ -20,9 +20,12 @@ class AccountsController < ApplicationController
 	end
 
       def update
+            @user = current_user
             @plans = Plan.all
-            @location = current_user.locations[0]
-            @subscription = current_user.subscription
+            @location_limit = @user.plan.location_limit
+            @review_limit = @user.plan.review_limit
+            @location = @user.locations[0]
+            @subscription = @user.subscription
 
             if current_user.subscription.status_info
                   @status = current_user.subscription.status_info.capitalize
@@ -35,11 +38,11 @@ class AccountsController < ApplicationController
             else
                   @start_date = "No start date found, please contact Grapevine"
             end
-            
+      end
 
-
-
-
+      def billing
+            @user = current_user
+            @subscription = @user.subscription
       end
 
 end

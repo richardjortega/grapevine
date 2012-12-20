@@ -6,30 +6,38 @@
 <%= render 'layouts/dashnav' %>
 </header>
 
-<div class="section-content">
+	<div class="section-content">
 
-		<h3>
-			Your current plan: <br />
-			<%= @current_user.plan.name %><br /><br />
-			Your plan's status: <br />
-			<%= @status %><br /><br />
-
-			Want to change your plan?
-			Upgrade to a plan:<br />
-			<% @plans.each do |plan| %>
-				<h4><%= plan.name %></h4>
-			<% end %>
-
-	</div><!-- /.section-content -->
-
-	<aside>
 		<h3>What does upgrading get me?</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Etiam porta sem malesuada magna mollis euismod.</p>
+		<h4>Unlimited Review Tracking for Your Business.</h4>
 
 		<h3>How much does it cost?</h3>
 		<h4>$30 per month.</h4>
-		<p>That&rsquo;s it. Awesome, right?</p>
+		<p>That&rsquo;s it. Awesome, right?<br /> Sign up below and your account will be immediately upgraded!</p>
+	
+	<% if @subscription.last_four.present? %>
+    	You have already provided a credit card ending in : <%= @subscription.last_four %><br />
+    	<%= link_to 'Update your billing', billing_path %>
+    <% else %>
+		<%= render 'shared/payment_form' %>
+	<% end %>
 
+	</div><!-- /.section-content -->
+
+
+
+	<aside>
+		<h3>Account Status:</h3>
+		<p><%= @status %></p>
+
+		<h3>Current Plan:</h3>
+		<p><%= @current_user.plan.name %></p>
+
+		<h3>Location Limit:</h3>
+		<p><%= pluralize(@location_limit, 'location') %></p>
+
+		<h3>Review Limit:</h3>
+		<p><%= pluralize(@review_limit, 'review') %></p>
 	</aside>
 </section>
 </div><!-- /#main-container.dash-page -->
