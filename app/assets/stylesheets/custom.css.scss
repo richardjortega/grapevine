@@ -263,12 +263,13 @@ header#global-header .global-nav li.signup a:hover {
         margin-bottom:0;
     }
     .tag {
-        width: 380px;
+        width: 480px;
         font-weight:200;
         font-size:24px;
-        line-height: 30px;
+        line-height: 35px;
         margin-bottom: 40px;
         text-shadow:1px 1px 3px #444;
+        letter-spacing: 1px;
     }
 }
 #hero-horiz-break {
@@ -362,6 +363,7 @@ section.section-panel {
 ===============================*/
 section {
     &.with-aside {
+        overflow: hidden;
         .section-content {
             float:left;
             width:55%;
@@ -835,5 +837,32 @@ footer {
     a {
         text-decoration: none;
         color:#fff;
+    }
+    h4 {
+        font-weight: 300;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    .footer-nav {
+        margin:0;
+        padding:0;
+        list-style-type: none;
+        li {
+            a {
+                padding:5px 0;
+                border-top:1px solid #444;
+                display: block;
+
+            }
+            &:first-child a { border-top:0;}
+        }
+    }
+    .footer-col {
+        width:300px;
+        float:left;
+        margin-left:50px;
+        &:first-child {
+            margin-left:0;
+        }
     }
 }
