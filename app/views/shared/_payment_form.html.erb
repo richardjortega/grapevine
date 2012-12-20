@@ -8,6 +8,9 @@
 
 			<%= f.hidden_field :stripe_card_token %>
 			<%= f.hidden_field :last_four %>
+			<% if local_assigns.has_key? :plan %>
+				<%= f.hidden_field :plan %>
+			<% end %>
 
 			<noscript>
 	          <p>This form requires Javascript to use</p>
@@ -37,7 +40,7 @@
 
 			<div class="form-actions">
 				<%= link_to "Back", :back, :class => 'btn' %>
-				<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn alt" %>
+				<%= f.button "Signup", :type => 'submit', :class => "btn alt" %>
 				
 			</div>
 

@@ -68,8 +68,8 @@ class Subscription < ActiveRecord::Base
 
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-    if params[:plan].present?
-      customer.update_subscription({:plan => "gv_30"})
+    unless params[:plan] == 'gv_free'
+      customer.update_subscription({:plan => params[:plan]})
     end
 
     if params[:stripe_card_token].present?

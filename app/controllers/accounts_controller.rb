@@ -22,6 +22,8 @@ class AccountsController < ApplicationController
       def update
             @user = current_user
             @plans = Plan.all
+            @plan_identifier = @user.plan.identifier
+            @paid_plan = Plan.find_by_identifier('gv_30')
             @location_limit = @user.plan.location_limit
             @review_limit = @user.plan.review_limit
             @location = @user.locations[0]
