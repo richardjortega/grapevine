@@ -30,9 +30,9 @@ class Subscription < ActiveRecord::Base
   	self.stripe_customer_token	= customer.id
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts
-  	customer.update_subscription({:plan => "basic_monthly"})
+  	customer.update_subscription({:plan => "gv_free"})
   	self.status                 = true
-    self.status_info            = "trialing"
+    self.status_info            = "active"
     self.next_bill_on           = Date.parse customer.next_recurring_charge.date
     self.start_date             = Date.today.beginning_of_day.to_i
   	save!
