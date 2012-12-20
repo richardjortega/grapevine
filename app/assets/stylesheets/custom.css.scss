@@ -377,6 +377,7 @@ section {
 
         }
     }
+    
 }
 section.subpage {
 
@@ -659,6 +660,57 @@ form select {
     height:30px;
     line-height: 30px;
     display: inline-block;
+}
+
+/* HOW IT WORKS
+=================================
+===============================*/
+.how-it-works {
+    a.btn.primary {
+        margin:60px auto 0 auto;
+        display: block;
+        width:200px;
+    }
+    .col-wrapper {
+        margin-bottom: 40px;
+        h3 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .col {
+            width:280px;
+            float:left;
+            margin-left:40px;
+            &.first { margin-left:0;}
+            h4 {
+                margin-top:0;
+            }
+        }
+        img.col-icon {
+            width:30px;
+            height:auto;
+            float:left;
+            margin-right:5px;
+        }
+    }
+    .happy-customers {
+        h4 { text-align: center;}
+        ul {
+            margin:0;
+            padding:0;
+            list-style-type: none;
+            text-align: center;
+            li {
+                
+                text-align: center;
+                display: inline-block;
+                margin:0 20px;
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
 }
 
 /* SIGN IN
