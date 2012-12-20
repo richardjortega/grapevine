@@ -68,12 +68,12 @@ class Subscription < ActiveRecord::Base
 
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
+    if params[:plan].present?
+      customer.update_subscription({:plan => "gv_30"})
+    end
+
     if params[:stripe_card_token].present?
       customer.card = params[:stripe_card_token]
-    end
-    
-    if params[:end_trial] == 'true'
-      end_trial customer
     end
 
     # in case they've changed

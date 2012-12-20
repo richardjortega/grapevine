@@ -35,9 +35,6 @@
 					
 			</div>
 
-			<% if @status == "trialing" %>
-				<%= f.hidden_field :end_trial, { :value => true } %>
-			<% end %>
 			<div class="form-actions">
 				<%= link_to "Back", :back, :class => 'btn' %>
 				<%= f.button "Signup", :id => 'monthly-plan', :type => 'submit', :class => "btn alt" %>
