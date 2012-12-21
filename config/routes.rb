@@ -28,6 +28,7 @@ Grapevine::Application.routes.draw do
   match '/signup', :to => 'static_pages#signup', as: 'signup'
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
+  match '/learn-more', :to => 'static_pages#learn_more', as: 'learn_more'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
 
 
