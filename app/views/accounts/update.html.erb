@@ -28,17 +28,7 @@
 
 
 	<aside>
-		<h3>Account Status:</h3>
-		<p><%= @status %></p>
-
-		<h3>Current Plan:</h3>
-		<p><%= @current_user.plan.name %></p>
-
-		<h3>Location Limit:</h3>
-		<p><%= pluralize(@location_limit, 'location') %></p>
-
-		<h3>Review Limit:</h3>
-		<p><%= pluralize(@review_limit, 'review') %></p>
+		<%= render 'account_overview' %>
 	</aside>
 </section>
 </div><!-- /#main-container.dash-page -->

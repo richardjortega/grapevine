@@ -24,8 +24,19 @@ class AccountsController < ApplicationController
             @plans = Plan.all
             @plan_identifier = @user.plan.identifier
             @paid_plan = Plan.find_by_identifier('gv_30')
-            @location_limit = @user.plan.location_limit
-            @review_limit = @user.plan.review_limit
+
+            if @user.plan.location_limit.nil?
+                  @location_limit = '1'
+            else 
+                  @location_limit = @user.plan.location_limit
+            end
+
+            if @user.plan.review_limit.nil?
+                  @review_limit = 'Unlimited'
+            else
+                  @review_limit = @user.plan.review_limit
+            end
+
             @location = @user.locations[0]
             @subscription = @user.subscription
 
