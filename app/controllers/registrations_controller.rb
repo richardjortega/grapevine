@@ -1,4 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
+  def edit
+    @business = current_user.locations[0]
+    super
+  end
+  
   def update
     # required for settings form to submit when password is left blank
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?

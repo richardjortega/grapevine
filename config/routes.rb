@@ -64,7 +64,7 @@ Grapevine::Application.routes.draw do
     match 'upgrade' => 'devise/sessions#new', :as => :upgrade
     match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
       :via => Devise.mappings[:user].sign_out_via
-    get 'edit_profile' => 'registrations#edit', :as => :edit_user_registration
+    get 'profile' => 'registrations#edit', :as => :edit_user_registration
   end
 
   # default rake routes for devise User

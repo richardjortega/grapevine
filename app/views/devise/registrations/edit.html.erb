@@ -1,18 +1,35 @@
-<% content_for :head do %>
-  <%= render 'devise/registrations/stripe_tag_includes' %>
-  <%= render 'shared/form_js_includes' %>
-<% end %>
-
-<div id="main-container" class="dash-page edit-profile">
-<section>
+<div id="main-container" class="dash-page profile">
+<section class="with-aside">
 
 <header>
-<h2>Edit Profile Information</h3>
+<h2>Profile</h3>
 <%= render 'accounts/dashnav' %>
 </header>
 
+
 <div class="section-content">
-<h3>Edit <%= resource_name.to_s.humanize %></h3>
+  <ul class="unstyled user-details-list">
+    <h3>Current Information</h3>
+    <li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.last_name %></span></li>
+    <li><strong>Email</strong> <span><%= current_user.email %></span></li>
+    <li><strong>Phone Number</strong> <span><%= current_user.phone_number %></span></li>
+</ul>
+
+<p>Need to update your profile information? <a href="#" class="edit-profile-info">Edit Profile</a></p>
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  var editProfile = $('.edit-profile-info');
+  $('.profile-fields').hide();
+  $(editProfile).click(function() {
+    event.preventDefault();
+    $('.profile-fields').toggle();
+  });
+ });
+</script>
+<div class="profile-fields">
+<h3>Edit Your <%= resource_name.to_s.humanize %> Information</h3>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-horizontal', :method => :put }) do |user_form| %>
   <%= devise_error_messages! %>
 
@@ -50,17 +67,33 @@
   </div>
 <div class="form-actions" style="margin:60px 0 20px 0;">
 <%= link_to "Back", :back, :class => 'btn' %> <%= user_form.submit "Update", :class => 'btn alt' %>
-</div>
 <% end %>
-<p>
-<h3>Edit Business Information</h3>
-          Currently at this time you cannot change your business information.<br />
-          Please contact us directly if you need your business information updated or changed.<br /><br />
-          Customer Service: 210-549-7799<br /><br />
-          We will be releasing a location management system to handle this in the future.</p>
+</div>
+</div><!-- /.profile-fields -->
 
-<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too, just call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
+<ul class="unstyled user-details-list">
+  <h3>Business Information</h3>
+  <li><strong>Name</strong> <span><%= @business.name %></span></li>
+  <li><strong>Address</strong> <span><%= @business.street_address %></span></li>
+  <% unless @business.address_line_2.nil? %>
+    <li><strong>&nbsp;</strong> <span><%= @business.address_line_2 %></span></li>
+  <% end %>
+  <li><strong>City</strong> <span><%= @business.city %></span></li>
+  <li><strong>State</strong> <span><%= @business.state %></span></li>
+  <li><strong>Zip</strong> <span><%= @business.zip %></span></li>
+
+  <li><strong>Phone Number</strong> <span><%= current_user.phone_number %></span></li>
+</ul>
+
+<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too. <br />Please contact Grapevine's Customer Service at <a href="tel:+12105497799">210-549-7799</a>.</p>
+
 </div><!-- /.section-content -->
+
+<aside>
+  <h3>Need to edit your business?</h3>
+    <p>Please contact us directly if you need your business information requires updating.</p>
+    <p>Customer Service: <a href="tel:+12105497799">210-549-7799</a></p>
+</aside>
 </section>
 </div><!-- /#main-container -->
 
