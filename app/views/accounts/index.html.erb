@@ -1,4 +1,4 @@
-<div id="main-container" class="dash-page welcome">
+<div id="main-container" class="dash-page summary">
 <section id="profile" class="with-aside">
 	<header>
 		<h2>Welcome, <%= current_user.first_name %></h2>
@@ -11,7 +11,7 @@
 
 	
 	<ul class="unstyled user-details-list">
-		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.	last_name %></span></li>
+		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.last_name %></span></li>
 		<li><strong>Email</strong> <span><%= current_user.email %></span></li>
 		<li><strong>Plan</strong> <span><%= @plan.name %></li>
 		<li><strong>Status</strong> <span><%= @status %></span></li>
@@ -22,10 +22,9 @@
 
 	<aside>
 		<h3>Thanks for stopping by</h3>
-		<p>When logged in you can edit the business you&rsquo;re tracking, change up your password or personal info, or upgrade.</p>
-		<p>Yes, you can downgrade here too if you&rsquo;re already paying, but seriously, why would you want to do that?</p>
-
+		<p>When logged in you can edit your account details and personal info. </p>
 		<p>If you have any questions or concerns while here, don&rsquo;t hesitate to contact us.</p>
+		<p>Call us at <a href="tel:+12105497799">210-549-7799</a></p>
 	</aside>
 		
 </section>
