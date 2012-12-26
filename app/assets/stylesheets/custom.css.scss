@@ -841,6 +841,9 @@ header#global-header .global-nav .sign-in {
     &.billing {
         .dashnav li.billing a { background:#d7c9e6; color:#fff;}
     }
+    &.upgrade {
+        .dashnav li.upgrade a { background:#d7c9e6; color:#fff;}
+    }
     &.change-plan {
         .dashnav li.change-plan a { background:#d7c9e6; color:#fff;}
     }
