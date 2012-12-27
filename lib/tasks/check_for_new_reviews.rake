@@ -16,6 +16,18 @@ namespace :crawl do
 		Rake::Task['crawl:opentable'].invoke(zinc)
 	end
 	
+	desc "Check Yelp for new reviews"
+	task :yelp => :environment do
+		Source.find_by_name('yelp').vines.each do |location|
+			location_id = location.source_location_uri
+			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
+			puts "Searching for new reviews at: #{location_id}"
+			run = Yelp.new location_id
+			response = run.get_new_reviews latest_review
+			puts response
+		end
+	end
+	
 	desc "Check OpenTable for new reviews"
 	task :opentable => :environment do
 		#Location.all.each do |location|
@@ -29,21 +41,6 @@ namespace :crawl do
 			response = run.get_new_reviews latest_review
 			puts response
 		#end
-	end
-
-	desc "Check Yelp for new reviews"
-	task :yelp => :environment do
-		# Location.all.each do |location|
-			# location_id = location.source('yelp').matchingid
-
-			# for testing
-			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
-			location_id = 'rosarios-mexican-cafe-y-cantina-san-antonio'
-
-			run = Yelp.new location_id
-			response = run.get_new_reviews latest_review
-			puts response
-		# end
 	end
 
 	desc "Check GooglePlus for new reviews"
