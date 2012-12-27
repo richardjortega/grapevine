@@ -877,7 +877,31 @@ header#global-header .global-nav .sign-in {
 
 }
 
+.change-plan .current-plan {
+    background:lighten($purple, 30%);
+    color:#fff;
+    margin-top:20px;
+    padding:10px;
+    @include radius(3px);
+    text-shadow:1px 1px 0px rgba(0, 0, 0, .3);
+    span {
+        display: block;
+        font-size:22px;
+        margin-top:5px;
 
+    }
+}
+.change-plan aside {
+    margin-top:20px;
+    @include radius(3px);
+    background:#efefef;
+    h4 {
+        margin-bottom:0;
+        & + p {
+            margin-top:0;
+        }
+    }
+}
 
 
 .thankyou {
