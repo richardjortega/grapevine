@@ -588,6 +588,19 @@ form #credit-card {
         height:150px;
         text-align: center;
         margin:0 auto;
+        position: relative;
+        z-index: 2;
+        border:5px solid lighten($purple, 30%);
+        -webkit-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        img {
+            width:170px;
+            height: auto;
+        }
+        &:hover {
+            border:5px solid lighten($purple, 5%);
+            top:-2px;
+        }
     }
     h4 {
         text-align: center;
