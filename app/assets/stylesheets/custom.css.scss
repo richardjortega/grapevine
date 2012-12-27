@@ -869,7 +869,13 @@ header#global-header .global-nav .sign-in {
     }
 }
 
+.profile .profile-fields {
+    padding:0 20px 20px 20px;
+    border:1px solid #e1e1e1;
+    background:#efefef;
+    @include radius(3px);
 
+}
 
 
 
