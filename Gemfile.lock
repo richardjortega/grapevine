@@ -14,6 +14,18 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.3)
+    activeadmin (0.5.1)
+      arbre (>= 1.0.1)
+      bourbon (>= 1.0.0)
+      devise (>= 1.1.2)
+      fastercsv
+      formtastic (>= 2.0.0)
+      inherited_resources (>= 1.3.1)
+      jquery-rails (>= 1.0.0)
+      kaminari (>= 0.13.0)
+      meta_search (>= 0.9.2)
+      rails (>= 3.0.0)
+      sass (>= 3.1.0)
     activemodel (3.2.8)
       activesupport (= 3.2.8)
       builder (~> 3.0.0)
@@ -29,10 +41,15 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
+    arbre (1.0.1)
+      activesupport (>= 3.0.0)
     arel (3.0.2)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.3)
+    bourbon (3.0.1)
+      sass (>= 3.2.0)
+      thor
     builder (3.0.4)
     cancan (1.6.8)
     capybara (1.1.4)
@@ -46,13 +63,6 @@ GEM
       ffi (~> 1.0, >= 1.0.6)
     choice (0.1.6)
     client_side_validations (3.2.0)
-    cloudfoundry-devise (1.5.2)
-      bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
-      warden (~> 1.1)
-    cloudfoundry-jquery-rails (1.0.19.1)
-      railties (~> 3.0)
-      thor (~> 0.14)
     coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -92,11 +102,14 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
+    fastercsv (1.5.5)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.2.0)
     foreman (0.60.2)
       thor (>= 0.13.6)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
     geocoder (1.1.6)
     growl (1.0.3)
     guard (1.5.4)
@@ -111,6 +124,7 @@ GEM
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
+    has_scope (0.5.1)
     headless (0.3.1)
     hike (1.2.1)
     http_parser.rb (0.5.3)
@@ -118,6 +132,9 @@ GEM
       multi_json (~> 1.0)
       multi_xml
     i18n (0.6.1)
+    inherited_resources (1.3.1)
+      has_scope (~> 0.5.0)
+      responders (~> 0.6)
     iron_core (0.4.4)
       rest (>= 2.1.1)
     iron_worker_ng (0.13.1)
@@ -129,6 +146,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.5)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
     libwebsocket (0.1.7.1)
@@ -144,6 +164,11 @@ GEM
       httparty
     meta-tags (1.2.6)
       actionpack
+    meta_search (1.1.3)
+      actionpack (~> 3.1)
+      activerecord (~> 3.1)
+      activesupport (~> 3.1)
+      polyamorous (~> 0.5.0)
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.4.0)
@@ -160,6 +185,8 @@ GEM
       faye-websocket (~> 0.4, >= 0.4.4)
       http_parser.rb (~> 0.5.3)
       multi_json (~> 1.0)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -196,6 +223,8 @@ GEM
     rb-fsevent (0.9.2)
     rdoc (3.12)
       json (~> 1.4)
+    responders (0.9.3)
+      railties (~> 3.1)
     rest (2.1.1)
       net-http-persistent
       rest-client (>= 0.3.0)
@@ -275,13 +304,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeadmin
   awesome_print
   bootstrap-sass (= 2.0.3)
   cancan (>= 1.6.7)
   capybara
   client_side_validations (= 3.2.0)
-  cloudfoundry-devise
-  cloudfoundry-jquery-rails
   coffee-rails (~> 3.2.1)
   database_cleaner (>= 0.7.2)
   debugger
@@ -300,6 +328,7 @@ DEPENDENCIES
   launchy
   mailchimp
   meta-tags
+  meta_search (>= 1.1.0.pre)
   newrelic_rpm
   nokogiri
   oauth

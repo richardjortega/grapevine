@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-# Additions for AppFog
-gem 'cloudfoundry-jquery-rails'
-gem 'cloudfoundry-devise', :require => 'devise'
+# # Additions for AppFog
+# gem 'cloudfoundry-jquery-rails'
+# gem 'cloudfoundry-devise', :require => 'devise'
 
 # Main
 gem 'rails', '3.2.8'
@@ -10,6 +10,8 @@ gem 'thin'
 gem 'jquery-rails'
 gem 'geocoder'
 gem 'seedbank'
+gem 'activeadmin'
+gem 'meta_search',	'>= 1.1.0.pre'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
