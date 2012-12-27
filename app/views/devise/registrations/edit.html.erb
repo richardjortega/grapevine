@@ -20,9 +20,8 @@
 
 <script type="text/javascript">
  $(document).ready(function() {
-  var editProfile = $('.edit-profile-info');
   $('.profile-fields').hide();
-  $(editProfile).click(function() {
+  $('.edit-profile-info, a.cancel-profile-edit').click(function() {
     event.preventDefault();
     $('.profile-fields').toggle();
   });
@@ -66,7 +65,7 @@
     </div>
   </div>
 <div class="form-actions" style="margin:60px 0 20px 0;">
-<%= link_to "Back", :back, :class => 'btn' %> <%= user_form.submit "Update", :class => 'btn alt' %>
+<a href="#" class="cancel-profile-edit">Cancel</a> <%= user_form.submit "Save Changes", :class => 'btn alt' %>
 <% end %>
 </div>
 </div><!-- /.profile-fields -->
