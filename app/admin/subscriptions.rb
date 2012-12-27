@@ -2,6 +2,7 @@ ActiveAdmin.register Subscription do
   actions :index, :show
   index do
   	selectable_column
+  	column :id
   	column :user_id do |subscription|
   		link_to "#{subscription.user.first_name} #{subscription.user.last_name}", admin_user_path(subscription.user)
   	end
