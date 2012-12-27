@@ -4,29 +4,30 @@
 		<h4>Site Links</h4>
   	<p>They&rsquo;re just like above, only here.</p>
   	<ul class="footer-nav">
-  		<li><a href="#">Home</a></li>
-  		<li><a href="#">About</a></li>
-  		<li><a href="#">Contact</a></li>
-  		<li><a href="#">Pricing</a></li>
-  		<li><a href="#">Login</a></li>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Learn More", learn_more_path %></li>
+    <li><%= link_to "Sign Up", signup_path %></li>
+    <li><%= link_to "Contact", contact_path %></li>
+    <li><%= link_to "Login", root_path %></li>
   	</ul>
 		
   </div>
 
   <div class="footer-col">
   	<h4>Thanks for checking us out</h4>
-    <p>Let us know if you need anything. No, seriously, we&rsquo;re kinda lonely. Just kidding, we&rsquo;re not lonely.. ok, maybe a little.</p>
-    <p>But if you do have any questions or just want to say &ldquo;Howdy&rdquo; don&rsquo;t hesitate to <a href="/contact">contact us</a>.</p>
+    <p>Let us know if you need anything. We are sorta crazy about customer support and are here for any questions you may have, about life, love or even our software.
+    But if you do have any questions or just want to say &ldquo;Howdy &ldquo; don &ldquo;t hesitate to <a href="/contact">contact us</a>.</p>
   	
   </div>
 
   <div class="footer-col">
 		<h4>Twitter</h4>
-  	<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.</p>
+  	<p>@drewwitt You play to win the game http://www.youtube.com/watch?v=W42iiCcFbxE…</p>
+    <p>Last week @joshseltzer joined @PickGrapevine & we love his energy & kick-butt front-end skills! Welcome aboard buddy!</p>
 
   </div>
 </div><!-- /.footer-col-wrap -->
-  <p class="copyright">&copy; Grapevine 2012 | <a href="mailto:info@pickgrapevine.com?Subject=Grapevine%20Inquiry">Contact</a></p>
+  <p class="copyright">&copy; Grapevine 2012 | Privacy Policy | Terms of Service | <a href="mailto:info@pickgrapevine.com?Subject=Grapevine%20Inquiry">Contact</a></p>
 </div><!-- /.wrapper -->
   
     <%= debug(params) if Rails.env.development? %>
