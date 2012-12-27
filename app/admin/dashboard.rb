@@ -41,7 +41,7 @@ ActiveAdmin.register_page "Dashboard" do
 
         column do
             panel 'Total Reviews' do
-                "#{Location.all.count}"
+                "#{Review.all.count}"
             end
              panel 'Recent Reviews' do
                 ul do
