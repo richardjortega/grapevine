@@ -29,9 +29,9 @@ source1 = Source.find_or_create_by_name! name: 'yelp', category: 'general', max_
 puts "Added source: #{source1[:name]}, unless already in database"
 source2 = Source.find_or_create_by_name! name: 'googleplus', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.google.com/placesforbusiness', main_url: 'http://www.google.com/places/'
 puts "Added source: #{source2[:name]}, unless already in database"
-source3 = Source.find_or_create_by_name! name: 'opentable', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.otrestaurant.com/', main_url: 'http://www.yelp.com'
+source3 = Source.find_or_create_by_name! name: 'opentable', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.otrestaurant.com/', main_url: 'http://www.opentable.com'
 puts "Added source: #{source3[:name]}, unless already in database"
-source4 = Source.find_or_create_by_name! name: 'tripadvisor', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.tripadvisor.com/Owners', main_url: 'http://www.yelp.com'
+source4 = Source.find_or_create_by_name! name: 'tripadvisor', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.tripadvisor.com/Owners', main_url: 'http://www.tripadvisor.com'
 puts "Added source: #{source4[:name]}, unless already in database"
-source5 = Source.find_or_create_by_name! name: 'urbanspoon', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.urbanspoon.com/u/signin', main_url: 'http://www.yelp.com'
+source5 = Source.find_or_create_by_name! name: 'urbanspoon', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.urbanspoon.com/u/signin', main_url: 'http://www.urbanspoon.com'
 puts "Added source: #{source5[:name]}, unless already in database"
