@@ -7,11 +7,11 @@
 
 <script type="text/javascript">
  $(document).ready(function() {
-  var editBilling = $('.edit-billing-info');
   $('.form-wrapper').hide();
-  $(editBilling).click(function() {
+  $('.edit-billing-info').click(function() {
     event.preventDefault();
     $('.form-wrapper').toggle();
+    $('.form-wrapper form')[0].reset();
   });
  });
 </script>
