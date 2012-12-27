@@ -649,10 +649,13 @@ form #credit-card {
 }
 .contact-form {
     input, textarea, select {
-        width:50%;
+        width:70%;
     }
     textarea {
         height:120px;
+    }
+    input[type=submit] {
+        width:55%;
     }
 }
 .ui-autocomplete.ui-menu.ui-widget.ui-widget-content.ui-corner-all {
