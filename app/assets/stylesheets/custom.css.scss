@@ -652,7 +652,7 @@ form #credit-card {
 
         }
     }
-span.ui-helper-hidden-accessible { display: block;}
+span.ui-helper-hidden-accessible { display:none;}
 form .input-mini {
     width:50px;
 }
@@ -660,6 +660,14 @@ form select {
     height:30px;
     line-height: 30px;
     display: inline-block;
+}
+#map {
+  border: 1px solid #DDD; 
+  width:318px;
+  height: 204px;
+  float:left;  
+  margin: 5px 0 0 0px;
+  -webkit-box-shadow: #AAA 0px 0px 15px;
 }
 
 /* HOW IT WORKS
