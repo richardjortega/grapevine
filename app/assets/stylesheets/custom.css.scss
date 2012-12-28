@@ -50,7 +50,7 @@ section.subpage aside, aside {
 p {
     font-size:16px;
     line-height: 30px;
-    color:$textGray;
+    color: darken($textGray, 10%);
     font-weight: 300;
 
 }
@@ -902,10 +902,12 @@ header#global-header .global-nav .sign-in {
 }
 
 .change-plan .current-plan {
-    background:lighten($purple, 30%);
+    background:lighten($purple, 20%);
     color:#fff;
     margin-top:20px;
     padding:10px;
+    border-top:1px solid rgba(0, 0, 0, .1);
+    border-left:1px solid rgba(0, 0, 0, .1);
     @include radius(3px);
     text-shadow:1px 1px 0px rgba(0, 0, 0, .3);
     span {
@@ -916,6 +918,7 @@ header#global-header .global-nav .sign-in {
     }
 }
 .change-plan aside {
+    
     margin-top:20px;
     @include radius(3px);
     background:#efefef;
