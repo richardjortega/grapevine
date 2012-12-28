@@ -9,7 +9,12 @@
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
+$primary-color: #af83d3;
+$secondary-color: #8D6DB1;
+
 @import "active_admin/base";
+
+
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

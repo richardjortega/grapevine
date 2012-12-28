@@ -6,5 +6,5 @@ class Vine < ActiveRecord::Base
 
   belongs_to :location
   belongs_to :source
-
+  scope :locations_without_uris, where(:source_location_uri => nil, :source_location_uri => '')
 end
