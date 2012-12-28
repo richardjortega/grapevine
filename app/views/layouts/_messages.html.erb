@@ -3,11 +3,3 @@
     <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
   </div>
 <% end %>
-
-<script>
-  $(document).ready(function() {
-    setTimeout(function(){ 
-      $(".alert").fadeOut("slow"); 
-    }, 1000 ); 
-  });
-</script>
