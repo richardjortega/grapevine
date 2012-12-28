@@ -849,7 +849,7 @@ header#global-header .global-nav .sign-in {
             color:$textGray;
             margin-left:-1px;
             &:hover {
-                background:#d7c9e6;
+                background:#c1afd5;
                 color:#fff;
             }
         } 
@@ -857,19 +857,19 @@ header#global-header .global-nav .sign-in {
 }
 .dash-page {
     &.summary {
-        .dashnav li.summary a { background:#d7c9e6; color:#fff;}
+        .dashnav li.summary a { background:#c1afd5; color:#fff;}
     }
     &.profile {
-        .dashnav li.profile a { background:#d7c9e6; color:#fff;}
+        .dashnav li.profile a { background:#c1afd5; color:#fff;}
     }
     &.billing {
-        .dashnav li.billing a { background:#d7c9e6; color:#fff;}
+        .dashnav li.billing a { background:#c1afd5; color:#fff;}
     }
     &.upgrade {
-        .dashnav li.upgrade a { background:#d7c9e6; color:#fff;}
+        .dashnav li.upgrade a { background:#c1afd5; color:#fff;}
     }
     &.change-plan {
-        .dashnav li.change-plan a { background:#d7c9e6; color:#fff;}
+        .dashnav li.change-plan a { background:#c1afd5; color:#fff;}
     }
 }
 .user-details-list {
