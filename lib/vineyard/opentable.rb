@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'HTTParty'
+require 'httparty'
 
 class OpenTable
 	def initialize(location_id)
