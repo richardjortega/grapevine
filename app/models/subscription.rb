@@ -26,7 +26,6 @@ class Subscription < ActiveRecord::Base
   
   # Create new customer on Stripe and internal, 30 Day Free Trial Signups
   def save_without_payment 
-  	begin
     customer = stripe_customer_without_credit_card 
   	self.stripe_customer_token	= customer.id
   	# This will not create a stripe charge at all

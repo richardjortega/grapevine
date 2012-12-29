@@ -20,4 +20,11 @@ class Location < ActiveRecord::Base
   #Model Validations
   validates_presence_of :name, :street_address
 
+  #Geocoding!
+  geocoded_by :full_address, :latitude => :lat, :longitude => :long
+  after_validation :geocode, :if => :address_changed?
+
+  def full_address
+    [street_address, address_line_2, city, state, zip].compact.join(', ')
+  end
 end
