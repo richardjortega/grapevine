@@ -356,21 +356,23 @@ section.section-panel {
     border-top:1px solid #d4d4d4;
 
     &.home-panel {
-        &:first-child {
+        &.track {
             border-top:0;
             background: url('home-browser-bg.png') no-repeat bottom right;
         }
         p {
             width:45%;
+            font-size:18px;
+            line-height: 33px;
         }
-        &:nth-of-type(2) {
+        &.how {
             background: url('home-displays-bg.png') no-repeat bottom left;
-            h3, p {
+            h3, p, a.btn {
                 position: relative;
                 left:56%;
             }
         }
-        &:nth-of-type(3) {
+        &.last {
             background: url('home-stats.png') no-repeat bottom right;
 
         }
