@@ -22,7 +22,7 @@ class Location < ActiveRecord::Base
 
   #Geocoding!
   geocoded_by :full_address, :latitude => :lat, :longitude => :long
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode
 
   def full_address
     [street_address, address_line_2, city, state, zip].compact.join(', ')
