@@ -50,7 +50,7 @@ section.subpage aside, aside {
 p {
     font-size:16px;
     line-height: 30px;
-    color: darken($textGray, 10%);
+    color: $textGray;
     font-weight: 300;
 
 }
@@ -338,10 +338,9 @@ header#global-header .global-nav li.signup a:hover {
 =================================
 ===============================*/
 a.home-bottom-action {
-    margin: 0 auto;
+    margin: 50px auto;
     display: block;
-    width: 180px;
-    top: 26px;
+    width: 240px;
     position: relative;
 }
 
@@ -359,6 +358,7 @@ section.section-panel {
         &.track {
             border-top:0;
             background: url('home-browser-bg.png') no-repeat bottom right;
+            p { color:$textGray;}
         }
         p {
             width:45%;
@@ -371,9 +371,11 @@ section.section-panel {
                 position: relative;
                 left:56%;
             }
+            p {color: darken($textGray, 10%);}
         }
         &.last {
             background: url('home-stats.png') no-repeat bottom right;
+            height:338px;
 
         }
         blockquote {

@@ -81,13 +81,13 @@
                 <%= location_fields.text_field :city %> 
               </div>
             </div>
-            <div class="control-group">
+            <div class="control-group state">
               <label class="control-label">State</label>
               <div class="controls">
-                <%= location_fields.text_field :state %> 
+                <%= location_fields.text_field :state, :size => 2, :placeholder => 'TX' %> 
               </div>
             </div>
-            <div class="control-group">
+            <div class="control-group zip">
               <label class="control-label">Zip</label>
               <div class="controls">
                 <%= location_fields.text_field :zip, :size => 5 %> 
