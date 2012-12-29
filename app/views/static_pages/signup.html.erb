@@ -54,7 +54,7 @@
         </div><!-- /.user-info -->
 
       <div class="biz-info">
-        <h3>Your Business Information</h3>
+        <h3>Business Name &amp; Address</h3>
           <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
             <div class="control-group">
@@ -90,7 +90,7 @@
             <div class="control-group zip">
               <label class="control-label">Zip</label>
               <div class="controls">
-                <%= location_fields.text_field :zip, :size => 5 %> 
+                <%= location_fields.text_field :zip, :size => 8 %> 
               </div>
             </div>
           <% end %>

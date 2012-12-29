@@ -358,7 +358,7 @@ section.section-panel {
         &.track {
             border-top:0;
             background: url('home-browser-bg.png') no-repeat bottom right;
-            p { color:$textGray;}
+           
         }
         p {
             width:45%;
@@ -371,7 +371,7 @@ section.section-panel {
                 position: relative;
                 left:56%;
             }
-            p {color: darken($textGray, 10%);}
+           
         }
         &.last {
             background: url('home-stats.png') no-repeat bottom right;
@@ -733,7 +733,10 @@ form select {
   margin: 5px 0 0 0px;
   -webkit-box-shadow: #AAA 0px 0px 15px;
 }
-
+.control-group.state {
+    float:left;
+    margin-right:20px;
+}
 /* HOW IT WORKS
 =================================
 ===============================*/
