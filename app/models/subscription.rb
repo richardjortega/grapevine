@@ -26,7 +26,7 @@ class Subscription < ActiveRecord::Base
   
   # Create new customer on Stripe and internal, 30 Day Free Trial Signups
   def save_without_payment 
-  	customer = stripe_customer_without_credit_card 
+    customer = stripe_customer_without_credit_card 
   	self.stripe_customer_token	= customer.id
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts
@@ -35,7 +35,8 @@ class Subscription < ActiveRecord::Base
     self.status_info            = "active"
     self.next_bill_on           = Date.parse customer.next_recurring_charge.date
     self.start_date             = Date.today.beginning_of_day.to_i
-  	save!
+  	user.save!
+    save!
   end
 
   def save_with_payment

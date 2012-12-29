@@ -64,14 +64,34 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Address</label>
+              <label class="control-label">Street Address</label>
               <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
-
+                <%= location_fields.text_field :street_address %> 
               </div>
-              <div id="map"></div>
-                <%= location_fields.hidden_field :lat, :id => 'lat' %>
-                <%= location_fields.hidden_field :long, :id => 'lng' %>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Suite/Other</label>
+              <div class="controls">
+                <%= location_fields.text_field :address_line_2 %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">City</label>
+              <div class="controls">
+                <%= location_fields.text_field :city %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">State</label>
+              <div class="controls">
+                <%= location_fields.text_field :state %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Zip</label>
+              <div class="controls">
+                <%= location_fields.text_field :zip, :size => 5 %> 
+              </div>
             </div>
           <% end %>
 

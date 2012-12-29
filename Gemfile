@@ -8,6 +8,7 @@ gem 'cloudfoundry-devise', :require => 'devise'
 gem 'rails', '3.2.8'
 gem 'thin'
 gem 'jquery-rails'
+gem 'geocoder'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
