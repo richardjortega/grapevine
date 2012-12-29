@@ -556,9 +556,12 @@ input, textarea {
 }
 select {
     display: block;
-    height:30px;
+    height:40px;
     line-height: 30px;
     margin-bottom: 10px;
+    border:1px solid #ccc;
+    background:#efefef;
+    padding:4px 6px;
 
 }
 form label {
