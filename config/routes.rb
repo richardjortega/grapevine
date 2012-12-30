@@ -33,7 +33,10 @@ Grapevine::Application.routes.draw do
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
   match '/learn-more', :to => 'static_pages#learn_more', as: 'learn_more'
+  match '/terms', :to => 'static_pages#terms', as: 'terms'
+  match '/privacy', :to => 'static_pages#privacy', as: 'privacy'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
+
 
 
   # some older but relevant shit

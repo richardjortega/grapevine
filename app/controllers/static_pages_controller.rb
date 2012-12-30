@@ -40,6 +40,12 @@ class StaticPagesController < ApplicationController
   def send_follow_up
   end
 
+  def terms
+  end
+
+  def privacy
+  end
+
   def review_alert
 
     # Associate all params to appropiate 
