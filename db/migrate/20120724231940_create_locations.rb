@@ -2,8 +2,8 @@ class CreateLocations < ActiveRecord::Migration
   def change
     create_table :locations do |t|
       t.string :name,           :null => false
-      t.string :lat
-      t.string :long
+      t.decimal :lat,           :precision => 15, :scale => 10
+      t.decimal :long,          :precision => 15, :scale => 10
       t.string :street_address, :null => false
       t.string :address_line_2
       t.string :city,           :null => false
