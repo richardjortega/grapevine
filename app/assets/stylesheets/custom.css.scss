@@ -260,6 +260,12 @@ header#global-header .global-nav li.signup a:hover {
     background: linear-gradient(135deg, rgba(0,0,0,0.46) 0%,rgba(0,0,0,0) 73%,rgba(0,0,0,0) 100%), url('ipad-coffee3.jpg') no-repeat 0 -80px;;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75000000', endColorstr='#00000000',GradientType=1 );
     /*background: url('ipad-coffee3.jpg') no-repeat 0 -80px;*/
+    @media screen and (min-width:1570px) {
+        background: url('ipad-coffee3.jpg') no-repeat 0 -200px;
+        -webkit-background-size:cover;
+        -moz-background-size:cover;
+        background-size:cover;
+    }
     -webkit-background-size:cover;
     -moz-background-size:cover;
     background-size:cover;
@@ -355,6 +361,10 @@ section.section-panel {
     border-top:1px solid #d4d4d4;
 
     &.home-panel {
+        a.btn.alt {
+            line-height: 14px;
+            margin-top:15px;
+        }
         &.track {
             border-top:0;
             background: url('home-browser-bg.png') no-repeat bottom right;
@@ -367,7 +377,7 @@ section.section-panel {
         }
         &.how {
             background: url('home-displays-bg.png') no-repeat bottom left;
-            h3, p, a.btn {
+            h3, p {
                 position: relative;
                 left:56%;
             }
@@ -628,28 +638,32 @@ form #credit-card {
     margin:40px 0;
     padding:0;
     list-style-type: none;
-    span.avatar-wrapper {
-        display: block;
-        border-radius: 100px;
-        overflow: hidden;
+   
+        
+    img {
         width:150px;
-        height:150px;
-        text-align: center;
-        margin:0 auto;
-        position: relative;
-        z-index: 2;
+        height: 150px;
+        @include radius(100px);
         border:5px solid lighten($purple, 30%);
         -webkit-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        img {
-            width:170px;
-            height: auto;
+        margin:0 auto;
+        display: block;
+        position: relative;
+        top:0;
+        
+    
+    }
+    li:hover {
+        h4 { color:lighten($purple, 5%);
+
         }
-        &:hover {
+        img {
             border:5px solid lighten($purple, 5%);
             top:-2px;
         }
     }
+    
     h4 {
         text-align: center;
         margin-bottom: 0;
@@ -746,8 +760,36 @@ form select {
         display: block;
         width:200px;
     }
+    p.stat {
+        padding:10px;
+        @include radius(5px);
+        background:#efefef;
+        position: relative;
+        font-size: 14px;
+        line-height: 22px;
+        font-family: georgia, serif;
+        height: 74px;
+        em {
+            position: absolute;
+            bottom:-31px;
+            right:0;
+        }
+        &:after {
+            content:'';
+            border-top:10px solid #efefef;
+            border-left:10px solid transparent;
+            border-right:10px solid transparent;
+            position: absolute;
+            bottom:-7px;
+            right:10px;
+        }
+    }
+    .reviews-matter .col p:first-of-type {
+        height:120px;
+        /* makes stats line up */
+    }
     .col-wrapper {
-        margin-bottom: 40px;
+        margin-bottom: 50px;
         h3 {
             text-align: center;
             margin-bottom: 40px;
@@ -944,13 +986,14 @@ header#global-header .global-nav .sign-in {
     }
 }
 
-.profile .profile-fields, .billing .form-wrapper {
+.profile .profile-fields, .billing .form-wrapper, .change-plan .form-wrapper {
     padding:0 20px 20px 20px;
     border:1px solid #e1e1e1;
     background:#efefef;
     @include radius(3px);
 
 }
+.change-plan .form-wrapper { padding-top: 20px;}
 
 .change-plan .current-plan {
     background:lighten($purple, 20%);
@@ -1037,7 +1080,6 @@ footer {
         &.thanks {
             width:605px;
             padding-right:40px;
-            border-right:1px solid #ccc;
             p {
                 font-size:19px;
             }
@@ -1059,21 +1101,15 @@ footer {
             line-height: 14px;
             padding-top:35px;
 
-            .img-wrapper {
-                height: 100px;
-                width: 100px;
+            
+            img {
+                width:110px;
+                height:110px;
                 @include radius(100px);
-                overflow: hidden;
-                display: block;
+                margin-right:10px;
                 float:left;
                 margin-top:-25px;
-                margin-right:10px;
-                position: relative;
                 border:5px solid #666;
-                img {
-                    width:110px;
-                    height:110px;
-                }
             }
             .name {
                 font-size:16px;

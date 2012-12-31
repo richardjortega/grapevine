@@ -7,7 +7,7 @@
 
 <div class="section-content">
 	<h3>Have questions?</h3>
-	<p>We’d love to hear from you. Whether it's feedback about how we can improve our service or general questions, please let us know.</p>
+	<p>We&rsquo;d love to hear from you. Whether it&rsquo;s feedback about how we can improve our service or general questions, please let us know.</p>
 
 <%= form_tag 'static_pages/submit_contact_us', :class => 'contact-form' do %>
 
@@ -16,11 +16,8 @@
 
 	<%= label_tag 'email' %>
 	<%= email_field_tag 'email' %>
-<!-- 
-	<%= label_tag 'subject' %>
-	<%= text_field_tag 'subject' %>
- -->
- <%= label_tag 'subject' %>
+
+  <%= label_tag 'subject' %>
 	<%= select_tag 'subject', options_for_select(['Agency Related', 'General Sales', 'Tech Support', 'Other'], params[:subject]) %>
 
 
@@ -37,7 +34,7 @@
 
 <aside>
 	<h3>Customer Service:</h3>
-	<p>"A customer is the most important visitor on our premises, he is not dependent on us. We are dependent on him. He is not an interruption in our work. He is the purpose of it. He is not an outsider in our business. He is part of it. We are not doing him a favor by serving him. He is doing us a favor by giving us an opportunity to do so."<br />- <em>Mahatma Gandhi<em></p>
+	<p>&ldquo;A customer is the most important visitor on our premises, he is not dependent on us. We are dependent on him. He is not an interruption in our work. He is the purpose of it. He is not an outsider in our business. He is part of it. We are not doing him a favor by serving him. He is doing us a favor by giving us an opportunity to do so.&rdquo;<br />- <em>Mahatma Gandhi</em></p>
 </aside>
 </section>
 </div><!-- /#main-container -->
