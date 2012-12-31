@@ -980,13 +980,14 @@ header#global-header .global-nav .sign-in {
     }
 }
 
-.profile .profile-fields, .billing .form-wrapper {
+.profile .profile-fields, .billing .form-wrapper, .change-plan .form-wrapper {
     padding:0 20px 20px 20px;
     border:1px solid #e1e1e1;
     background:#efefef;
     @include radius(3px);
 
 }
+.change-plan .form-wrapper { padding-top: 20px;}
 
 .change-plan .current-plan {
     background:lighten($purple, 20%);

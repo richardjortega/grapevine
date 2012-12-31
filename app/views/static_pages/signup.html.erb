@@ -84,13 +84,13 @@
             <div class="control-group state">
               <label class="control-label">State</label>
               <div class="controls">
-                <%= location_fields.text_field :state, :size => 2, :placeholder => 'TX' %> 
+              <%= location_fields.select :state, options_for_select(us_states) %>
               </div>
             </div>
             <div class="control-group zip">
               <label class="control-label">Zip</label>
               <div class="controls">
-                <%= location_fields.text_field :zip, :size => 8 %> 
+                <%= location_fields.text_field :zip, :size => 8, :class => 'zip' %> 
               </div>
             </div>
           <% end %>
