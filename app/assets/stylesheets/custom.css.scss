@@ -260,6 +260,12 @@ header#global-header .global-nav li.signup a:hover {
     background: linear-gradient(135deg, rgba(0,0,0,0.46) 0%,rgba(0,0,0,0) 73%,rgba(0,0,0,0) 100%), url('ipad-coffee3.jpg') no-repeat 0 -80px;;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75000000', endColorstr='#00000000',GradientType=1 );
     /*background: url('ipad-coffee3.jpg') no-repeat 0 -80px;*/
+    @media screen and (min-width:1570px) {
+        background: url('ipad-coffee3.jpg') no-repeat 0 -200px;
+        -webkit-background-size:cover;
+        -moz-background-size:cover;
+        background-size:cover;
+    }
     -webkit-background-size:cover;
     -moz-background-size:cover;
     background-size:cover;
