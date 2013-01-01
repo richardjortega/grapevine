@@ -6,7 +6,9 @@ class CreatePlans < ActiveRecord::Migration
       t.integer :amount, null: false
       t.string :currency, null: false
       t.string :interval, null: false
-      t.integer :trial_period_days #optional
+      t.integer :trial_period_days
+      t.integer :location_limit
+      t.integer :review_limit
 
       t.timestamps
     end
