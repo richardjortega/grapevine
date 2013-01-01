@@ -8,7 +8,7 @@
 
 			<%= f.hidden_field :stripe_card_token %>
 			<%= f.hidden_field :last_four %>
-			<%= hidden_field_tag 'subscription[plan]', 'gv_30' %>
+			<%= f.hidden_field :plan, { :value => 'gv_30' } %>
 			
 
 			<noscript>

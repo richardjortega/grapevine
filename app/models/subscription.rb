@@ -66,16 +66,22 @@ class Subscription < ActiveRecord::Base
     #   self.last_four = customer.active_card.last4
     #   response = customer.update_subscription({:plan => "premium"})
     # else
-
+    begin
+    puts params
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-    unless params[:plan] == 'gv_free'
-      customer.update_subscription({:plan => params[:plan]})
+    # Before adding a plan, we are ensuring that the user has a credit card associated (needed for paid plans)
+    if params[:stripe_card_token].present?
+      if user.plan.identifier == 'gv_free'
+        customer = stripe_customer_with_credit_card params
+      else
+        customer.card = params[:stripe_card_token]
+      end 
     end
 
-    if params[:stripe_card_token].present?
-      customer.card = params[:stripe_card_token]
-    end
+    if params[:plan].present?
+      customer.update_subscription({:plan => params[:plan]})
+    end    
 
     # in case they've changed
     customer.email             = user.email
@@ -86,7 +92,12 @@ class Subscription < ActiveRecord::Base
     self.status_info           = "active"
     self.next_bill_on          = Date.parse customer.next_recurring_charge.date
     self.stripe_customer_token = customer.id
+    user.save!
     save!
+
+    rescue Stripe::InvalidRequestError => e
+      puts "#{e.message}"    
+    end
   end
 
 
@@ -107,8 +118,8 @@ private
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
   end
 
-  def stripe_customer_with_credit_card
-    Stripe::Customer.create(email: user.email, description: stripe_description, plan: plan.identifier, card: stripe_card_token)
+  def stripe_customer_with_credit_card params
+    Stripe::Customer.create(email: user.email, description: stripe_description, plan: params[:plan], card: params[:stripe_card_token])
   end
 
 	def stripe_customer
