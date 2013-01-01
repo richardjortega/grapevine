@@ -8,9 +8,8 @@
 
 			<%= f.hidden_field :stripe_card_token %>
 			<%= f.hidden_field :last_four %>
-			<% if local_assigns.has_key? :plan %>
-				<%= f.hidden_field :plan %>
-			<% end %>
+			<%= hidden_field_tag 'subscription[plan]', 'gv_30' %>
+			
 
 			<noscript>
 	          <p>This form requires Javascript to use</p>

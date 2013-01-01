@@ -23,7 +23,6 @@ class AccountsController < ApplicationController
             @user = current_user
             @plans = Plan.all
             @plan_identifier = @user.plan.identifier
-            @paid_plan = Plan.find_by_identifier('gv_30')
 
             if @user.plan.location_limit.nil?
                   @location_limit = '1'

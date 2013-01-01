@@ -12,6 +12,7 @@
 
 	<div class="section-content">
 		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
+		<span>Plan: </span><%= @paid_plan %>
 		<% if @plan_identifier == 'gv_free' %>
 	    	<h3>What does upgrading get me?</h3>
 			<h4>Unlimited Review Tracking for Your Business.</h4>
@@ -20,7 +21,7 @@
 			<h4>$30 per month.</h4>
 			<p>That&rsquo;s it. Awesome, right?<br /> Sign up below and your account will be immediately upgraded!</p>
 			<div class="form-wrapper">
-			<%= render 'shared/payment_form', :plan => @paid_plan %>
+			<%= render 'shared/payment_form' %>
 			</div>
 	    <% else %>
 	    	<h3>Need to change your plan?</h3>
