@@ -135,22 +135,22 @@ ActiveRecord::Schema.define(:version => 20121227011159) do
   end
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id",                                                 :null => false
-    t.integer  "plan_id",                                                 :null => false
-    t.boolean  "status",                               :default => false
+    t.integer  "user_id",                                  :null => false
+    t.integer  "plan_id",                                  :null => false
+    t.boolean  "status",                :default => false
     t.string   "status_info"
-    t.integer  "current_period_end",    :limit => 255
-    t.integer  "current_period_start",  :limit => 255
-    t.integer  "trial_end",             :limit => 255
-    t.integer  "trial_start",           :limit => 255
+    t.integer  "current_period_end"
+    t.integer  "current_period_start"
+    t.integer  "trial_end"
+    t.integer  "trial_start"
     t.string   "stripe_customer_token"
     t.string   "card_zip"
     t.string   "last_four"
     t.string   "card_type"
     t.date     "next_bill_on"
     t.string   "card_expiration"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "start_date"
   end
 
