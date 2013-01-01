@@ -12,7 +12,6 @@
 
 	<div class="section-content">
 		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
-		<span>Plan: </span><%= @paid_plan %>
 		<% if @plan_identifier == 'gv_free' %>
 	    	<h3>What does upgrading get me?</h3>
 			<h4>Unlimited Review Tracking for Your Business.</h4>
