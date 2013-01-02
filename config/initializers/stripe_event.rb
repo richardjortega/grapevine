@@ -50,16 +50,21 @@ private
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(charge)
+		begin
 		subscription = Subscription.find_by_stripe_customer_token(charge.invoice.customer)
-
-		if subscription.status_info == 'trialing' 
-			return false
-		else
-			subscription.status = true
-			subscription.save!
-			
-			user = subscription.user
-			NotifyMailer.successfully_charged(charge.invoice, user).deliver
+		if subscription.status_info.present?
+			if subscription.status_info == 'trialing' 
+				return false
+			else
+				subscription.status = true
+				subscription.save!
+				
+				user = subscription.user
+				NotifyMailer.successfully_charged(charge.invoice, user).deliver
+			end
+		end
+		rescue => e
+			puts "#{e.message}"
 		end
 	end
 
