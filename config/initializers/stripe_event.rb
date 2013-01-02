@@ -6,11 +6,11 @@
 StripeEvent.setup do
 	require 'pp'
 
-	subscribe 'invoice.payment_failed' do |event|
+	subscribe 'charge.failed' do |event|
 		handle_failed_charge event.data.object
 	end
 
-	subscribe 'invoice.payment_succeeded' do |event|
+	subscribe 'charge.succeeded' do |event|
 		handle_successful_charge event.data.object
 	end
 
@@ -36,12 +36,12 @@ end
 private
 
 	# Inform user of failed payment. Accepts Stripe Invoice object
-	def handle_failed_charge(invoice)
+	def handle_failed_charge(charge)
 		begin
-		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
+		subscription = Subscription.find_by_stripe_customer_token(charge.invoice.customer)
 		
 		user = subscription.user
-		NotifyMailer.unsuccessfully_invoiced(invoice, user).deliver
+		NotifyMailer.unsuccessfully_charged(charge.invoice, user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has failed a charge").deliver
 		rescue => e
 			puts "#{e.message}"
@@ -49,8 +49,8 @@ private
 	end
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object
-	def handle_successful_charge(invoice)
-		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
+	def handle_successful_charge(charge)
+		subscription = Subscription.find_by_stripe_customer_token(charge.invoice.customer)
 
 		if subscription.status_info == 'trialing' 
 			return false
@@ -59,7 +59,7 @@ private
 			subscription.save!
 			
 			user = subscription.user
-			NotifyMailer.successfully_invoiced(invoice, user).deliver
+			NotifyMailer.successfully_charged(charge.invoice, user).deliver
 		end
 	end
 

@@ -101,8 +101,10 @@ class NotifyMailer < ActionMailer::Base
     mail to: user.email, subject: "Sorry to see you go the way of the Dodo..."
   end
 
+  ### Stripe related emails (billing, charges, etc)
+
   # Email invoice receipt to User's email and Grapevine Support - successful
-  def successfully_invoiced(invoice, user)
+  def successfully_charged(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
     @subscription_plan = @subscription.plan.name
@@ -114,8 +116,7 @@ class NotifyMailer < ActionMailer::Base
   end
 
   # Email invoice receipt to User's email and Grapevine Support - failed
-  # Called in HooksController
-  def unsuccessfully_invoiced(invoice, user)
+  def unsuccessfully_charged(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
     @subscription_plan = @subscription.plan.name
