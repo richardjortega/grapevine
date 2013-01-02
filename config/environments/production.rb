@@ -1,6 +1,9 @@
 Grapevine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # specify what domain to use for mailer URLs
+  config.action_mailer.default_url_options = { :host => 'pickgrapevine.com'}
+
   # Heroku REQUIRES this to be false
   config.assets.initialize_on_precompile = false
 
