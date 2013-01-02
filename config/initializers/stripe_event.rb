@@ -37,11 +37,15 @@ private
 
 	# Inform user of failed payment. Accepts Stripe Invoice object
 	def handle_failed_charge(invoice)
+		begin
 		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
 		
 		user = subscription.user
-		NotifyMailer.unsuccessfully_invoiced(user).deliver
+		NotifyMailer.unsuccessfully_invoiced(invoice, user).deliver
 		NotifyMailer.update_grapevine_team(user, "User has failed a charge").deliver
+		rescue => e
+			puts "#{e.message}"
+		end
 	end
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object

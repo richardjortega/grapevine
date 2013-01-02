@@ -115,13 +115,14 @@ class NotifyMailer < ActionMailer::Base
 
   # Email invoice receipt to User's email and Grapevine Support - failed
   # Called in HooksController
-  def unsuccessfully_invoiced(user)
+  def unsuccessfully_invoiced(invoice, user)
+    @subscription = invoice.lines.subscriptions[0]
     @user = user
     @subscription_plan = @subscription.plan.name
     @subscription_amount = format_amount(invoice.total)
     
     # Mail invoice 
-    mail to: user.email, subject: "Grapevine Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt", bcc: "erik@pickgrapevine.com"
   end
  
 private
