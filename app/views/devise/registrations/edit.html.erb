@@ -76,7 +76,7 @@
   <h3>Business Information</h3>
   <li><strong>Name</strong> <span><%= @business.name %></span></li>
   <li><strong>Address</strong> <span><%= @business.street_address %></span></li>
-  <% unless @business.address_line_2.nil? %>
+  <% unless @business.address_line_2.empty? %>
     <li><strong>&nbsp;</strong> <span><%= @business.address_line_2 %></span></li>
   <% end %>
   <li><strong>City</strong> <span><%= @business.city %></span></li>
