@@ -636,7 +636,12 @@ form #credit-card {
         margin-bottom:5px;
     }
 }
-
+form .field_with_errors {
+    input, textarea {
+        border:1px solid red;
+    }
+    .message { color:red; font-size:13px;}
+}
 
 
 /* ABOUT PAGE
@@ -1055,8 +1060,10 @@ header#global-header .global-nav .sign-in {
 footer {
     background:#39383b;
     color:#fff;
-    a {
+    a, a:link, a:visited {
         text-decoration: none;
+        color:$purple;
+
     }
     h4 {
         font-weight: 300;
