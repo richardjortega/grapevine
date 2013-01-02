@@ -26,7 +26,7 @@ class SubscriptionsController < ApplicationController
       redirect_to billing_path
     else
       flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
-      redirect_to billing_path
+      redirect_to :back
     end
 
   end

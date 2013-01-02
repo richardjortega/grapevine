@@ -23,7 +23,9 @@ class Location < ActiveRecord::Base
   has_many :reviews
 
   #Model Validations
-  validates_presence_of :name, :street_address
+  validates_presence_of :street_address, :city, :state, :zip
+  validates_presence_of :name, :message => 'Please provide a business name to monitor'
+  validates_format_of :zip, :with => /^\d{5}(-\d{4})?$/, :message => "Zip code should be in the form 12345"
 
   #Geocoding!
   geocoded_by :full_address, :latitude => :lat, :longitude => :long
