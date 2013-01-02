@@ -81,7 +81,11 @@ class Subscription < ActiveRecord::Base
 
     if params[:plan].present?
       customer.update_subscription({:plan => params[:plan]})
-    end    
+      user_new_plan = Plan.find_by_identifier params[:plan]
+      user.plan = user_new_plan
+    end
+
+    debugger    
 
     # in case they've changed
     customer.email             = user.email

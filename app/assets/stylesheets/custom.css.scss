@@ -136,23 +136,22 @@ body { background: url(grid.png) repeat; }
       border-color: #e6e6e6 #e6e6e6 #bfbfbf;
       border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
       border-bottom-color: #a2a2a2;
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+      
       *zoom: 1;
       -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
          -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
               box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 .btn.primary {
+    background: #eca919;
     background: rgb(239,184,65);
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmYjg0MSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYWEyMDciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: -moz-linear-gradient(top, rgba(239,184,65,1) 0%, rgba(234,162,7,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,184,65,1)), color-stop(100%,rgba(234,162,7,1)));
     background: -webkit-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     background: -o-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     background: -ms-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
     background: linear-gradient(to bottom, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efb841', endColorstr='#eaa207',GradientType=0 );
+    
     font-size:24px;
     color:#333 !important;
 }
@@ -168,15 +167,13 @@ body { background: url(grid.png) repeat; }
 ===============================*/
 header#global-header {
     /*background: $purple;*/
-    background: #af83d3;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2FmODNkMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4ZDZkYjEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: $purple;
     background: -moz-linear-gradient(top, #af83d3 0%, $purple 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#af83d3), color-stop(100%,$purple));
     background: -webkit-linear-gradient(top, #af83d3 0%,$purple 100%);
     background: -o-linear-gradient(top, #af83d3 0%,$purple 100%);
     background: -ms-linear-gradient(top, #af83d3 0%,$purple 100%);
     background: linear-gradient(to bottom, #af83d3 0%,$purple 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#af83d3', endColorstr='$purple',GradientType=0 );
 
     box-shadow: 0 2px 13px 0px rgba(0, 0, 0, .5);
     position: relative;
@@ -339,6 +336,12 @@ header#global-header .global-nav li.signup a:hover {
     }
     
 }
+.lt-ie9 .twitter-wrapper {
+    .inner-twitter-wrapper {
+        color:#fff;
+        display:inline !important;
+    }
+}
 
 /* HOME MISC
 =================================
@@ -373,7 +376,7 @@ section.section-panel {
         p {
             width:45%;
             font-size:18px;
-            line-height: 33px;
+            line-height: 30px;
         }
         &.how {
             background: url('home-displays-bg.png') no-repeat bottom left;
@@ -405,7 +408,7 @@ section.section-panel {
     }
     
     h3 {
-        font-size:36px;
+        font-size:34px;
         font-weight: 100;
         width:45%;
         margin-top:0;
@@ -413,6 +416,11 @@ section.section-panel {
     }
     
 }
+.lt-ie9 .track.home-panel {
+    height:330px;
+}
+
+
 /* SUB PAGES
 =================================
 ===============================*/
@@ -628,7 +636,12 @@ form #credit-card {
         margin-bottom:5px;
     }
 }
-
+form .field_with_errors {
+    input, textarea {
+        border:1px solid red;
+    }
+    .message { color:red; font-size:13px;}
+}
 
 
 /* ABOUT PAGE
@@ -644,7 +657,7 @@ form #credit-card {
         width:150px;
         height: 150px;
         @include radius(100px);
-        border:5px solid lighten($purple, 30%);
+        /*border:5px solid lighten($purple, 30%);*/
         -webkit-transition: all .2s ease-in;
         transition: all .2s ease-in;
         margin:0 auto;
@@ -659,7 +672,7 @@ form #credit-card {
 
         }
         img {
-            border:5px solid lighten($purple, 5%);
+           /* border:5px solid lighten($purple, 5%);*/
             top:-2px;
         }
     }
@@ -698,7 +711,7 @@ form #credit-card {
         width:48%;
         float:left;
     }
-    h3 { font-size:30px !important;}
+    h3 { font-size:26px !important;}
     .biz-info {
         width:48%;
         float:right;
@@ -995,7 +1008,7 @@ header#global-header .global-nav .sign-in {
 }
 .change-plan .form-wrapper { padding-top: 20px;}
 
-.change-plan .current-plan {
+.change-plan .current-plan, .billing .current-plan {
     background:lighten($purple, 20%);
     color:#fff;
     margin-top:20px;
@@ -1047,8 +1060,10 @@ header#global-header .global-nav .sign-in {
 footer {
     background:#39383b;
     color:#fff;
-    a {
+    a, a:link, a:visited {
         text-decoration: none;
+        color:$purple;
+
     }
     h4 {
         font-weight: 300;
@@ -1109,7 +1124,7 @@ footer {
                 margin-right:10px;
                 float:left;
                 margin-top:-25px;
-                border:5px solid #666;
+                /*border:5px solid #666;*/
             }
             .name {
                 font-size:16px;

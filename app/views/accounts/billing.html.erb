@@ -16,6 +16,7 @@
  });
 </script>
 	<div class="section-content">
+		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
 		<% if @subscription.last_four.present? %>
 			<p>You have already provided a credit card ending in : <strong><%= @subscription.last_four %></strong>
 			<p>Need to update your billing information?</p> 

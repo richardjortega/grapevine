@@ -138,7 +138,7 @@ private
 
   #Add new signup to Mailchimp list "Free Trial Signup"
   def add_user_to_marketing_list(user)
-    free_trial_list_id = '45da553fee'
+    gv_free_5_alerts_plan_list = 'a8c9d4b3b1'
     location = user.locations.last
     
     merge_vars = {
@@ -153,7 +153,7 @@ private
                    :zip => location.zip ]
     }
     double_optin = false
-    response = Mailchimp::API.listSubscribe({:id => free_trial_list_id,
+    response = Mailchimp::API.listSubscribe({:id => gv_free_5_alerts_plan_list,
       :email_address => user.email, :merge_vars => merge_vars,
       :double_optin => double_optin})
   rescue => e
