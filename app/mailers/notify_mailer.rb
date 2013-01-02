@@ -138,7 +138,7 @@ private
 
   #Add new signup to Mailchimp list "Free Trial Signup"
   def add_user_to_marketing_list(user)
-    free_trial_list_id = '45da553fee'
+    free_trial_list_id = 'a8c9d4b3b1'
     location = user.locations.last
     
     merge_vars = {
