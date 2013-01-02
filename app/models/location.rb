@@ -23,7 +23,7 @@ class Location < ActiveRecord::Base
   has_many :reviews
 
   #Model Validations
-  validates_presence_of :name, :street_address
+  validates_presence_of :name, :street_address, :city, :state, :zip
 
   #Geocoding!
   geocoded_by :full_address, :latitude => :lat, :longitude => :long
