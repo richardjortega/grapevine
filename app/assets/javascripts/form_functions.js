@@ -25,6 +25,6 @@ $(document).ready(function() {
 
 	/* Jquery masked plugin */
 	$("#user_phone_number").mask("(999) 999-9999");
-	$("#user[locations_attributes][0][zip]").mask("99999");
+	$("#user_locations_attributes_0_zip").mask("99999");
 
 });

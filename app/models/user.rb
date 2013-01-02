@@ -28,8 +28,10 @@ class User < ActiveRecord::Base
                   :locations_attributes
 
   validates_presence_of :email
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'Please enter a correct email'
   validates_length_of :password, :minimum => 6, :on => :create
   validates_uniqueness_of :email, :case_sensitive => false
+
 
   validates_presence_of :password, :on => :create
 
