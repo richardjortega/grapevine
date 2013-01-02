@@ -22,6 +22,8 @@ Grapevine::Application.routes.draw do
 
   authenticated :user do
     root to: 'accounts#index'
+    match '/upgrade', to: 'accounts#update', as: 'upgrade'
+
   end
 
   root to: 'static_pages#home'
@@ -61,7 +63,6 @@ Grapevine::Application.routes.draw do
 
   #Billing/payment page
   match '/changeplan', to: 'accounts#update', as: 'change_plan'
-  match '/upgrade', to: 'accounts#update', as: 'upgrade'
   match '/billing', to: 'accounts#billing', as: 'billing'
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
