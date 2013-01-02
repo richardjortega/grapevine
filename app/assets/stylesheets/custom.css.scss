@@ -1003,7 +1003,7 @@ header#global-header .global-nav .sign-in {
 }
 .change-plan .form-wrapper { padding-top: 20px;}
 
-.change-plan .current-plan {
+.change-plan .current-plan, .billing .current-plan {
     background:lighten($purple, 20%);
     color:#fff;
     margin-top:20px;
