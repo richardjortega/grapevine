@@ -2,21 +2,21 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= render 'shared/form_js_includes' %>
 <% end %>
+<% set_meta_tags :title => 'Sign up : Grapevine' %>
+<div id="main-container" class="clearfix">
+<section class="subpage">
+  <header>
+    <h2 class="title">Let&rsquo;s do this.</h2>
+    <p class="description">By signing up today, you will be enrolled in our FREE FOREVER Plan that includes up to 5 customer review alerts per month. Starting out doesn&rsquo;t mean missing out, because you can upgrade to track unlimited reviews at anytime.</p>
+  </header>
 
-<div id="signup-page">
-<div class="page-header">
-	 <h2 class="motto">Reviews. <strong>Delivered</strong>.</h2>
-            <h3 class="hand">Track every review posted online, good and bad!</h3>
-	<h3>30 Day Free Trial, No Credit Card</h3>
-</div>
+ <div class="section-content clearfix">
 
 
-  <div class="row">
-    <p style="text-align:center;">We just need a little information from you to start tracking your business reviews!</p>
+    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal signup-form'}, :url => subscriptions_path(@user) do |user_form| %>
 
-    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal'}, :url => subscriptions_path(@user) do |user_form| %>
 
-        <div class="span5 offset1 user-info">
+        <div class="user-info">
           <h3>Your Information</h3>
 
             <div class="control-group">
@@ -53,8 +53,8 @@
         
         </div><!-- /.user-info -->
 
-      <div class="span5 biz-info">
-        <h3>Your Business Information</h3>
+      <div class="biz-info">
+        <h3>Business Name &amp; Address</h3>
           <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
  
             <div class="control-group">
@@ -64,14 +64,34 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label">Address</label>
+              <label class="control-label">Street Address</label>
               <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
-
+                <%= location_fields.text_field :street_address %> 
               </div>
-              <div id="map"></div>
-                <%= location_fields.hidden_field :lat, :id => 'lat' %>
-                <%= location_fields.hidden_field :long, :id => 'lng' %>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Suite/Other</label>
+              <div class="controls">
+                <%= location_fields.text_field :address_line_2 %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">City</label>
+              <div class="controls">
+                <%= location_fields.text_field :city %> 
+              </div>
+            </div>
+            <div class="control-group state">
+              <label class="control-label">State</label>
+              <div class="controls">
+              <%= location_fields.select :state, options_for_select(us_states) %>
+              </div>
+            </div>
+            <div class="control-group zip">
+              <label class="control-label">Zip</label>
+              <div class="controls">
+                <%= location_fields.text_field :zip, :size => 8, :class => 'zip' %> 
+              </div>
             </div>
           <% end %>
 
@@ -84,10 +104,12 @@
 
           
          
-      <div class="span12">
+      <div class="clear action">
          <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn signup-btn primary purple_button large' %>
-          <% end %>
+      </div>
+      <% end %>
      
-      </div><!-- /.span12 -->
-  </div><!-- /.row -->
-</div>
+      
+  </div><!-- /.section-content -->
+</section>
+</div><!-- /#main-container -->

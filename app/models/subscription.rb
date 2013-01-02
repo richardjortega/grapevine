@@ -26,16 +26,17 @@ class Subscription < ActiveRecord::Base
   
   # Create new customer on Stripe and internal, 30 Day Free Trial Signups
   def save_without_payment 
-  	customer = stripe_customer_without_credit_card 
+    customer = stripe_customer_without_credit_card 
   	self.stripe_customer_token	= customer.id
   	# This will not create a stripe charge at all
   	# This assigns user to Grapevine Alerts - Monthly Alerts
-  	customer.update_subscription({:plan => "basic_monthly"})
+  	customer.update_subscription({:plan => "gv_free"})
   	self.status                 = true
-    self.status_info            = "trialing"
+    self.status_info            = "active"
     self.next_bill_on           = Date.parse customer.next_recurring_charge.date
     self.start_date             = Date.today.beginning_of_day.to_i
-  	save!
+  	user.save!
+    save!
   end
 
   def save_with_payment
@@ -65,16 +66,22 @@ class Subscription < ActiveRecord::Base
     #   self.last_four = customer.active_card.last4
     #   response = customer.update_subscription({:plan => "premium"})
     # else
-
+    begin
+    puts params
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
+    # Before adding a plan, we are ensuring that the user has a credit card associated (needed for paid plans)
     if params[:stripe_card_token].present?
-      customer.card = params[:stripe_card_token]
+      if user.plan.identifier == 'gv_free'
+        customer = stripe_customer_with_credit_card params
+      else
+        customer.card = params[:stripe_card_token]
+      end 
     end
-    
-    if params[:end_trial] == 'true'
-      end_trial customer
-    end
+
+    if params[:plan].present?
+      customer.update_subscription({:plan => params[:plan]})
+    end    
 
     # in case they've changed
     customer.email             = user.email
@@ -85,7 +92,12 @@ class Subscription < ActiveRecord::Base
     self.status_info           = "active"
     self.next_bill_on          = Date.parse customer.next_recurring_charge.date
     self.stripe_customer_token = customer.id
+    user.save!
     save!
+
+    rescue Stripe::InvalidRequestError => e
+      puts "#{e.message}"    
+    end
   end
 
 
@@ -106,8 +118,8 @@ private
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
   end
 
-  def stripe_customer_with_credit_card
-    Stripe::Customer.create(email: user.email, description: stripe_description, plan: plan.identifier, card: stripe_card_token)
+  def stripe_customer_with_credit_card params
+    Stripe::Customer.create(email: user.email, description: stripe_description, plan: params[:plan], card: params[:stripe_card_token])
   end
 
 	def stripe_customer

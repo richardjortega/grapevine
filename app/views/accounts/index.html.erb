@@ -1,34 +1,32 @@
-<div class="container signed-in">
+<div id="main-container" class="dash-page summary">
+<section id="profile" class="with-aside">
+	<header>
+		<h2>Welcome, <%= current_user.first_name %></h2>
+		<%= render 'dashnav' %>
+	</header>
 
-	<div class="row-fluid">
-		<div class="span7">
-			<h3>Welcome, <%= current_user.first_name %></h3>
-			<p class="muted">Here&rsquo;s what we have on file for you now.</p>
+	<div class="section-content">
+	
+	<h3 class="has-actions">Your Information</h3>
 
-			<dl>
-				<dt>Name</dt>
-				<dd><%= current_user.first_name %> <%= current_user.	last_name %></dd>
+	
+	<ul class="unstyled user-details-list">
+		<li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.last_name %></span></li>
+		<li><strong>Email</strong> <span><%= current_user.email %></span></li>
+		<li><strong>Plan</strong> <span><%= @plan.name %></li>
+		<li><strong>Status</strong> <span><%= @status %></span></li>
+		<li><strong>Business Tracking</strong> <span><%= @location.name %></span></li>
+	</ul>
 
-				<dt>Email</dt>
-				<dd><%= current_user.email %></dd>
+	</div><!-- /.section-content -->
 
-				<dt>Plan</dt>
-				<dd><%= @plan.name %>  <span>Start date: <%= @start_date %></span></dd>
-
-				<dt>Status</dt>
-				<dd><%= @subscription.status_info.capitalize %></dd>
-				<p>
-
-
-				<dt>Business Tracking</dt>
-				<dd><%= @location.name %></dd>
-			</dl>
-
-			<%= link_to "Edit Profile", edit_user_registration_path, :class => 'btn' %>
-		</div><!-- /.span6 -->
+	<aside>
+		<h3>Thanks for stopping by</h3>
+		<p>When logged in you can edit your account details and personal info. </p>
+		<p>If you have any questions or concerns while here, don&rsquo;t hesitate to contact us.</p>
+		<p>Call us at <a href="tel:+12105497799">210-549-7799</a></p>
+	</aside>
 		
-		<% if @status != "active" %>
-			<%= render :partial => 'shared/payment_form', :object => @status %>
-		<% end %>
-</div><!-- /.container -->
+</section>
+</div><!-- /#main-container.dash-page -->
 	

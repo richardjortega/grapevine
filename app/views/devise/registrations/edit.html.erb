@@ -1,14 +1,35 @@
-<% content_for :head do %>
-  <%= render 'devise/registrations/stripe_tag_includes' %>
-  <%= render 'shared/form_js_includes' %>
-<% end %>
+<div id="main-container" class="dash-page profile">
+<section class="with-aside">
 
-<div class="container signed-in">
-  <div class="row-fluid">
+<header>
+<h2>Profile</h3>
+<%= render 'accounts/dashnav' %>
+</header>
 
-<h3>Edit <%= resource_name.to_s.humanize %></h3>
-<p class="muted">Feel free to update your user and location information in case anything has changed.</p>
 
+<div class="section-content">
+  <ul class="unstyled user-details-list">
+    <h3>Current Information</h3>
+    <li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.last_name %></span></li>
+    <li><strong>Email</strong> <span><%= current_user.email %></span></li>
+    <li><strong>Phone Number</strong> <span><%= current_user.phone_number %></span></li>
+</ul>
+
+<p>Need to update your profile information? <a href="#" class="edit-profile-info">Edit Profile</a></p>
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  $('.profile-fields').hide();
+  $('.edit-profile-info, a.cancel-profile-edit').click(function() {
+    event.preventDefault();
+    $('.profile-fields').toggle();
+    $('.profile-fields form')[0].reset();
+  });
+ });
+</script>
+<div class="profile-fields">
+<h3>Edit Your <%= resource_name.to_s.humanize %> Information</h3>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-horizontal', :method => :put }) do |user_form| %>
   <%= devise_error_messages! %>
 
@@ -44,34 +65,36 @@
       <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
     </div>
   </div>
-
-        <h3>Edit Business Information</h3>
-          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
- 
-            <div class="control-group">
-              <label class="control-label">Business Name</label>
-              <div class="controls">
-                <%= location_fields.text_field :name %> 
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Address</label>
-              <div class="controls">
-                <%= location_fields.text_field :street_address, :id => 'addresspicker_map' %>
-
-              </div>
-              <div id="map"></div>
-                <%= location_fields.hidden_field :lat, :id => 'lat' %>
-                <%= location_fields.hidden_field :long, :id => 'lng' %>
-            </div>
-          <% end %>
-
 <div class="form-actions" style="margin:60px 0 20px 0;">
-<%= link_to "Back", :back, :class => 'btn' %> <%= user_form.submit "Update", :class => 'btn' %>
-</div>
+ <%= user_form.submit "Save Changes", :class => 'btn alt' %>
+ <p><a href="#" class="cancel-profile-edit">Cancel</a></p>
 <% end %>
+</div>
+</div><!-- /.profile-fields -->
 
+<ul class="unstyled user-details-list">
+  <h3>Business Information</h3>
+  <li><strong>Name</strong> <span><%= @business.name %></span></li>
+  <li><strong>Address</strong> <span><%= @business.street_address %></span></li>
+  <% unless @business.address_line_2.nil? %>
+    <li><strong>&nbsp;</strong> <span><%= @business.address_line_2 %></span></li>
+  <% end %>
+  <li><strong>City</strong> <span><%= @business.city %></span></li>
+  <li><strong>State</strong> <span><%= @business.state %></span></li>
+  <li><strong>Zip</strong> <span><%= @business.zip %></span></li>
 
-<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too, just call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
+  <li><strong>Phone Number</strong> <span><%= current_user.phone_number %></span></li>
+</ul>
 
+<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too. <br />Please contact Grapevine's Customer Service at <a href="tel:+12105497799">210-549-7799</a>.</p>
+
+</div><!-- /.section-content -->
+
+<aside>
+  <h3>Need to edit your business?</h3>
+    <p>Please contact us directly if you need your business information requires updating.</p>
+    <p>Customer Service: <a href="tel:+12105497799">210-549-7799</a></p>
+</aside>
+</section>
+</div><!-- /#main-container -->
 

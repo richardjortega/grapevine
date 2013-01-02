@@ -1,0 +1,2 @@
+# sample request to google places review api
+# https://maps.googleapis.com/maps/api/place/details/json?reference=CnRmAAAAGg321uK8xOiQRZguEZvxKwZXqwzShD1Mx5rW7bolqViOIC4anBbtDrqZDaJ2KSdrEoDgdOhxuwtwI35QlDEgvhFmkPek-MDkV3Gj8ZGMz-wQlAWjbiSIjeVu8pB6Yy8iE5dMIK0fLl4e4Mh0Lu9ihhIQwUApDK4XMZazepOYt6XJQBoUgvF1h4j1OCCNCfVnRmcpbvJwIpE&sensor=true&key=AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM

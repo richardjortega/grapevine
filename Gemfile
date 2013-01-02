@@ -1,13 +1,17 @@
 source 'https://rubygems.org'
 
-# Additions for AppFog
-gem 'cloudfoundry-jquery-rails'
-gem 'cloudfoundry-devise', :require => 'devise'
+# # Additions for AppFog
+# gem 'cloudfoundry-jquery-rails'
+# gem 'cloudfoundry-devise', :require => 'devise'
 
 # Main
 gem 'rails', '3.2.8'
 gem 'thin'
 gem 'jquery-rails'
+gem 'geocoder'
+gem 'seedbank'
+gem 'activeadmin'
+gem 'meta_search',	'>= 1.1.0.pre'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
@@ -33,6 +37,11 @@ gem 'roadie'
 # Background Processes/Workers
 gem 'iron_worker_ng'
 gem 'poltergeist'
+
+# Gems for the Vineyard
+gem 'oauth'
+gem 'httparty'
+gem 'rest-client'
 
 # Design
 gem 'bootstrap-sass', '2.0.3'
@@ -64,6 +73,7 @@ group :development do
 	gem 'debugger'
 	gem 'rails-erd'
 	gem 'thoughtbot-shoulda'
+	gem 'awesome_print'
 end
 
 group :test do

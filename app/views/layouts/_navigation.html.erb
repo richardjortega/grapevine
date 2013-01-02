@@ -1,31 +1,50 @@
-<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-</a>
-<!-- Be sure to leave the brand out there if you want it shown -->
-<%= link_to image_tag( "logo_333x71.png", :class => "brand", :alt => "Grapevine"), root_path %>
+<div class="wrapper">
+	<h1><%= link_to image_tag( "logo-white.png", :class => "brand", :alt => "Grapevine"), root_path %></h1>
 
-<!-- Everything you want hidden at 940px or less, place within here -->
-<div class="nav-collapse">
-	<!-- .nav, .navbar-search, .navbar-form, etc -->
-	<ul class="nav">
-		<li><h3> Call Us. 210-549-7799</h3></li>
+
+	<ul class="global-nav">
 		<% if current_user %>
-			<li>
-				<%= link_to "Edit Profile", edit_user_registration_path %>
+
+			<li><%= current_user.email %></li>
+			<li><%= link_to "Log Out", destroy_user_session_path %></li>
+
+		<% else %>
+
+		  <li><%= link_to "Home", root_path %></li>
+			<li><%= link_to "About", about_path %></li>
+			<li><%= link_to "Contact", contact_path %></li>
+			<li><%= link_to "Pricing", pricing_path %></li>
+			<li><%= link_to "Learn More", learn_more_path %></li>
+			
+			<li class="sign-in"><%= link_to "Login", new_user_session_path, :class => 'sign-in-link' %>
+				<div class="sign-in-form">
+					<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+					  <%= f.email_field :email, :placeholder => 'Email Address', :size => '20' %>
+					  <%= f.password_field :password, :placeholder => 'Password', :size => '20' %>
+
+					  <% if devise_mapping.rememberable? -%>
+					  	<span class="remember-me">
+					    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+					  	</span>
+					  <% end -%>
+
+					  <%= f.submit "Sign in", :class => "btn primary" %>
+					<% end %>
+
+					<span class="sign-up-forgot-pass">
+						<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+	  					<%= link_to "Sign up", signup_path %>
+						<% end -%>
+
+						<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+						  <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+						<% end -%>
+					</span>
+				</div>
+
 			</li>
-			<li>
-				<%= link_to "Sign Out", destroy_user_session_path %>
-			</li>
-		  <% else %>
-			<li>
-		  		<%= link_to "Sign In", new_user_session_path %>
-		  	</li>
-		  	<li>
-		  		<%= link_to "Sign Up", signup_path %>
-		  	</li>
+			<li class="signup"><%= link_to "Sign Up", signup_path %></li>
+			
 		<% end %>
-	</ul>
-</div>
+	</ul><!-- /.global-nav -->
+</div><!-- /.wrapper -->

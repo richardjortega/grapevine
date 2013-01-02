@@ -2,7 +2,7 @@ require_relative "../jobs/opentable.rb"
 
 namespace :crawl do
 	desc "OpenTable - Export CSV of All Locations with Emails"
-	task :opentable do
+	task :opentable_emails do
 		# File to be updated for scrapping
 		filename = "#{Rails.root}/lib/jobs/opentable_scrapelist.txt"
 		

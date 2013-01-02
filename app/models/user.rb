@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
                   :password, 
                   :password_confirmation, 
                   :remember_me, 
-                  :stripe_token,
                   :phone_number,
                   :location,
                   :locations_attributes
@@ -33,6 +32,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   validates_presence_of :password, :on => :create
+
+  def display_name
+    "#{self.first_name} #{self.last_name} | #{self.email}"
+  end
 
 
 private

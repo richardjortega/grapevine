@@ -1,22 +1,51 @@
-<div class="container">
-    <div>
-    &nbsp;
-    </div>
-    <div>
-    &nbsp;
-    </div>
-    <ul class="nav nav-list">
-    <li class="divider"></li>
+<div class="wrapper clearfix">
+	<div class="footer-col-wrap clearfix">
+	<!-- <div class="footer-col">
+
+
+  	<ul class="footer-nav">
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Learn More", learn_more_path %></li>
+    <li><%= link_to "Sign Up", signup_path %></li>
+    <li><%= link_to "Contact", contact_path %></li>
+    <li><%= link_to "Login", root_path %></li>
+  	</ul>
+		
+  </div> -->
+
+  <div class="footer-col thanks">
+  	<h4>Thanks for checking us out.</h4>
+    <p>Let us know if you need anything. We are sorta crazy about customer support and are here for any questions you may have, about life, love or even our software.
+    But if you do have any questions or just want to say &ldquo;Howdy&rdquo; don&rsquo;t hesitate to <a href="/contact">contact us</a>.</p>
+  	
+  </div>
+
+  <div class="footer-col">
+    <blockquote class="quote">
+      &ldquo;It is such a time saver to just be notified instantly, instead of searching daily or weekly for new customer reviews.&rdquo;
+      <span class="author"><%= image_tag 'julia-head-shot.jpg' %><span class="name">Julia</span> <br /><em>JKFitness</em></span>
+    </blockquote>
+
+
+  </div>
+</div><!-- /.footer-col-wrap -->
+  
+
+  <ul class="footer-nav">
+    <% if current_user %>
+      <li><%= link_to "Log Out", destroy_user_session_path %></li>
+
+    <% else %>
+
+      <li><%= link_to "Home", root_path %></li> • 
+      <li><%= link_to "About", about_path %></li> • 
+      <li><%= link_to "Contact", contact_path %></li> • 
+      <li><%= link_to "Pricing", pricing_path %></li> • 
+      <li><%= link_to "Learn More", learn_more_path %></li> • 
+      <li class="signup"><%= link_to "Sign Up", signup_path %></li>
+    <% end %>
     </ul>
-    <div class="row footer">
-        <div class="span10 offset1">
-            <ul class="links">
-                <li><a href="https://twitter.com/#!/PickGrapevine/" target="_blank"><%= image_tag("icons/twitter.png", alt: "twitter") %></a></li>
-                <li><a href="http://www.facebook.com/pages/Grapevine/183081488425142" target="_blank"><%= image_tag("icons/facebook.png", alt: "fb") %></a></li>
-                <li><a href="mailto:info@pickgrapevine.com?Subject=Support%20Request">Support</li>
-                <li><a href="mailto:info@pickgrapevine.com?Subject=Grapevine%20Inquiry">Contact</li>
-            </ul>           
-        </div>
-    </div>
+    <p class="copyright">&copy; Grapevine 2012 | <%= link_to 'Privacy Policy', privacy_path %> | <%= link_to 'Terms of Service', terms_path %></p>
+</div><!-- /.wrapper -->
+  
     <%= debug(params) if Rails.env.development? %>
-</div>

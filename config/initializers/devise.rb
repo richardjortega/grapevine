@@ -1,3 +1,6 @@
+# Explicitly set devise_for inside engine routes
+Devise.router_name = :main_app
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|

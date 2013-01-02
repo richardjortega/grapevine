@@ -3,11 +3,23 @@ class StaticPagesController < ApplicationController
   def home
   end
 
+  def about
+  end
+
   def signup
   	@user			      = User.new
-  	@plan 			    = Plan.find_by_identifier("basic_monthly")
+  	@plan 			    = Plan.find_by_identifier('gv_free')
   	@location       = @user.locations.build
   	@subscription 	= Subscription.new
+  end
+
+  def pricing
+  end
+
+  def learn_more
+  end
+
+  def contact
   end
 
   def concierge
@@ -26,6 +38,12 @@ class StaticPagesController < ApplicationController
   end
 
   def send_follow_up
+  end
+
+  def terms
+  end
+
+  def privacy
   end
 
   def review_alert
@@ -55,6 +73,18 @@ class StaticPagesController < ApplicationController
     NotifyMailer.follow_up_alert(email, name, body, body_part2, location_link).deliver
 
     redirect_to send_follow_up_path, :notice => "Your follow-up email has been sent successfully to: #{email}"
+
+  end
+
+  def submit_contact_us
+    email = params[:email]
+    name = params[:name]
+    body = params[:body]
+    subject = params[:subject]
+
+    NotifyMailer.submit_contact_us(email, name, body, subject).deliver
+
+    redirect_to contact_path, :notice => "Thank you for contacting us we'll respond to you as soon as possible."
 
   end
 

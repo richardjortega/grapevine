@@ -17,7 +17,19 @@ class Location < ActiveRecord::Base
   has_many :relationships
   has_many :users, through: :relationships
 
+  has_many :vines
+  has_many :sources, through: :vines
+
+  has_many :reviews
+
   #Model Validations
   validates_presence_of :name, :street_address
 
+  #Geocoding!
+  geocoded_by :full_address, :latitude => :lat, :longitude => :long
+  after_validation :geocode
+
+  def full_address
+    [street_address, address_line_2, city, state, zip].compact.join(', ')
+  end
 end

@@ -11,7 +11,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031230444) do
+ActiveRecord::Schema.define(:version => 20121227011159) do
+
+  create_table "active_admin_comments", :force => true do |t|
+    t.string   "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.text     "body"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "namespace"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "admin_users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
+  add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "blasts", :force => true do |t|
     t.string   "name"
@@ -59,6 +92,8 @@ ActiveRecord::Schema.define(:version => 20121031230444) do
     t.integer  "trial_period_days"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "location_limit"
+    t.integer  "review_limit"
   end
 
   add_index "plans", ["amount"], :name => "index_plans_on_amount"
@@ -71,23 +106,51 @@ ActiveRecord::Schema.define(:version => 20121031230444) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "reviews", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "source_id"
+    t.string   "author"
+    t.string   "author_url"
+    t.string   "comment"
+    t.date     "post_date"
+    t.decimal  "rating"
+    t.string   "title"
+    t.string   "management_response"
+    t.boolean  "verified"
+    t.string   "rating_description"
+    t.string   "url"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.string   "category"
+    t.decimal  "max_rating"
+    t.boolean  "accepts_management_response"
+    t.string   "management_response_url"
+    t.string   "main_url"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
   create_table "subscriptions", :force => true do |t|
-    t.integer  "user_id",                                                 :null => false
-    t.integer  "plan_id",                                                 :null => false
-    t.boolean  "status",                               :default => false
+    t.integer  "user_id",                                  :null => false
+    t.integer  "plan_id",                                  :null => false
+    t.boolean  "status",                :default => false
     t.string   "status_info"
-    t.integer  "current_period_end",    :limit => 255
-    t.integer  "current_period_start",  :limit => 255
-    t.integer  "trial_end",             :limit => 255
-    t.integer  "trial_start",           :limit => 255
+    t.integer  "current_period_end"
+    t.integer  "current_period_start"
+    t.integer  "trial_end"
+    t.integer  "trial_start"
     t.string   "stripe_customer_token"
     t.string   "card_zip"
     t.string   "last_four"
     t.string   "card_type"
     t.date     "next_bill_on"
     t.string   "card_expiration"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "start_date"
   end
 
@@ -113,5 +176,14 @@ ActiveRecord::Schema.define(:version => 20121031230444) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vines", :force => true do |t|
+    t.integer  "source_id"
+    t.integer  "location_id"
+    t.string   "source_location_uri"
+    t.decimal  "overall_rating"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
 end
