@@ -38,11 +38,12 @@ private
 	# Inform user of failed payment. Accepts Stripe Invoice object
 	def handle_failed_charge(charge)
 		begin
-		subscription = Subscription.find_by_stripe_customer_token(charge.invoice.customer)
+		invoice_id = charge.invoice
+		invoice = Stripe::Invoice.retrieve(invoice_id)
+		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
 		
 		user = subscription.user
-		NotifyMailer.unsuccessfully_charged(charge.invoice, user).deliver
-		NotifyMailer.update_grapevine_team(user, "User has failed a charge").deliver
+		NotifyMailer.unsuccessfully_charged(invoice, user).deliver
 		rescue => e
 			puts "#{e.message}"
 		end
@@ -51,7 +52,9 @@ private
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(charge)
 		begin
-		subscription = Subscription.find_by_stripe_customer_token(charge.invoice.customer)
+		invoice_id = charge.invoice
+		invoice = Stripe::Invoice.retrieve(invoice_id)
+		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
 		if subscription.status_info.present?
 			if subscription.status_info == 'trialing' 
 				return false
@@ -60,7 +63,7 @@ private
 				subscription.save!
 				
 				user = subscription.user
-				NotifyMailer.successfully_charged(charge.invoice, user).deliver
+				NotifyMailer.successfully_charged(invoice, user).deliver
 			end
 		end
 		rescue => e

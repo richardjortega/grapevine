@@ -104,6 +104,17 @@ class NotifyMailer < ActionMailer::Base
   ### Stripe related emails (billing, charges, etc)
 
   # Email invoice receipt to User's email and Grapevine Support - successful
+  def unsuccessfully_charged(invoice, user)
+    @subscription = invoice.lines.subscriptions[0]
+    @user = user
+    @subscription_plan = @subscription.plan.name
+    @subscription_amount = format_amount(invoice.total)
+    
+    # Mail invoice 
+    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt", bcc: "erik@pickgrapevine.com"
+  end
+  
+  # Email invoice receipt to User's email and Grapevine Support - failed
   def successfully_charged(invoice, user)
     @subscription = invoice.lines.subscriptions[0]
     @user = user
@@ -113,17 +124,6 @@ class NotifyMailer < ActionMailer::Base
     @subscription_end = format_timestamp(@subscription.period.end)
     # Mail invoice 
     mail to: user.email, subject: "Grapevine Payment Receipt", bcc: "erik@pickgrapevine.com"
-  end
-
-  # Email invoice receipt to User's email and Grapevine Support - failed
-  def unsuccessfully_charged(invoice, user)
-    @subscription = invoice.lines.subscriptions[0]
-    @user = user
-    @subscription_plan = @subscription.plan.name
-    @subscription_amount = format_amount(invoice.total)
-    
-    # Mail invoice 
-    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt", bcc: "erik@pickgrapevine.com"
   end
  
 private
