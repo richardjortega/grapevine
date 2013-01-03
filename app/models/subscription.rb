@@ -53,19 +53,6 @@ class Subscription < ActiveRecord::Base
   end
 
   def update_stripe params
-    # if stripe_customer_token.nil?
-    #   if !stripe_token.present?
-    #     raise "We're doing something wrong -- this isn't supposed to happen"
-    #   end
-
-    #   customer = Stripe::Customer.create(
-    #     :email => email,
-    #     :description => stripe_description,
-    #     :card => stripe_token
-    #   )
-    #   self.last_four = customer.active_card.last4
-    #   response = customer.update_subscription({:plan => "premium"})
-    # else
     begin
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
