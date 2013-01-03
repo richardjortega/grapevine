@@ -67,7 +67,6 @@ class Subscription < ActiveRecord::Base
     #   response = customer.update_subscription({:plan => "premium"})
     # else
     begin
-    puts params
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
     # Before adding a plan, we are ensuring that the user has a credit card associated (needed for paid plans)
@@ -84,8 +83,6 @@ class Subscription < ActiveRecord::Base
       user_new_plan = Plan.find_by_identifier params[:plan]
       user.plan = user_new_plan
     end
-
-    debugger    
 
     # in case they've changed
     customer.email             = user.email
