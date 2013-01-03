@@ -70,13 +70,13 @@ class NotifyMailer < ActionMailer::Base
   def free_signup(user)
     @user = user
     add_user_to_marketing_list(user)
-    mail to: user.email, subject: "Thanks for signing up to Grapevine for 30 days!"
+    mail to: user.email, subject: "Thanks for signing up to Grapevine's Free Forever plan!"
   end
   
   # Send a signup email to the user, pass user object that contains the user's email address
   def paid_signup(user)
     @user = user
-    mail to: user.email, subject: "Thanks for signing up!"
+    mail to: user.email, subject: "You've Upgraded to our Small Business plan!"
   end
 
   # Update Grapevine team about important account changes
