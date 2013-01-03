@@ -39,36 +39,25 @@ class Subscription < ActiveRecord::Base
     save!
   end
 
-  def save_with_payment
-    if valid?
-      customer = stripe_customer_with_credit_card
-      self.stripe_customer_token = customer.id
-      self.next_bill_on          = Date.parse customer.next_recurring_charge.date
-      save!
-    end
-  rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}"
-    errors.add :base, "There was a problem with your credit card."
-    false
-  end
-
+  # Used for any updating of users on Stripe after user has signed up
   def update_stripe params
     begin
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
-    # Before adding a plan, we are ensuring that the user has a credit card associated (needed for paid plans)
-    if params[:stripe_card_token].present?
-      if user.plan.identifier == 'gv_free'
-        customer = stripe_customer_with_credit_card params
-      else
-        customer.card = params[:stripe_card_token]
-      end 
+    if params[:stripe_card_token].present? && params[:plan].present?
+      customer.update_subscription({:card => params[:stripe_card_token], :plan => params[:plan]})
+      user.plan = Plan.find_by_identifier params[:plan]  
     end
 
-    if params[:plan].present?
+    # User updated credit card but doesn't change their plan
+    if params[:stripe_card_token].present? && !params[:plan].present?
+      customer.update_subscription({:card => params[:stripe_card_token]})
+    end
+
+    # User changes plan (provided they have a credit card on file)
+    if params[:plan].present? && !params[:stripe_card_token].present?
       customer.update_subscription({:plan => params[:plan]})
-      user_new_plan = Plan.find_by_identifier params[:plan]
-      user.plan = user_new_plan
+      user.plan = Plan.find_by_identifier params[:plan]
     end
 
     # in case they've changed
@@ -88,8 +77,6 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-
-
 private
 	def stripe_description
 	  	"#{user.first_name} #{user.last_name}: #{user.email}"
@@ -104,10 +91,6 @@ private
 
 	def stripe_customer_without_credit_card
 		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
-  end
-
-  def stripe_customer_with_credit_card params
-    Stripe::Customer.create(email: user.email, description: stripe_description, plan: params[:plan], card: params[:stripe_card_token])
   end
 
 	def stripe_customer
