@@ -112,7 +112,5 @@ private
 		subscription.start_date = customer_subscription.start
 		subscription.current_period_start = customer_subscription.current_period_start
 		subscription.current_period_end = customer_subscription.current_period_end
-		subscription.trial_start = customer_subscription.trial_start if customer_subscription.trial_start.present?
-		subscription.trial_end = customer_subscription.trial_end if customer_subscription.trial_end.present?
 		subscription.save!
 	end
