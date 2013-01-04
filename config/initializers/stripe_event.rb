@@ -107,16 +107,18 @@ private
 
 	# Update all items on customer to match stripe webhook
 	def update_customer_subscription(customer_subscription)
-		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer) rescue 'Stripe customer not in database'
-		subscription.status_info = customer_subscription.status
-		subscription.start_date = customer_subscription.start
-		subscription.current_period_start = customer_subscription.current_period_start
-		subscription.current_period_end = customer_subscription.current_period_end
-		if customer_subscription.trial_start.present?
-			subscription.trial_start = customer_subscription.trial_start
+		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
+		if subscription.nil?
+			subscription.status_info = customer_subscription.status
+			subscription.start_date = customer_subscription.start
+			subscription.current_period_start = customer_subscription.current_period_start
+			subscription.current_period_end = customer_subscription.current_period_end
+			if customer_subscription.trial_start.present?
+				subscription.trial_start = customer_subscription.trial_start
+			end
+			if customer_subscription.trial_end.present?
+				subscription.trial_end = customer_subscription.trial_end
+			end
+			subscription.save!
 		end
-		if customer_subscription.trial_end.present?
-			subscription.trial_end = customer_subscription.trial_end
-		end
-		subscription.save!
 	end
