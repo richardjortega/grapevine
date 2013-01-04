@@ -1,9 +1,18 @@
+<% content_for :head do %>
+  <%= render 'shared/form_js_includes' %>
+<% end %>
 <div id="main-container">
 <section class="subpage with-aside">
 <header>
 	<h2 class="title">Something on your mind?</h2>
 	<!-- <p class="description">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p> -->
 </header>
+
+<script type='text/javascript'>
+ $(document).ready(function() {
+	$("#phone_number").mask("(999) 999-9999");
+ });
+</script>
 
 <div class="section-content">
 	<h3>Have questions?</h3>
@@ -16,6 +25,9 @@
 
 	<%= label_tag 'email' %>
 	<%= email_field_tag 'email' %>
+
+	<%= label_tag 'phone_number' %>
+	<%= phone_field_tag 'phone_number' %>
 
   <%= label_tag 'subject' %>
 	<%= select_tag 'subject', options_for_select(['Agency Related', 'General Sales', 'Tech Support', 'Other'], params[:subject]) %>

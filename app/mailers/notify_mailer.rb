@@ -54,11 +54,12 @@ class NotifyMailer < ActionMailer::Base
 
   end
 
-  def submit_contact_us(email, name, body, subject)
+  def submit_contact_us(email, name, body, subject, phone_number)
     @email = email
     @name = name
     @body = body
     @subject = subject
+    @phone_number = phone_number
 
     mail to: 'info@pickgrapevine.com', subject: "Contact form submitted", from: "#{email}", reply_to: 
     "#{email}"

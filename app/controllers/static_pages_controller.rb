@@ -81,8 +81,9 @@ class StaticPagesController < ApplicationController
     name = params[:name]
     body = params[:body]
     subject = params[:subject]
+    phone_number = params[:phone_number]
 
-    NotifyMailer.submit_contact_us(email, name, body, subject).deliver
+    NotifyMailer.submit_contact_us(email, name, body, subject, phone_number).deliver
 
     redirect_to contact_path, :notice => "Thank you for contacting us we'll respond to you as soon as possible."
 
