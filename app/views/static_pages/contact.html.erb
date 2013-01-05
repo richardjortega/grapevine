@@ -21,10 +21,10 @@
 <%= form_tag 'static_pages/submit_contact_us', :class => 'contact-form' do %>
 
 	<%= label_tag 'name' %>
-	<%= text_field_tag 'name' %>
+	<%= text_field_tag 'name', nil, :class => 'required', :minlength => '2' %>
 
 	<%= label_tag 'email' %>
-	<%= email_field_tag 'email' %>
+	<%= email_field_tag 'email', nil, :class => 'required email' %>
 
 	<%= label_tag 'phone_number' %>
 	<%= phone_field_tag 'phone_number' %>
@@ -34,7 +34,7 @@
 
 
 	<%= label_tag 'body' %>
-	<%= text_area_tag 'body' %>
+	<%= text_area_tag 'body', nil, :class => 'required' %>
 
 	<br />
 	

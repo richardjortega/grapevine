@@ -642,6 +642,10 @@ form .field_with_errors {
     }
     .message { color:red; font-size:13px;}
 }
+form {
+    label.error { color:red; font-size:13px;}
+    textarea.error, input.error { border:1px solid red;}
+}
 
 
 /* ABOUT PAGE
