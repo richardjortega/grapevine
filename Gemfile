@@ -37,6 +37,7 @@ gem 'roadie'
 # Background Processes/Workers
 gem 'iron_worker_ng'
 gem 'poltergeist'
+gem 'delayed_job_active_record'
 
 # Gems for the Vineyard
 gem 'oauth'
