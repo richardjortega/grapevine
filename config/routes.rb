@@ -1,6 +1,8 @@
 Grapevine::Application.routes.draw do
   
+  # Grapevine Admin Type Stuff
   ActiveAdmin.routes(self)
+  match '/delayed_jobs' => DelayedJobWeb, :anchor => false
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
