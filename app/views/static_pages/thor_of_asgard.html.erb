@@ -26,6 +26,13 @@ width: 300px;
  }
 
 </style>
+<div id="main-container" class="clearfix dash-page">
+<section class="subpage clearfix">
+<header>
+  <h2 class="title">Send that shit, yo.</h2>
+  <!-- <p class="description">We are committed improving the  about their cusomter reviews online.</p> -->
+</header>
+<div class="section-content">
 <div class="controls inline select-source">
       <%= label_tag 'Yelp', :class => 'radio inline' do %><%= radio_button_tag 'source', 'yelp' %> <%= image_tag 'email/yelp_logo_small.png' %><% end %>
       
@@ -111,3 +118,7 @@ width: 300px;
     })
   </script>
 <% end %>
+
+</div><!-- /.section-content -->
+</section>
+</div><!-- /#main-container -->
