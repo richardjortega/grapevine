@@ -77,11 +77,11 @@ class StaticPagesController < ApplicationController
   end
 
   def submit_contact_us
-    email = params[:email] || 'No email provided'
-    name = params[:name] || 'No name provided'
-    body = params[:body] || 'No body provided'
-    subject = params[:subject] || 'No subject provided'
-    phone_number = params[:phone_number] || 'No phone number provided'
+    email = params[:email]
+    name = params[:name]
+    body = params[:body]
+    subject = params[:subject]
+    phone_number = params[:phone_number]
 
     NotifyMailer.submit_contact_us(email, name, body, subject, phone_number).deliver
 
