@@ -38,6 +38,7 @@ gem 'roadie'
 gem 'iron_worker_ng'
 gem 'poltergeist'
 gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 
 # Gems for the Vineyard
 gem 'oauth'
