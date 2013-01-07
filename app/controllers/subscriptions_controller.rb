@@ -25,8 +25,8 @@ class SubscriptionsController < ApplicationController
     if @subscription.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if current_plan == 'gv_free' && params[:subscription][:plan] == 'gv_30'
-        NotifyMailer.paid_signup(@subscription.user).deliver
-        NotifyMailer.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID").deliver
+        NotifyMailer.delay.(@subscription.user)
+        NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
       end
       redirect_to billing_path
     else
