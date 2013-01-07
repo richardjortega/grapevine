@@ -43,6 +43,7 @@ class Subscription < ActiveRecord::Base
     begin
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
+    # If user is upgrading their free plan to paid plan
     if params[:stripe_card_token].present? && params[:plan].present?
       customer.update_subscription({:card => params[:stripe_card_token], :plan => params[:plan]})
       user.plan = Plan.find_by_identifier params[:plan]  

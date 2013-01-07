@@ -22,7 +22,7 @@ class SubscriptionsController < ApplicationController
     @subscription = current_user.subscription
     current_plan = current_user.plan.identifier
 
-    if @subscription.update_stripe params[:subscription]
+    if @subscription.delay.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if current_plan == 'gv_free' && params[:subscription][:plan] == 'gv_30'
         NotifyMailer.delay.(@subscription.user)
