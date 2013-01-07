@@ -9,18 +9,14 @@
 			<%= f.hidden_field :stripe_card_token %>
 			<%= f.hidden_field :last_four %>
 			<%= f.hidden_field :plan, { :value => 'gv_30' } %>
-			
 
 			<noscript>
 	          <p>This form requires Javascript to use</p>
 	        </noscript>
 	        <!-- these fields are disabled before submission and are never transmitted back to rails -->
-			
-				<label class="control-label">Name on card</label>
-				<%= text_field_tag :name_on_card %>
-				
-
 			<div id="credit-card">
+				<label class="control-label">Name on card</label>
+				<%= text_field_tag :name_on_card, params[:name_on_card], :id => 'name-on-card' %>
 				<label class="control-label">Card Number</label>
 				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
 				<span class="help-block">Visa, MasterCard, Discover, AMEX</span>

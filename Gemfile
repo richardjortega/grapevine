@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # gem 'cloudfoundry-devise', :require => 'devise'
 
 # Main
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.10'
 gem 'thin'
 gem 'jquery-rails'
 gem 'geocoder'
