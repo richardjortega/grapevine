@@ -43,7 +43,7 @@ private
 		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
 		
 		user = subscription.user
-		NotifyMailer.unsuccessfully_charged(invoice, user).deliver
+		NotifyMailer.delay.unsuccessfully_charged(invoice, user)
 		rescue => e
 			puts "#{e.message}"
 		end
@@ -63,7 +63,7 @@ private
 				subscription.save!
 				
 				user = subscription.user
-				NotifyMailer.successfully_charged(invoice, user).deliver
+				NotifyMailer.delay.successfully_charged(invoice, user)
 			end
 		end
 		rescue => e
@@ -76,8 +76,8 @@ private
 		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
 		
 		user = subscription.user
-		NotifyMailer.trial_ending(user).deliver
-		NotifyMailer.update_grapevine_team(user, "User has 3 days left on trial").deliver
+		NotifyMailer.delay.trial_ending(user)
+		NotifyMailer.delay.update_grapevine_team(user, "User has 3 days left on trial")
 	end
 
 	# Handle canceled user
@@ -88,8 +88,8 @@ private
 		subscription.save!
 
 		user = subscription.user
-		NotifyMailer.account_canceled(user).deliver
-		NotifyMailer.update_grapevine_team(user, "User has just canceled").deliver
+		NotifyMailer.delay.account_canceled(user)
+		NotifyMailer.delay.update_grapevine_team(user, "User has just canceled")
 	end
 
 	# Suspend user for not paying after 3 retries to credit card
@@ -101,8 +101,8 @@ private
 		subscription.save!
 
 		user = subscription.user
-		NotifyMailer.account_expired(user).deliver
-		NotifyMailer.update_grapevine_team(user, "User has been set to unpaid status").deliver
+		NotifyMailer.delay.account_expired(user)
+		NotifyMailer.delay.update_grapevine_team(user, "User has been set to unpaid status")
 	end
 
 	# Update all items on customer to match stripe webhook
