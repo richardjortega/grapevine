@@ -13,6 +13,13 @@ class StaticPagesController < ApplicationController
   	@subscription 	= Subscription.new
   end
 
+  def signup_today
+    @user           = User.new
+    @plan           = Plan.find_by_identifier('gv_free')
+    @location       = @user.locations.build
+    @subscription   = Subscription.new
+  end
+
   def pricing
   end
 

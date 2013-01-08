@@ -10,12 +10,23 @@ Grapevine::Application.routes.draw do
   devise_for  :users, :controllers => {:registrations => "registrations"}
   resources   :subscriptions
   resources   :wantmore,    only: [:show], :controller => 'blasts'
-  
+
+  # Reconfiguring Devise routes for pretty URLs, because they look pretty!
+  # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
+  as :user do
+    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign_in' => 'devise/sessions#create', :as => :user_session
+    match 'upgrade' => 'devise/sessions#new', :as => :upgrade
+    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
+      :via => Devise.mappings[:user].sign_out_via
+    get 'profile' => 'registrations#edit', :as => :edit_user_registration
+  end
 
   # Static pages
   root to: 'static_pages#home'
   match '/about', :to => 'static_pages#about', as: 'about'
   match '/signup', :to => 'static_pages#signup', as: 'signup'
+  match '/signup-today', to: 'static_pages#signup_today', as: 'signup_today'
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
   match '/learn-more', :to => 'static_pages#learn_more', as: 'learn_more'
@@ -51,36 +62,4 @@ Grapevine::Application.routes.draw do
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
 
-  # Shit we may not use... (double check to for deletion)
-  match '/signuptoday', to: 'static_pages#signuptoday'
-  match '/upgradetoday', to: 'static_pages#upgradetoday'
-
- 
-
-  # Reconfiguring Devise routes for pretty URLs, because they look pretty!
-  # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
-  as :user do
-    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
-    post 'sign_in' => 'devise/sessions#create', :as => :user_session
-    match 'upgrade' => 'devise/sessions#new', :as => :upgrade
-    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
-      :via => Devise.mappings[:user].sign_out_via
-    get 'profile' => 'registrations#edit', :as => :edit_user_registration
-  end
-
-  # default rake routes for devise User
-  #         new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
-  #             user_session POST   /users/sign_in(.:format)       devise/sessions#create
-  #     destroy_user_session DELETE /users/sign_out(.:format)      devise/sessions#destroy
-  #            user_password POST   /users/password(.:format)      devise/passwords#create
-  #        new_user_password GET    /users/password/new(.:format)  devise/passwords#new
-  #       edit_user_password GET    /users/password/edit(.:format) devise/passwords#edit
-  #                          PUT    /users/password(.:format)      devise/passwords#update
-  # cancel_user_registration GET    /users/cancel(.:format)        devise/registrations#cancel
-  #        user_registration POST   /users(.:format)               devise/registrations#create
-  #    new_user_registration GET    /users/sign_up(.:format)       devise/registrations#new
-  #   edit_user_registration GET    /users/edit(.:format)          devise/registrations#edit
-  #                          PUT    /users(.:format)               devise/registrations#update
-  #                          DELETE /users(.:format)               devise/registrations#destroy
-  
 end

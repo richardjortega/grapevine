@@ -1,0 +1,116 @@
+<% content_for :head do %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+  <%= render 'shared/form_js_includes' %>
+<% end %>
+<% set_meta_tags :title => 'Sign up : Grapevine' %>
+<div id="main-container" class="clearfix">
+<section class="subpage">
+  <header>
+    <h2 class="title">Let&rsquo;s do this.</h2>
+    <p class="description">By signing up today, you will be enrolled in our FREE FOREVER Plan that includes up to 5 customer review alerts per month. Starting out doesn&rsquo;t mean missing out, because you can upgrade to track unlimited reviews at anytime.</p>
+  </header>
+
+ <div class="section-content clearfix">
+
+
+    <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal signup-form'}, :url => subscriptions_path(@user) do |user_form| %>
+
+        <%= user_form.hidden_field :type, { :value => 'multi_location' } %>
+
+        <div class="user-info">
+          <h3>Your Information</h3>
+
+            <div class="control-group">
+              <label class="control-label">First Name</label>
+              <div class="controls">
+                <%= user_form.text_field :first_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Last Name</label>
+              <div class="controls">
+                <%= user_form.text_field :last_name %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Email</label>
+              <div class="controls">
+                <%= user_form.email_field :email, :validate => true %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Phone Number</label>
+              <div class="controls">
+                <%= user_form.phone_field :phone_number %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Password</label>
+              <div class="controls">
+                <%= user_form.password_field :password %>
+              </div>
+            </div>
+
+        
+        </div><!-- /.user-info -->
+
+      <div class="biz-info">
+        <h3>Business Name &amp; Address</h3>
+          <%= user_form.fields_for :locations, :validate => true do |location_fields| %>
+ 
+            <div class="control-group">
+              <label class="control-label">Business Name</label>
+              <div class="controls">
+                <%= location_fields.text_field :name %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Street Address</label>
+              <div class="controls">
+                <%= location_fields.text_field :street_address %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Suite/Other</label>
+              <div class="controls">
+                <%= location_fields.text_field :address_line_2 %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">City</label>
+              <div class="controls">
+                <%= location_fields.text_field :city %> 
+              </div>
+            </div>
+            <div class="control-group state">
+              <label class="control-label">State</label>
+              <div class="controls">
+              <%= location_fields.select :state, options_for_select(us_states) %>
+              </div>
+            </div>
+            <div class="control-group zip">
+              <label class="control-label">Zip</label>
+              <div class="controls">
+                <%= location_fields.text_field :zip, :size => 8, :class => 'zip' %> 
+              </div>
+            </div>
+          <% end %>
+
+          <%= fields_for @subscription do |subscription_field| %>
+            <%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
+          <% end %>
+          
+          
+      </div><!-- /.biz-info -->
+
+          
+         
+      <div class="clear action">
+         <%= user_form.submit "Sign up for Grapevine Email Alerts", :class => 'btn signup-btn primary purple_button large' %>
+      </div>
+      <% end %>
+     
+      
+  </div><!-- /.section-content -->
+</section>
+</div><!-- /#main-container -->

@@ -9,8 +9,10 @@ class SubscriptionsController < ApplicationController
     
   	if @subscription.save_without_payment
       redirect_to thank_you_path
-	    NotifyMailer.delay.free_signup(@subscription.user)
-	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
+      unless params[:type] == 'multi_location'
+  	    NotifyMailer.delay.free_signup(@subscription.user)
+  	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
+      end
   	else
   		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
   		render template: 'static_pages/signup'
