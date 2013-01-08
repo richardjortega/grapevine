@@ -227,20 +227,33 @@ header#global-header .global-nav li a {
     /*color:#5F3377;
     text-shadow:1px 1px #B187DB;*/
     color: #fff;
-    opacity: .5;
 }
 header#global-header .global-nav li a:hover {
     opacity: 1;
 }
-header#global-header .global-nav li.signup a {
-    color:#fff;
-    background: #444;
-    padding:10px;
+header#global-header .global-nav li.signup a, header#global-header .global-nav li.sign-in a {
+    background: #eca919;
+    background: rgb(239,184,65);
+    background: -moz-linear-gradient(top, rgba(239,184,65,1) 0%, rgba(234,162,7,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,184,65,1)), color-stop(100%,rgba(234,162,7,1)));
+    background: -webkit-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: -o-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: -ms-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: linear-gradient(to bottom, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    color:#444;
+    text-shadow:1px 1px 0 rgba(255, 255, 255, .5);
+    padding:7px 14px;
     border-radius: 4px;
 }
+header#global-header .global-nav li.signup { margin-left:4px;}
 header#global-header .global-nav li.signup a:hover {
-    background: #fff;
-    color:$purple;
+    // background: #fff;
+    // color:$purple;
+}
+header#global-header .global-nav li.sign-in a {
+    color:lighten($purple, 30%);
+    background: darken($purple, 10%);
+    text-shadow:none;
 }
 
 
