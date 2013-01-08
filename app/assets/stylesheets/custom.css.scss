@@ -231,7 +231,7 @@ header#global-header .global-nav li a {
 header#global-header .global-nav li a:hover {
     opacity: 1;
 }
-header#global-header .global-nav li.signup a, header#global-header .global-nav li.sign-in a {
+header#global-header .global-nav li.signup > a, header#global-header .global-nav li.sign-in > a {
     background: #eca919;
     background: rgb(239,184,65);
     background: -moz-linear-gradient(top, rgba(239,184,65,1) 0%, rgba(234,162,7,1) 100%);
@@ -250,7 +250,7 @@ header#global-header .global-nav li.signup a:hover {
     // background: #fff;
     // color:$purple;
 }
-header#global-header .global-nav li.sign-in a {
+header#global-header .global-nav li.sign-in > a {
     color:lighten($purple, 30%);
     background: darken($purple, 10%);
     text-shadow:none;
