@@ -646,6 +646,16 @@ form {
     label.error { color:red; font-size:13px;}
     textarea.error, input.error { border:1px solid red;}
 }
+#payment-errors {
+    padding:8px 14px;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color:#b94a48;
+    margin-bottom: 10px;
+    @include radius(5px);
+    display: block;
+    width:480px;
+}
 
 
 /* ABOUT PAGE

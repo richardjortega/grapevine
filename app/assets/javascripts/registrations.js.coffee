@@ -1,27 +1,6 @@
 jQuery ->
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
   subscription.setupForm()
-  
-  # add custom rules for credit card validating
-  jQuery.validator.addMethod "cardNumber", Stripe.validateCardNumber, "Please enter a valid card number"
-  jQuery.validator.addMethod "cardCVC", Stripe.validateCVC, "Please enter a valid security code"
-  jQuery.validator.addMethod "cardExpiry", (->
-    Stripe.validateExpiry $("#card-expiry-month").val(), $("#card-expiry-year").val()
-  ), "Please enter a valid expiration"
-
-  # We use the jQuery validate plugin to validate required params on submit
-  $("#credit-card").validate
-    submitHandler: submit
-    rules:
-      "card-cvc":
-        cardCVC: true
-        required: true
-
-      "card-number":
-        cardNumber: true
-        required: true
-
-      "card-expiry-year": "cardExpiry" # we don't validate month separately
 
 subscription =
   setupForm: ->
@@ -52,7 +31,9 @@ subscription =
       $('#payment-form')[0].submit()
     else
       # show the errors on the form
-      $('.payment-errors').text(response.error.message)
+      $('.payment-form').prepend('<span id="payment-errors"></span>')
+      $('#payment-errors').text(response.error.message)
+      $('html,body').animate({scrollTop: $('#payment-errors').offset().top},'slow')
       # re-enable the submit button
       $('input[type=submit]').attr('disabled', false)
   
