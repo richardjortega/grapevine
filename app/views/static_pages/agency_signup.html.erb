@@ -15,7 +15,7 @@
 
     <%= form_for @user, :validate => true, :html => { :class => 'form-horizontal signup-form'}, :url => subscriptions_path(@user) do |user_form| %>
 
-        <%= user_form.hidden_field :type, { :value => 'multi_location' } %>
+        <%= user_form.hidden_field :type, { :value => 'agency' } %>
 
         <div class="user-info">
           <h3>Your Information</h3>
