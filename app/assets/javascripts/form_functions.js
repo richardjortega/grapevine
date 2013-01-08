@@ -6,6 +6,6 @@ $(document).ready(function() {
 	$("#user_locations_attributes_0_zip").mask("99999");
 
 	// jquery validate contact form
-	$(".contact-form").validate();
+	$(".contact-form, #payment-form").validate();
 
 });

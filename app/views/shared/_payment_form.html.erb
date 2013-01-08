@@ -1,6 +1,8 @@
 <% content_for :head do %>
   <%= render 'devise/registrations/stripe_tag_includes' %>
+  <%= render 'shared/form_js_includes' %>
 <% end %>
+
 <!-- to display errors returned by createToken -->
 	   
 
@@ -16,9 +18,9 @@
 	        <!-- these fields are disabled before submission and are never transmitted back to rails -->
 			<div id="credit-card">
 				<label class="control-label">Name on card</label>
-				<%= text_field_tag :name_on_card, params[:name_on_card], :id => 'name-on-card' %>
+				<%= text_field_tag :name_on_card, params[:name_on_card], :id => 'name-on-card', :class => 'required' %>
 				<label class="control-label">Card Number</label>
-				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large', :maxlength => 16 %>
+				<%= text_field_tag :credit_card_number, params[:credit_card_number], :id => 'credit-card-number', :class =>  'input-large required creditcard', :maxlength => 16 %>
 				<span class="help-block">Visa, MasterCard, Discover, AMEX</span>
 					
 				
@@ -29,7 +31,7 @@
 						<span class="help-block">Your credit card details will be sent directly to our payment processor</span>
 				
 					<label class="control-label">Security Code</label>
-					<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 4, :class => "input-mini" %>
+					<%= text_field_tag :cvc, params[:cvc], :id => "card-cvc", :maxlength => 4, :class => "input-mini digits" %>
 					
 			</div>
 
