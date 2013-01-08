@@ -25,7 +25,7 @@ class StaticPagesController < ApplicationController
   def concierge
   end
 
-  def thankyou
+  def thank_you
   end
 
   def signup2

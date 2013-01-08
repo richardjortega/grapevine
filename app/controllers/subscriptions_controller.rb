@@ -8,7 +8,7 @@ class SubscriptionsController < ApplicationController
   	@plan = Plan.find params[:subscription][:plan_id]
     
   	if @subscription.save_without_payment
-      redirect_to thankyou_path
+      redirect_to thank_you_path
 	    NotifyMailer.delay.free_signup(@subscription.user)
 	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
   	else
