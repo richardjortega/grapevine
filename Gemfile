@@ -12,6 +12,7 @@ gem 'geocoder'
 gem 'seedbank'
 gem 'activeadmin'
 gem 'meta_search',	'>= 1.1.0.pre'
+gem 'dalli'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
