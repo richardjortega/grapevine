@@ -814,10 +814,11 @@ form select {
         @include radius(5px);
         background:#efefef;
         position: relative;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 22px;
         font-family: georgia, serif;
-        height: 74px;
+        height:74px;
+        min-height: 74px;
         em {
             position: absolute;
             bottom:-31px;
