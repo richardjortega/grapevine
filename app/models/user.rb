@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
 
   def display_name
-    "#{self.first_name} #{self.last_name} | #{self.email}"
+    "#{self.first_name} #{self.last_name} | <!--email_off-->#{self.email}<!--/email_off-->"
   end
 
 
