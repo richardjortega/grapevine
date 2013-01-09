@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-
-  # Helpers from Devise
-  # To add user authentication add 'before_filter :authenticate_user!'
-  # Verify if signed in - user_signed_in?
-  # Current signed in user - current_user
-  # Access session for this scope - user_session
+  # Tell Devise to redirect after sign_out
+  def after_sign_out_path_for(resource_or_scope)
+    root_url(:protocol => 'http')
+  end
 
   private
   
