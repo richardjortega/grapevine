@@ -1,1 +1,10 @@
 los-angeles-restaurant-listings
+san-antonio-texas-restaurant-listings
+austin-texas-restaurant-listings
+dallas-texas-restaurant-listings
+houston-texas-restaurant-listings
+phoenix-restaurant-listings
+wisconsin-restaurant-listings
+orlando-florida-restaurant-listings
+miami-restaurant-listings
+denver-colorado-restaurant-listings
