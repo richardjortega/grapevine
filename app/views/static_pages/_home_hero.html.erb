@@ -25,3 +25,10 @@ to your inbox.</h3>
 	</div><!-- /.wrapper -->
 
 </div><!-- /#hero-horiz-break -->
+
+<%= javascript_include_tag "jquery.anystretch.min" %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#home-hero').anystretch("<%= asset_path('ipad-coffee3.jpg') %>");
+	});
+</script>
