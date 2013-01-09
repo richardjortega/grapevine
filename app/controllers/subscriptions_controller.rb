@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  force_ssl
 
   def create
   	@subscription = Subscription.new params[:subscription]
@@ -8,9 +9,11 @@ class SubscriptionsController < ApplicationController
   	@plan = Plan.find params[:subscription][:plan_id]
     
   	if @subscription.save_without_payment
-      redirect_to thankyou_path
-	    NotifyMailer.delay.free_signup(@subscription.user)
-	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
+      redirect_to thank_you_path
+      unless params[:user][:multi_location] == 'true'
+  	    NotifyMailer.delay.free_signup(@subscription.user)
+  	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
+      end
   	else
   		flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
   		render template: 'static_pages/signup'

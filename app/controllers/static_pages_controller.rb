@@ -13,6 +13,13 @@ class StaticPagesController < ApplicationController
   	@subscription 	= Subscription.new
   end
 
+  def agency_signup
+    @user           = User.new
+    @plan           = Plan.find_by_identifier('gv_free')
+    @location       = @user.locations.build
+    @subscription   = Subscription.new
+  end
+
   def pricing
   end
 
@@ -25,7 +32,7 @@ class StaticPagesController < ApplicationController
   def concierge
   end
 
-  def thankyou
+  def thank_you
   end
 
   def signup2
