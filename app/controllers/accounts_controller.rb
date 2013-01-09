@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
       force_ssl
 
+      caches_action :index, :layout => false
+      caches_action :show, :layout => false
+      caches_action :billing, :layout => false
+
 	def index
             @plan = current_user.subscription.plan
             @location = current_user.locations[0]
