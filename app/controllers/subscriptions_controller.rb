@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
     
   	if @subscription.save_without_payment
       redirect_to thank_you_path
-      unless params[:type] == 'agency'
+      unless params[:user][:multi_location] == 'true'
   	    NotifyMailer.delay.free_signup(@subscription.user)
   	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
       end
