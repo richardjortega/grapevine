@@ -22,8 +22,15 @@ Grapevine::Application.routes.draw do
     get 'profile' => 'registrations#edit', :as => :edit_user_registration
   end
 
+  #Account Dashboard pages (for logged in users)
+  authenticated :user do
+    root to: 'accounts#index'
+    match '/changeplan', to: 'accounts#update', as: 'change_plan'
+    match '/billing', to: 'accounts#billing', as: 'billing'
+    match '/upgrade', to: 'accounts#update', as: 'upgrade'
+  end
+
   # Static pages
-  root to: 'static_pages#home'
   match '/about', :to => 'static_pages#about', as: 'about'
   match '/signup', :to => 'static_pages#signup', as: 'signup'
   match '/agency-signup', to: 'static_pages#agency_signup', as: 'agency_signup'
@@ -35,15 +42,7 @@ Grapevine::Application.routes.draw do
   match '/thank-you', :to => 'static_pages#thank_you', as: 'thank_you'
   match '/404',  to: 'static_pages#error404'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
-  match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')
-
-  #Account Dashboard pages (for logged in users)
-  authenticated :user do
-    root to: 'accounts#index'
-    match '/changeplan', to: 'accounts#update', as: 'change_plan'
-    match '/billing', to: 'accounts#billing', as: 'billing'
-    match '/upgrade', to: 'accounts#update', as: 'upgrade'
-  end
+  match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')  
 
   # Landing pages for email blasting
   get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'
@@ -61,5 +60,8 @@ Grapevine::Application.routes.draw do
   match '/send_follow_up', to: 'static_pages#send_follow_up'
   post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
+
+  # Root page
+  root to: 'static_pages#home'
 
 end
