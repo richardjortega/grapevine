@@ -188,7 +188,6 @@ ActiveRecord::Schema.define(:version => 20130108231614) do
     t.string   "phone_number"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "type"
     t.boolean  "multi_location"
   end
 
