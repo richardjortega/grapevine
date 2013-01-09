@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  force_ssl
 
   def create
   	@subscription = Subscription.new params[:subscription]
