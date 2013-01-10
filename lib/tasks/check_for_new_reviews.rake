@@ -31,7 +31,7 @@ namespace :get_new_reviews do
 	
 	desc "Check Yelp for new reviews"
 	task :yelp => :environment do
-		puts "Getting all associated source_location_uris of Yelp..."
+		puts "Getting all associated source_location_uris of Yelp"
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -64,17 +64,36 @@ namespace :get_new_reviews do
 	
 	desc "Check OpenTable for new reviews"
 	task :opentable => :environment do
-		#Location.all.each do |location|
-			#location_id = location.source('opentable').matchingid
-
-			#for testing
-			location_id = '86449'
-			latest_review = {:post_date => '11/29/2012', :comment => 'asdfad'}
-
-			run = OpenTable.new location_id
-			response = run.get_new_reviews latest_review
-			puts response
-		#end
+		puts "Getting all associated source_location_uris of OpenTable"
+		source = Source.find_by_name('opentable')
+		source_vines = source.vines
+		source_vines.each do |vine|
+			source_location_uri = vine.source_location_uri
+			location = vine.location
+			reviews = location.reviews
+			if reviews.empty?
+				few_days_ago = Date.today - 30
+				latest_review = {:post_date => few_days_ago, :comment => '' }
+			else
+				last_review = reviews.order('post_date DESC').first
+				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
+			end
+			puts "Searching for new reviews at: #{source_location_uri}"
+			run = OpenTable.new
+			response = run.get_new_reviews(latest_review, source_location_uri)
+			debugger
+			ap response
+			# review_count = 0
+			# response.each do |review|
+			# 	new_review = Review.new(:location_id => location.id,
+			# 							:source_id => source.id, 
+			# 						    :post_date => review[:post_date],
+			# 						    :comment   => review[:comment] )
+			# 	new_review.save!
+			# 	review_count += 1
+			# end
+			#puts "Finished adding #{review_count} new reviews for: #{location.name}"
+		end
 	end
 
 	desc "Check GooglePlus for new reviews"
