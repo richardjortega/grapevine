@@ -2,21 +2,21 @@ require 'nokogiri'
 require 'open-uri'
 
 class UrbanSpoon
-	def initialize(location_id)
-		site = 'http://www.urbanspoon.com/'
-		uri = location_id
-		@url = "#{site}#{uri}"
+	def initialize
+		@site = 'http://www.urbanspoon.com/'
 	end
 
-	def get_new_reviews(latest_review)
+	def get_new_reviews(latest_review, location_id)
 		begin
+		url = "#{@site}#{location_id}"
 		job_start_time = Time.now
-		puts "Crawling: #{@url}"
+		puts "Crawling: #{url}"
 
 		
-		doc = Nokogiri::HTML(open(@url)).css('#diner_reviews ul > li.comment')
+		doc = Nokogiri::HTML(open(url)).css('#diner_reviews ul > li.comment')
 		new_reviews = []
-		
+		debugger
+
 		doc.each do |review|
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
 			if review.at_css('div.body a.show_more').nil?
@@ -26,7 +26,8 @@ class UrbanSpoon
 			end
 
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
+			if review_date >= latest_review[:post_date]
+				debugger
 				next if review_comment == latest_review[:comment].strip
 				new_review = {}
 				new_review[:post_date] = review_date

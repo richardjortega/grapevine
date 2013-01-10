@@ -153,19 +153,39 @@ namespace :get_new_reviews do
 
 	desc "Check UrbanSpoon for new reviews"
 	task :urbanspoon => :environment do
-		# Location.all.each do |location|
-			# location_id = location.source('urbanspoon').matchingid
-
-			# for testing
-			latest_review = {:post_date => '11/15/2012', :comment => 'asdfad'}
-			location_id = 'r/39/432003/restaurant/Midtown/Sams-Burger-Joint-San-Antonio'
-			job_start_time = Time.now
-			puts "Starting job: #{location_id}"
-			run = UrbanSpoon.new location_id
-			response = run.get_new_reviews latest_review
-			puts response
-			puts "Finished job in #{Time.now - job_start_time} seconds"
-		# end
+		puts "Getting all associated source_location_uris of UrbanSpoon"
+		source = Source.find_by_name('urbanspoon')
+		source_vines = source.vines
+		source_vines.each do |vine|
+			source_location_uri = vine.source_location_uri
+			location = vine.location
+			reviews = vine.source.reviews
+			if reviews.empty?
+				last_30_days_ago = Date.today - 30
+				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+			else
+				last_review = reviews.order('post_date DESC').first
+				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
+			end
+			puts "Searching for new reviews at: #{location.name}"
+			run = UrbanSpoon.new
+			response = run.get_new_reviews(latest_review, source_location_uri)
+			debugger
+			review_count = 0
+			response.each do |review|
+				new_review = Review.new(:location_id => location.id,
+										:source_id   => source.id, 
+									    :post_date   => review[:post_date],
+									    :comment     => review[:comment],
+									    :author	     => review[:author],
+									    :rating      => review[:rating],
+									    :title       => review[:title],
+									    :url         => review[:url] )
+				new_review.save!
+				review_count += 1
+			end
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+		end
 	end
 
 	desc "Check TripAdvisor for new reviews"
