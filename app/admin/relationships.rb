@@ -23,7 +23,7 @@ ActiveAdmin.register Relationship do
 			vines.join(', ')
 		end
 		column 'Vine Count' do |relationship|
-			"#{relationship.location.vines.count}"
+			link_to "#{relationship.location.vines.count}", :controller => 'vines', :action => 'index', 'q[location_id_eq]' => "#{relationship.id}".html_safe
 		end
 		column :created_at
 		
