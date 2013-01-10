@@ -6,8 +6,21 @@ require_relative '../vineyard/tripadvisor.rb'
 # require_relative "../../app/models/review"
 require_relative "../../app/models/location"
 
+namespace :get_vine do
+	desc 'Find Yelp ID# : term, lat, long'
+	task :yelp, [:term, :lat, :long] => :environment do |t, args|
+		term = args[:term]
+		lat = args[:lat]
+		long = args[:long]
+		puts "Searching for Yelp ID using term: #{term}"
+		run = Yelp.new
+		response = run.get_location_id(term, lat, long)
+		puts response['businesses'][0]['id']
+	end
+end
 
-namespace :crawl do
+
+namespace :get_new_reviews do
 	desc "Check All Locations for New Reviews Across All Sites"
 	task :all => :environment do
 		zinc = Location.find('13')
@@ -18,21 +31,33 @@ namespace :crawl do
 	
 	desc "Check Yelp for new reviews"
 	task :yelp => :environment do
-		Source.find_by_name('yelp').vines.each do |vine|
-			vine_id = vine.source_location_uri
+		puts "Getting all associated source_location_uris of Yelp..."
+		source = Source.find_by_name('yelp')
+		source_vines = source.vines
+		source_vines.each do |vine|
+			source_location_uri = vine.source_location_uri
 			location = vine.location
 			reviews = location.reviews
 			if reviews.empty?
-				few_days_ago = Date.today - 8
+				few_days_ago = Date.today - 3
 				latest_review = {:post_date => few_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 			end
-			puts "Searching for new reviews at: #{vine_id}"
+			puts "Searching for new reviews at: #{source_location_uri}"
 			run = Yelp.new
-			response = run.get_new_reviews(latest_review, vine_id)
-			puts response
+			response = run.get_new_reviews(latest_review, source_location_uri)
+
+			review_count = 0
+			response.each do |review|
+				location.reviews.build(:source_id => source.id, 
+									   :post_date => review[:post_date],
+									   :comment   => review[:comment] )
+				location.save!
+				review_count += 1
+			end
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 	

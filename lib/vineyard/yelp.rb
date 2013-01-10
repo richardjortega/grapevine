@@ -14,12 +14,13 @@ class Yelp
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
 	end
 
-	def get_location_id
-		path = "/v2/search"
+	def get_location_id(term, lat, long)
+		path = "/v2/search?term=#{term}&ll=#{lat},#{long}"
+		response = JSON.parse(@access_token.get(path).body)
 	end
 
 	def get_new_reviews(latest_review, location_id)	
-		parsed_location_id = URI.parse("#{location_id}")
+		parsed_location_id = URI.parse(URI.encode(location_id.strip))
 		path = "/v2/business/#{parsed_location_id}"	
 		response = JSON.parse(@access_token.get(path).body)
 		url = response["url"]
