@@ -1,6 +1,4 @@
 require 'open-uri'
-require 'rest_client'
-require 'json'
 require 'httparty'
 
 class Google
@@ -15,12 +13,13 @@ class Google
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
-		location_id = response['results'][0]['reference']
+		location_id = response['results'][0]['reference'] rescue 'No Google Information Found Near These Coordinates and Search Term'
 	end
 
 	def get_new_reviews(latest_review, location_id)
 		begin
-		uri = URI.parse('https://maps.googleapis.com/maps/api/place/details/json')
+		path = "https://maps.googleapis.com/maps/api/place/details/#{output}?reference=#{location_id}"
+		uri = URI.parse('https://maps.googleapis.com/maps/api/place/details/json?reference=#')
 		response = RestClient.get "#{uri}", {:params => {:reference => "#{location_id}", :radius => "#{@radius}", :sensor => "#{@sensor}", :key => "#{@key}"}}
 		parsed_response = JSON.parse(response)
 		debugger
