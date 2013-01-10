@@ -51,10 +51,11 @@ namespace :get_new_reviews do
 
 			review_count = 0
 			response.each do |review|
-				location.reviews.build(:source_id => source.id, 
-									   :post_date => review[:post_date],
-									   :comment   => review[:comment] )
-				location.save!
+				new_review = Review.new(:location_id => location.id,
+										:source_id => source.id, 
+									    :post_date => review[:post_date],
+									    :comment   => review[:comment] )
+				new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
