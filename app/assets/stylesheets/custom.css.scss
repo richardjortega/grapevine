@@ -269,6 +269,8 @@ header#global-header .global-nav li.sign-in > a:hover {
 /* HOME HERO
 =================================
 ===============================*/
+
+
 #home-hero {
     // background: url('ipad-coffee3.jpg') no-repeat 0 -80px;
     // background: -moz-linear-gradient(-45deg, rgba(0,0,0,0.46) 0%, rgba(0,0,0,0) 73%, rgba(0,0,0,0) 100%), url('ipad-coffee3.jpg') no-repeat 0 -80px;;
@@ -299,12 +301,13 @@ header#global-header .global-nav li.sign-in > a:hover {
     }
     .tag {
         width: 550px;
-        font-weight:200;
+        font-weight:400;
         font-size:28px;
         line-height: 40px;
         margin-bottom: 40px;
-        text-shadow:1px 1px 2px #000;
+        text-shadow:1px 1px 2px #fff;
         letter-spacing: 1px;
+        color:$purple;
     }
 
 }
@@ -359,6 +362,8 @@ header#global-header .global-nav li.sign-in > a:hover {
     }
     
 }
+.no-textshadow #home-hero h2.title { color:#482673;}
+.no-textshadow #home-hero h3.tag { color:#666;}
 .lt-ie9 .twitter-wrapper {
     .inner-twitter-wrapper {
         color:#fff;
