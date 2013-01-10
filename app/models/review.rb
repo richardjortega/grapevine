@@ -1,4 +1,7 @@
 class Review < ActiveRecord::Base
+  scope :today, where('post_date = ?', Date.today)
+  scope :yesterday, where('post_date = ?', Date.yesterday)
+
   attr_accessible :author, 
   				:author_url, 
   				:comment, 
