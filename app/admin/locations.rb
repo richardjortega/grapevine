@@ -9,6 +9,15 @@ ActiveAdmin.register Location do
 		column :name do |location|
 			link_to "#{location.name}", admin_location_path(location)
 		end
+		column 'Associated Users' do |location|
+			next if location.users.empty?
+			users = []
+			location.users.each do |user|
+				users << user.display_name
+			end
+			users.join(', ')
+		end
+
 		column :street_address
 		column :address_line_2
 		column :city
