@@ -12,10 +12,10 @@ class UrbanSpoon
 		job_start_time = Time.now
 		puts "Crawling: #{url}"
 
+		# AJAXY request goign on here...
 		
-		doc = Nokogiri::HTML(open(url)).css('#diner_reviews ul > li.comment')
+		doc = Nokogiri::HTML(open(url)).css('#comments')
 		new_reviews = []
-		debugger
 
 		doc.each do |review|
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
