@@ -17,7 +17,7 @@ class Location < ActiveRecord::Base
   has_many :relationships
   has_many :users, through: :relationships
 
-  has_many :vines
+  has_many :vines, dependent: :destroy
   has_many :sources, through: :vines
 
   has_many :reviews
