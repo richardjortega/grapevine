@@ -92,6 +92,7 @@ namespace :get_new_reviews do
 									    :comment     => review[:comment],
 									    :author	     => review[:author],
 									    :rating      => review[:rating],
+									    :title       => review[:title],
 									    :url         => review[:url] )
 				new_review.save!
 				review_count += 1

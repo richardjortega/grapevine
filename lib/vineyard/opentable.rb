@@ -28,7 +28,7 @@ class OpenTable
 				new_review[:author] = 'OpenTable Diner'
 				new_review[:rating] = review["Rating"].to_i
 				new_review[:title] = review["Title"]
-				new_review[:url] = "http://www.opentable.com/rest_profile.aspx?rid=#{@location_id}&tab=2"
+				new_review[:url] = "http://www.opentable.com/rest_profile.aspx?rid=#{location_id}&tab=2"
 				new_reviews << new_review
 			end
 		end
