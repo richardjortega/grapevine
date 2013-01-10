@@ -37,7 +37,12 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
 
   def display_name
-    "#{self.first_name} #{self.last_name} | <!--email_off-->#{self.email}<!--/email_off-->"
+    # email_off HTML is so CloudFlare doesn't obscure the email
+    "#{self.first_name} #{self.last_name} | #{self.email}"
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 
 
