@@ -52,9 +52,12 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				new_review = Review.new(:location_id => location.id,
-										:source_id => source.id, 
-									    :post_date => review[:post_date],
-									    :comment   => review[:comment] )
+										:source_id   => source.id, 
+									    :post_date   => review[:post_date],
+									    :comment     => review[:comment],
+									    :author	     => review[:author],
+									    :rating      => review[:rating],
+									    :url         => review[:url] )
 				new_review.save!
 				review_count += 1
 			end
