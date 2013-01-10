@@ -18,13 +18,10 @@ class Google
 
 	def get_new_reviews(latest_review, location_id)
 		begin
-		path = "https://maps.googleapis.com/maps/api/place/details/#{output}?reference=#{location_id}"
-		uri = URI.parse('https://maps.googleapis.com/maps/api/place/details/json?reference=#')
-		response = RestClient.get "#{uri}", {:params => {:reference => "#{location_id}", :radius => "#{@radius}", :sensor => "#{@sensor}", :key => "#{@key}"}}
-		parsed_response = JSON.parse(response)
+		path = "https://maps.googleapis.com/maps/api/place/details/#{@output}?reference=#{location_id}&sensor=#{@sensor}&key=#{@key}"
+		response = HTTParty.get(path)
 		debugger
-		url = parsed_response["result"]["url"]
-
+		
 		new_reviews = []
 
 		parsed_response["result"]["reviews"].each do |review|

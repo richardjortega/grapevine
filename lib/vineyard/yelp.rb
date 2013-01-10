@@ -30,7 +30,7 @@ class Yelp
 			review_date = Time.at(review["time_created"]).to_date
 			review_comment = review["excerpt"].strip
 			
-			if review_date > latest_review[:post_date]
+			if review_date >= latest_review[:post_date]
 				next if review_comment == latest_review[:comment].chomp
 				new_review = {}
 				new_review[:post_date] = review_date

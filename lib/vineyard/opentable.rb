@@ -20,7 +20,7 @@ class OpenTable
 			review_comment = review["ReviewText"].strip
 			
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date > latest_review[:post_date]
+			if review_date >= latest_review[:post_date]
 				next if review_comment == latest_review[:comment].chomp
 				new_review = {}
 				new_review[:post_date] = review_date

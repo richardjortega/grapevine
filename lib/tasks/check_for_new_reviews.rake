@@ -48,7 +48,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = location.reviews
+			reviews = vine.source.reviews
 			if reviews.empty?
 				last_30_days_ago = Date.today - 30
 				latest_review = {:post_date => last_30_days_ago, :comment => '' }
@@ -84,7 +84,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = location.reviews
+			reviews = vine.source.reviews
 			if reviews.empty?
 				last_30_days_ago = Date.today - 30
 				latest_review = {:post_date => last_30_days_ago, :comment => '' }
@@ -120,11 +120,12 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = location.reviews
+			reviews = vine.source.reviews
 			if reviews.empty?
 				last_30_days_ago = Date.today - 30
 				latest_review = {:post_date => last_30_days_ago, :comment => '' }
 			else
+				debugger
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 			end
