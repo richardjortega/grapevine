@@ -21,4 +21,13 @@ ActiveAdmin.register Vine do
 		column :source_location_uri
 		default_actions
 	end
+	form do |f|
+		f.inputs 'Location' do
+			f.input :location, :as => :select, :collection => Location.all.sort_by { |location| location.created_at}.reverse
+			f.input :source, :as => :select
+			f.input :source_location_uri
+			f.input :overall_rating
+		end
+		f.buttons
+	end
 end

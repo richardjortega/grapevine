@@ -14,6 +14,17 @@ ActiveAdmin.register Relationship do
 			link_to "#{relationship.location.name}", admin_location_path(relationship.location)
 		end
 		column :location_id
+		column 'Associated Vines' do |relationship|
+			next if relationship.location.vines.empty?
+			vines = []
+			relationship.location.vines.each do |vine|
+				vines << vine.source.name
+			end
+			vines.join(', ')
+		end
+		column 'Vine Count' do |relationship|
+			"#{relationship.location.vines.count}"
+		end
 		column :created_at
 		
 		default_actions
