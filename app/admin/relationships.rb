@@ -6,7 +6,7 @@ ActiveAdmin.register Relationship do
 		selectable_column
 		column :user_id do |relationship|
 			next if relationship.user.nil?
-			link_to "#{relationship.user.first_name} #{relationship.user.last_name}", admin_user_path(relationship.user)
+			link_to "#{relationship.user.display_name}", admin_user_path(relationship.user)
 		end
 		column :user_id
 		column :location_id do |relationship|
