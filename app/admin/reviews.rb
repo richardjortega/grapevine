@@ -7,7 +7,10 @@ ActiveAdmin.register Review do
 		selectable_column
 		column :id
 		column :location do |review|
-			link_to "#{review.location.name}", admin_location_path(review.location)
+			"#{review.location.name}"
+		end
+		column :source do |review|
+			"#{review.source.name}"
 		end
 		column :author
 		column :author_url
