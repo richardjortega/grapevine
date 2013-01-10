@@ -16,13 +16,13 @@ class OpenTable
 
 		new_reviews = []
 		response["Results"].each do |review|
-			debugger
 			review_date = Date.strptime(review["AdditionalFields"][1]["Value"], "%m/%d/%Y")
 			review_comment = review["ReviewText"].strip
 			
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= latest_review[:post_date]
+			if review_date > latest_review[:post_date]
 				next if review_comment == latest_review[:comment].chomp
+				debugger
 				new_review = {}
 				new_review[:post_date] = review_date
 				new_review[:comment] = review_comment
