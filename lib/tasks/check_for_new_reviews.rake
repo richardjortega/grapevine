@@ -18,12 +18,20 @@ namespace :crawl do
 	
 	desc "Check Yelp for new reviews"
 	task :yelp => :environment do
-		Source.find_by_name('yelp').vines.each do |location|
-			location_id = location.source_location_uri
-			latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
-			puts "Searching for new reviews at: #{location_id}"
-			run = Yelp.new location_id
-			response = run.get_new_reviews latest_review
+		Source.find_by_name('yelp').vines.each do |vine|
+			vine_id = vine.source_location_uri
+			location = vine.location
+			reviews = location.reviews
+			if reviews.empty?
+				few_days_ago = Date.today - 8
+				latest_review = {:post_date => few_days_ago, :comment => '' }
+			else
+				last_review = reviews.order('post_date DESC').first
+				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
+			end
+			puts "Searching for new reviews at: #{vine_id}"
+			run = Yelp.new
+			response = run.get_new_reviews(latest_review, vine_id)
 			puts response
 		end
 	end

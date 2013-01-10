@@ -1,8 +1,9 @@
 require 'oauth'
 require 'json'
+require 'open-uri'
 
 class Yelp
-	def initialize(location_id)
+	def initialize
 	 	consumer_key = 'CoPn_PDLyBIom28EwW_vcg'
 		consumer_secret = 'v6VqDXMzGUpLEnbCGx6xDAwG4OM'
 		token = '8UmXzrrFzbAffWuTpjTiOQkiFKJ3KZzY'
@@ -11,11 +12,16 @@ class Yelp
 
 		consumer = OAuth::Consumer.new(consumer_key, consumer_secret, {:site => "http://#{api_host}"})
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
-		@path = "/v2/business/#{location_id}"
 	end
 
-	def get_new_reviews(latest_review)		
-		response = JSON.parse(@access_token.get(@path).body)
+	def get_location_id
+		path = "/v2/search"
+	end
+
+	def get_new_reviews(latest_review, location_id)	
+		parsed_location_id = URI.parse("#{location_id}")
+		path = "/v2/business/#{parsed_location_id}"	
+		response = JSON.parse(@access_token.get(path).body)
 		url = response["url"]
 
 		new_reviews = []
@@ -23,7 +29,7 @@ class Yelp
 			review_date = Time.at(review["time_created"]).to_date
 			review_comment = review["excerpt"].strip
 			
-			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
+			if review_date >= latest_review[:post_date]
 				next if review_comment == latest_review[:comment].chomp
 				new_review = {}
 				new_review[:post_date] = review_date
