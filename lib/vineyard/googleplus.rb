@@ -1,19 +1,29 @@
 require 'open-uri'
 require 'rest_client'
 require 'json'
+require 'httparty'
 
-class GooglePlus
-	def initialize(location_id)
-		@uri = URI.parse('https://maps.googleapis.com/maps/api/place/details/json')
-		@location_id = location_id
-		@sensor = true
+class Google
+	def initialize
+		@sensor = false
+		@radius = 500
+		@output = 'json'
 		@key = 'AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM'
 	end
 
-	def get_new_reviews(latest_review)
+	def get_location_id(term, lat, long)
+		parsed_term = URI.parse(URI.encode(term.strip))
+		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
+		response = HTTParty.get(path)
+		location_id = response['results'][0]['reference']
+	end
+
+	def get_new_reviews(latest_review, location_id)
 		begin
-		response = RestClient.get "#{@uri}", {:params => {:reference => "#{@location_id}", :sensor => "#{@sensor}", :key => "#{@key}"}}
+		uri = URI.parse('https://maps.googleapis.com/maps/api/place/details/json')
+		response = RestClient.get "#{uri}", {:params => {:reference => "#{location_id}", :radius => "#{@radius}", :sensor => "#{@sensor}", :key => "#{@key}"}}
 		parsed_response = JSON.parse(response)
+		debugger
 		url = parsed_response["result"]["url"]
 
 		new_reviews = []
@@ -63,7 +73,7 @@ class GooglePlus
 		rescue => e
 			pp e.message
 			pp e.backtrace
-			puts "Encountered error on #{@location_id} page, moving on..."
+			puts "Encountered error on #{location_id} page, moving on..."
 		end
 
 		new_reviews
