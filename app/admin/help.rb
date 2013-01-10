@@ -47,9 +47,7 @@ ActiveAdmin.register_page "Help" do
                 'CqQBlQAAAIpI_j7Mt6PkTMnJ6SqsgoQ3wsVReoM8jSwJapt56TEfej1TG1sk0dSUxGsoljqHJB6NAmUOQ3GqLjZ53mwBFdvkYKMTkpbDaOz8SwOhFReia2r6hO_Rkvq02CCbinZM2COchOJI6OreV8bssKtrzsHAr4lMMHyiJLJvceG7R6OklLN4rWoyAMaazVnORTUQw10J_GprzyMLPoCAFCooXoUSEGVQge5CeRw1b53cP6M1vP8aFBam2IAUeVmC7nkV1LTT0CH5xCYQ'
             end
             td :style => 'border:1px solid black;' do
-                "We need the reference ID that comes back on a Places API request Search. You'll need the location's lat, long, and search term (usually the locations name and needs to be URI encoded). Good site for lat/long points based on address: itouchmap.com/latlong.html  
-                The call can be done from your browser in the format (https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=[lat],[long]&keyword=[locationname]&radius=500&sensor=false&key=AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM) 
-                Example call for Zinc Wine & Bar: https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=29.426895,-98.492872&keyword=luke&radius=500&sensor=false&key=AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM"
+                "Super simple now, one command with three required params [name with spaces/special characters/or whatever will be encoded, lat, long] : Example in terminal -- $ rake get_source_location_uri:google['paloma blanca',29.479975,-98.46389]"
             end
         end
         tr do
@@ -77,7 +75,7 @@ ActiveAdmin.register_page "Help" do
                 'zinc-bistro-and-wine-bar-san-antonio'
             end
             td :style => 'border:1px solid black;' do
-                ''
+                "Important: Make sure all the links you copy and paste are URI encoded. So special characters wont work, otherwise use $ rake get_source_location_uri:yelp['name whatever',lat,long]"
             end
         end
         tr do
