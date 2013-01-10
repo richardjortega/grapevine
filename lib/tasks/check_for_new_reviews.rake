@@ -19,7 +19,6 @@ namespace :get_vine do
 	end
 end
 
-
 namespace :get_new_reviews do
 	desc "Check All Locations for New Reviews Across All Sites"
 	task :all => :environment do
