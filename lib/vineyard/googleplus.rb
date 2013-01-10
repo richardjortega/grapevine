@@ -19,8 +19,7 @@ class Google
 	def get_new_reviews(latest_review, location_id)
 		begin
 		path = "https://maps.googleapis.com/maps/api/place/details/#{@output}?reference=#{location_id}&sensor=#{@sensor}&key=#{@key}"
-		response = HTTParty.get(path)
-		debugger
+		parsed_response = HTTParty.get(path)
 		url = parsed_response["result"]["url"]
 
 		new_reviews = []
@@ -30,7 +29,7 @@ class Google
 			review_comment = review["text"].strip
 			
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= Date.strptime(latest_review[:post_date], "%m/%d/%Y")
+			if review_date >= latest_review[:post_date]
 				next if review_comment == latest_review[:comment].strip
 				new_review = {}
 				new_review[:post_date] = review_date

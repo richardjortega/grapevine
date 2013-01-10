@@ -92,7 +92,7 @@ namespace :get_new_reviews do
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 			end
-			puts "Searching for new reviews at: #{source_location_uri}"
+			puts "Searching for new reviews at: #{location.name}"
 			run = OpenTable.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
@@ -125,42 +125,30 @@ namespace :get_new_reviews do
 				last_30_days_ago = Date.today - 30
 				latest_review = {:post_date => last_30_days_ago, :comment => '' }
 			else
-				debugger
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 			end
-			puts "Searching for new reviews at: #{source_location_uri}"
+			puts "Searching for new reviews at: #{location.name}"
 			run = Google.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
-			debugger
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id => location.id,
-										:source_id   => source.id, 
-									    :post_date   => review[:post_date],
-									    :comment     => review[:comment],
-									    :author	     => review[:author],
-									    :rating      => review[:rating],
-									    :title       => review[:title],
-									    :url         => review[:url] )
+				new_review = Review.new(:location_id 		=> location.id,
+										:source_id   		=> source.id, 
+									    :post_date   		=> review[:post_date],
+									    :comment     		=> review[:comment],
+									    :author	     		=> review[:author],
+									    :author_url  		=> review[:author_url],
+									    :rating      		=> review[:rating],
+									    :rating_description => review[:rating_description],
+									    :title       		=> review[:title],
+									    :url         		=> review[:url] )
 				new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 
-
-		# # Location.all.each do |location|
-		# 	# location_id = location.source('googelplus').matchingid
-
-		# 	# for testing
-		# 	latest_review = {:post_date => '01/29/2012', :comment => 'asdfad'}
-		# 	location_id = 'CnRmAAAAGg321uK8xOiQRZguEZvxKwZXqwzShD1Mx5rW7bolqViOIC4anBbtDrqZDaJ2KSdrEoDgdOhxuwtwI35QlDEgvhFmkPek-MDkV3Gj8ZGMz-wQlAWjbiSIjeVu8pB6Yy8iE5dMIK0fLl4e4Mh0Lu9ihhIQwUApDK4XMZazepOYt6XJQBoUgvF1h4j1OCCNCfVnRmcpbvJwIpE'
-
-		# 	run = GooglePlus.new location_id
-		# 	response = run.get_new_reviews latest_review
-		# 	puts response
-		# # end
 	end
 
 	desc "Check UrbanSpoon for new reviews"
