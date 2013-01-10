@@ -16,6 +16,7 @@ class OpenTable
 
 		new_reviews = []
 		response["Results"].each do |review|
+			debugger
 			review_date = Date.strptime(review["AdditionalFields"][1]["Value"], "%m/%d/%Y")
 			review_comment = review["ReviewText"].strip
 			
