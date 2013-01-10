@@ -5,7 +5,6 @@ ActiveAdmin.register Location do
 			You must associate a User to a Location through the Relationships tab by creating a new Relationship.'
 		end
 		selectable_column
-		column :id
 		column :name do |location|
 			link_to "#{location.name}", admin_location_path(location)
 		end
@@ -16,6 +15,15 @@ ActiveAdmin.register Location do
 				users << user.display_name
 			end
 			users.join(', ')
+		end
+
+		column 'Associated Vines' do |location|
+			next if location.vines.empty?
+			vines = []
+			location.vines.each do |vine|
+				vines << vine.source.name
+			end
+			vines.join(', ')
 		end
 
 		column :street_address
