@@ -21,7 +21,8 @@ class Google
 		path = "https://maps.googleapis.com/maps/api/place/details/#{@output}?reference=#{location_id}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
 		debugger
-		
+		url = parsed_response["result"]["url"]
+
 		new_reviews = []
 
 		parsed_response["result"]["reviews"].each do |review|
