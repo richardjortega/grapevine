@@ -39,8 +39,8 @@ namespace :get_new_reviews do
 			location = vine.location
 			reviews = location.reviews
 			if reviews.empty?
-				few_days_ago = Date.today - 3
-				latest_review = {:post_date => few_days_ago, :comment => '' }
+				last_30_days_ago = Date.today - 30
+				latest_review = {:post_date => last_30_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -75,8 +75,8 @@ namespace :get_new_reviews do
 			location = vine.location
 			reviews = location.reviews
 			if reviews.empty?
-				few_days_ago = Date.today - 30
-				latest_review = {:post_date => few_days_ago, :comment => '' }
+				last_30_days_ago = Date.today - 30
+				latest_review = {:post_date => last_30_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -84,18 +84,19 @@ namespace :get_new_reviews do
 			puts "Searching for new reviews at: #{source_location_uri}"
 			run = OpenTable.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
-			debugger
-			ap response
-			# review_count = 0
-			# response.each do |review|
-			# 	new_review = Review.new(:location_id => location.id,
-			# 							:source_id => source.id, 
-			# 						    :post_date => review[:post_date],
-			# 						    :comment   => review[:comment] )
-			# 	new_review.save!
-			# 	review_count += 1
-			# end
-			#puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			review_count = 0
+			response.each do |review|
+				new_review = Review.new(:location_id => location.id,
+										:source_id   => source.id, 
+									    :post_date   => review[:post_date],
+									    :comment     => review[:comment],
+									    :author	     => review[:author],
+									    :rating      => review[:rating],
+									    :url         => review[:url] )
+				new_review.save!
+				review_count += 1
+			end
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 
