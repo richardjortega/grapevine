@@ -13,6 +13,7 @@ ActiveAdmin.register Vine do
 		selectable_column
 		column :id
 		column :source_id do |vine|
+			next if vine.source.nil?
 			link_to "#{vine.source.name}", admin_source_path(vine.source)
 		end
 		column :location_id do |vine|

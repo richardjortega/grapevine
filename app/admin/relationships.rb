@@ -15,7 +15,7 @@ ActiveAdmin.register Relationship do
 		end
 		column :location_id
 		column 'Associated Vines' do |relationship|
-			next if relationship.location.vines.empty?
+			next if relationship.location.nil? or relationship.location.vines.empty?
 			vines = []
 			relationship.location.vines.each do |vine|
 				vines << vine.source.name
@@ -23,6 +23,7 @@ ActiveAdmin.register Relationship do
 			vines.join(', ')
 		end
 		column 'Vine Count' do |relationship|
+			next if relationship.location.nil?
 			link_to "#{relationship.location.vines.count}", :controller => 'vines', :action => 'index', 'q[location_id_eq]' => "#{relationship.id}".html_safe
 		end
 		column :created_at

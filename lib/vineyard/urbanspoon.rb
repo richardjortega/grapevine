@@ -12,12 +12,11 @@ class UrbanSpoon
 		job_start_time = Time.now
 		puts "Crawling: #{url}"
 
-		# AJAXY request goign on here...
-		
-		doc = Nokogiri::HTML(open(url)).css('#comments')
+		doc = Nokogiri::HTML(open(url)).css('.list > ul > li.comment')
 		new_reviews = []
 
 		doc.each do |review|
+			debugger
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
 			if review.at_css('div.body a.show_more').nil?
 				review_comment = review.at_css('div.body').text.strip

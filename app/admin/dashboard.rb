@@ -21,6 +21,7 @@ ActiveAdmin.register_page "Dashboard" do
                 ul do
                     Relationship
                     Relationship.last(10).reverse.map do |relationship|
+                        next if relationship.location.nil?
                         relationship_name = "#{relationship.user.first_name} #{relationship.user.last_name} | #{relationship.location.name}"
                         li link_to(relationship_name, admin_relationship_path(relationship))
                     end
