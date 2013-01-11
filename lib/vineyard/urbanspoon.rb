@@ -26,7 +26,6 @@ class UrbanSpoon
 
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
 			if review_date >= latest_review[:post_date]
-				debugger
 				next if review_comment == latest_review[:comment].strip
 				new_review = {}
 				new_review[:post_date] = review_date
@@ -34,7 +33,7 @@ class UrbanSpoon
 				new_review[:author] = review.at_css('div.with_stats div.title').text.strip
 				new_review[:rating] = review.at_css('div.opinion').text
 				new_review[:title] = review.at_css('div.details div.title').text.strip
-				new_review[:url] = @url
+				new_review[:url] = url
 				new_reviews << new_review
 			end
 		end
@@ -43,7 +42,7 @@ class UrbanSpoon
 		rescue => e
 			pp e.message
 			pp e.backtrace
-			puts "Encountered error on #{@url} page, moving on..."
+			puts "Encountered error on #{url} page, moving on..."
 		end
 
 		new_reviews
