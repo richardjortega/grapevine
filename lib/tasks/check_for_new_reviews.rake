@@ -32,10 +32,41 @@ end
 namespace :get_new_reviews do
 	desc "Check All Locations for New Reviews Across All Sites"
 	task :all => :environment do
-		zinc = Location.find('13')
-		# Check OpenTable
-		Rake::Task['crawl:opentable'].reenable
-		Rake::Task['crawl:opentable'].invoke(zinc)
+		job_start_time = Time.now
+		puts "Checking for new reviews across all review sites"
+		
+		opentable_start_time = Time.now
+		puts "Checking for new reviews at OpenTable"
+		Rake::Task['get_new_reviews:opentable'].reenable
+		Rake::Task['get_new_reviews:opentable'].invoke
+		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
+
+		yelp_start_time = Time.now
+		puts "Checking for new reviews at Yelp"
+		Rake::Task['get_new_reviews:yelp'].reenable
+		Rake::Task['get_new_reviews:yelp'].invoke
+		puts "Total check time: #{((Time.now - yelp_start_time)/60.0)} minutes"
+
+		google_start_time = Time.now
+		puts "Checking for new reviews at Google"
+		Rake::Task['get_new_reviews:google'].reenable
+		Rake::Task['get_new_reviews:google'].invoke
+		puts "Total check time: #{((Time.now - google_start_time)/60.0)} minutes"
+
+		tripadvisor_start_time = Time.now
+		puts "Checking for new reviews at TripAdvisor"
+		Rake::Task['get_new_reviews:tripadvisor'].reenable
+		Rake::Task['get_new_reviews:tripadvisor'].invoke
+		puts "Total check time: #{((Time.now - tripadvisor_start_time)/60.0)} minutes"
+
+		opentable_start_time = Time.now
+		puts "Checking for new reviews at UrbanSpoon"
+		Rake::Task['get_new_reviews:urbanspoon'].reenable
+		Rake::Task['get_new_reviews:urbanspoon'].invoke
+		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
+
+		puts "Finished checking for new reviews across all review sites"
+		puts "Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
 	end
 	
 	desc "Check Yelp for new reviews"
