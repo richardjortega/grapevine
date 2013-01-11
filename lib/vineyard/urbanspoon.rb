@@ -16,7 +16,6 @@ class UrbanSpoon
 		new_reviews = []
 
 		doc.each do |review|
-			debugger
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
 			if review.at_css('div.body a.show_more').nil?
 				review_comment = review.at_css('div.body').text.strip

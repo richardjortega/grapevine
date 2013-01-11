@@ -3,8 +3,6 @@ require_relative '../vineyard/yelp.rb'
 require_relative '../vineyard/googleplus.rb'
 require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
-# require_relative "../../app/models/review"
-require_relative "../../app/models/location"
 
 namespace :get_source_location_uri do
 	desc 'Find Yelp ID# : term, lat, long (Assumes 1st is right)'
@@ -170,7 +168,6 @@ namespace :get_new_reviews do
 			puts "Searching for new reviews at: #{location.name}"
 			run = UrbanSpoon.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
-			debugger
 			review_count = 0
 			response.each do |review|
 				new_review = Review.new(:location_id => location.id,
