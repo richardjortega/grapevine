@@ -1,11 +1,7 @@
 source 'https://rubygems.org'
 
-# # Additions for AppFog
-# gem 'cloudfoundry-jquery-rails'
-# gem 'cloudfoundry-devise', :require => 'devise'
-
 # Main
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.11'
 gem 'thin'
 gem 'jquery-rails'
 gem 'geocoder'
@@ -16,6 +12,7 @@ gem 'dalli'
 
 # Front-end
 gem 'client_side_validations', '3.2.0'
+gem 'meta-tags', :require => 'meta_tags'
 
 # Payment
 gem 'stripe'
@@ -29,7 +26,6 @@ gem 'rolify', '>= 3.1.0'
 # Some crawling madness
 gem 'nokogiri'
 gem 'watir-webdriver'
-gem 'headless'
 
 # Mailers
 gem 'mailchimp'
@@ -37,25 +33,16 @@ gem 'roadie'
 
 # Background Processes/Workers
 gem 'iron_worker_ng'
-gem 'poltergeist'
 gem 'delayed_job_active_record'
 gem 'dj_mon'
 
 # Gems for the Vineyard
 gem 'oauth'
 gem 'httparty'
-gem 'rest-client'
-
-# Design
-gem 'bootstrap-sass', '2.0.3'
-gem 'meta-tags', :require => 'meta_tags'
 
 #used only in testing, but heroku needs all rake to pass before using other rakes
-#needs to be configured correctly laterhero
-gem 'database_cleaner', '>= 0.7.2'
 
 group :production do
-	# gem 'mysql2'
 	gem 'newrelic_rpm'
 	gem 'pg'
 end
@@ -83,6 +70,7 @@ group :test do
 	gem 'email_spec'
 	gem 'capybara'
 	gem 'launchy'
+	gem 'database_cleaner', '>= 0.7.2'
 end
 
 
