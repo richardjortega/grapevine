@@ -5,6 +5,30 @@ require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
 
 namespace :get_source_location_uri do
+	desc 'Find all source_location_uri for all locations'
+	taks :all => :environment do
+		Location.all.each do |location|
+			next if location.vines
+			term = location.name
+			street_address = location.street_address
+			city = location.city
+			state = location.state
+			zip = location.zip
+			lat = location.lat.to_f
+			long = location.long.to_f
+
+			Rake::Task['get_source_location_uri:yelp'].reenable
+			new_vine = Rake::Task['get_source_location_uri:yelp'].invoke(term, lat, long)
+
+		end
+
+
+		
+		Rake::Task['get_new_reviews:opentable'].reenable
+		Rake::Task['get_new_reviews:opentable'].invoke
+	end
+
+
 	desc 'Find Yelp ID# : term, lat, long (Assumes 1st is right)'
 	task :yelp, [:term, :lat, :long] => :environment do |t, args|
 		term = args[:term]
