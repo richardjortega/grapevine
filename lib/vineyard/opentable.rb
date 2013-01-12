@@ -9,6 +9,16 @@ class OpenTable
 		@url = "http://reviews.opentable.com/data/reviews.json?apiversion=#{apiversion}&passkey=#{passkey}&sort=submissiontime:desc&limit=#{limit}&filter=IsRatingsOnly:false&include=products&stats=reviews"
 	end
 
+	def get_location_id(term, street_address, city, state, zip)
+		query = "#{term} #{street_address} #{city} #{state} #{zip}"
+		parsed_query = URI.parse(URI.encode(query.strip))
+		cx = "009410204525769731320:tbwceh9avj4"
+		key = "AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM"
+		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
+		response = HTTParty.get(path)
+		location_id = response['items'][0]['link']
+	end
+
 	def get_new_reviews(latest_review, location_id)
 		begin
 		@request = @url + URI.encode("&filter=ProductId:#{location_id}&RestaurantID=#{location_id}")
