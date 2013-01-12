@@ -41,6 +41,7 @@ gem 'oauth'
 gem 'httparty'
 
 #used only in testing, but heroku needs all rake to pass before using other rakes
+gem 'database_cleaner', '>= 0.7.2'
 
 group :production do
 	gem 'newrelic_rpm'
@@ -70,7 +71,6 @@ group :test do
 	gem 'email_spec'
 	gem 'capybara'
 	gem 'launchy'
-	gem 'database_cleaner', '>= 0.7.2'
 end
 
 
