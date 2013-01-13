@@ -8,7 +8,7 @@ namespace :get_source_location_uri do
 	desc 'Find all source_location_uri for all locations'
 	task :all => :environment do
 		Location.all.each do |location|
-			next if location.vines
+			next if location.vines.empty?
 			term = location.name
 			street_address = location.street_address
 			city = location.city
@@ -18,18 +18,21 @@ namespace :get_source_location_uri do
 			long = location.long.to_f
 
 			Rake::Task['get_source_location_uri:yelp'].reenable
-			new_vine = Rake::Task['get_source_location_uri:yelp'].invoke(term, lat, long)
+			Rake::Task['get_source_location_uri:yelp'].invoke(term, lat, long)
+			puts new_vine
+
+			Rake::Task['get_new_reviews:opentable'].reenable
+			Rake::Task['get_new_reviews:opentable'].invoke
 
 		end
 
 
 		
-		Rake::Task['get_new_reviews:opentable'].reenable
-		Rake::Task['get_new_reviews:opentable'].invoke
+		
 	end
 
 
-	desc 'Find Yelp ID# : term, lat, long (Assumes 1st is right)'
+	desc 'Find Yelp ID# and associate it to Location: term, lat, long (Assumes 1st is right)'
 	task :yelp, [:term, :lat, :long] => :environment do |t, args|
 		term = args[:term]
 		lat = args[:lat]

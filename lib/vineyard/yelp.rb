@@ -15,8 +15,10 @@ class Yelp
 	end
 
 	def get_location_id(term, lat, long)
-		path = "/v2/search?term=#{term}&ll=#{lat},#{long}"
+		parsed_term = URI.parse(URI.encode(term.strip))
+		path = "/v2/search?term=#{parsed_term}&ll=#{lat},#{long}"
 		response = JSON.parse(@access_token.get(path).body)
+		location_id = response['businesses'][0]['id']
 	end
 
 	def get_new_reviews(latest_review, location_id)	
