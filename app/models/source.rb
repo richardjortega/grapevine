@@ -10,6 +10,7 @@ class Source < ActiveRecord::Base
   has_many :locations, through: :vines
 
   has_many :reviews
-  
+
+  validates_uniqueness_of :name, :case_sensitive => false
 
 end
