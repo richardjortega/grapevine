@@ -69,10 +69,12 @@ namespace :get_source_location_uri do
 		puts "Searching for Yelp ID using term: #{term}"
 		run = Yelp.new
 		source_location_uri = run.get_location_id(term, lat, long)
-		new_vine = Vine.new(:source_id 			   => source_id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		unless source_location_uri ==  "Could not find any matching information"
+			new_vine = Vine.new(:source_id 			   => source_id, 
+					 			:location_id 		   => location_id, 
+								:source_location_uri   => source_location_uri)
+			new_vine.save!
+		end
 		puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 
 	end
@@ -88,10 +90,12 @@ namespace :get_source_location_uri do
 		puts "Searching for Google ID using term: #{term}"
 		run = Google.new
 		source_location_uri = run.get_location_id(term, lat, long)
-		new_vine = Vine.new(:source_id 			   => source_id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		unless source_location_uri ==  "Could not find any matching information"
+			new_vine = Vine.new(:source_id 			   => source_id, 
+					 			:location_id 		   => location_id, 
+								:source_location_uri   => source_location_uri)
+			new_vine.save!
+		end
 		puts "Added Google source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
@@ -108,10 +112,12 @@ namespace :get_source_location_uri do
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			   => source_id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		unless source_location_uri ==  "Could not find any matching information"
+			new_vine = Vine.new(:source_id 			   => source_id, 
+					 			:location_id 		   => location_id, 
+								:source_location_uri   => source_location_uri)
+			new_vine.save!
+		end
 		puts "Added UrbanSpoon source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
@@ -128,10 +134,12 @@ namespace :get_source_location_uri do
 		puts "Searching for TripAdvisor ID using term: #{term}"
 		run = TripAdvisor.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			   => source_id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		unless source_location_uri ==  "Could not find any matching information"
+			new_vine = Vine.new(:source_id 			   => source_id, 
+					 			:location_id 		   => location_id, 
+								:source_location_uri   => source_location_uri)
+			new_vine.save!
+		end
 		puts "Added TripAdvisor source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
@@ -148,10 +156,12 @@ namespace :get_source_location_uri do
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			   => source_id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		unless source_location_uri ==  "Could not find any matching information"
+			new_vine = Vine.new(:source_id 			   => source_id, 
+					 			:location_id 		   => location_id, 
+								:source_location_uri   => source_location_uri)
+			new_vine.save!
+		end
 		puts "Added OpenTable source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 end
