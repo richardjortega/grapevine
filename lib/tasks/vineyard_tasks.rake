@@ -105,10 +105,10 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args[:street_address]
-		city = args[:city]
-		state = args[:state]
-		zip = args[:zip]
+		street_address = args.[:street_address] || ""
+		city = args[:city] || ""
+		state = args[:state] || ""
+		zip = args[:zip] || ""
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
@@ -127,10 +127,10 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args[:street_address]
-		city = args[:city]
-		state = args[:state]
-		zip = args[:zip]
+		street_address = args.[:street_address] || ""
+		city = args[:city] || ""
+		state = args[:state] || ""
+		zip = args[:zip] || ""
 		puts "Searching for TripAdvisor ID using term: #{term}"
 		run = TripAdvisor.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
@@ -149,10 +149,10 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args[:street_address]
-		city = args[:city]
-		state = args[:state]
-		zip = args[:zip]
+		street_address = args.[:street_address] || ""
+		city = args[:city] || ""
+		state = args[:state] || ""
+		zip = args[:zip] || ""
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
