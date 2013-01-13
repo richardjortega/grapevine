@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110140312) do
+ActiveRecord::Schema.define(:version => 20130113001125) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -202,5 +202,9 @@ ActiveRecord::Schema.define(:version => 20130110140312) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  add_index "vines", ["location_id"], :name => "index_vines_on_location_id"
+  add_index "vines", ["source_id"], :name => "index_vines_on_source_id"
+  add_index "vines", ["source_location_uri"], :name => "index_vines_on_source_location_uri"
 
 end

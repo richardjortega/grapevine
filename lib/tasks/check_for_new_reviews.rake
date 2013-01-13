@@ -6,7 +6,7 @@ require_relative '../vineyard/tripadvisor.rb'
 
 namespace :get_source_location_uri do
 	desc 'Find all source_location_uri for all locations'
-	taks :all => :environment do
+	task :all => :environment do
 		Location.all.each do |location|
 			next if location.vines
 			term = location.name
