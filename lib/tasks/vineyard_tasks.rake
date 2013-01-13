@@ -74,9 +74,8 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
+			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 		end
-		puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
-
 	end
 
 	desc 'Find Google ID# : term, lat, long (Assumes 1st is right)'
@@ -95,8 +94,8 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
+			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 		end
-		puts "Added Google source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
 	desc 'Find UrbanSpoon ID# : term, street_address, city, state, zip (Assumes 1st is right)'
@@ -117,8 +116,8 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
+			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 		end
-		puts "Added UrbanSpoon source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
 	desc 'Find TripAdvisor ID# : term, street_address, city, state, zip (Assumes 1st is right)'
@@ -139,8 +138,8 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
+			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 		end
-		puts "Added TripAdvisor source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
 	desc 'Find OpenTable ID# : term, street_address, city, state, zip (Assumes 1st is right)'
@@ -161,8 +160,8 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
+			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
 		end
-		puts "Added OpenTable source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 end
 
