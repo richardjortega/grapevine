@@ -13,7 +13,7 @@ class Google
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
-		location_id = response['results'][0]['reference'] rescue 'No Google Information Found Near These Coordinates and Search Term'
+		location_id = response['results'][0]['reference'] rescue "No Google Information Found for #{term}"
 	end
 
 	def get_new_reviews(latest_review, location_id)

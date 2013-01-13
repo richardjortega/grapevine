@@ -47,8 +47,8 @@ namespace :get_source_location_uri do
 				Rake::Task['get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
 			end
 
-			unless existing_vines.include?('google')
-				puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
+			unless existing_vines.include?('opentable')
+				puts "Didn't find a OpenTable source_location_uri for #{term}, finding it now..."			
 				Rake::Task['get_source_location_uri:opentable'].reenable
 				Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
 			end
@@ -67,8 +67,8 @@ namespace :get_source_location_uri do
 		puts "Searching for Yelp ID using term: #{term}"
 		run = Yelp.new
 		source_location_uri = run.get_location_id(term, lat, long)
-		new_vine = Vine.new(:source_id 			=> source_id, 
-				 			:location_id 			=> location_id, 
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
 							:source_location_uri   => source_location_uri)
 		new_vine.save!
 		puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
@@ -77,7 +77,7 @@ namespace :get_source_location_uri do
 
 	desc 'Find Google ID# : term, lat, long (Assumes 1st is right)'
 	task :google, [:location_id, :term, :lat, :long] => :environment do |t, args|
-		source = Source.find_by_name('google')
+		source = Source.find_by_name('googleplus')
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
@@ -86,8 +86,8 @@ namespace :get_source_location_uri do
 		puts "Searching for Google ID using term: #{term}"
 		run = Google.new
 		source_location_uri = run.get_location_id(term, lat, long)
-		new_vine = Vine.new(:source_id 			=> source_id, 
-				 			:location_id 			=> location_id, 
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
 							:source_location_uri   => source_location_uri)
 		new_vine.save!
 		puts "Added Google source_location_uri '#{source_location_uri}' to #{term}"	
@@ -106,8 +106,8 @@ namespace :get_source_location_uri do
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			=> source_id, 
-				 			:location_id 			=> location_id, 
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
 							:source_location_uri   => source_location_uri)
 		new_vine.save!
 		puts "Added UrbanSpoon source_location_uri '#{source_location_uri}' to #{term}"	
@@ -126,8 +126,8 @@ namespace :get_source_location_uri do
 		puts "Searching for TripAdvisor ID using term: #{term}"
 		run = TripAdvisor.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			=> source_id, 
-				 			:location_id 			=> location_id, 
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
 							:source_location_uri   => source_location_uri)
 		new_vine.save!
 		puts "Added TripAdvisor source_location_uri '#{source_location_uri}' to #{term}"	
@@ -146,8 +146,8 @@ namespace :get_source_location_uri do
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		new_vine = Vine.new(:source_id 			=> source_id, 
-				 			:location_id 			=> location_id, 
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
 							:source_location_uri   => source_location_uri)
 		new_vine.save!
 		puts "Added OpenTable source_location_uri '#{source_location_uri}' to #{term}"	

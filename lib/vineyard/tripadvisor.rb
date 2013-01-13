@@ -13,7 +13,7 @@ class TripAdvisor
 		key = "AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
-		location_id = response['items'][0]['link']
+		location_id = response['items'][0]['link'] rescue "No TripAdvisor information found for #{term}"
 	end
 
 	def get_new_reviews(latest_review, location_id)
