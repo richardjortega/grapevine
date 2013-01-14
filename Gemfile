@@ -10,6 +10,13 @@ gem 'activeadmin'
 gem 'meta_search',	'>= 1.1.0.pre'
 gem 'dalli'
 
+# Exception/Error Reporting
+gem 'airbrake'
+gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
+
+# Data/Event Reporting
+gem 'keen'
+
 # Front-end
 gem 'client_side_validations', '3.2.0'
 gem 'meta-tags', :require => 'meta_tags'
