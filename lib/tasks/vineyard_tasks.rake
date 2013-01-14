@@ -102,7 +102,6 @@ namespace :get_source_location_uri do
 	task :urbanspoon, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('urbanspoon')
 		source_id = source.id
-		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
 		location_id = args[:location_id]
 		term = args[:term]
 		street_address = args[:street_address]
@@ -125,7 +124,6 @@ namespace :get_source_location_uri do
 	task :tripadvisor, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('tripadvisor')
 		source_id = source.id
-		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
 		location_id = args[:location_id]
 		term = args[:term]
 		street_address = args[:street_address]
@@ -148,7 +146,6 @@ namespace :get_source_location_uri do
 	task :opentable, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('opentable')
 		source_id = source.id
-		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
 		location_id = args[:location_id]
 		term = args[:term]
 		street_address = args[:street_address]
