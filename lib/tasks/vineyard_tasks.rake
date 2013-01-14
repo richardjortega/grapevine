@@ -104,7 +104,7 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args.[:street_address] || ""
+		street_address = args[:street_address] || ""
 		city = args[:city] || ""
 		state = args[:state] || ""
 		zip = args[:zip] || ""
@@ -126,7 +126,7 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args.[:street_address] || ""
+		street_address = args[:street_address] || ""
 		city = args[:city] || ""
 		state = args[:state] || ""
 		zip = args[:zip] || ""
@@ -148,7 +148,7 @@ namespace :get_source_location_uri do
 		source_id = source.id
 		location_id = args[:location_id]
 		term = args[:term]
-		street_address = args.[:street_address] || ""
+		street_address = args[:street_address] || ""
 		city = args[:city] || ""
 		state = args[:state] || ""
 		zip = args[:zip] || ""
