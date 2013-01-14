@@ -19,7 +19,7 @@ class OpenTable
 		if response['error']
 			code = response['error']['code']
 			message = response['error']['message']
-			puts "Error found: #{code} | Message: #{message}"
+			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
 		else
 			location_id = response['items'][0]['link'] rescue "Could not find any matching information"
 		end

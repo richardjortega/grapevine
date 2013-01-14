@@ -70,11 +70,7 @@ namespace :get_source_location_uri do
 		run = Yelp.new
 		source_location_uri = run.get_location_id(term, lat, long)
 		unless source_location_uri ==  "Could not find any matching information"
-			new_vine = Vine.new(:source_id 			   => source_id, 
-					 			:location_id 		   => location_id, 
-								:source_location_uri   => source_location_uri)
-			new_vine.save!
-			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
+			add_new_vine(source_id, location_id, source_location_uri, term)
 		end
 	end
 
@@ -90,11 +86,7 @@ namespace :get_source_location_uri do
 		run = Google.new
 		source_location_uri = run.get_location_id(term, lat, long)
 		unless source_location_uri ==  "Could not find any matching information"
-			new_vine = Vine.new(:source_id 			   => source_id, 
-					 			:location_id 		   => location_id, 
-								:source_location_uri   => source_location_uri)
-			new_vine.save!
-			puts "Added Google source_location_uri '#{source_location_uri}' to #{term}"	
+			add_new_vine(source_id, location_id, source_location_uri, term)	
 		end
 	end
 
@@ -113,11 +105,7 @@ namespace :get_source_location_uri do
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
 		unless source_location_uri ==  "Could not find any matching information"
-			new_vine = Vine.new(:source_id 			   => source_id, 
-					 			:location_id 		   => location_id, 
-								:source_location_uri   => source_location_uri)
-			new_vine.save!
-			puts "Added UrbanSpoon source_location_uri '#{source_location_uri}' to #{term}"	
+			add_new_vine(source_id, location_id, source_location_uri, term)
 		end
 	end
 
@@ -136,11 +124,7 @@ namespace :get_source_location_uri do
 		run = TripAdvisor.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
 		unless source_location_uri ==  "Could not find any matching information"
-			new_vine = Vine.new(:source_id 			   => source_id, 
-					 			:location_id 		   => location_id, 
-								:source_location_uri   => source_location_uri)
-			new_vine.save!
-			puts "Added TripAdvisor source_location_uri '#{source_location_uri}' to #{term}"	
+			add_new_vine(source_id, location_id, source_location_uri, term)	
 		end
 	end
 
@@ -155,17 +139,12 @@ namespace :get_source_location_uri do
 		city = args[:city]
 		state = args[:state]
 		zip = args[:zip]
-		debugger
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		debugger
+		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
-			new_vine = Vine.new(:source_id 			   => source_id, 
-					 			:location_id 		   => location_id, 
-								:source_location_uri   => source_location_uri)
-			new_vine.save!
-			puts "Added OpenTable source_location_uri '#{source_location_uri}' to #{term}"	
+			add_new_vine(source_id, location_id, source_location_uri, term)
 		end
 	end
 end
@@ -232,14 +211,15 @@ namespace :get_new_reviews do
 
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id => location.id,
-										:source_id   => source.id, 
-									    :post_date   => review[:post_date],
-									    :comment     => review[:comment],
-									    :author	     => review[:author],
-									    :rating      => review[:rating],
-									    :url         => review[:url] )
-				new_review.save!
+				add_new_review(location, source, review)
+				# new_review = Review.new(:location_id => location.id,
+				# 						:source_id   => source.id, 
+				# 					    :post_date   => review[:post_date],
+				# 					    :comment     => review[:comment],
+				# 					    :author	     => review[:author],
+				# 					    :rating      => review[:rating],
+				# 					    :url         => review[:url] )
+				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -267,15 +247,16 @@ namespace :get_new_reviews do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id => location.id,
-										:source_id   => source.id, 
-									    :post_date   => review[:post_date],
-									    :comment     => review[:comment],
-									    :author	     => review[:author],
-									    :rating      => review[:rating],
-									    :title       => review[:title],
-									    :url         => review[:url] )
-				new_review.save!
+				add_new_review(location, source, review)
+				# new_review = Review.new(:location_id => location.id,
+				# 						:source_id   => source.id, 
+				# 					    :post_date   => review[:post_date],
+				# 					    :comment     => review[:comment],
+				# 					    :author	     => review[:author],
+				# 					    :rating      => review[:rating],
+				# 					    :title       => review[:title],
+				# 					    :url         => review[:url] )
+				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -303,17 +284,18 @@ namespace :get_new_reviews do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id 		=> location.id,
-										:source_id   		=> source.id, 
-									    :post_date   		=> review[:post_date],
-									    :comment     		=> review[:comment],
-									    :author	     		=> review[:author],
-									    :author_url  		=> review[:author_url],
-									    :rating      		=> review[:rating],
-									    :rating_description => review[:rating_description],
-									    :title       		=> review[:title],
-									    :url         		=> review[:url] )
-				new_review.save!
+				add_new_review(location, source, review)
+				# new_review = Review.new(:location_id 		=> location.id,
+				# 						:source_id   		=> source.id, 
+				# 					    :post_date   		=> review[:post_date],
+				# 					    :comment     		=> review[:comment],
+				# 					    :author	     		=> review[:author],
+				# 					    :author_url  		=> review[:author_url],
+				# 					    :rating      		=> review[:rating],
+				# 					    :rating_description => review[:rating_description],
+				# 					    :title       		=> review[:title],
+				# 					    :url         		=> review[:url] )
+				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -342,15 +324,16 @@ namespace :get_new_reviews do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id => location.id,
-										:source_id   => source.id, 
-									    :post_date   => review[:post_date],
-									    :comment     => review[:comment],
-									    :author	     => review[:author],
-									    :rating      => review[:rating],
-									    :title       => review[:title],
-									    :url         => review[:url] )
-				new_review.save!
+				add_new_review(location, source, review)
+				# new_review = Review.new(:location_id => location.id,
+				# 						:source_id   => source.id, 
+				# 					    :post_date   => review[:post_date],
+				# 					    :comment     => review[:comment],
+				# 					    :author	     => review[:author],
+				# 					    :rating      => review[:rating],
+				# 					    :title       => review[:title],
+				# 					    :url         => review[:url] )
+				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -378,15 +361,16 @@ namespace :get_new_reviews do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			response.each do |review|
-				new_review = Review.new(:location_id => location.id,
-										:source_id   => source.id, 
-									    :post_date   => review[:post_date],
-									    :comment     => review[:comment],
-									    :author	     => review[:author],
-									    :rating      => review[:rating],
-									    :title       => review[:title],
-									    :url         => review[:url] )
-				new_review.save!
+				add_new_review(location, source, review)
+				# new_review = Review.new(:location_id => location.id,
+				# 						:source_id   => source.id, 
+				# 					    :post_date   => review[:post_date],
+				# 					    :comment     => review[:comment],
+				# 					    :author	     => review[:author],
+				# 					    :rating      => review[:rating],
+				# 					    :title       => review[:title],
+				# 					    :url         => review[:url] )
+				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -394,3 +378,27 @@ namespace :get_new_reviews do
 	end
 
 end
+
+private
+
+	def add_new_vine(source_id, location_id, source_location_uri, term)
+		new_vine = Vine.new(:source_id 			   => source_id, 
+				 			:location_id 		   => location_id, 
+							:source_location_uri   => source_location_uri)
+		new_vine.save!
+		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{term}"	
+	end
+
+	def add_new_review(location, source, review)
+		new_review = Review.new(:location_id 		=> location.id,
+								:source_id   		=> source.id, 
+							    :post_date   		=> review[:post_date],
+							    :comment     		=> review[:comment],
+							    :author	     		=> review[:author],
+							    :author_url  		=> review[:author_url],
+							    :rating      		=> review[:rating],
+							    :rating_description => review[:rating_description],
+							    :title       		=> review[:title],
+							    :url         		=> review[:url] )
+		new_review.save!
+	end
