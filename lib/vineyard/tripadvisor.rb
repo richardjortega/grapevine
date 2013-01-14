@@ -13,7 +13,13 @@ class TripAdvisor
 		key = "AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
-		location_id = response['items'][0]['link'] rescue "Could not find any matching information"
+		if response['error']
+			code = response['error']['code']
+			message = response['error']['message']
+			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
+		else
+			location_id = response['items'][0]['link'] rescue "Could not find any matching information"
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)
