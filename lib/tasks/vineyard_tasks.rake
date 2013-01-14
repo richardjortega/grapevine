@@ -29,7 +29,7 @@ namespace :get_source_location_uri do
 				Rake::Task['get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
 			end
 
-			unless existing_vines.include?('google')
+			unless existing_vines.include?('googleplus')
 				puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
 				Rake::Task['get_source_location_uri:google'].reenable
 				Rake::Task['get_source_location_uri:google'].invoke(location_id, term, lat, long)
@@ -94,7 +94,7 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
-			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
+			puts "Added Google source_location_uri '#{source_location_uri}' to #{term}"	
 		end
 	end
 
@@ -116,7 +116,7 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
-			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
+			puts "Added UrbanSpoon source_location_uri '#{source_location_uri}' to #{term}"	
 		end
 	end
 
@@ -138,7 +138,7 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
-			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
+			puts "Added TripAdvisor source_location_uri '#{source_location_uri}' to #{term}"	
 		end
 	end
 
@@ -160,7 +160,7 @@ namespace :get_source_location_uri do
 					 			:location_id 		   => location_id, 
 								:source_location_uri   => source_location_uri)
 			new_vine.save!
-			puts "Added Yelp source_location_uri '#{source_location_uri}' to #{term}"	
+			puts "Added OpenTable source_location_uri '#{source_location_uri}' to #{term}"	
 		end
 	end
 end
