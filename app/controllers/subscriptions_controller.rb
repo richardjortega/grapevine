@@ -2,7 +2,6 @@ class SubscriptionsController < ApplicationController
   force_ssl
   
   def create
-    debugger
   	@subscription = Subscription.new params[:subscription]
   	@user  = User.create!(params[:user])
   	@subscription.user = @user
