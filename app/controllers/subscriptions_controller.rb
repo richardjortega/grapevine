@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-  force_ssl
+  force_ssl, :except => :create
   
   def create
   	@subscription = Subscription.new params[:subscription]
