@@ -1,6 +1,8 @@
 class Location < ActiveRecord::Base
   #Before methods and triggers!
 
+  after_save :get_source_location_uris
+
   attr_accessible :address_line_2, 
   				  :city, 
   				  :lat, 
@@ -33,5 +35,9 @@ class Location < ActiveRecord::Base
 
   def full_address
     [street_address, address_line_2, city, state, zip].compact.join(', ')
+  end
+
+  def get_source_location_uris
+    call_rake('get_source_location_uri', :all_for_one, :location_id => self.id)
   end
 end

@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
 	root_url(:protocol => 'http')
 	end
 
-	def call_rake(task, options = {})
+	def call_rake(namespace, task, options = {})
 		options[:rails_env] ||= Rails.env
 		args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
-		system "rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
+		system "rake #{namespace}#{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
 	end
 
 	private
