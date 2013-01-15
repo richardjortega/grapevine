@@ -179,8 +179,6 @@ namespace :get_source_location_uri do
 			Rake::Task['get_source_location_uri:opentable'].reenable
 			Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
 		end
-
-		puts "Finished checking #{location.name} for possible missing source_location_uris."
 	end
 
 	def set_check_date(location)
