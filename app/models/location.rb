@@ -1,6 +1,5 @@
 class Location < ActiveRecord::Base
   #Before methods and triggers!
-
   after_save :get_source_location_uris
 
   attr_accessible :address_line_2, 
@@ -38,6 +37,8 @@ class Location < ActiveRecord::Base
   end
 
   def get_source_location_uris
-    call_rake('get_source_location_uri', :all_for_one, :location_id => self.id)
+    system "rake get_source_location_uri:one_for_all LOCATION_ID=#{self.id} &"
   end
+
+
 end

@@ -8,38 +8,21 @@ namespace :get_source_location_uri do
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
 		Location.all.each do |location|
-			location_id = location.id
-			term = location.name
-			street_address = location.street_address
-			city = location.city
-			state = location.state
-			zip = location.zip
-			lat = location.lat.to_f
-			long = location.long.to_f
-
 			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 			existing_vines = []
 			location.vines.each do |vine|
 				existing_vines << vine.source.name
 			end
 
-			check_review_sites(existing_vines)
-			
+			check_review_sites(existing_vines, location)
+			set_check_date(location)
 		end
 		puts "Finished checking all locations for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
 	desc 'Find all source_location_uris for one location that does not have vines'
-	task :all_for_one => :environment do
+	task :one_for_all => :environment do
 		location = Location.find(ENV["LOCATION_ID"])
-		location_id = location.id
-		term = location.name
-		street_address = location.street_address
-		city = location.city
-		state = location.state
-		zip = location.zip
-		lat = location.lat.to_f
-		long = location.long.to_f
 
 		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 		existing_vines = []
@@ -47,7 +30,8 @@ namespace :get_source_location_uri do
 			existing_vines << vine.source.name
 		end
 
-		check_review_sites(existing_vines)
+		check_review_sites(existing_vines, location)
+		set_check_date(location)
 		puts "Finished checking for source_location_uris for #{location.name}. Thank you, pwnage."
 	end
 
@@ -151,7 +135,17 @@ namespace :get_source_location_uri do
 		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
-	def check_review_sites(existing_vines)
+	def check_review_sites(existing_vines, location)
+
+		location_id = location.id
+		term = location.name
+		street_address = location.street_address
+		city = location.city
+		state = location.state
+		zip = location.zip
+		lat = location.lat.to_f
+		long = location.long.to_f
+
 		unless existing_vines.include?('yelp')
 			puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
 			Rake::Task['get_source_location_uri:yelp'].reenable
@@ -183,6 +177,11 @@ namespace :get_source_location_uri do
 		end
 
 		puts "Finished checking #{location.name} for possible missing source_location_uris."
+	end
+
+	def set_check_date(location)
+		location.uri_check_date = Date.today
+		location.save!
 	end
 
 
