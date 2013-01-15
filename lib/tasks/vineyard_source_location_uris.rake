@@ -8,6 +8,10 @@ namespace :get_source_location_uri do
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
 		Location.all.each do |location|
+			# Don't check this location if we've checked within the last 30 days
+			last_30_days = Date.today - 30
+			next if location.uri_check_date < last_30_days
+			
 			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 			existing_vines = []
 			location.vines.each do |vine|
