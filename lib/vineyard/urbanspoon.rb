@@ -11,7 +11,7 @@ class UrbanSpoon
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
-		key = "AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM"
+		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
 		if response['error']

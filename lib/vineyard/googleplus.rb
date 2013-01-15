@@ -6,7 +6,7 @@ class Google
 		@sensor = false
 		@radius = 500
 		@output = 'json'
-		@key = 'AIzaSyAfzgIC3a-sxgoaFMZ7nZn9ioSZfwMenhM'
+		@key = 'AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU'
 	end
 
 	def get_location_id(term, lat, long)
