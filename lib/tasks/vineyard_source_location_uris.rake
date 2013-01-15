@@ -7,7 +7,7 @@ require_relative '../vineyard/tripadvisor.rb'
 namespace :get_source_location_uri do
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
-		Location.all.each do |location|
+		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			last_30_days = Date.today - 30
 			next if location.uri_check_date < last_30_days
