@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <%= render 'devise/registrations/stripe_tag_includes' %>
-  <%= render 'shared/form_js_includes' %>
+  <%= javascript_include_tag 'jquery.validate' %>
+  <%= javascript_include_tag 'simple_form_validations' %>
 <% end %>
 
 <!-- to display errors returned by createToken -->

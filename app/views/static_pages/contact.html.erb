@@ -1,5 +1,6 @@
 <% content_for :head do %>
-  <%= render 'shared/form_js_includes' %>
+  <%= javascript_include_tag 'jquery.validate' %>
+  <%= javascript_include_tag 'simple_form_validations' %>
 <% end %>
 <div id="main-container">
 <section class="subpage with-aside">

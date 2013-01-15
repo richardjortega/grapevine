@@ -18,7 +18,7 @@ gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 gem 'keen'
 
 # Front-end
-gem 'client_side_validations', '3.2.0'
+gem 'client_side_validations'
 gem 'meta-tags', :require => 'meta_tags'
 
 # Payment
