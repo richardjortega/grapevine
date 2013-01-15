@@ -12,7 +12,8 @@ class Location < ActiveRecord::Base
   				  :website, 
   				  :zip, 
   				  :phone_number, 
-  				  :user_id
+  				  :user_id,
+            :uri_check_date
 
   #Associations
   has_many :relationships
@@ -37,7 +38,7 @@ class Location < ActiveRecord::Base
   end
 
   def get_source_location_uris
-    system "rake get_source_location_uri:one_for_all LOCATION_ID=#{self.id} &"
+    Delayed::Job.enqueue(DelayedRake.new("get_source_location_uri:one_for_all", :location_id => "#{self.id}"))
   end
 
 
