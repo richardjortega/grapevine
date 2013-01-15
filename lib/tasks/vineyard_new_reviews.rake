@@ -232,9 +232,7 @@ namespace :get_new_reviews do
 		end
 	end
 
-end
-
-private
+	# Methods!!!
 
 	def add_new_review(location, source, review)
 		new_review = Review.new(:location_id 		=> location.id,
@@ -249,3 +247,5 @@ private
 							    :url         		=> review[:url] )
 		new_review.save!
 	end
+
+end

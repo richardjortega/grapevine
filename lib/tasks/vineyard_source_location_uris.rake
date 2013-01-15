@@ -5,7 +5,7 @@ require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
 
 namespace :get_source_location_uri do
-	desc 'Find all source_location_uri for all locations that do not have vines'
+	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
 		Location.all.each do |location|
 			location_id = location.id
@@ -23,39 +23,32 @@ namespace :get_source_location_uri do
 				existing_vines << vine.source.name
 			end
 
-			unless existing_vines.include?('yelp')
-				puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
-				Rake::Task['get_source_location_uri:yelp'].reenable
-				Rake::Task['get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
-			end
-
-			unless existing_vines.include?('googleplus')
-				puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
-				Rake::Task['get_source_location_uri:google'].reenable
-				Rake::Task['get_source_location_uri:google'].invoke(location_id, term, lat, long)
-			end
-
-			unless existing_vines.include?('urbanspoon')
-				puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
-				Rake::Task['get_source_location_uri:urbanspoon'].reenable
-				Rake::Task['get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip)
-			end
-
-			unless existing_vines.include?('tripadvisor')
-				puts "Didn't find a TripAdvisor source_location_uri for #{term}, finding it now..."			
-				Rake::Task['get_source_location_uri:tripadvisor'].reenable
-				Rake::Task['get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
-			end
-
-			unless existing_vines.include?('opentable')
-				puts "Didn't find a OpenTable source_location_uri for #{term}, finding it now..."			
-				Rake::Task['get_source_location_uri:opentable'].reenable
-				Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
-			end
-
-			puts "Finished checking #{location.name} for possible missing source_location_uris."
+			check_review_sites(existing_vines)
+			
 		end
 		puts "Finished checking all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+	end
+
+	desc 'Find all source_location_uris for one location that does not have vines'
+	task :all_for_one => :environment do
+		location = Location.find(ENV["LOCATION_ID"])
+		location_id = location.id
+		term = location.name
+		street_address = location.street_address
+		city = location.city
+		state = location.state
+		zip = location.zip
+		lat = location.lat.to_f
+		long = location.long.to_f
+
+		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+		existing_vines = []
+		location.vines.each do |vine|
+			existing_vines << vine.source.name
+		end
+
+		check_review_sites(existing_vines)
+		puts "Finished checking for source_location_uris for #{location.name}. Thank you, pwnage."
 	end
 
 
@@ -148,11 +141,8 @@ namespace :get_source_location_uri do
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
 	end
-end
 
-
-private
-
+	# Methods!!
 	def add_new_vine(source, location_id, source_location_uri, term)
 		new_vine = Vine.new(:source_id 			   => source.id, 
 				 			:location_id 		   => location_id, 
@@ -160,3 +150,42 @@ private
 		new_vine.save!
 		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{term}"	
 	end
+
+	def check_review_sites(existing_vines)
+		unless existing_vines.include?('yelp')
+			puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
+			Rake::Task['get_source_location_uri:yelp'].reenable
+			Rake::Task['get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
+		end
+
+		unless existing_vines.include?('googleplus')
+			puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
+			Rake::Task['get_source_location_uri:google'].reenable
+			Rake::Task['get_source_location_uri:google'].invoke(location_id, term, lat, long)
+		end
+
+		unless existing_vines.include?('urbanspoon')
+			puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
+			Rake::Task['get_source_location_uri:urbanspoon'].reenable
+			Rake::Task['get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip)
+		end
+
+		unless existing_vines.include?('tripadvisor')
+			puts "Didn't find a TripAdvisor source_location_uri for #{term}, finding it now..."			
+			Rake::Task['get_source_location_uri:tripadvisor'].reenable
+			Rake::Task['get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
+		end
+
+		unless existing_vines.include?('opentable')
+			puts "Didn't find a OpenTable source_location_uri for #{term}, finding it now..."			
+			Rake::Task['get_source_location_uri:opentable'].reenable
+			Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
+		end
+
+		puts "Finished checking #{location.name} for possible missing source_location_uris."
+	end
+
+
+end
+
+	
