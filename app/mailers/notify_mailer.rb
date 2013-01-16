@@ -15,23 +15,23 @@ class NotifyMailer < ActionMailer::Base
     
     if source == 'yelp'
         @source = "Yelp"
-        @logo = "http://www.pickgrapevine.com/assets/email/yelp_logo_small.png"
+        @logo = "http://www.pickgrapevine.com/assets/email/yelp-solid.png"
         @response_link = "http://biz.yelp.com"
       elsif source == 'opentable'
         @source = "Opentable"
-        @logo = "http://www.pickgrapevine.com/assets/email/open-table-logo_small.png"
+        @logo = "http://www.pickgrapevine.com/assets/email/opentable-solid.png"
         @response_link = "http://www.otrestaurant.com"
       elsif source == 'google'
         @source = "Google Places"
-        @logo = "http://www.pickgrapevine.com/assets/pics/Google-Places.jpg"
+        @logo = "http://www.pickgrapevine.com/assets/pics/google-solid.png"
         @response_link = "http://www.google.com/placesforbusiness"
       elsif source == 'tripadvisor'
         @source = "Tripadvisor"
-        @logo = "http://www.pickgrapevine.com/assets/email/tripadvisor_logo_small.png"
+        @logo = "http://www.pickgrapevine.com/assets/email/tripadvisor-solid.png"
         @response_link = "http://www.tripadvisor.com/Owners"
       elsif source == 'urbanspoon'
         @source = "Urbanspoon"
-        @logo = "http://www.pickgrapevine.com/assets/email/urbanspoon_logo_small.png"
+        @logo = "http://www.pickgrapevine.com/assets/email/urbanspoon-solid.png"
         @response_link = "http://www.urbanspoon.com/u/signin"
 
       else
