@@ -87,7 +87,6 @@ namespace :get_source_location_uri do
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
-		debugger
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
