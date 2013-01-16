@@ -13,3 +13,4 @@
 //= require jquery
 //= require modernizr
 //= require custom
+//= require rails.validations
