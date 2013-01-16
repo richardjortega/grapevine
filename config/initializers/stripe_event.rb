@@ -48,6 +48,7 @@ private
 			puts "#{e.message}"
 		end
 	end
+	handle_asynchronously :handle_failed_charge
 
 	# Provide user with payment receipt. Accepts Stripe Invoice object
 	def handle_successful_charge(charge)
@@ -70,6 +71,7 @@ private
 			puts "#{e.message}"
 		end
 	end
+	handle_asynchronously :handle_successful_charge
 
 	# Send an email to the customer informing them the trial is ending in 3 days
 	def handle_trial_ending(customer_subscription)
@@ -79,6 +81,7 @@ private
 		NotifyMailer.delay.trial_ending(user)
 		NotifyMailer.delay.update_grapevine_team(user, "User has 3 days left on trial")
 	end
+	handle_asynchronously :handle_trial_ending
 
 	# Handle canceled user
 	def handle_canceled_customer(customer_subscription)
@@ -91,6 +94,7 @@ private
 		NotifyMailer.delay.account_canceled(user)
 		NotifyMailer.delay.update_grapevine_team(user, "User has just canceled")
 	end
+	handle_asynchronously :handle_canceled_customer
 
 	# Suspend user for not paying after 3 retries to credit card
 	# Same for trials that expire (on the 31st day)
@@ -104,6 +108,7 @@ private
 		NotifyMailer.delay.account_expired(user)
 		NotifyMailer.delay.update_grapevine_team(user, "User has been set to unpaid status")
 	end
+	handle_asynchronously :handle_unpaid_customer
 
 	# Update all items on customer to match stripe webhook
 	def update_customer_subscription(customer_subscription)
@@ -122,3 +127,4 @@ private
 			subscription.save!
 		end
 	end
+	handle_asynchronously :update_customer_subscription
