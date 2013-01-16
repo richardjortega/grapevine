@@ -7,7 +7,7 @@ require_relative '../vineyard/tripadvisor.rb'
 namespace :get_source_location_uri do
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
-		Location.all.each do |location|
+		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			last_30_days = Date.today - 30
 			next if location.uri_check_date < last_30_days
@@ -124,6 +124,7 @@ namespace :get_source_location_uri do
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
+		debugger
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
@@ -179,8 +180,6 @@ namespace :get_source_location_uri do
 			Rake::Task['get_source_location_uri:opentable'].reenable
 			Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
 		end
-
-		puts "Finished checking #{location.name} for possible missing source_location_uris."
 	end
 
 	def set_check_date(location)

@@ -16,3 +16,5 @@ ActionMailer::Base.smtp_settings = {
   :enable_starttls_auto => true
 }
 
+# Load up Delayed_Rake
+require_relative '../lib/delayed_rake.rb'
