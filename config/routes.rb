@@ -58,7 +58,7 @@ Grapevine::Application.routes.draw do
   # For Grapevine internal team use
   match '/thor_of_asgard', to: 'static_pages#thor_of_asgard'
   match '/send_follow_up', to: 'static_pages#send_follow_up'
-  post '/static_pages/paid_review_alert_email', to: 'static_pages#paid_review_alert_email'
+  post '/static_pages/review_alert', to: 'static_pages#review_alert'
   post '/static_pages/follow_up_alert', to: 'static_pages#follow_up_alert'
 
   # Root page

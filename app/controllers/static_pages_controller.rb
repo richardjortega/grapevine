@@ -53,7 +53,7 @@ class StaticPagesController < ApplicationController
   def privacy
   end
 
-  def paid_review_alert_email
+  def review_alert
 
     # Associate all params to appropiate 
     email = params[:email]
