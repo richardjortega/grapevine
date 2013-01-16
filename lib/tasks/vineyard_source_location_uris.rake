@@ -9,7 +9,7 @@ namespace :get_source_location_uri do
 	task :all => :environment do
 		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
 			# Don't check this location if we've checked within the last 30 days
-			next if location.uri_check_date
+			#next if location.uri_check_date
 			
 			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 			existing_vines = []
@@ -71,8 +71,8 @@ namespace :get_source_location_uri do
 		end
 	end
 
-	desc 'Find UrbanSpoon ID# : term, street_address, city, state, zip (Assumes 1st is right)'
-	task :urbanspoon, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
+	desc 'Find UrbanSpoon ID# : term, street_address, city, state, zip, lat, long'
+	task :urbanspoon, [:location_id, :term, :street_address, :city, :state, :zip, :lat, :long] => :environment do |t, args|
 		source = Source.find_by_name('urbanspoon')
 		source_id = source.id
 		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
@@ -82,15 +82,18 @@ namespace :get_source_location_uri do
 		city = args[:city]
 		state = args[:state]
 		zip = args[:zip]
+		lat = args[:lat]
+		long = args[:long]
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
-		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
+		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
+		debugger
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
 	end
 
-	desc 'Find TripAdvisor ID# : term, street_address, city, state, zip (Assumes 1st is right)'
+	desc 'Find TripAdvisor ID# : term, street_address, city, state, zip'
 	task :tripadvisor, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('tripadvisor')
 		source_id = source.id
@@ -109,7 +112,7 @@ namespace :get_source_location_uri do
 		end
 	end
 
-	desc 'Find OpenTable ID# : term, street_address, city, state, zip (Assumes 1st is right)'
+	desc 'Find OpenTable ID# : term, street_address, city, state, zip'
 	task :opentable, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('opentable')
 		source_id = source.id
@@ -122,8 +125,7 @@ namespace :get_source_location_uri do
 		zip = args[:zip]
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
-		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
-		debugger
+		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
@@ -165,7 +167,7 @@ namespace :get_source_location_uri do
 		unless existing_vines.include?('urbanspoon')
 			puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
 			Rake::Task['get_source_location_uri:urbanspoon'].reenable
-			Rake::Task['get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip)
+			Rake::Task['get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
 		end
 
 		unless existing_vines.include?('tripadvisor')

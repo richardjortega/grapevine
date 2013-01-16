@@ -25,6 +25,7 @@ class OpenTable
 			code = response['error']['code']
 			message = response['error']['message']
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
+			return
 		end
 		location_url = ""
 		response['items'].each do |result|

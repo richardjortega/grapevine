@@ -24,6 +24,7 @@ class TripAdvisor
 		end
 		location_id = ""
 		response['items'].each do |result|
+			debugger
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
 			if postal_address.include?("#{zip}")
 				puts "Found a search result that matches the zip code provided."
