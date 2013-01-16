@@ -22,18 +22,18 @@ class TripAdvisor
 			message = response['error']['message']
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
 		end
-		location_url = ""
+		location_id = ""
 		response['items'].each do |result|
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
 			if postal_address.include?("#{zip}")
 				puts "Found a search result that matches the zip code provided."
-				location_url = result['link'] rescue "Could not find any matching information"
+				location_id = result['link'] rescue "Could not find any matching information"
 				break
 			else
 				puts "Found a search result that doesn't match the zip code provided. Please be more specific in searching."
 			end
 		end
-		location_id = get_restaurant_id(location_url)
+		location_id
 	end
 
 	def get_new_reviews(latest_review, location_id)

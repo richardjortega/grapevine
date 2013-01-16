@@ -9,8 +9,7 @@ namespace :get_source_location_uri do
 	task :all => :environment do
 		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
 			# Don't check this location if we've checked within the last 30 days
-			last_30_days = Date.today - 30
-			next if location.uri_check_date < last_30_days
+			next if location.uri_check_date
 			
 			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 			existing_vines = []

@@ -33,6 +33,7 @@ ActiveAdmin.register Location do
 		column :zip
 		column :lat
 		column :long
+		column :uri_check_date
 		column :created_at
 		default_actions
 	end
