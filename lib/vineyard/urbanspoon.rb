@@ -32,7 +32,6 @@ class UrbanSpoon
 			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[urbanspoon_lat,urbanspoon_long])
 
 			if delta < 0.5
-				debugger
 				location_id = result['link'] rescue "Could not find any matching information"
 				break
 			else
