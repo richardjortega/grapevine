@@ -176,6 +176,7 @@ GEM
       activesupport (>= 3.0.0)
     keen (0.4.1)
       multi_json (~> 1.0)
+    lascivious (1.0.1)
     launchy (2.1.2)
       addressable (~> 2.3)
     libwebsocket (0.1.7.1)
@@ -355,6 +356,7 @@ DEPENDENCIES
   iron_worker_ng
   jquery-rails
   keen
+  lascivious
   launchy
   mailchimp
   meta-tags
