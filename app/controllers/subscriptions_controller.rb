@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
   	if @subscription.save_without_payment
       redirect_to thank_you_path
       unless params[:user][:multi_location] == 'true'
-        kiss_identify current_user.email
+        kiss_identify @user.email
         kiss_record('Signed Up', {'Plan Name' => "#{@plan.name}", 
                                  'Plan Identifier' => "#{@plan.identifier}"})
   	    NotifyMailer.delay.free_signup(@subscription.user)
