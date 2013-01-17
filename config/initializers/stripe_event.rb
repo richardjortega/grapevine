@@ -35,6 +35,10 @@ end
 
 private
 
+	def format_amount(amount)
+	    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
+	end
+
 	# Inform user of failed payment. Accepts Stripe Invoice object
 	def handle_failed_charge(charge)
 		begin
@@ -55,6 +59,14 @@ private
 		invoice_id = charge.invoice
 		invoice = Stripe::Invoice.retrieve(invoice_id)
 		subscription = Subscription.find_by_stripe_customer_token(invoice.customer)
+		### Track that user was billed successfully - KM
+		user = subscription.user
+		plan = user.plan
+		subscription_amount = format_amount(invoice.total)
+		kiss_identify user.email
+		kiss_record('Billed', {'Billing Amount' => "#{subscription_amount}", 
+                                 'Billing Description' => "Monthly Subscription of #{plan.name}",
+                                 'Plan ID' => "#{plan.identifier}"})
 		if subscription.status_info.present?
 			if subscription.status_info == 'trialing' 
 				return false
@@ -66,6 +78,7 @@ private
 				NotifyMailer.delay.successfully_charged(invoice, user)
 			end
 		end
+
 		rescue => e
 			puts "#{e.message}"
 		end

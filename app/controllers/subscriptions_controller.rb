@@ -11,6 +11,9 @@ class SubscriptionsController < ApplicationController
   	if @subscription.save_without_payment
       redirect_to thank_you_path
       unless params[:user][:multi_location] == 'true'
+        kiss_identify current_user.email
+        kiss_record('Signed Up', {'Plan Name' => "#{@plan.name}", 
+                                 'Plan Identifier' => "#{@plan.identifier}"})
   	    NotifyMailer.delay.free_signup(@subscription.user)
   	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
       end
@@ -28,6 +31,9 @@ class SubscriptionsController < ApplicationController
     if @subscription.delay.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if current_plan == 'gv_free' && params[:subscription][:plan] == 'gv_30'
+        kiss_identify current_user.email
+        kiss_record('Upgraded', {'Plan Name' => "Grapevine Alerts - Basic Monthly Plan (1 Location)", 
+                                 'Plan Identifier' => "#{params[:subscription][:plan]}"}
         NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
       end

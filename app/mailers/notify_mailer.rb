@@ -71,6 +71,8 @@ class NotifyMailer < ActionMailer::Base
   def free_signup(user)
     @user = user
     add_user_to_marketing_list(user)
+    kiss_identify user.email
+    kiss_record('Subscribed to Newsletter', {'Newsletter Name' => "GV Free 5 Alerts Plan List"})
     mail to: user.email, subject: "Thanks for signing up to Grapevine's Free Forever plan!"
   end
   
