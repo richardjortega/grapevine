@@ -29,6 +29,14 @@ class AccountsController < ApplicationController
             @location = @user.locations[0]
             @subscription = @user.subscription
 
+            if request.fullpath.include?('upgrade')
+                  DelayedKiss.record(@user.email, 'Free User Viewed Upgrade Page')
+            end
+
+            if request.fullpath.include?('changeplan')
+                  DelayedKiss.record(@user.email, 'Paid User Viewed Change Plan Page')
+            end
+
             # For aside content
                   if @user.plan.location_limit.nil?
                         @location_limit = '1'

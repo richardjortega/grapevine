@@ -63,10 +63,10 @@ private
 		user = subscription.user
 		plan = user.plan
 		subscription_amount = format_amount(invoice.total)
-		DelayedKiss.alias(user.email, user.km_id)
-        DelayedKiss.record(user.km_id, 'Billed', {'Billing Amount' => "#{subscription_amount}", 
-        											  'Plan Name' => "#{plan.name}",
-                                                      'Plan Identifier' => "#{plan.identifier}", })
+		DelayedKiss.alias(user.full_name, user.email)
+        DelayedKiss.record(user.email, 'Billed', {'Billing_Amount' => "#{subscription_amount}", 
+        											  'Plan_Name' => "#{plan.name}",
+                                                      'Plan_Identifier' => "#{plan.identifier}", })
 		if subscription.status_info.present?
 			if subscription.status_info == 'trialing' 
 				return false
