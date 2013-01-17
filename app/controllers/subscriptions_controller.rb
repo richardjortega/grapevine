@@ -33,7 +33,7 @@ class SubscriptionsController < ApplicationController
       if current_plan == 'gv_free' && params[:subscription][:plan] == 'gv_30'
         kiss_identify current_user.email
         kiss_record('Upgraded', {'Plan Name' => "Grapevine Alerts - Basic Monthly Plan (1 Location)", 
-                                 'Plan Identifier' => "#{params[:subscription][:plan]}"}
+                                 'Plan Identifier' => "#{params[:subscription][:plan]}"})
         NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
       end
