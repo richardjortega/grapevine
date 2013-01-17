@@ -7,7 +7,6 @@ class StaticPagesController < ApplicationController
   end
 
   def signup
-    kiss_record 'Viewed Signup Form'
   	@user			      = User.new
   	@plan 			    = Plan.find_by_identifier('gv_free')
   	@location       = @user.locations.build
