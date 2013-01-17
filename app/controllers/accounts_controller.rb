@@ -88,4 +88,7 @@ class AccountsController < ApplicationController
                   end
       end
 
+      def upgrade_thank_you
+      end
+
 end

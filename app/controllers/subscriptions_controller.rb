@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
         NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
       end
-      redirect_to billing_path
+      redirect_to upgrade_thank_you_path
     else
       flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
       redirect_to :back
