@@ -41,8 +41,9 @@ class NotifyMailer < ActionMailer::Base
     mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
     
     ### Track all review alerts sent
-    kiss_identify email
-    kiss_record('Sent Review Alert', {'Location' => "#{location}"})
+    DelayedKiss.alias(email, user.km_id)
+    DelayedKiss.record(user.km_id, 'Sent Review Alert', {'Location' => "#{location}", 
+                                                      'Source' => "#{source.to_s.titleize}" })
   end
 
   # Follow up email for people after calling
