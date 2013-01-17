@@ -13,6 +13,8 @@
 	<div class="section-content">
 		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
 		<% if @plan_identifier == 'gv_free' %>
+			<%= kiss_identify @current_user.email %>
+	    	<%= kiss_record 'Free User Viewed Change Plan' %>
 	    	<h3>What does upgrading get me?</h3>
 			<h4>Unlimited Review Tracking for Your Business.</h4>
 
@@ -23,6 +25,8 @@
 			<%= render 'shared/payment_form' %>
 			</div>
 	    <% else %>
+	    	<%= kiss_identify @current_user.email %>
+	    	<%= kiss_record 'Paid User Viewed Change Plan' %>
 	    	<h3>Need to change your plan?</h3>
 	    	<p>Please call us about any account change including plan inquiries, downgrades, or cancellations. We'd be happy to help. 
     		<p class="span6 muted" style="margin-top:20px; font-size:13px;">Need help? Give us a call and we&rsquo;ll hug it out. <br />Call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
