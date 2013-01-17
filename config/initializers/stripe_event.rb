@@ -64,9 +64,7 @@ private
 		plan = user.plan
 		subscription_amount = format_amount(invoice.total)
 		kiss_identify user.email
-		kiss_record('Billed', {'Billing Amount' => "#{subscription_amount}", 
-                                 'Billing Description' => "Monthly Subscription of #{plan.name}",
-                                 'Plan ID' => "#{plan.identifier}"})
+		kiss_record('Billed', {'Billing Amount' => "#{subscription_amount}"})
 		if subscription.status_info.present?
 			if subscription.status_info == 'trialing' 
 				return false

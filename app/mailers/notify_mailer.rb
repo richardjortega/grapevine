@@ -42,7 +42,7 @@ class NotifyMailer < ActionMailer::Base
     
     ### Track all review alerts sent
     kiss_identify email
-    kiss_record('Sent Review Alert', {'Location' => "#{location}", 'Source' => "#{source.to_s.titleize}"})
+    kiss_record('Sent Review Alert', {'Location' => "#{location}"})
   end
 
   # Follow up email for people after calling
