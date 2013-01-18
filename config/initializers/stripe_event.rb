@@ -18,6 +18,11 @@ StripeEvent.setup do
 		handle_trial_ending event.data.object
 	end
 
+	# Customer updated (like adding a new card)
+	subscribe 'customer.updated' do |event|
+		handle_customer_updated event.data.object
+	end
+
 	# Update customer's plan to whatever Stripe lets us know.
 	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
@@ -34,6 +39,28 @@ StripeEvent.setup do
 end
 
 private
+
+	def handle_customer_updated(customer)
+		subscription = Subscription.find_by_stripe_customer_token(customer.id)
+		user = subscription.user
+		if subscription
+			if customer.active_card.present?
+				active_card = customer.active_card
+				exp_month = active_card.exp_month
+				exp_year = active_card.exp_year
+				last_four = active_card.last4
+				card_type = active_card.type
+				subscription.update_attributes({:last_four => last_four, 
+												:card_type => card_type,
+												:exp_month => exp_month,
+												:exp_year  => exp_year })
+			end
+		end
+		if customer_subscription.plan?
+				new_plan = customer_subscription.plan
+				# do something
+			end
+	end
 
 	def format_amount(amount)
 	    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
@@ -122,6 +149,7 @@ private
 	def update_customer_subscription(customer_subscription)
 		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
 		if subscription
+			
 			subscription.status_info = customer_subscription.status
 			subscription.start_date = customer_subscription.start
 			subscription.current_period_start = customer_subscription.current_period_start
