@@ -10,7 +10,9 @@ class SubscriptionsController < ApplicationController
     
   	if @subscription.save_without_payment
       redirect_to thank_you_path
-      unless params[:user][:multi_location] == 'true'
+      if params[:user][:multi_location] == 'true'
+        NotifyMailer.delay.update_grapevine_team(@subscription.user, "New Agency signed up")
+      else
         DelayedKiss.alias(@user.full_name, @user.email)
         DelayedKiss.record(@user.email, 'Signed Up', {'Plan_Name' => "#{@plan.name}", 
                                                       'Plan_Identifier' => "#{@plan.identifier}", })
