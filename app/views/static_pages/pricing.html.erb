@@ -19,7 +19,7 @@
 					<li>Email support</li>
 				</ul>
 				<p class="details">Yeah, free is pretty awesome. If you get 5 or less reviews in a month, then you&rsquo;re good. If a 6th comes in, we&rsquo;ll let you know. You can decide if you want to go pro or not.</p>
-				<%= link_to 'Get Started', signup_path, :class => 'btn alt' %>
+				<%= link_to 'Get Started', signup_path, {:class => 'btn alt', :onClick => "_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Get Started - Starting Out']);" } %>
 			</li>
 			<li class="thirty">
 				<h3>Small Business</h3>
@@ -32,7 +32,7 @@
 					<li>Phone support</li>
 				</ul>
 				<p class="details">Who doesn&rsquo;t like &ldquo;unlimited&rdquo;?. This plan is great for all types of businesses.</p>
-				<%= link_to 'Get Started', signup_path, :class => 'btn alt' %>
+				<%= link_to 'Get Started', signup_path, {:class => 'btn alt', :onClick => "_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Get Started - Small Business']);" } %>
 			</li>
 			<li class="custom">
 				<h3>Agencies &amp; Custom</h3>

@@ -42,7 +42,7 @@
 				</div>
 
 			</li>
-			<li class="signup"><%= link_to "Get Started", signup_path %></li>
+			<li class="signup"><%= link_to "Get Started", signup_path, {:onClick => "_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Get Started - Nav']);" } %></li>
 			
 		<% end %>
 	</ul><!-- /.global-nav -->
