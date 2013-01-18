@@ -23,8 +23,12 @@ StripeEvent.setup do
 		handle_customer_updated event.data.object
 	end
 
+	# New plans created will now update system
+	subscribe 'plan.created' do |event|
+		handle_plan_created event.data.object
+	end
+
 	# Update customer's plan to whatever Stripe lets us know.
-	# TODO: Will be used when user's accounts update
 	subscribe 'customer.subscription.updated' do |event|
 		case event.data.object.status
 			# when 'unpaid'
@@ -39,7 +43,24 @@ StripeEvent.setup do
 end
 
 private
+	
+	def format_amount(amount)
+	    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
+	end
 
+	def handle_plan_created(plan)
+		begin
+		Plan.create({:amount => plan.amount,
+					   :currency 	=> plan.currency,
+					   :interval	=> plan.interval,
+					   :name 		=> plan.name,
+					   :identifier  => plan.id})
+		rescue => e
+			puts "#{e.message}"
+		end
+	end
+	
+	# Handles any new card changes
 	def handle_customer_updated(customer)
 		subscription = Subscription.find_by_stripe_customer_token(customer.id)
 		if subscription
@@ -55,10 +76,6 @@ private
 												:exp_year  => exp_year })
 			end
 		end
-	end
-
-	def format_amount(amount)
-	    sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
 	end
 
 	# Inform user of failed payment. Accepts Stripe Invoice object

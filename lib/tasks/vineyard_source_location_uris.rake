@@ -133,10 +133,9 @@ namespace :get_source_location_uri do
 
 	# Methods!!
 	def add_new_vine(source, location_id, source_location_uri, term)
-		new_vine = Vine.new(:source_id 			   => source.id, 
-				 			:location_id 		   => location_id, 
-							:source_location_uri   => source_location_uri)
-		new_vine.save!
+		Vine.create(:source_id 			   => source.id, 
+		 			:location_id 		   => location_id, 
+					:source_location_uri   => source_location_uri)
 		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
