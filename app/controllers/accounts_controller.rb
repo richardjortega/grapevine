@@ -2,6 +2,9 @@ class AccountsController < ApplicationController
       force_ssl
 
 	def index
+            DelayedKiss.alias(current_user.full_name, current_user.email) unless current_user.nil?
+            DelayedKiss.record(current_user.email, 'Signed In') unless current_user.nil?
+
             @plan = current_user.subscription.plan
             @location = current_user.locations[0]
             @subscription = current_user.subscription
