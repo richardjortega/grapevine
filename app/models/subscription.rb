@@ -2,9 +2,7 @@ class Subscription < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
 
-  attr_accessible :card_expiration, 
-                  :card_type, 
-                  :card_zip, 
+  attr_accessible :card_type,  
                   :current_period_end, 
                   :current_period_start, 
                   :last_four, 
@@ -14,7 +12,9 @@ class Subscription < ActiveRecord::Base
                   :stripe_customer_token, 
                   :trial_end, 
                   :trial_start, 
-                  :user_id
+                  :user_id,
+                  :exp_month,
+                  :exp_year
 
   belongs_to :plan
   belongs_to :user
@@ -65,6 +65,14 @@ class Subscription < ActiveRecord::Base
     customer.description       = stripe_description
     customer.save
 
+    if params[:exp_month].present?
+      self.exp_month = params[:exp_month]
+    end
+
+    if params[:exp_year].present?
+      self.exp_year = params[:exp_year]
+    end
+    
     self.last_four             = params[:last_four]
     self.status_info           = "active"
     self.next_bill_on          = Date.parse customer.next_recurring_charge.date

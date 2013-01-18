@@ -42,7 +42,6 @@ private
 
 	def handle_customer_updated(customer)
 		subscription = Subscription.find_by_stripe_customer_token(customer.id)
-		user = subscription.user
 		if subscription
 			if customer.active_card.present?
 				active_card = customer.active_card
@@ -51,15 +50,11 @@ private
 				last_four = active_card.last4
 				card_type = active_card.type
 				subscription.update_attributes({:last_four => last_four, 
-												:card_type => card_type,
-												:exp_month => exp_month,
+												:card_type => card_type, 
+												:exp_month => exp_month, 
 												:exp_year  => exp_year })
 			end
 		end
-		if customer_subscription.plan?
-				new_plan = customer_subscription.plan
-				# do something
-			end
 	end
 
 	def format_amount(amount)
@@ -149,11 +144,18 @@ private
 	def update_customer_subscription(customer_subscription)
 		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
 		if subscription
+			# Update customer with new plan
+			if customer_subscription.plan.present?
+				active_plan_id = customer_subscription.plan.id
+				subscription.plan = Plan.find_by_identifier(active_plan_id)
+				subscription.save!
+			end
+			subscription.update_attributes({:status_info 			=> customer_subscription.status,
+											:start_date				=> customer_subscription.start,
+											:current_period_start	=> customer_subscription.current_period_start,
+											:current_period_end		=> customer_subscription.current_period_end })
 			
-			subscription.status_info = customer_subscription.status
-			subscription.start_date = customer_subscription.start
-			subscription.current_period_start = customer_subscription.current_period_start
-			subscription.current_period_end = customer_subscription.current_period_end
+			## Just in case later in the future we have trialing...
 			if customer_subscription.trial_start.present?
 				subscription.trial_start = customer_subscription.trial_start
 			end
