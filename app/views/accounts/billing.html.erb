@@ -16,7 +16,12 @@
  });
 </script>
 	<div class="section-content">
-		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
+		
+		<div class="current-plan">
+
+			You are currently subscribed to our: <span><%= @current_user.plan.name %></span>
+		</div>
+		<p>Thanks for choosing Grapevine, your plan is billed monthly from the date you upgraded on a rolling 30 day period.</p>
 		<% if @subscription.last_four.present? %>
 			<p>You have already provided a credit card ending in : <strong><%= @subscription.last_four %></strong>
 			<p>Need to update your billing information?</p> 
@@ -32,5 +37,8 @@
 			<%= render 'shared/payment_form' %>
 		</div>
 	</div><!-- /.section-content -->
+	<aside>
+		<%= render 'account_overview' %>
+	</aside>
 </section>
 </div><!-- /#main-container.dash-page -->

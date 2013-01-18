@@ -8,13 +8,13 @@
 <section class="section-panel track home-panel">
 	<h3>We track reviews for you.</h3>
 	<p>We monitor all the popular review sites across the web including Google, Bing, Yelp, CitySearch, Yellow Pages, TripAdvisor, OpenTable, UrbanSpoon and more. Downtime should be focused on preparation and managing your business. Don&rsquo;t spend that time searching for reviews by hand.<br />
-	<%= link_to "Learn More", learn_more_path, :class => 'btn alt' %></p>
+	<%= link_to "Learn More", learn_more_path, {:class => 'btn alt', :onClick => "_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Learn More 1 - Home Page']);"} %></p>
 	
 </section>
 <section class="section-panel how home-panel">
 	<h3>How does it work?</h3>
 	<p>If a new review pops up online, you&rsquo;ll get an email alert from us automatically. These emails are easy to read and interact on desktops, tablets and smart phones. Grapevine&rsquo;s efficient email alert system will keep you informed around the clock. <br />
-	<%= link_to "Learn More", learn_more_path, :class => 'btn alt' %></p>
+	<%= link_to "Learn More", learn_more_path, {:class => 'btn alt', :onClick => "_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Learn More 2 - Home Page']);"} %></p>
 	
 </section>
 <section class="section-panel home-panel last">
@@ -30,4 +30,4 @@
 
 
 </div><!-- /#main-container -->
-<a href="/signup" class="btn primary home-bottom-action">Sign Up Today</a>
+<a href="/signup" class="btn primary home-bottom-action" onClick="_gaq.push(['_trackEvent', 'Buttons', 'Click', 'Sign Up Today - Bottom']);">Sign Up Today</a>

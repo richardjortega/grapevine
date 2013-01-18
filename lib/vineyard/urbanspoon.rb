@@ -7,7 +7,7 @@ class UrbanSpoon
 		@site = 'http://www.urbanspoon.com/'
 	end
 
-	def get_location_id(term, street_address, city, state, zip)
+	def get_location_id(term, street_address, city, state, zip, lat, long)
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
@@ -22,16 +22,20 @@ class UrbanSpoon
 			code = response['error']['code']
 			message = response['error']['message']
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
+			return
 		end
 		location_id = ""
 		response['items'].each do |result|
-			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
-			if postal_address.include?("#{zip}")
-				puts "Found a search result that matches the zip code provided."
+			#Check lat and long against lat and long of resulted
+			urbanspoon_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f
+			urbanspoon_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
+			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[urbanspoon_lat,urbanspoon_long])
+
+			if delta < 0.5
 				location_id = result['link'] rescue "Could not find any matching information"
 				break
 			else
-				puts "Found a search result that doesn't match the zip code provided. Please be more specific in searching."
+				puts "Found a search result that is too far away from asking location. Distance is #{delta} miles"
 			end
 		end
 		location_id

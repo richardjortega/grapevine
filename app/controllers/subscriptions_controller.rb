@@ -10,7 +10,13 @@ class SubscriptionsController < ApplicationController
     
   	if @subscription.save_without_payment
       redirect_to thank_you_path
-      unless params[:user][:multi_location] == 'true'
+      if params[:user][:multi_location] == 'true'
+        NotifyMailer.delay.update_grapevine_team(@subscription.user, "New Agency signed up")
+      else
+        DelayedKiss.alias(@user.full_name, @user.email)
+        DelayedKiss.record(@user.email, 'Signed Up', {'Plan_Name' => "#{@plan.name}", 
+                                                      'Plan_Identifier' => "#{@plan.identifier}", })
+
   	    NotifyMailer.delay.free_signup(@subscription.user)
   	    NotifyMailer.delay.update_grapevine_team(@subscription.user, "New FREE customer signed up")
       end
@@ -28,10 +34,15 @@ class SubscriptionsController < ApplicationController
     if @subscription.delay.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if current_plan == 'gv_free' && params[:subscription][:plan] == 'gv_30'
-        NotifyMailer.delay.(@subscription.user)
+        @plan = Plan.find_by_identifier(params[:subscription][:plan])
+        DelayedKiss.alias(current_user.full_name, current_user.email)
+        DelayedKiss.record(current_user.email, 'Upgraded', {'Plan_Name' => "#{@plan.name}", 
+                                                      'Plan_Identifier' => "#{@plan.identifier}" })
+        
+        NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
       end
-      redirect_to billing_path
+      redirect_to upgrade_thank_you_path
     else
       flash.now[:error] = "Unable to add your subscription, this has been reported to the Grapevine team"
       redirect_to :back

@@ -235,17 +235,17 @@ namespace :get_new_reviews do
 	# Methods!!!
 
 	def add_new_review(location, source, review)
-		new_review = Review.new(:location_id 		=> location.id,
-								:source_id   		=> source.id, 
-							    :post_date   		=> review[:post_date],
-							    :comment     		=> review[:comment],
-							    :author	     		=> review[:author],
-							    :author_url  		=> review[:author_url],
-							    :rating      		=> review[:rating],
-							    :rating_description => review[:rating_description],
-							    :title       		=> review[:title],
-							    :url         		=> review[:url] )
-		new_review.save!
+		Review.create(:location_id 		=> location.id,
+						:source_id   		=> source.id, 
+					    :post_date   		=> review[:post_date],
+					    :comment     		=> review[:comment],
+					    :author	     		=> review[:author],
+					    :author_url  		=> review[:author_url],
+					    :rating      		=> review[:rating],
+					    :rating_description => review[:rating_description],
+					    :title       		=> review[:title],
+					    :url         		=> review[:url] )
+
 	end
 
 end

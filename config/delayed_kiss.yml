@@ -1,0 +1,7 @@
+development:
+    key: de0b51786a475f40e1ceef4684a1f18808e16645
+    whiny_config: true
+test:
+    key: de0b51786a475f40e1ceef4684a1f18808e16645
+production:
+    key: "<%= ENV['KISS_METRICS_API_KEY'] %>"

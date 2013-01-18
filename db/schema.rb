@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115070743) do
+ActiveRecord::Schema.define(:version => 20130118023654) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -170,14 +170,14 @@ ActiveRecord::Schema.define(:version => 20130115070743) do
     t.integer  "trial_end"
     t.integer  "trial_start"
     t.string   "stripe_customer_token"
-    t.string   "card_zip"
     t.string   "last_four"
     t.string   "card_type"
     t.date     "next_bill_on"
-    t.string   "card_expiration"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.integer  "start_date"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
   end
 
   add_index "subscriptions", ["plan_id"], :name => "index_subscriptions_on_plan_id"

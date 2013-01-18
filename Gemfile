@@ -14,8 +14,10 @@ gem 'dalli'
 gem 'airbrake'
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 
-# Data/Event Reporting
+# Analytics
 gem 'keen'
+gem 'lascivious'
+gem 'delayed_kiss'
 
 # Front-end
 gem 'client_side_validations'

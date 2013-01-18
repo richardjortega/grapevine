@@ -11,6 +11,17 @@ Grapevine::Application.routes.draw do
   resources   :subscriptions
   resources   :wantmore,    only: [:show], :controller => 'blasts'
 
+  # Order is important!!! don't  switch around 
+
+  #Account Dashboard pages (for logged in users)
+  authenticated :user do
+    root to: 'accounts#index'
+    match '/changeplan', to: 'accounts#update', as: 'change_plan'
+    match '/billing', to: 'accounts#billing', as: 'billing'
+    match '/upgrade', to: 'accounts#update', as: 'upgrade'
+    match '/upgrade-thank-you', to: 'accounts#upgrade_thank_you', as: 'upgrade_thank_you'
+  end
+
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
   # For linking make sure to keep using full default route paths (i.e. - sign_in would be new_user_session_path)
   as :user do
@@ -22,13 +33,7 @@ Grapevine::Application.routes.draw do
     get 'profile' => 'registrations#edit', :as => :edit_user_registration
   end
 
-  #Account Dashboard pages (for logged in users)
-  authenticated :user do
-    root to: 'accounts#index'
-    match '/changeplan', to: 'accounts#update', as: 'change_plan'
-    match '/billing', to: 'accounts#billing', as: 'billing'
-    match '/upgrade', to: 'accounts#update', as: 'upgrade'
-  end
+  #### End order importance ####
 
   # Static pages
   match '/about', :to => 'static_pages#about', as: 'about'

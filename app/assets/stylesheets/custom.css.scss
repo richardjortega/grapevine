@@ -1083,6 +1083,19 @@ header#global-header .global-nav .sign-in {
     }
 }
 
+.billing aside {
+    
+    margin-top:20px;
+    @include radius(3px);
+    background:#efefef;
+    h4 {
+        margin-bottom:0;
+        & + p {
+            margin-top:0;
+        }
+    }
+}
+
 
 .thankyou {
     #feature-screenshot {
