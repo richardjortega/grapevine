@@ -37,8 +37,12 @@ class NotifyMailer < ActionMailer::Base
       else
         return false
     end
+    
     mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
-  
+    
+    ### Track all review alerts sent
+    DelayedKiss.record(email, 'Sent Review Alert', {'Location' => "#{location}", 
+                                                      'Source' => "#{source.to_s.titleize}" })
   end
 
   # Follow up email for people after calling
@@ -71,11 +75,16 @@ class NotifyMailer < ActionMailer::Base
   def free_signup(user)
     @user = user
     add_user_to_marketing_list(user)
+    DelayedKiss.alias(user.full_name, user.email)
+    DelayedKiss.record(user.email, 'Sent Free Signup Email')
+    DelayedKiss.record(user.email, 'Subscribed to Newsletter', {'Newsletter Name' => "GV Free 5 Alerts Plan List"})
     mail to: user.email, subject: "Thanks for signing up to Grapevine's Free Forever plan!"
   end
   
   # Send a signup email to the user, pass user object that contains the user's email address
   def paid_signup(user)
+    DelayedKiss.alias(user.full_name, user.email)
+    DelayedKiss.record(user.email, 'Sent Paid Signup Email')
     @user = user
     mail to: user.email, subject: "You've Upgraded to our Small Business plan!"
   end
@@ -89,6 +98,8 @@ class NotifyMailer < ActionMailer::Base
 
   # Send canceled email
   def account_canceled(user)
+    DelayedKiss.alias(user.full_name, user.email)
+    DelayedKiss.record(user.email, 'Canceled')
     mail to: user.email, subject: "We're sorry to see you go!"
   end
 

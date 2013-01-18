@@ -16,9 +16,12 @@
  });
 </script>
 	<div class="section-content">
-		<p>Thanks for choosing Grapevine, your plan is billed monthly from the date you upgraded on a rolling 30 day period. <br /><small>If you recently upgraded and your plan and billing details haven't updated, it's likely pending processing and will be updated shortly.</small></p>
+		
 		<div class="current-plan">
-			You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
+
+			You are currently subscribed to our: <span><%= @current_user.plan.name %></span>
+		</div>
+		<p>Thanks for choosing Grapevine, your plan is billed monthly from the date you upgraded on a rolling 30 day period.</p>
 		<% if @subscription.last_four.present? %>
 			<p>You have already provided a credit card ending in : <strong><%= @subscription.last_four %></strong>
 			<p>Need to update your billing information?</p> 
