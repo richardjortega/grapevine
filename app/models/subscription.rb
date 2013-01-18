@@ -14,7 +14,9 @@ class Subscription < ActiveRecord::Base
                   :trial_start, 
                   :user_id,
                   :exp_month,
-                  :exp_year
+                  :exp_year,
+                  :status_info,
+                  :start_date
 
   belongs_to :plan
   belongs_to :user
