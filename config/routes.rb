@@ -47,7 +47,8 @@ Grapevine::Application.routes.draw do
   match '/thank-you', :to => 'static_pages#thank_you', as: 'thank_you'
   match '/404',  to: 'static_pages#error404'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
-  match '/blog', :to => redirect('http://pickgrapevine.tumblr.com')  
+  match '/blog', :to => redirect('http://pickgrapevine.tumblr.com') 
+  match '/signup-now', :to => 'static_pages#signup_now', as: 'signup_now' 
 
   # Landing pages for email blasting
   get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'

@@ -1,5 +1,4 @@
 ActiveAdmin.register Plan do
-  actions :index, :show
   index do
   	h2 :style => "line-height:26px; width:65%;" do 
   		'This page is not directly editable, plans must be created and updated at Stripe. Changes will then be reflected in our system (soon!, needs to be)'
