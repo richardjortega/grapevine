@@ -124,7 +124,7 @@ namespace :get_source_location_uri do
 		zip = args[:zip]
 		puts "Searching for OpenTable ID using term: #{term}"
 		run = OpenTable.new
-		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
+		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
