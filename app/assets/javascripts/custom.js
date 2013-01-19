@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
 	// sign in form
+	$('.sign-in-form').hide();
 		$('a.sign-in-link').click(function() {
-			$('.sign-in-form').toggleClass('active');
+			$('.sign-in-form').toggle().addClass('active');
 			event.preventDefault();
 		});
 
