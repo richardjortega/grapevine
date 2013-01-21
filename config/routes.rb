@@ -1,5 +1,7 @@
 Grapevine::Application.routes.draw do
   
+  mount_roboto
+
   # Grapevine Admin Type Stuff
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config

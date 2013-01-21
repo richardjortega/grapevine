@@ -19,6 +19,10 @@ gem 'keen'
 gem 'lascivious'
 gem 'delayed_kiss'
 
+# SEO
+gem 'roboto'
+gem 'sitemap_generator'
+
 # Front-end
 gem 'client_side_validations'
 gem 'meta-tags', :require => 'meta_tags'
