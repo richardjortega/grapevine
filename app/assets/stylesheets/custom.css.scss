@@ -895,11 +895,12 @@ form select {
 header#global-header .global-nav .sign-in {
     position: relative;
     .sign-in-form {
-        display: block;
+        // display: block;
         position: absolute;
         top:-220px;
         right:0;
         width:233px;
+        background:#000;
         background: rgba(0, 0, 0, .7);
         padding:20px;
         opacity:0;
@@ -933,6 +934,7 @@ header#global-header .global-nav .sign-in {
             opacity: 1;
             filter: alpha(opacity=100);
         }
+        input#user_email, input#user_password { width:210px;}
     }
     span.remember-me {
         text-align: left;
@@ -958,6 +960,8 @@ header#global-header .global-nav .sign-in {
 
 
 }
+
+
 .login-incorrect {
     input[type=checkbox] {
         float:left;
