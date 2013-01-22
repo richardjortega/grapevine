@@ -73,7 +73,6 @@ class TripAdvisor
 			location_id = results.first
 		end
 
-		debugger
 		location_id
 	end
 
