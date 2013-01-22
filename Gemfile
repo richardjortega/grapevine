@@ -44,6 +44,7 @@ gem 'watir-webdriver'
 gem 'mailchimp'
 gem 'roadie'
 
+
 # Background Processes/Workers
 gem 'iron_worker_ng'
 gem 'delayed_job_active_record'
@@ -65,6 +66,8 @@ end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
+	gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+	gem 'letter_opener'
 	gem 'foreman'
 	gem 'sqlite3'
 	gem 'rspec-rails'

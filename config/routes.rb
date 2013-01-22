@@ -5,7 +5,12 @@ Grapevine::Application.routes.draw do
   # Grapevine Admin Type Stuff
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
-  mount DjMon::Engine => 'delayed_jobs'  
+  mount DjMon::Engine => 'delayed_jobs'
+
+  # For Mail_View
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end  
 
   mount StripeEvent::Engine => "/stripe_event"
 

@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/37signals/mail_view.git
+  revision: c8cc1315026ce85973ef56e628ac2e38a7a95563
+  specs:
+    mail_view (1.0.1)
+      tilt
+
+GIT
   remote: https://github.com/getsentry/raven-ruby.git
   revision: a0f59d3974034b38891fb1d4a70ff45fa996e7c9
   specs:
@@ -184,6 +191,8 @@ GEM
     lascivious (1.0.1)
     launchy (2.1.2)
       addressable (~> 2.3)
+    letter_opener (1.0.0)
+      launchy (>= 2.0.4)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -369,6 +378,8 @@ DEPENDENCIES
   keen
   lascivious
   launchy
+  letter_opener
+  mail_view!
   mailchimp
   meta-tags
   meta_search (>= 1.1.0.pre)
