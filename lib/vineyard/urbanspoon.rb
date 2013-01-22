@@ -14,8 +14,10 @@ class UrbanSpoon
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
+		location_id = nil
+
 		# Handle zero results
-		if response['queries']['request'][0]['totalResults'].to_i
+		if response['queries']['request'][0]['totalResults'].to_i == 0
 			puts "Found no results, moving on..."
 			return
 		end
@@ -31,20 +33,23 @@ class UrbanSpoon
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
 			return
 		end
-		location_id = ""
+		# Check each location
 		response['items'].each do |result|
 			#Check lat and long against lat and long of resulted
-			urbanspoon_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f
-			urbanspoon_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
-			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[urbanspoon_lat,urbanspoon_long])
+			result_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f
+			result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
+			result_id = result['link']
+			result_name = result['title']
+			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
 
-			if delta < 0.5
-				location_id = result['link'] rescue "Could not find any matching information"
+			if delta < 0.25
+				location_id = result_id rescue "Could not find any matching information"
 				break
 			else
 				puts "Found a search result that is too far away from asking location. Distance is #{delta} miles"
 			end
 		end
+		# If no results match what we are looking for 'location_id' will return nil
 		location_id
 	end
 

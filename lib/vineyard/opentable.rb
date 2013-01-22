@@ -17,8 +17,9 @@ class OpenTable
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
+		location_id = nil
 		# Handle zero results
-		if response['queries']['request'][0]['totalResults'].to_i
+		if response['queries']['request'][0]['totalResults'].to_i == 0
 			puts "Found no results, moving on..."
 			return
 		end
@@ -34,7 +35,7 @@ class OpenTable
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
 			return
 		end
-		location_url = ""
+		# Check each location using zip comparison
 		response['items'].each do |result|
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
 			if postal_address.include?("#{zip}")
@@ -45,6 +46,7 @@ class OpenTable
 				puts "Found a search result that doesn't match the zip code provided. Please be more specific in searching."
 			end
 		end
+		# If no results match what we are looking for 'location_id' will return nil
 		location_id = get_restaurant_id(location_url)
 	end
 

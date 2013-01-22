@@ -13,7 +13,33 @@ class Google
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
-		location_id = response['results'][0]['reference'] rescue "Could not find any matching information"
+		
+		# Handle Zero Results
+		if response['results'].empty?
+			puts "Found no results, moving on..."
+			return
+		end
+		# Check each location
+		# Google may return a completely different type of result (needs work)
+		location_id = nil
+		response['results'].each do |result|
+			result_lat = result['geometry']['location']['lat']
+			result_long = result['geometry']['location']['lng']
+			result_id = result['reference']
+			result_name = result['name']
+			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+
+			if delta < 0.25
+				puts "Matching found location '#{result_name}' to given location: #{term}"
+				location_id = result_id rescue "Could not find any matching information"
+				break
+			else
+				puts "Result is too far away from location. Distance is #{delta} miles. Location: #{result_name}"
+			end
+
+		end
+		# If no results match what we are looking for 'location_id' will return nil
+		location_id
 	end
 
 	def get_new_reviews(latest_review, location_id)

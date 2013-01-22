@@ -75,6 +75,7 @@ namespace :get_source_location_uri do
 		puts "Searching for Yelp ID using term: #{term}"
 		run = Yelp.new
 		source_location_uri = run.get_location_id(term, lat, long)
+		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
@@ -91,6 +92,7 @@ namespace :get_source_location_uri do
 		puts "Searching for Google ID using term: #{term}"
 		run = Google.new
 		source_location_uri = run.get_location_id(term, lat, long)
+		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
@@ -112,6 +114,7 @@ namespace :get_source_location_uri do
 		puts "Searching for UrbanSpoon ID using term: #{term}"
 		run = UrbanSpoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
+		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
@@ -131,6 +134,7 @@ namespace :get_source_location_uri do
 		puts "Searching for TripAdvisor ID using term: #{term}"
 		run = TripAdvisor.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
+		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location_id, source_location_uri, term)
 		end
@@ -158,6 +162,7 @@ namespace :get_source_location_uri do
 
 	# Methods!!
 	def add_new_vine(source, location_id, source_location_uri, term)
+		return if source_location_uri.nil?
 		Vine.create(:source_id 			   => source.id, 
 		 			:location_id 		   => location_id, 
 					:source_location_uri   => source_location_uri)

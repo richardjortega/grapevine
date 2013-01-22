@@ -14,7 +14,7 @@ class TripAdvisor
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
 		# Handle zero results
-		if response['queries']['request'][0]['totalResults'].to_i
+		if response['queries']['request'][0]['totalResults'].to_i == 0
 			puts "Found no results, moving on..."
 			return
 		end

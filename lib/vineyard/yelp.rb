@@ -18,7 +18,26 @@ class Yelp
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "/v2/search?term=#{parsed_term}&ll=#{lat},#{long}"
 		response = JSON.parse(@access_token.get(path).body)
-		location_id = response['businesses'][0]['id'] rescue "Could not find any matching information"
+		location_id = nil
+		# Check each location
+		response['businesses'].each do |result|
+			#Check lat and long against lat and long of resulted
+			result_lat = result['location']['coordinate']['latitude']
+			result_long = result['location']['coordinate']['longitude']
+			result_id = result['id']
+			result_name = result['name']
+			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+
+			if delta < 0.25
+				puts "Matching found location '#{result_name}' to given location: #{term}"
+				location_id = result_id rescue "Could not find any matching information"
+				break
+			else
+				puts "Result is too far away from location. Distance is #{delta} miles. Location: #{result_name}"
+			end
+		end
+		# If no results match what we are looking for 'location_id' will return nil
+		location_id
 	end
 
 	def get_new_reviews(latest_review, location_id)	
