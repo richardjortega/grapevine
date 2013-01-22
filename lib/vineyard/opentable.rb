@@ -38,13 +38,13 @@ class OpenTable
 		# Check each location using zip comparison
 		location_url = ""
 		response['items'].each do |result|
-			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
+			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific or this is the wrong link."
 			if postal_address.include?("#{zip}")
 				puts "Found a search result that matches the zip code provided."
 				location_url = result['link'] rescue "Could not find any matching information"
 				break
 			else
-				puts "Found a search result that doesn't match the zip code provided. Please be more specific in searching."
+				puts "Found a search result that doesn't match the zip code provided. Checking next result."
 			end
 		end
 		# If no results match what we are looking for 'location_id' will return nil
