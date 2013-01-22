@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118023654) do
+ActiveRecord::Schema.define(:version => 20130122021354) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130118023654) do
     t.date     "uri_check_date"
   end
 
+  add_index "locations", ["created_at"], :name => "index_locations_on_created_at"
   add_index "locations", ["name"], :name => "index_locations_on_name"
 
   create_table "plans", :force => true do |t|
