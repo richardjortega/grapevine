@@ -7,6 +7,12 @@ class Google
 		@radius = 500
 		@output = 'json'
 		@key = 'AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU'
+		track_api_call('googleplus')
+	end
+
+	def track_api_call(source_name)
+		source_id = Source.find_by_name("#{source_name}")
+		Source.update_counters(source_id, :api_count_daily => 1)
 	end
 
 	def get_location_id(term, lat, long)

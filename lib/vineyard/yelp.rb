@@ -9,15 +9,22 @@ class Yelp
 		token = '8UmXzrrFzbAffWuTpjTiOQkiFKJ3KZzY'
 		token_secret = 'uADpLMg0_BuzFaTWP3GOie9qIQU'
 		api_host = 'api.yelp.com'
+		track_api_call('yelp')
 
 		consumer = OAuth::Consumer.new(consumer_key, consumer_secret, {:site => "http://#{api_host}"})
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
+	end
+
+	def track_api_call(source_name)
+		source_id = Source.find_by_name("#{source_name}")
+		Source.update_counters(source_id, :api_count_daily => 1)
 	end
 
 	def get_location_id(term, lat, long)
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "/v2/search?term=#{parsed_term}&ll=#{lat},#{long}"
 		response = JSON.parse(@access_token.get(path).body)
+		
 		location_id = nil
 		# Check each location
 		response['businesses'].each do |result|

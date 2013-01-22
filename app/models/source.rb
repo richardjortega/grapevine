@@ -4,7 +4,9 @@ class Source < ActiveRecord::Base
   				:main_url, 
   				:management_response_url, 
   				:max_rating, 
-  				:name
+  				:name,
+          :api_count_daily,
+          :api_count_all_time
 
   has_many :vines
   has_many :locations, through: :vines
