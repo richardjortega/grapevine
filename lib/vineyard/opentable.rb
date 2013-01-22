@@ -22,10 +22,15 @@ class OpenTable
 			puts "Found no results, moving on..."
 			return
 		end
-		# Handle spelling errors
+		# Handle spelling errors (must be handled first)
 		if response['spelling']
 			puts "This query (location or address) is likely spelled wrong, please fix it."
 			puts "Recommended/Corrected Query: #{response['spelling']['correctedQuery']}"
+			puts "Reruning search with Corrected Query: #{response['spelling']['correctedQuery']}"
+			query = "#{response['spelling']['correctedQuery']}"
+			parsed_query = URI.parse(URI.encode(query.strip))
+			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
+			response = HTTParty.get(path)
 		end
 		# Handle error responses
 		if response['error']
