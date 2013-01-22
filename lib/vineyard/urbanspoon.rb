@@ -14,10 +14,17 @@ class UrbanSpoon
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
+		# Handle zero results
+		if response['queries']['request'][0]['totalResults'].to_i
+			puts "Found no results, moving on..."
+			return
+		end
+		# Handle spelling errors
 		if response['spelling']
 			puts "This query (location or address) is likely spelled wrong, please fix it."
 			puts "Recommended/Corrected Query: #{response['spelling']['correctedQuery']}"
 		end
+		# Handle error responses
 		if response['error']
 			code = response['error']['code']
 			message = response['error']['message']

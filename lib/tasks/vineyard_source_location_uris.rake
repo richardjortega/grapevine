@@ -5,8 +5,33 @@ require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
 
 namespace :get_source_location_uri do
+	
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task :all => :environment do
+		count = Location.all.count
+		puts "There are #{count} locations we will check for source_location_uris"
+		next if count == 0
+		Location.all.each do |location|
+			# Don't check this location if we've checked within the last 30 days
+			next if location.uri_check_date
+			
+			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+			existing_vines = []
+			location.vines.each do |vine|
+				existing_vines << vine.source.name
+			end
+
+			check_review_sites(existing_vines, location)
+			set_check_date(location)
+		end
+		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+	end
+
+	desc 'Daily find for source_location_uris for all locations that do not have vines'
+	task :daily => :environment do
+		count = Location.where('created_at >= ?', Date.yesterday.beginning_of_day).count
+		puts "There are #{count} locations we will check for source_location_uris."
+		next if count == 0
 		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			next if location.uri_check_date
@@ -20,7 +45,7 @@ namespace :get_source_location_uri do
 			check_review_sites(existing_vines, location)
 			set_check_date(location)
 		end
-		puts "Finished checking all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+		puts "Finished checking for locations added from yesterday for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
 	desc 'Find all source_location_uris for one location that does not have vines'
@@ -182,8 +207,7 @@ namespace :get_source_location_uri do
 	end
 
 	def set_check_date(location)
-		location.uri_check_date = Date.today
-		location.save!
+		location.update_column(:uri_check_date, Date.today)
 	end
 
 
