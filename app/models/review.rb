@@ -1,6 +1,7 @@
 class Review < ActiveRecord::Base
   scope :today, where('post_date = ?', Date.today)
   scope :yesterday, where('post_date = ?', Date.yesterday)
+  scope :new_reviews, where('status = ?', 'new')
 
   attr_accessible :author, 
   				:author_url, 
@@ -13,7 +14,9 @@ class Review < ActiveRecord::Base
   				:source_id, 
   				:title, 
   				:url, 
-  				:verified
+  				:verified,
+          :status,
+          :status_updated_at
 
   belongs_to :location
   belongs_to :source

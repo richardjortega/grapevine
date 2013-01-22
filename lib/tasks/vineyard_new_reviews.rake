@@ -67,14 +67,6 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				add_new_review(location, source, review)
-				# new_review = Review.new(:location_id => location.id,
-				# 						:source_id   => source.id, 
-				# 					    :post_date   => review[:post_date],
-				# 					    :comment     => review[:comment],
-				# 					    :author	     => review[:author],
-				# 					    :rating      => review[:rating],
-				# 					    :url         => review[:url] )
-				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -103,15 +95,6 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				add_new_review(location, source, review)
-				# new_review = Review.new(:location_id => location.id,
-				# 						:source_id   => source.id, 
-				# 					    :post_date   => review[:post_date],
-				# 					    :comment     => review[:comment],
-				# 					    :author	     => review[:author],
-				# 					    :rating      => review[:rating],
-				# 					    :title       => review[:title],
-				# 					    :url         => review[:url] )
-				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -140,17 +123,6 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				add_new_review(location, source, review)
-				# new_review = Review.new(:location_id 		=> location.id,
-				# 						:source_id   		=> source.id, 
-				# 					    :post_date   		=> review[:post_date],
-				# 					    :comment     		=> review[:comment],
-				# 					    :author	     		=> review[:author],
-				# 					    :author_url  		=> review[:author_url],
-				# 					    :rating      		=> review[:rating],
-				# 					    :rating_description => review[:rating_description],
-				# 					    :title       		=> review[:title],
-				# 					    :url         		=> review[:url] )
-				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -180,15 +152,6 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				add_new_review(location, source, review)
-				# new_review = Review.new(:location_id => location.id,
-				# 						:source_id   => source.id, 
-				# 					    :post_date   => review[:post_date],
-				# 					    :comment     => review[:comment],
-				# 					    :author	     => review[:author],
-				# 					    :rating      => review[:rating],
-				# 					    :title       => review[:title],
-				# 					    :url         => review[:url] )
-				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -217,15 +180,6 @@ namespace :get_new_reviews do
 			review_count = 0
 			response.each do |review|
 				add_new_review(location, source, review)
-				# new_review = Review.new(:location_id => location.id,
-				# 						:source_id   => source.id, 
-				# 					    :post_date   => review[:post_date],
-				# 					    :comment     => review[:comment],
-				# 					    :author	     => review[:author],
-				# 					    :rating      => review[:rating],
-				# 					    :title       => review[:title],
-				# 					    :url         => review[:url] )
-				# new_review.save!
 				review_count += 1
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
@@ -244,7 +198,9 @@ namespace :get_new_reviews do
 					    :rating      		=> review[:rating],
 					    :rating_description => review[:rating_description],
 					    :title       		=> review[:title],
-					    :url         		=> review[:url] )
+					    :url         		=> review[:url],
+					    :status				=> 'new',
+					    :status_updated_at  => Time.now )
 
 	end
 

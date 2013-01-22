@@ -3,6 +3,7 @@ ActiveAdmin.register Review do
 	scope :all, :default => true
 	scope :today
 	scope :yesterday
+	scope :new_reviews
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'This page is not directly editable, reviews should be handled by our crawlers (if you see errors report them)!'
