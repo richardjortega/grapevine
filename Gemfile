@@ -43,7 +43,7 @@ gem 'watir-webdriver'
 # Mailers
 gem 'mailchimp'
 gem 'roadie'
-
+gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
 # Background Processes/Workers
 gem 'iron_worker_ng'
@@ -66,7 +66,6 @@ end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
-	gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 	gem 'letter_opener'
 	gem 'foreman'
 	gem 'sqlite3'
