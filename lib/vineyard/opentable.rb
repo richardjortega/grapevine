@@ -17,7 +17,6 @@ class OpenTable
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
-		location_id = nil
 		# Handle zero results
 		if response['queries']['request'][0]['totalResults'].to_i == 0
 			puts "Found no results, moving on..."
@@ -35,7 +34,9 @@ class OpenTable
 			puts "Error found: #{code} | Message: #{message} | Google Search API quota may have been reached"
 			return
 		end
+		
 		# Check each location using zip comparison
+		location_url = ""
 		response['items'].each do |result|
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific."
 			if postal_address.include?("#{zip}")

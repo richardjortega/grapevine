@@ -13,6 +13,8 @@ class TripAdvisor
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 		path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 		response = HTTParty.get(path)
+		location_id = nil
+
 		# Handle zero results
 		if response['queries']['request'][0]['totalResults'].to_i == 0
 			puts "Found no results, moving on..."
@@ -31,6 +33,7 @@ class TripAdvisor
 		else
 			location_id = response['items'][0]['link'] rescue "Could not find any matching information"
 		end
+		location_id
 	end
 
 	def get_new_reviews(latest_review, location_id)
