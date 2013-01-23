@@ -7,24 +7,16 @@ class StaticPagesController < ApplicationController
   end
 
   def signup
+    if request.fullpath.include?('signup-now')
+        @plan = Plan.find_by_identifier('gv_needs_to_pay')
+      elsif request.fullpath.include?('agency-signup')
+        @plan = Plan.find_by_identifier('gv_agency')
+      else
+        @plan = Plan.find_by_identifier('gv_free')
+    end
   	@user			      = User.new
-  	@plan 			    = Plan.find_by_identifier('gv_free')
   	@location       = @user.locations.build
   	@subscription 	= Subscription.new
-  end
-
-  def agency_signup
-    @user           = User.new
-    @plan           = Plan.find_by_identifier('gv_agency')
-    @location       = @user.locations.build
-    @subscription   = Subscription.new
-  end
-
-  def signup_now
-    @user           = User.new
-    @plan           = Plan.find_by_identifier('gv_needs_to_pay')
-    @location       = @user.locations.build
-    @subscription   = Subscription.new
   end
 
   def pricing

@@ -45,7 +45,7 @@ Grapevine::Application.routes.draw do
   # Static pages
   match '/about', :to => 'static_pages#about', as: 'about'
   match '/signup', :to => 'static_pages#signup', as: 'signup'
-  match '/agency-signup', to: 'static_pages#agency_signup', as: 'agency_signup'
+  match '/agency-signup', to: 'static_pages#signup', as: 'agency_signup'
   match '/pricing', :to => 'static_pages#pricing', as: 'pricing'
   match '/contact', :to => 'static_pages#contact', as: 'contact'
   match '/learn-more', :to => 'static_pages#learn_more', as: 'learn_more'
@@ -55,7 +55,7 @@ Grapevine::Application.routes.draw do
   match '/404',  to: 'static_pages#error404'
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
   match '/blog', :to => redirect('http://pickgrapevine.tumblr.com') 
-  match '/signup-now', :to => 'static_pages#signup_now', as: 'signup_now' 
+  match '/signup-now', :to => 'static_pages#signup', as: 'signup_now' 
 
   # Landing pages for email blasting
   get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'
