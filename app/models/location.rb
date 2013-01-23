@@ -1,6 +1,5 @@
 class Location < ActiveRecord::Base
   #Before methods and triggers!
-  scope :duplicates, where("COUNT(name) > 1")
 
   attr_accessible :address_line_2, 
   				  :city, 
