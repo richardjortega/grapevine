@@ -2,8 +2,8 @@
 <div id="main-container" class="dash-page change-plan">
 <section class="with-aside">
 <header>
-<% if @plan_identifier == 'gv_free' %>
-	<h2>Upgrade to Pro for Unlimited Review Alerts!</h2>
+<% if @plan_identifier == 'gv_free' or 'gv_needs_to_pay' %>
+	<h2>Upgrade to Unlimited Review Alerts!</h2>
 <% else %>
 	<h2>Change Your Plan</h2>
 <% end %>
@@ -11,8 +11,10 @@
 </header>
 
 	<div class="section-content">
+		<% unless @plan_identifier == 'gv_needs_to_pay' %>
 		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
-		<% if @plan_identifier == 'gv_free' %>
+		<% end %>
+		<% if @plan_identifier == 'gv_free' or 'gv_needs_to_pay' %>
 	    	<h3>What does upgrading get me?</h3>
 			<h4>Unlimited Review Tracking for Your Business.</h4>
 
@@ -31,9 +33,11 @@
 	</div><!-- /.section-content -->
 
 
-
-	<aside>
-		<%= render 'account_overview' %>
-	</aside>
+	<% unless @plan_identifier == 'gv_needs_to_pay' %>
+		<aside>
+			<%= render 'account_overview' %>
+		</aside>
+	<% end %>
+	
 </section>
 </div><!-- /#main-container.dash-page -->

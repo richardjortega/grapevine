@@ -2,6 +2,10 @@ class AccountsController < ApplicationController
       force_ssl
 
 	def index
+            if current_user.plan.identifier == 'gv_needs_to_pay'
+                  redirect_to upgrade_path
+            end
+
             DelayedKiss.alias(current_user.full_name, current_user.email) unless current_user.nil?
             DelayedKiss.record(current_user.email, 'Signed In') unless current_user.nil?
 
