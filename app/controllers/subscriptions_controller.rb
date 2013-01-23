@@ -6,8 +6,6 @@ class SubscriptionsController < ApplicationController
   	@user  = User.create!(params[:user])
   	@subscription.user = @user
   	@plan = Plan.find params[:subscription][:plan_id]
-
-    debugger
     
   	if @subscription.save_without_payment
       redirect_to thank_you_path
