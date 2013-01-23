@@ -52,10 +52,10 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.source.reviews
+			reviews = vine.location.reviews
 			if reviews.empty?
-				last_30_days_ago = Date.today - 3
-				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+				last_3_days_ago = Date.today - 3
+				latest_review = {:post_date => last_3_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -63,8 +63,12 @@ namespace :get_new_reviews do
 			puts "Searching for new reviews at: #{source_location_uri}"
 			run = Yelp.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
-
+			if response.empty?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			review_count = 0
+			debugger
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -81,10 +85,10 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.source.reviews
+			reviews = vine.location.reviews
 			if reviews.empty?
-				last_30_days_ago = Date.today - 3
-				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+				last_3_days_ago = Date.today - 3
+				latest_review = {:post_date => last_3_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -109,10 +113,10 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.source.reviews
+			reviews = vine.location.reviews
 			if reviews.empty?
-				last_30_days_ago = Date.today - 3
-				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+				last_3_days_ago = Date.today - 3
+				latest_review = {:post_date => last_3_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -138,10 +142,10 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.source.reviews
+			reviews = vine.location.reviews
 			if reviews.empty?
-				last_30_days_ago = Date.today - 3
-				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+				last_3_days_ago = Date.today - 3
+				latest_review = {:post_date => last_3_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -166,10 +170,10 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.source.reviews
+			reviews = vine.location.reviews
 			if reviews.empty?
-				last_30_days_ago = Date.today - 3
-				latest_review = {:post_date => last_30_days_ago, :comment => '' }
+				last_3_days_ago = Date.today - 3
+				latest_review = {:post_date => last_3_days_ago, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}

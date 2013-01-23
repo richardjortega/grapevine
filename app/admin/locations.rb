@@ -1,4 +1,5 @@
 ActiveAdmin.register Location do
+	scope :duplicates
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'Adding new locations does not associate them to specific user.
