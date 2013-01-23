@@ -34,7 +34,6 @@ class Subscription < ActiveRecord::Base
   	# This assigns user to Grapevine Alerts - Monthly Alerts
   	self.status                 = true
     self.status_info            = "active"
-    self.next_bill_on           = Date.parse customer.next_recurring_charge.date
     self.start_date             = Date.today.beginning_of_day.to_i
   	user.save!
     save!
