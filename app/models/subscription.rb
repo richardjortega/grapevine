@@ -100,7 +100,7 @@ private
   end
 
 	def stripe_customer_without_credit_card
-		Stripe::Customer.create email: user.email, plan: plan.identifier, description: stripe_description
+		Stripe::Customer.create email: user.email, plan: plan, description: stripe_description
   end
 
 	def stripe_customer

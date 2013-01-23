@@ -5,7 +5,10 @@
 stripe_plans = [
   { amount: 0, interval: 'month', currency: 'usd', id: 'gv_free',  name: 'Grapevine Alerts - Free Forever Plan'},
   { amount: 3000, interval: 'month', currency: 'usd', id: 'gv_30',  name: 'Grapevine Alerts - Basic Monthly Plan (1 Location)'},
-  { amount: 5000, interval: 'month', currency: 'usd', id: 'gv_50',  name: 'Grapevine Alerts - Basic Monthly Plan (3 Locations)'}
+  { amount: 5000, interval: 'month', currency: 'usd', id: 'gv_50',  name: 'Grapevine Alerts - Basic Monthly Plan (3 Locations)'},
+  { amount: 0, interval: 'month', currency: 'usd', id: 'gv_agency',  name: 'Grapevine Alerts - Agency'},
+  { amount: 0, interval: 'month', currency: 'usd', id: 'gv_needs_to_pay',  name: 'Grapevine Alerts - Pro Plan'}
+
 ]
 
 # If a plan is already created inside of Stripe, it will return an error.
@@ -15,12 +18,23 @@ stripe_plans.each { |plan| Stripe::Plan.create plan rescue puts "Skipping #{ pla
 gv_free = stripe_plans[0]
 gv_30 = stripe_plans[1]
 gv_50 = stripe_plans[2]
+gv_agency = stripe_plans[3]
+gv_needs_to_pay = stripe_plans[4]
+
 Plan.find_or_create_by_identifier! :identifier => gv_free[:id], :name => gv_free[:name], :amount => gv_free[:amount], :currency => gv_free[:currency], :interval => gv_free[:interval], :location_limit => 1, :review_limit => 5
 puts "Created #{gv_free[:name]} in local database"
+
 Plan.find_or_create_by_identifier! :identifier => gv_30[:id], :name => gv_30[:name], :amount => gv_30[:amount], :currency => gv_30[:currency], :interval => gv_30[:interval], :location_limit => 1
 puts "Created #{gv_30[:name]} in local database"
+
 Plan.find_or_create_by_identifier! :identifier => gv_50[:id], :name => gv_50[:name], :amount => gv_50[:amount], :currency => gv_50[:currency], :interval => gv_50[:interval], :location_limit => 3
 puts "Created #{gv_50[:name]} in local database"
+
+Plan.find_or_create_by_identifier! :identifier => gv_agency[:id], :name => gv_agency[:name], :amount => gv_agency[:amount], :currency => gv_agency[:currency], :interval => gv_agency[:interval], :location_limit => nil, :review_limit => nil 
+puts "Created #{gv_agency[:name]} in local database"
+
+Plan.find_or_create_by_identifier! :identifier => gv_needs_to_pay[:id], :name => gv_needs_to_pay[:name], :amount => gv_needs_to_pay[:amount], :currency => gv_needs_to_pay[:currency], :interval => gv_needs_to_pay[:interval], :location_limit => 1, :review_limit => 0
+puts "Created #{gv_needs_to_pay[:name]} in local database"
 
 # Add Sources to Source Tables
 # Source(id: integer, name: string, category: string, max_rating: decimal, accepts_management_response: boolean, management_response_url: string, main_url: string, created_at: datetime, updated_at: datetime) 
