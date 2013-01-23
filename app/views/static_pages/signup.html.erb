@@ -96,7 +96,7 @@
           <% end %>
 
           <%= fields_for @subscription do |subscription_field| %>
-            <%= subscription_field.hidden_field :plan_id, value: @plan.identifier  %>
+            <%= subscription_field.hidden_field :plan_id, value: @plan.id  %>
           <% end %>
           
           
