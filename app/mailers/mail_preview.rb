@@ -11,7 +11,8 @@ class MailPreview < MailView
 		source = 'yelp'
 		location = "Bob's Burgers"
 		location_link = 'http://www.bobsburgers.com'
-		NotifyMailer.review_alert(email, review, rating, source, location, location_link)
+		review_count = 5
+		NotifyMailer.review_alert(email, review, rating, source, location, location_link, review_count)
 	end
 
 	def follow_up_alert
