@@ -17,6 +17,7 @@ class OpenTable
 	end
 
 	def get_location_id(term, street_address, city, state, zip)
+		begin
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:tbwceh9avj4"
@@ -47,7 +48,7 @@ class OpenTable
 		end
 		
 		# Check each location using zip comparison
-		location_url = ""
+		location_url = nil
 		response['items'].each do |result|
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific or this is the wrong link."
 			if postal_address.include?("#{zip}")
@@ -59,12 +60,24 @@ class OpenTable
 			end
 		end
 		# If no results match what we are looking for 'location_id' will return nil
+		return if location_url.nil?
 		location_id = get_restaurant_id(location_url)
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_restaurant_id(location_url)
+		begin
 		doc = Nokogiri::HTML(open(location_url))
 		restaurant_id = doc.css('input#SearchBox_RestSearchBox_txtHid_RestaurantID').attribute('value').value
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)

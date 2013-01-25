@@ -14,6 +14,7 @@ class UrbanSpoon
 	end
 
 	def get_location_id(term, street_address, city, state, zip, lat, long)
+		begin
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
@@ -64,6 +65,12 @@ class UrbanSpoon
 		end
 		# If no results match what we are looking for 'location_id' will return nil
 		location_id
+
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)

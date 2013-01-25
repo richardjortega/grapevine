@@ -13,6 +13,7 @@ class TripAdvisor
 	end
 
 	def get_location_id(term, street_address, city, state, zip)
+		begin
 		short_term = term.split(' ', 2)[0]
 		query = "#{short_term} #{city}"
 		parsed_query = URI.parse(URI.encode(query.strip))
@@ -80,6 +81,11 @@ class TripAdvisor
 		end
 
 		location_id
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)

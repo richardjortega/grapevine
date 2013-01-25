@@ -16,6 +16,7 @@ class Google
 	end
 
 	def get_location_id(term, lat, long)
+		begin
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
@@ -46,6 +47,11 @@ class Google
 		end
 		# If no results match what we are looking for 'location_id' will return nil
 		location_id
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)

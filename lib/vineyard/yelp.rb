@@ -21,6 +21,7 @@ class Yelp
 	end
 
 	def get_location_id(term, lat, long)
+		begin
 		parsed_term = URI.parse(URI.encode(term.strip))
 		path = "/v2/search?term=#{parsed_term}&ll=#{lat},#{long}"
 		response = JSON.parse(@access_token.get(path).body)
@@ -45,9 +46,15 @@ class Yelp
 		end
 		# If no results match what we are looking for 'location_id' will return nil
 		location_id
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 
 	def get_new_reviews(latest_review, location_id)	
+		begin
 		parsed_location_id = URI.parse(URI.encode(location_id.strip))
 		path = "/v2/business/#{parsed_location_id}"	
 		response = JSON.parse(@access_token.get(path).body)
@@ -70,6 +77,11 @@ class Yelp
 			end
 		end
 		new_reviews
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
 	end
 end
 
