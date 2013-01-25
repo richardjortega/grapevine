@@ -12,7 +12,20 @@ ActiveAdmin.register User do
 		column :last_name
 		column :email
 		column 'Associating Stripe Token' do |user|
+			next if user.subscription.nil?
 			"#{user.subscription.stripe_customer_token}"
+		end
+		column 'Associated Locations' do |user|
+			next if user.locations.empty?
+			locations = []
+			user.locations.each do |location|
+				locations << location.name
+			end
+			locations.join(', ')
+		end
+		column 'Associated Plan' do |user|
+			next if user.plan.nil?
+			"#{user.plan.identifier}"
 		end
 		column :phone_number
 		default_actions
