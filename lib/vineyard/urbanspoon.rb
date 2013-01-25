@@ -36,8 +36,15 @@ class UrbanSpoon
 
 		# Handle zero results
 		if response['queries']['request'][0]['totalResults'].to_i == 0
-			puts "Found no results, moving on..."
-			return
+			puts "Found no results. Rerunning with simpler query: '#{term} #{city}'"
+			query = "#{term} #{city}"
+			parsed_query = URI.parse(URI.encode(query.strip))
+			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
+			response = HTTParty.get(path)
+			if response['queries']['request'][0]['totalResults'].to_i == 0
+				puts "Found no results, moving on..."
+				return
+			end
 		end
 
 		# Handle error responses
