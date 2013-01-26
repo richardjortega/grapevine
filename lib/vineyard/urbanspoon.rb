@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'httparty'
+require 'uri'
 
 class UrbanSpoon
 	def initialize
@@ -57,17 +58,25 @@ class UrbanSpoon
 		# Check each location
 		response['items'].each do |result|
 			#Check lat and long against lat and long of resulted
-			result_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f
-			result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
-			result_id = result['link']
-			result_name = result['title']
-			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+			if result['pagemap'].present?
+				result_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f 
+				result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
+				result_id = result['link']
+				result_name = result['title']
+				delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
 
-			if delta < 0.25
-				location_id = result_id rescue "Could not find any matching information"
-				break
+				if delta < 0.25
+					location_id = result_id rescue "Could not find any matching information"
+					break
+				else
+					puts "Found a search result that is too far away from asking location. Distance is #{delta} miles"
+				end
 			else
-				puts "Found a search result that is too far away from asking location. Distance is #{delta} miles"
+				# This kind of result may need proper parsing and removing of url params
+				uri = URI("#{result['link']}")
+				host = uri.host
+				path = uri.path
+				location_id = "http://#{host}#{path}"
 			end
 		end
 		# If no results match what we are looking for 'location_id' will return nil
