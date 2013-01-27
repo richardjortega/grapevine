@@ -62,6 +62,12 @@ class Google
 
 		new_reviews = []
 
+		# Handle no reviews
+		if !parsed_response["result"]["reviews"].present?
+			puts "There are no reviews for this restaurant"
+			return
+		end
+
 		parsed_response["result"]["reviews"].each do |review|
 			review_date = Time.at(review["time"]).to_date
 			review_comment = review["text"].strip

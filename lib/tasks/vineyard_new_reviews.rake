@@ -68,7 +68,6 @@ namespace :get_new_reviews do
 				next
 			end
 			review_count = 0
-			debugger
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
