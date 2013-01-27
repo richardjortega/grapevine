@@ -1,9 +1,10 @@
 require 'open-uri'
 require 'nokogiri'
+require 'uri'
 
 class TripAdvisor
 	def initialize
-		@site = 'http://www.tripadvisor.com/'
+		@site = 'http://www.tripadvisor.com'
 		track_api_call('tripadvisor')
 	end
 
@@ -52,7 +53,7 @@ class TripAdvisor
 		results = []
 		response['items'].each do |result|
 			result_title = result['title']
-			result_id = result['link']
+			result_id = URI("#{result['link']}").path
 			# Find if city matches up to result if not, next
 			if !result_title.include?("#{city}")
 				puts "This result is not in the same city as given location"
@@ -70,12 +71,10 @@ class TripAdvisor
 			puts "Detected possibly similar locations in same city, rerunning with smarter query..."
 			query = "#{term} #{street_address} #{city} #{state} #{zip}"
 			parsed_query = URI.parse(URI.encode(query.strip))
-			cx = "009410204525769731320:fiksaiphsou"
-			key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
 			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 			response = HTTParty.get(path)
 			puts "We are assuming it is the first result, hopefully..."
-			location_id = response['items'][0]['link'] rescue "Could not find any matching information"
+			location_id = URI("#{response['items'][0]['link']}").path rescue "Could not find any matching information"
 		else
 			location_id = results.first
 		end

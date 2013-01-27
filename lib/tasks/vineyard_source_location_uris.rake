@@ -26,6 +26,23 @@ namespace :get_source_location_uri do
 		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
+	desc 'Find all source_location_uris for all locations that do not have vines, except ignore the last uri check date'
+	task 'all:ignore_check_date' => :environment do
+		count = Location.all.count
+		puts "There are #{count} locations we will check for source_location_uris"
+		Location.all.each do |location|
+			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+			existing_vines = []
+			location.vines.each do |vine|
+				existing_vines << vine.source.name
+			end
+
+			check_review_sites(existing_vines, location)
+			set_check_date(location)
+		end
+		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+	end
+
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
 	task :daily_check => :environment do
 		count = Location.where('created_at >= ?', Date.yesterday.beginning_of_day).count

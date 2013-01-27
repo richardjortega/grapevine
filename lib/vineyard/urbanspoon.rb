@@ -5,7 +5,7 @@ require 'uri'
 
 class UrbanSpoon
 	def initialize
-		@site = 'http://www.urbanspoon.com/'
+		@site = 'http://www.urbanspoon.com'
 		track_api_call('urbanspoon')
 	end
 
@@ -61,7 +61,7 @@ class UrbanSpoon
 			if result['pagemap'].present?
 				result_lat = result['pagemap']['metatags'][0]['urbanspoon:location:latitude'].to_f 
 				result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
-				result_id = result['link']
+				result_id = URI("#{result['link']}").path
 				result_name = result['title']
 				delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
 
@@ -74,9 +74,7 @@ class UrbanSpoon
 			else
 				# This kind of result may need proper parsing and removing of url params
 				uri = URI("#{result['link']}")
-				host = uri.host
-				path = uri.path
-				location_id = "http://#{host}#{path}"
+				location_id = uri.path
 			end
 		end
 		# If no results match what we are looking for 'location_id' will return nil
