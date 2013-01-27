@@ -52,7 +52,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews
+			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
 				last_3_days_ago = Date.today - 3
 				latest_review = {:post_date => last_3_days_ago, :comment => '' }
@@ -68,6 +68,7 @@ namespace :get_new_reviews do
 				next
 			end
 			review_count = 0
+			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -84,7 +85,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews
+			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
 				last_3_days_ago = Date.today - 3
 				latest_review = {:post_date => last_3_days_ago, :comment => '' }
@@ -96,6 +97,7 @@ namespace :get_new_reviews do
 			run = OpenTable.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
+			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -112,7 +114,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews
+			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
 				last_3_days_ago = Date.today - 3
 				latest_review = {:post_date => last_3_days_ago, :comment => '' }
@@ -124,6 +126,7 @@ namespace :get_new_reviews do
 			run = Google.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
+			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -141,7 +144,8 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews
+			reviews = vine.location.reviews.where('source_id = ?', source.id)
+			debugger
 			if reviews.empty?
 				last_3_days_ago = Date.today - 3
 				latest_review = {:post_date => last_3_days_ago, :comment => '' }
@@ -153,6 +157,8 @@ namespace :get_new_reviews do
 			run = UrbanSpoon.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
+			debugger
+			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -169,7 +175,7 @@ namespace :get_new_reviews do
 		source_vines.each do |vine|
 			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews
+			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
 				last_3_days_ago = Date.today - 3
 				latest_review = {:post_date => last_3_days_ago, :comment => '' }
@@ -181,6 +187,7 @@ namespace :get_new_reviews do
 			run = TripAdvisor.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
+			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
