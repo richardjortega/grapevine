@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
-  scope :today, where('post_date = ?', Date.today)
-  scope :yesterday, where('post_date = ?', Date.yesterday)
+  scope :today_post_date, where('post_date = ?', Date.today)
+  scope :yesterday_post_date, where('post_date = ?', Date.yesterday)
   scope :new_reviews, where('status = ?', 'new').order('created_at DESC')
   scope :sent_reviews, where('status = ?', 'sent').order('status_updated_at DESC')
 

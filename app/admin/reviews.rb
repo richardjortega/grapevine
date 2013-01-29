@@ -1,8 +1,8 @@
 ActiveAdmin.register Review do
 	#actions :index, :show
 	scope :all, :default => true
-	scope :today
-	scope :yesterday
+	scope :today_post_date
+	scope :yesterday_post_date
 	scope :new_reviews
 	scope :sent_reviews
 	index do
