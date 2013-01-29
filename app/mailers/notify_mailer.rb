@@ -5,7 +5,7 @@ class NotifyMailer < ActionMailer::Base
           bcc: "alerts+logs@pickgrapevine.com"
 
   # All agruements accept strings
-  def review_alert(email, review, rating, source, location, location_link, review_count)
+  def review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
     @email = email
     @review = review
     @rating = rating
@@ -13,23 +13,27 @@ class NotifyMailer < ActionMailer::Base
     @location = location
     @location_link = location_link
     @review_count = review_count
+    @plan_type = plan_type
 
-    case @review_count
-      when 1
-        @review_message = 'Your first review this month'
-        @review_progress_bar = '4-remaining.png'
-      when 2
-        @review_message = 'Thats 2 two reviews so far.'
-        @review_progress_bar = '3-remaining.jpg'
-      when 3
-        @review_message = 'You have 2 reviews left.'
-        @review_progress_bar = '2-remaining.jpg'
-      when 4
-        @review_message = 'Oh, snap. You have 1 review remaining.'
-        @review_progress_bar = '1-remaining.jpg'
-      when 5
-        @review_message = 'Sad Panda. You have reached your limit.'
-        @review_progress_bar = '0-remaining.jpg'
+
+    if plan_type == 'free'
+      case @review_count
+        when 1
+          @review_message = 'Your first review this month'
+          @review_progress_bar = '4-remaining.png'
+        when 2
+          @review_message = 'Thats 2 two reviews so far.'
+          @review_progress_bar = '3-remaining.jpg'
+        when 3
+          @review_message = 'You have 2 reviews left.'
+          @review_progress_bar = '2-remaining.jpg'
+        when 4
+          @review_message = 'Oh, snap. You have 1 review remaining.'
+          @review_progress_bar = '1-remaining.jpg'
+        when 5
+          @review_message = 'Sad Panda. You have reached your limit.'
+          @review_progress_bar = '0-remaining.jpg'
+      end
     end
     
     if source == 'yelp'

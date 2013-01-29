@@ -49,6 +49,7 @@
 																<h2 style="color: #707070; display: block; font-family: Helvetica; font-size: 28px; font-style: normal; font-weight: bold; line-height: 100%; letter-spacing: normal; text-align: left; margin-top: 0; margin-right: 0; margin-bottom: 10px; margin-left: 0;" align="left">for <%= @location %> on <%= @source %>.</h2>
 															</td>
 														</tr>
+            <% if @plan_type == 'free' %>
 						<!--- PROGRESS BAR -->
                             <tr>
                               <td class="headerContent" style="padding-bottom: 20px; border-collapse: collapse; padding-top: 0; color: #505050; font-family: Helvetica; font-size: 20px; font-weight: bold; line-height: 100%; text-align: left; vertical-align: top;" align="left" valign="top">
@@ -73,6 +74,7 @@
 
 
             <!-- END PROGRESS BAR -->
+            <% end %>
 
 														<tr>
 

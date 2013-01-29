@@ -8,17 +8,59 @@ namespace :vineyard do
 			user = review.location.users.first
 			user_id = user.id
 
+			# Set everything needed for review alert
+			# use this in production
+			# email = user.email
+
+			## remove later, only for testing email
+			email = 'info+test@pickgrapevine.com'
+			
+			review = review.comment
+			rating = review.rating.to_f
+			source = review.source.name
+			location = review.location.name
+			location_link = review.url
+
+			# Change user's review_count to zero if nil
+			user.review_count = 0 if user.review_count.nil?
+			review_count = user.review_count
+
 			# Check user's plan first (check for free plans)
 			if user.plan.identifier == 'gv_free'
+				plan_type = 'free'
+				if review_count <= 4
+					# Send the review
+					NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 
+					# mark review sent
+					review.update_column(:status, 'sent')
+					review.save!
+
+					# increment user's review
+					user.review_count += 1
+					user.save!
+				else
+					# Handles people who hit their max review count
+
+					# Don't send the review
+					# Mark review 'archive'
+					review.update_column(:status, 'archive')
+					review.save!
+				end
 			else
-				# Send review
+				plan_type = 'paid'
+				# Handles people with paid plan_types
+				# Send the review
+				NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
+
 				# mark review sent
+				review.update_column(:status, 'sent')
+				review.save!
+
 				# increment user's review
-				User.update_counters(user_id, :api_count_daily => 1)
+				user.review_count += 1
+				user.save!
 			end
-			## If 'gv_free'
-				#
 		end
 	end
 end
