@@ -1,7 +1,8 @@
 class Review < ActiveRecord::Base
   scope :today, where('post_date = ?', Date.today)
   scope :yesterday, where('post_date = ?', Date.yesterday)
-  scope :new_reviews, where('status = ?', 'new')
+  scope :new_reviews, where('status = ?', 'new').order('created_at DESC')
+  scope :sent_reviews, where('status = ?', 'sent').order('status_updated_at DESC')
 
   attr_accessible :author, 
   				:author_url, 

@@ -34,7 +34,8 @@ namespace :vineyard do
 					NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 					# mark review sent
-					review.update_column(:status, 'sent')
+					review.status = 'sent'
+					review.status_updated_at = Time.now
 					review.save!
 
 					# increment user's review
@@ -46,7 +47,8 @@ namespace :vineyard do
 					# Don't send the review
 					# Mark review 'archive'
 					puts "Not sending a review because user's review count has hit the max"
-					review.update_column(:status, 'archive')
+					review.status = 'archive'
+					review.status_updated_at = Time.now
 					review.save!
 				end
 			else
@@ -57,7 +59,8 @@ namespace :vineyard do
 				NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 				# mark review sent
-				review.update_column(:status, 'sent')
+				review.status = 'sent'
+				review.status_updated_at = Time.now
 				review.save!
 
 				# increment user's review
