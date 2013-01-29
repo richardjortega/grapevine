@@ -54,8 +54,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				last_3_days_ago = Date.today - 3
-				latest_review = {:post_date => last_3_days_ago, :comment => '' }
+				yesterday = Date.yesterday
+				latest_review = {:post_date => yesterday, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -87,8 +87,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				last_3_days_ago = Date.today - 3
-				latest_review = {:post_date => last_3_days_ago, :comment => '' }
+				yesterday = Date.yesterday
+				latest_review = {:post_date => yesterday, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -116,8 +116,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				last_3_days_ago = Date.today - 3
-				latest_review = {:post_date => last_3_days_ago, :comment => '' }
+				yesterday = Date.yesterday
+				latest_review = {:post_date => yesterday, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -146,8 +146,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				last_3_days_ago = Date.today - 3
-				latest_review = {:post_date => last_3_days_ago, :comment => '' }
+				yesterday = Date.yesterday
+				latest_review = {:post_date => yesterday, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -175,8 +175,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				last_3_days_ago = Date.today - 3
-				latest_review = {:post_date => last_3_days_ago, :comment => '' }
+				yesterday = Date.yesterday
+				latest_review = {:post_date => yesterday, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
