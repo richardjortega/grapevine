@@ -14,4 +14,12 @@ namespace :vineyard do
 			source.save!
 		end
 	end
+
+	desc "Reset all user's review count to 0 if first of the month"
+	task :reset_users_review_counts => :environment do
+		User.all.each do |user|
+			user.review_count = 0
+			user.save!
+		end
+	end
 end
