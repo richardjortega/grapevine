@@ -29,6 +29,10 @@ namespace :vineyard do
 			if user.plan.identifier == 'gv_free'
 				plan_type = 'free'
 				if review_count <= 4
+					# increment user's review
+					user.review_count += 1
+					user.save!
+
 					# Send the review
 					puts "Sending a review alert to #{location} to #{email}"
 					NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
@@ -37,10 +41,6 @@ namespace :vineyard do
 					review.status = 'sent'
 					review.status_updated_at = Time.now
 					review.save!
-
-					# increment user's review
-					user.review_count += 1
-					user.save!
 				else
 					# Handles people who hit their max review count
 
@@ -54,6 +54,11 @@ namespace :vineyard do
 			else
 				plan_type = 'paid'
 				# Handles people with paid plan_types
+
+				# increment user's review
+				user.review_count += 1
+				user.save!
+
 				# Send the review
 				puts "Sending a review alert to #{location} to #{email}"
 				NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
@@ -62,10 +67,6 @@ namespace :vineyard do
 				review.status = 'sent'
 				review.status_updated_at = Time.now
 				review.save!
-
-				# increment user's review
-				user.review_count += 1
-				user.save!
 			end
 		end
 	end
