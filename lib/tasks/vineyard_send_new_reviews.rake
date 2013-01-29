@@ -31,16 +31,16 @@ namespace :vineyard do
 				if review_count <= 4
 					# increment user's review
 					user.review_count += 1
-					user.save!
 
 					# Send the review
 					puts "Sending a review alert to #{location} to #{email}"
-					NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
+					NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 					# mark review sent
 					review.status = 'sent'
 					review.status_updated_at = Time.now
 					review.save!
+					user.save!
 				else
 					# Handles people who hit their max review count
 
@@ -50,6 +50,12 @@ namespace :vineyard do
 					review.status = 'archive'
 					review.status_updated_at = Time.now
 					review.save!
+
+					# Alert us about users who have maxed out
+					if review_count == 5
+						DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}")
+						NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
+					end
 				end
 			else
 				plan_type = 'paid'
@@ -57,16 +63,16 @@ namespace :vineyard do
 
 				# increment user's review
 				user.review_count += 1
-				user.save!
 
 				# Send the review
 				puts "Sending a review alert to #{location} to #{email}"
-				NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
+				NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 				# mark review sent
 				review.status = 'sent'
 				review.status_updated_at = Time.now
 				review.save!
+				user.save!
 			end
 		end
 	end
