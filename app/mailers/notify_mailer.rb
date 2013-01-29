@@ -35,7 +35,7 @@ class NotifyMailer < ActionMailer::Base
           @review_message = 'Oh, snap. You have 1 review remaining.'
           @review_progress_bar = '1-remaining.jpg'
         when 5
-          @review_message = 'Sad Panda. You have reached your limit.'
+          @review_message = 'You have reached your limit.'
           @review_progress_bar = '0-remaining.jpg'
       end
     end
