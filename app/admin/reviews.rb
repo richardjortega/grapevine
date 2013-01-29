@@ -25,6 +25,7 @@ ActiveAdmin.register Review do
 		column :rating
 		column :title
 		column :rating_description
+		column :status
 		column :author_url
 		column :created_at
 		default_actions
