@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   scope :no_stripe_customer_token, includes(:subscription).where(Subscription.arel_table[:stripe_customer_token].eq(nil))
+  scope :reached_max_review_count, where('review_count = ?', 5)
 
   # Pre-validators!
   before_save :format_phone_number
