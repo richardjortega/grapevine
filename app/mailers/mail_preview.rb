@@ -8,7 +8,7 @@ class MailPreview < MailView
 		animi tenetur. Expedita perferendis asperiores 
 		voluptatum maxime unde.'
 		rating = 4.0
-		source = 'yelp'
+		source = 'urbanspoon'
 		location = "Bob's Burgers"
 		location_link = 'http://www.bobsburgers.com'
 		review_count = 5

@@ -27,6 +27,7 @@ ActiveAdmin.register User do
 			next if user.plan.nil?
 			"#{user.plan.identifier}"
 		end
+		column :review_count
 		column :phone_number
 		default_actions
 	end

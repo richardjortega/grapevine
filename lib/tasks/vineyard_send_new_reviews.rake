@@ -15,7 +15,7 @@ namespace :vineyard do
 			## remove later, only for testing email
 			email = 'info+test@pickgrapevine.com'
 			
-			review = review.comment
+			comment = review.comment
 			rating = review.rating.to_f
 			source = review.source.name
 			location = review.location.name
@@ -31,7 +31,7 @@ namespace :vineyard do
 				if review_count <= 4
 					# Send the review
 					puts "Sending a review alert to #{location} to #{email}"
-					NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
+					NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 					# mark review sent
 					review.update_column(:status, 'sent')
@@ -54,7 +54,7 @@ namespace :vineyard do
 				# Handles people with paid plan_types
 				# Send the review
 				puts "Sending a review alert to #{location} to #{email}"
-				NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
+				NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 
 				# mark review sent
 				review.update_column(:status, 'sent')
