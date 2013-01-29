@@ -9,6 +9,10 @@ class BlastsController < ApplicationController
     end
   end
 
+  def wantmore_redirect
+    redirect_to root_path
+  end
+
   def wantmore2
   	@blast = Blast.find_by_marketing_id(params[:id])
 

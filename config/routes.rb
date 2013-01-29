@@ -59,15 +59,15 @@ Grapevine::Application.routes.draw do
   match '/signup-now', :to => 'static_pages#signup', as: 'signup_now' 
   get '/send_to_site', :to => 'static_pages#send_to_site', as: 'send_to_site'
 
-  # Landing pages for email blasting
-  get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'
-  get '/wantmore3/:id', to: 'blasts#wantmore3', as: 'wantmore3'
-  get '/wantmore4/:id', to: 'blasts#wantmore4', as: 'wantmore4'
-  get '/wantmore5/:id', to: 'blasts#wantmore5', as: 'wantmore5'
-  get '/wantmore6/:id', to: 'blasts#wantmore6', as: 'wantmore6'
-  get '/wantmore7/:id', to: 'blasts#wantmore7', as: 'wantmore7'
-  get '/wantmore8/:id', to: 'blasts#wantmore8', as: 'wantmore8'
-  get '/wantmore8/:id', to: 'blasts#wantmore8', as: 'wantmore9'
+  # Landing pages for email blasting (deprecated can be deleted in future)
+  get '/wantmore2/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore3/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore4/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore5/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore6/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore7/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore8/:id', to: 'blasts#wantmore_redirect'
+  get '/wantmore8/:id', to: 'blasts#wantmore_redirect'
   get '/follow_up/:id', to: 'blasts#follow_up', as: 'follow_up'
 
   # For Grapevine internal team use
