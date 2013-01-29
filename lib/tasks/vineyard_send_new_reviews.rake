@@ -9,12 +9,15 @@ namespace :vineyard do
 			user_id = user.id
 
 			# Set everything needed for review alert
-			# use this in production
-			# email = user.email
 
-			## remove later, only for testing email
-			email = 'info+test@pickgrapevine.com'
-			
+			if Rails.env.development?
+				# for testing locally
+				email = 'info+test@pickgrapevine.com'
+			else
+				# for production and staging environments
+				email = user.email
+			end
+
 			comment = review.comment
 			rating = review.rating.to_f
 			source = review.source.name
@@ -53,7 +56,7 @@ namespace :vineyard do
 
 					# Alert us about users who have maxed out
 					if review_count == 5
-						DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}")
+						DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}"})
 						NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
 					end
 				end

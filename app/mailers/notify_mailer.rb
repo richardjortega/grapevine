@@ -14,9 +14,8 @@ class NotifyMailer < ActionMailer::Base
     @plan_type = plan_type
     @review_count = review_count
 
-    #host = 'localhost:3000'
     # needs to change to normal production path once setup
-    host = 'staging.pickgrapevine.com'
+    host = root_url
     q_full_review = URI.encode_www_form('link' => location_link, 'kme' => 'Clicked Read Full Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
     @location_link = "http://#{host}/send_to_site?#{q_full_review}"
 
