@@ -263,6 +263,7 @@ header#global-header .global-nav li.sign-in > a {
 }
 header#global-header .global-nav li.sign-in > a:hover {
     background:darken($purple, 5%);
+    cursor: pointer;
 }
 
 
