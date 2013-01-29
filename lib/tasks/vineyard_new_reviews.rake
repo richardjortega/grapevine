@@ -4,40 +4,40 @@ require_relative '../vineyard/googleplus.rb'
 require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
 
-namespace :get_new_reviews do
+namespace :vineyard do
 	desc "Check All Locations for New Reviews Across All Sites"
-	task :all => :environment do
+	task 'get_new_reviews:all' => :environment do
 		job_start_time = Time.now
 		puts "Checking for new reviews across all review sites"
 		
 		opentable_start_time = Time.now
 		puts "Checking for new reviews at OpenTable"
-		Rake::Task['get_new_reviews:opentable'].reenable
-		Rake::Task['get_new_reviews:opentable'].invoke
+		Rake::Task['vineyard:get_new_reviews:opentable'].reenable
+		Rake::Task['vineyard:get_new_reviews:opentable'].invoke
 		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
 
 		yelp_start_time = Time.now
 		puts "Checking for new reviews at Yelp"
-		Rake::Task['get_new_reviews:yelp'].reenable
-		Rake::Task['get_new_reviews:yelp'].invoke
+		Rake::Task['vineyard:get_new_reviews:yelp'].reenable
+		Rake::Task['vineyard:get_new_reviews:yelp'].invoke
 		puts "Total check time: #{((Time.now - yelp_start_time)/60.0)} minutes"
 
 		google_start_time = Time.now
 		puts "Checking for new reviews at Google"
-		Rake::Task['get_new_reviews:google'].reenable
-		Rake::Task['get_new_reviews:google'].invoke
+		Rake::Task['vineyard:get_new_reviews:google'].reenable
+		Rake::Task['vineyard:get_new_reviews:google'].invoke
 		puts "Total check time: #{((Time.now - google_start_time)/60.0)} minutes"
 
 		tripadvisor_start_time = Time.now
 		puts "Checking for new reviews at TripAdvisor"
-		Rake::Task['get_new_reviews:tripadvisor'].reenable
-		Rake::Task['get_new_reviews:tripadvisor'].invoke
+		Rake::Task['vineyard:get_new_reviews:tripadvisor'].reenable
+		Rake::Task['vineyard:get_new_reviews:tripadvisor'].invoke
 		puts "Total check time: #{((Time.now - tripadvisor_start_time)/60.0)} minutes"
 
 		opentable_start_time = Time.now
 		puts "Checking for new reviews at UrbanSpoon"
-		Rake::Task['get_new_reviews:urbanspoon'].reenable
-		Rake::Task['get_new_reviews:urbanspoon'].invoke
+		Rake::Task['vineyard:get_new_reviews:urbanspoon'].reenable
+		Rake::Task['vineyard:get_new_reviews:urbanspoon'].invoke
 		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
 
 		puts "Finished checking for new reviews across all review sites"
@@ -45,7 +45,7 @@ namespace :get_new_reviews do
 	end
 	
 	desc "Check Yelp for new reviews"
-	task :yelp => :environment do
+	task 'get_new_reviews:yelp' => :environment do
 		puts "Getting all associated source_location_uris of Yelp"
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
@@ -78,7 +78,7 @@ namespace :get_new_reviews do
 	end
 	
 	desc "Check OpenTable for new reviews"
-	task :opentable => :environment do
+	task 'get_new_reviews:opentable' => :environment do
 		puts "Getting all associated source_location_uris of OpenTable"
 		source = Source.find_by_name('opentable')
 		source_vines = source.vines
@@ -107,7 +107,7 @@ namespace :get_new_reviews do
 	end
 
 	desc "Check GooglePlus for new reviews"
-	task :google => :environment do
+	task 'get_new_reviews:google' => :environment do
 		puts "Getting all associated source_location_uris of Google"
 		source = Source.find_by_name('googleplus')
 		source_vines = source.vines
@@ -137,7 +137,7 @@ namespace :get_new_reviews do
 	end
 
 	desc "Check UrbanSpoon for new reviews"
-	task :urbanspoon => :environment do
+	task 'get_new_reviews:urbanspoon' => :environment do
 		puts "Getting all associated source_location_uris of UrbanSpoon"
 		source = Source.find_by_name('urbanspoon')
 		source_vines = source.vines
@@ -166,7 +166,7 @@ namespace :get_new_reviews do
 	end
 
 	desc "Check TripAdvisor for new reviews"
-	task :tripadvisor => :environment do
+	task 'get_new_reviews:tripadvisor' => :environment do
 		puts "Getting all associated source_location_uris of TripAdvisor"
 		source = Source.find_by_name('tripadvisor')
 		source_vines = source.vines

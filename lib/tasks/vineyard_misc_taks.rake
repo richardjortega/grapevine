@@ -4,13 +4,27 @@ namespace :vineyard do
 	desc 'Run everything in sequence'
 	task :harvest => :environment do
 		# Check to verify if it's first of the month, if it is reset all user's review count to 0
-		if Date.today
+		if Date.today == Date.today.beginning_of_month
+			Rake::Task['vineyard:reset_users_review_counts'].reenable
+			Rake::Task['vineyard:reset_users_review_counts'].invoke
 		end
 
-		# Check for new source_location_uris for any locations that don't have any
-		Rake::Task['get_source_location_uri:all'].reenable
-		Rake::Task['get_source_location_uri:all'].invoke
+		# Daily reseting of API tallies
+		Rake::Task['vineyard:reset_daily_api_count'].reenable
+		Rake::Task['vineyard:reset_daily_api_count'].invoke
 
+		# Check for new source_location_uris for any locations that don't have any
+		# You should run 'vineyard:get_source_location_uri:all' the first time on the DB, then daily check thereafter
+		Rake::Task['vineyard:get_source_location_uri:daily_check'].reenable
+		Rake::Task['vineyard:get_source_location_uri:daily_check'].invoke
+
+		# Get new reviews for all the locations
+		Rake::Task['vineyard:get_new_reviews:all'].reenable
+		Rake::Task['vineyard:get_new_reviews:all'].invoke
+
+		# Send all new reviews to corresponding location's user email
+		Rake::Task['vineyard:send_new_reviews'].reenable
+		Rake::Task['vineyard:send_new_reviews'].invoke
 
 	end
 

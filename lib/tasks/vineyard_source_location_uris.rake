@@ -4,10 +4,10 @@ require_relative '../vineyard/googleplus.rb'
 require_relative '../vineyard/urbanspoon.rb'
 require_relative '../vineyard/tripadvisor.rb'
 
-namespace :get_source_location_uri do
+namespace :vineyard do
 	
 	desc 'Find all source_location_uris for all locations that do not have vines'
-	task :all => :environment do
+	task 'get_source_location_uri:all' => :environment do
 		count = Location.all.count
 		puts "There are #{count} locations we will check for source_location_uris"
 		Location.all.each do |location|
@@ -27,7 +27,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find all source_location_uris for all locations that do not have vines, except ignore the last uri check date'
-	task 'all:ignore_check_date' => :environment do
+	task 'get_source_location_uri:all:ignore_check_date' => :environment do
 		count = Location.all.count
 		puts "There are #{count} locations we will check for source_location_uris"
 		Location.all.each do |location|
@@ -44,7 +44,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
-	task :daily_check => :environment do
+	task 'get_source_location_uri:daily_check' => :environment do
 		count = Location.where('created_at >= ?', Date.yesterday.beginning_of_day).count
 		puts "There are #{count} locations we will check for source_location_uris."
 		next if count == 0
@@ -65,7 +65,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find all source_location_uris for one location that does not have vines'
-	task :one_for_all => :environment do
+	task 'get_source_location_uri:one_for_all' => :environment do
 		location = Location.find(ENV["LOCATION_ID"])
 
 		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
@@ -81,7 +81,7 @@ namespace :get_source_location_uri do
 
 
 	desc 'Find Yelp ID# and associate it to Location: term, lat, long (Assumes 1st is right)'
-	task :yelp, [:location_id, :term, :lat, :long] => :environment do |t, args|
+	task 'get_source_location_uri:yelp', [:location_id, :term, :lat, :long] => :environment do |t, args|
 		source = Source.find_by_name('yelp')
 		source_id = source.id
 		location_id = args[:location_id]
@@ -98,7 +98,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find Google ID# : term, lat, long (Assumes 1st is right)'
-	task :google, [:location_id, :term, :lat, :long] => :environment do |t, args|
+	task 'get_source_location_uri:google', [:location_id, :term, :lat, :long] => :environment do |t, args|
 		source = Source.find_by_name('googleplus')
 		source_id = source.id
 		location_id = args[:location_id]
@@ -115,7 +115,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find UrbanSpoon ID# : term, street_address, city, state, zip, lat, long'
-	task :urbanspoon, [:location_id, :term, :street_address, :city, :state, :zip, :lat, :long] => :environment do |t, args|
+	task 'get_source_location_uri:urbanspoon', [:location_id, :term, :street_address, :city, :state, :zip, :lat, :long] => :environment do |t, args|
 		source = Source.find_by_name('urbanspoon')
 		source_id = source.id
 		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
@@ -137,7 +137,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find TripAdvisor ID# : term, street_address, city, state, zip'
-	task :tripadvisor, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
+	task 'get_source_location_uri:tripadvisor', [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('tripadvisor')
 		source_id = source.id
 		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
@@ -157,7 +157,7 @@ namespace :get_source_location_uri do
 	end
 
 	desc 'Find OpenTable ID# : term, street_address, city, state, zip'
-	task :opentable, [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
+	task 'get_source_location_uri:opentable', [:location_id, :term, :street_address, :city, :state, :zip] => :environment do |t, args|
 		source = Source.find_by_name('opentable')
 		source_id = source.id
 		args.with_defaults(:street_address => "", :city => "", :state => "", :zip => "")
@@ -198,32 +198,32 @@ namespace :get_source_location_uri do
 
 		unless existing_vines.include?('yelp')
 			puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
-			Rake::Task['get_source_location_uri:yelp'].reenable
-			Rake::Task['get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
+			Rake::Task['vineyard:get_source_location_uri:yelp'].reenable
+			Rake::Task['vineyard:get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
 		end
 
 		unless existing_vines.include?('googleplus')
 			puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
-			Rake::Task['get_source_location_uri:google'].reenable
-			Rake::Task['get_source_location_uri:google'].invoke(location_id, term, lat, long)
+			Rake::Task['vineyard:get_source_location_uri:google'].reenable
+			Rake::Task['vineyard:get_source_location_uri:google'].invoke(location_id, term, lat, long)
 		end
 
 		unless existing_vines.include?('urbanspoon')
 			puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
-			Rake::Task['get_source_location_uri:urbanspoon'].reenable
-			Rake::Task['get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
+			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].reenable
+			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
 		end
 
 		unless existing_vines.include?('tripadvisor')
 			puts "Didn't find a TripAdvisor source_location_uri for #{term}, finding it now..."			
-			Rake::Task['get_source_location_uri:tripadvisor'].reenable
-			Rake::Task['get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
+			Rake::Task['vineyard:get_source_location_uri:tripadvisor'].reenable
+			Rake::Task['vineyard:get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
 		end
 
 		unless existing_vines.include?('opentable')
 			puts "Didn't find a OpenTable source_location_uri for #{term}, finding it now..."			
-			Rake::Task['get_source_location_uri:opentable'].reenable
-			Rake::Task['get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
+			Rake::Task['vineyard:get_source_location_uri:opentable'].reenable
+			Rake::Task['vineyard:get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
 		end
 	end
 
@@ -232,6 +232,4 @@ namespace :get_source_location_uri do
 	end
 
 
-end
-
-	
+end	
