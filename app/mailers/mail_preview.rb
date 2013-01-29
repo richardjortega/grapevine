@@ -11,8 +11,8 @@ class MailPreview < MailView
 		source = 'urbanspoon'
 		location = "Bob's Burgers"
 		location_link = 'http://www.bobsburgers.com'
-		review_count = 5
-		plan_type = 'paid'
+		review_count = 0
+		plan_type = 'free'
 		NotifyMailer.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 	end
 

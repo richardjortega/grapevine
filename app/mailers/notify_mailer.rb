@@ -18,19 +18,19 @@ class NotifyMailer < ActionMailer::Base
 
     if plan_type == 'free'
       case @review_count
-        when 1
+        when 0
           @review_message = 'Your first review this month'
           @review_progress_bar = '4-remaining.png'
-        when 2
+        when 1
           @review_message = 'Thats 2 two reviews so far.'
           @review_progress_bar = '3-remaining.jpg'
-        when 3
+        when 2
           @review_message = 'You have 2 reviews left.'
           @review_progress_bar = '2-remaining.jpg'
-        when 4
+        when 3
           @review_message = 'Oh, snap. You have 1 review remaining.'
           @review_progress_bar = '1-remaining.jpg'
-        when 5
+        when 4
           @review_message = 'Sad Panda. You have reached your limit.'
           @review_progress_bar = '0-remaining.jpg'
       end
