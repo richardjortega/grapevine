@@ -11,10 +11,12 @@ class NotifyMailer < ActionMailer::Base
     @rating = rating
     @source = source
     @location = location
-    @location_link = location_link
-    @review_count = review_count
     @plan_type = plan_type
+    @review_count = review_count
 
+    host = 'localhost:3000'
+    q_full_review = URI.encode_www_form('link' => location_link, 'kme' => 'Clicked Read Full Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+    @location_link = "http://#{host}/send_to_site?#{q_full_review}"
 
     if plan_type == 'free'
       case @review_count
@@ -39,23 +41,37 @@ class NotifyMailer < ActionMailer::Base
     if source == 'yelp'
         @source = "Yelp"
         @logo = "http://www.pickgrapevine.com/assets/email/yelp-clear.png"
-        @response_link = "http://biz.yelp.com"
+        respond_link = "http://biz.yelp.com"
+        q_respond = URI.encode_www_form('link' => respond_link, 'kme' => 'Clicked Respond to Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+        @response_link = "http://#{host}/send_to_site?#{q_respond}"
+      
       elsif source == 'opentable'
         @source = "Opentable"
         @logo = "http://www.pickgrapevine.com/assets/email/opentable-clear.png"
-        @response_link = "http://www.otrestaurant.com"
+        respond_link = "http://www.otrestaurant.com"
+        q_respond = URI.encode_www_form('link' => respond_link, 'kme' => 'Clicked Respond to Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+        @response_link = "http://#{host}/send_to_site?#{q_respond}"
+      
       elsif source == 'google'
         @source = "Google Places"
         @logo = "http://www.pickgrapevine.com/assets/pics/google-clear.png"
-        @response_link = "http://www.google.com/placesforbusiness"
+        respond_link = "http://www.google.com/placesforbusiness"
+        q_respond = URI.encode_www_form('link' => respond_link, 'kme' => 'Clicked Respond to Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+        @response_link = "http://#{host}/send_to_site?#{q_respond}"
+      
       elsif source == 'tripadvisor'
         @source = "Tripadvisor"
         @logo = "http://www.pickgrapevine.com/assets/email/tripadvisor-clear.png"
-        @response_link = "http://www.tripadvisor.com/Owners"
+        respond_link = "http://www.tripadvisor.com/Owners"
+        q_respond = URI.encode_www_form('link' => respond_link, 'kme' => 'Clicked Respond to Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+        @response_link = "http://#{host}/send_to_site?#{q_respond}"
+      
       elsif source == 'urbanspoon'
         @source = "Urbanspoon"
         @logo = "http://www.pickgrapevine.com/assets/email/urbanspoon-clear.png"
-        @response_link = "http://www.urbanspoon.com/u/signin"
+        respond_link = "http://www.urbanspoon.com/u/signin"
+        q_respond = URI.encode_www_form('link' => respond_link, 'kme' => 'Clicked Respond to Review', 'kmi' => email, 'km_plan_type' => plan_type, 'source' => "#{source.to_s.titleize}")
+        @response_link = "http://#{host}/send_to_site?#{q_respond}"
 
       else
         return false

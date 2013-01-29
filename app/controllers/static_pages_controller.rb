@@ -52,6 +52,19 @@ class StaticPagesController < ApplicationController
   def privacy
   end
 
+
+
+  def send_to_site
+    if params[:kme] == 'Clicked Read Full Review'
+      DelayedKiss.record(params[:kmi], 'Clicked Read Full Review', {'Source' => "#{params[:source]}", 
+                                      'Plan_Type' => "#{params[:km_plan_type]}", 'Link' => "#{params[:link]}" }) 
+    else params[:kme] == 'Clicked Respond to Review'
+      DelayedKiss.record(params[:kmi], 'Clicked Respond to Review', {'Source' => "#{params[:source]}", 
+                                      'Plan_Type' => "#{params[:km_plan_type]}", 'Link' => "#{params[:link]}" }) 
+    end
+    redirect_to params[:link]
+  end
+
   def review_alert
 
     # Associate all params to appropiate 

@@ -17,6 +17,7 @@ Grapevine::Application.routes.draw do
   devise_for  :users, :controllers => {:registrations => "registrations"}
   resources   :subscriptions
   resources   :wantmore,    only: [:show], :controller => 'blasts'
+  resources   :send_to_site, only: [:show], :controller => 'static_pages'
 
   # Order is important!!! don't  switch around 
 
@@ -56,6 +57,7 @@ Grapevine::Application.routes.draw do
   post '/static_pages/submit_contact_us', to: 'static_pages#submit_contact_us'
   match '/blog', :to => redirect('http://pickgrapevine.tumblr.com') 
   match '/signup-now', :to => 'static_pages#signup', as: 'signup_now' 
+  get '/send_to_site', :to => 'static_pages#send_to_site', as: 'send_to_site'
 
   # Landing pages for email blasting
   get '/wantmore2/:id', to: 'blasts#wantmore2', as: 'wantmore2'

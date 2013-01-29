@@ -8,11 +8,11 @@ class MailPreview < MailView
 		animi tenetur. Expedita perferendis asperiores 
 		voluptatum maxime unde.'
 		rating = 4.0
-		source = 'urbanspoon'
-		location = "Bob's Burgers"
-		location_link = 'http://www.bobsburgers.com'
-		review_count = 1
-		plan_type = 'free'
+		source = 'tripadvisor'
+		location = "Larkin's on the River"
+		location_link = 'http://www.tripadvisor.com/Restaurant_Review-g54258-d829361-Reviews-Larkin_s_On_The_River-Greenville_South_Carolina.html'
+		review_count = 2
+		plan_type = 'paid'
 		NotifyMailer.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 	end
 
