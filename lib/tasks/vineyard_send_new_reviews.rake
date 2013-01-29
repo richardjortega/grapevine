@@ -30,6 +30,7 @@ namespace :vineyard do
 				plan_type = 'free'
 				if review_count <= 4
 					# Send the review
+					puts "Sending a review alert to #{location} to #{email}"
 					NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 
 					# mark review sent
@@ -44,6 +45,7 @@ namespace :vineyard do
 
 					# Don't send the review
 					# Mark review 'archive'
+					puts "Not sending a review because user's review count has hit the max"
 					review.update_column(:status, 'archive')
 					review.save!
 				end
@@ -51,6 +53,7 @@ namespace :vineyard do
 				plan_type = 'paid'
 				# Handles people with paid plan_types
 				# Send the review
+				puts "Sending a review alert to #{location} to #{email}"
 				NotifyMailer.delay.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 
 				# mark review sent
