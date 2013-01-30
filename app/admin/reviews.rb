@@ -1,5 +1,14 @@
 ActiveAdmin.register Review do
 	#actions :index, :show
+	batch_action :mark_new, :confirm => "Are you sure you want to mark all reviews as new again? They will be sent in next blast run." do |selection|
+		Review.find(selection).each do |review|
+			review.status = 'new'
+			review.status_updated_at = Time.now
+			review.save!
+		end
+		redirect_to :back  #this ensures any current filter stays active
+	end
+
 	scope :all, :default => true
 	scope :today_post_date
 	scope :yesterday_post_date
