@@ -1,18 +1,14 @@
 # Send all new reviews found for locations
 
 namespace :vineyard do
-	desc 'Send new reviews, set email to info@, blast_time is still 6.hours.from_now'
-	task "send_new_reviews:test_email_send" do
-		Rake::Task['vineyard:send_new_reviews'].invoke('info+test@pickgrapevine.com',nil)
-	end
-
 	desc 'Send new reviews, production, send now'
 	task 'send_new_reviews:now' do
-		Rake::Task['vineyard:send_new_reviews'].invoke(nil, true)
+		Rake::Task['vineyard:send_new_reviews'].invoke(true)
 	end
 
 	desc 'Send new reviews for all locations'
-	task :send_new_reviews, [:email, :run_now] => :environment do |t, args|
+	task :send_new_reviews, [:run_now] => :environment do |t, args|
+		args.with_defaults(:run_now => false)
 		new_reviews = Review.where('status = ?', 'new').order('created_at DESC')
 		if new_reviews.empty?
 			puts "GV Review Alert: No new reviews found from yesterday. No sending needed."
@@ -22,11 +18,10 @@ namespace :vineyard do
 			# User assumes only one user per location (needs refactoring for multi-user)
 			user = review.location.users.first
 			user_id = user.id
+			email = user.email
 
 			# Set args
-			args.with_defaults(:email => user.email, :run_now => false)
 			run_now = args[:run_now]
-			email = args[:email]
 
 			# Change user's review_count to zero if nil
 			user.review_count = 0 if user.review_count.nil?
