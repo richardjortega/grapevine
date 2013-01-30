@@ -1,28 +1,32 @@
 # Send all new reviews found for locations
 
 namespace :vineyard do
+	desc 'Send new reviews, set email to info@, blast_time is still 6.hours.from_now'
+	task "send_new_reviews:test_email_send" do
+		Rake::Task['vineyard:send_new_reviews'].invoke('info+test@pickgrapevine.com',nil)
+	end
+
+	desc 'Send new reviews, production, send now'
+	task 'send_new_reviews:now' do
+		Rake::Task['vineyard:send_new_reviews'].invoke(nil, true)
+	end
+
 	desc 'Send new reviews for all locations'
-	task :send_new_reviews => :environment do
-		Review.find(:all, :order => 'created_at').each do |review|
+	task :send_new_reviews, [:email, :run_now] => :environment do |t, args|
+		new_reviews = Review.where('status = ?', 'new').order('created_at DESC')
+		if new_reviews.empty?
+			puts "GV Review Alert: No new reviews found from yesterday. No sending needed."
+			next
+		end
+		new_reviews.each do |review|
 			# User assumes only one user per location (needs refactoring for multi-user)
 			user = review.location.users.first
 			user_id = user.id
 
-			# Set everything needed for review alert
-
-			if Rails.env.development?
-				# for testing locally
-				email = 'info+test@pickgrapevine.com'
-			else
-				# for production and staging environments
-				email = user.email
-			end
-
-			comment = review.comment
-			rating = review.rating.to_f
-			source = review.source.name
-			location = review.location.name
-			location_link = review.url
+			# Set args
+			args.with_defaults(:email => user.email, :run_now => false)
+			run_now = args[:run_now]
+			email = args[:email]
 
 			# Change user's review_count to zero if nil
 			user.review_count = 0 if user.review_count.nil?
@@ -34,22 +38,23 @@ namespace :vineyard do
 				if review_count <= 4
 					# increment user's review
 					review_count += 1
+					user.save!
 
 					# Send the review
-					puts "Sending a review alert to #{location} to #{email}"
-					NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
+					send_new_review(email, review, review_count, plan_type, run_now)
+					
 
 					# mark review sent
 					review.status = 'sent'
 					review.status_updated_at = Time.now
 					review.save!
-					user.save!
+
 				else
 					# Handles people who hit their max review count
 
 					# Don't send the review
 					# Mark review 'archive'
-					puts "Not sending a review because user's review count has hit the max"
+					puts "GV Review Alert: Not sending a review because user's review count has hit the max"
 					review.status = 'archive'
 					review.status_updated_at = Time.now
 					review.save!
@@ -61,22 +66,36 @@ namespace :vineyard do
 					end
 				end
 			else
-				plan_type = 'paid'
 				# Handles people with paid plan_types
+				plan_type = 'paid'
 
 				# increment user's review
 				review_count += 1
+				user.save!
 
 				# Send the review
-				puts "Sending a review alert to #{location} to #{email}"
-				NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
+				send_new_review(email, review, review_count, plan_type, run_now)
 
 				# mark review sent
 				review.status = 'sent'
 				review.status_updated_at = Time.now
 				review.save!
-				user.save!
 			end
+		end
+	end
+
+	# my methods of madness
+	def send_new_review(email, review, review_count, plan_type, run_now)
+		comment = review.comment
+		rating = review.rating.to_f
+		source = review.source.name
+		location = review.location.name
+		location_link = review.url
+		puts "GV Review Alert: Sending a review alert to #{location} to #{email}"
+		if run_now == true
+			NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
+		else
+			NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 		end
 	end
 end
