@@ -33,7 +33,7 @@ namespace :vineyard do
 				plan_type = 'free'
 				if review_count <= 4
 					# increment user's review
-					user.review_count += 1
+					review_count += 1
 
 					# Send the review
 					puts "Sending a review alert to #{location} to #{email}"
@@ -65,7 +65,7 @@ namespace :vineyard do
 				# Handles people with paid plan_types
 
 				# increment user's review
-				user.review_count += 1
+				review_count += 1
 
 				# Send the review
 				puts "Sending a review alert to #{location} to #{email}"
