@@ -8,7 +8,7 @@ namespace :vineyard do
 	desc "Check All Locations for New Reviews Across All Sites"
 	task 'get_new_reviews:all' => :environment do
 		job_start_time = Time.now
-		puts "Checking for new reviews across all review sites"
+		puts "GV Review Alert: Checking for new reviews across all review sites"
 		
 		opentable_start_time = Time.now
 		puts "Checking for new reviews at OpenTable"
@@ -40,7 +40,7 @@ namespace :vineyard do
 		Rake::Task['vineyard:get_new_reviews:urbanspoon'].invoke
 		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
 
-		puts "Finished checking for new reviews across all review sites"
+		puts "GV Review Alert: Finished checking for new reviews across all review sites"
 		puts "Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
 	end
 	
@@ -54,8 +54,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				yesterday = Date.yesterday
-				latest_review = {:post_date => yesterday, :comment => '' }
+				default_post_date = Date.today - 2
+				latest_review = {:post_date => default_post_date, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -73,7 +73,7 @@ namespace :vineyard do
 				add_new_review(location, source, review)
 				review_count += 1
 			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 	
@@ -87,8 +87,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				yesterday = Date.yesterday
-				latest_review = {:post_date => yesterday, :comment => '' }
+				default_post_date = Date.today - 2
+				latest_review = {:post_date => default_post_date, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -102,7 +102,7 @@ namespace :vineyard do
 				add_new_review(location, source, review)
 				review_count += 1
 			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 
@@ -116,8 +116,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				yesterday = Date.yesterday
-				latest_review = {:post_date => yesterday, :comment => '' }
+				default_post_date = Date.today - 2
+				latest_review = {:post_date => default_post_date, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -131,7 +131,7 @@ namespace :vineyard do
 				add_new_review(location, source, review)
 				review_count += 1
 			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 
 	end
@@ -146,8 +146,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				yesterday = Date.yesterday
-				latest_review = {:post_date => yesterday, :comment => '' }
+				default_post_date = Date.today - 2
+				latest_review = {:post_date => default_post_date, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -161,7 +161,7 @@ namespace :vineyard do
 				add_new_review(location, source, review)
 				review_count += 1
 			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 
@@ -175,8 +175,8 @@ namespace :vineyard do
 			location = vine.location
 			reviews = vine.location.reviews.where('source_id = ?', source.id)
 			if reviews.empty?
-				yesterday = Date.yesterday
-				latest_review = {:post_date => yesterday, :comment => '' }
+				default_post_date = Date.today - 2
+				latest_review = {:post_date => default_post_date, :comment => '' }
 			else
 				last_review = reviews.order('post_date DESC').first
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
@@ -190,7 +190,7 @@ namespace :vineyard do
 				add_new_review(location, source, review)
 				review_count += 1
 			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
 		end
 	end
 
