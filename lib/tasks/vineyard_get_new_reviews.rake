@@ -80,7 +80,7 @@ namespace :vineyard do
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 	
 	desc "Check OpenTable for new reviews"
@@ -119,7 +119,7 @@ namespace :vineyard do
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check GooglePlus for new reviews"
@@ -158,7 +158,7 @@ namespace :vineyard do
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check UrbanSpoon for new reviews"
@@ -197,7 +197,7 @@ namespace :vineyard do
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check TripAdvisor for new reviews"
@@ -236,7 +236,7 @@ namespace :vineyard do
 			end
 			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	# Methods!!!
