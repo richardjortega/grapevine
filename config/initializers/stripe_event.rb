@@ -167,14 +167,8 @@ private
 				subscription.save!
 			end
 
-			case customer_subscription.status
-			when 'unpaid'
-
-				
-			end
-
-
-			subscription.update_attributes({:status_info 			=> customer_subscription.status,
+			subscription.update_attributes({:status 				=> true,
+											:status_info 			=> customer_subscription.status,
 											:start_date				=> customer_subscription.start,
 											:current_period_start	=> customer_subscription.current_period_start,
 											:current_period_end		=> customer_subscription.current_period_end })
