@@ -210,11 +210,11 @@ namespace :vineyard do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			if response.nil?
-				puts "Didn't find any new reviews for #{location.name}"
+				puts "GV Review Alert: Didn't find any new reviews for #{location.name}"
 				next
 			end
 			if response.empty?
-				puts "Didn't find any new reviews for #{location.name}"
+				puts "GV Review Alert: Didn't find any new reviews for #{location.name}"
 				next
 			end
 			response.each do |review|
