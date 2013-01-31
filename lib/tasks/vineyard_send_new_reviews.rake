@@ -103,11 +103,11 @@ namespace :vineyard do
 		source = review.source.name
 		location = review.location.name
 		location_link = review.url
-		puts "GV Review Alert: Sending a review alert to #{location} to #{email}"
 		if run_now == true
 			NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 		else
 			NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 		end
+		puts "GV Review Alert: Sent a #{source.capitalize} review alert to #{location} to #{email}"
 	end
 end
