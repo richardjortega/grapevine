@@ -28,6 +28,13 @@ class Yelp
 		
 		location_id = nil
 		# Check each location
+
+		# Handle Yelp API query limit
+		if response['error'].present?
+			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
+			return
+		end
+
 		response['businesses'].each do |result|
 			#Check lat and long against lat and long of resulted
 			result_lat = result['location']['coordinate']['latitude']
@@ -61,6 +68,7 @@ class Yelp
 		url = response["url"]
 
 		new_reviews = []
+		return if response['reviews'].nil?
 		response["reviews"].each do |review|
 			review_date = Time.at(review["time_created"]).to_date
 			review_comment = review["excerpt"].strip
