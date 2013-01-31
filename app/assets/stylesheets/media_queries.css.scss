@@ -1,0 +1,66 @@
+/* Media Queries */
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+
+/* Medium desktop */
+@media (min-width: 980px) and (max-width:1199px) {
+	.wrapper, #main-container {
+		width:90%;
+	}
+	section.section-panel {
+		&.home-panel {
+			&.track, &.how, &.last {
+				background-size:50% auto;
+				height:auto;
+			}
+		}
+	}
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 481px) and (max-width: 979px) {
+	.wrapper, #main-container {
+		width:90%;
+	}
+	section.section-panel {
+		&.home-panel {
+			&.track, &.how, &.last {
+				background-size:84% auto;
+				height:auto;
+				h3, p {
+					width:auto;
+					left:0;
+				}
+			}
+			&.track {
+				p {
+					margin-bottom: 47%;
+				}
+			}
+			&.how {
+				p { margin-bottom:54%;}
+			}
+			&.last {
+				background-size:auto;
+				background-position:bottom right;
+				h3, p {
+					width:43%;
+				}
+			}
+		}
+	}
+}
+ 
+/* Landscape phone to portrait tablet */
+// @media (max-width: 767px) { 
+
+// }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+}

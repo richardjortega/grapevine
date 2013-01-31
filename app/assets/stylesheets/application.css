@@ -12,4 +12,5 @@
  *= require active_admin
  *= require boilerplate
  *= require custom
+ *= require media_queries
 */
