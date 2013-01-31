@@ -31,9 +31,11 @@ namespace :vineyard do
 			if user.plan.identifier == 'gv_free'
 				plan_type = 'free'
 				if review_count <= 4
+					debugger
 					# increment user's review
 					review_count += 1
 					user.save!
+					debugger
 
 					# Send the review
 					send_new_review(email, review, review_count, plan_type, run_now)

@@ -14,7 +14,8 @@ ActiveAdmin.register Subscription do
   	column :stripe_customer_token
   	column :last_four
   	column :next_bill_on
-  	column :card_expiration
+  	column :exp_month
+    column :exp_year
   	column :current_period_start
   	column :current_period_end
   	column :trial_start

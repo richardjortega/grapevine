@@ -1,5 +1,4 @@
 ActiveAdmin.register User do
-	actions :index, :show, :edit, :destroy
 	scope :no_stripe_customer_token
 	scope :reached_max_review_count
 	index do
@@ -29,7 +28,19 @@ ActiveAdmin.register User do
 			"#{user.plan.identifier}"
 		end
 		column :review_count
+		column :multi_location
 		column :phone_number
 		default_actions
+	end
+
+	form do |f|
+		f.inputs 'Main' do
+			f.input :first_name
+			f.input :last_name
+			f.input :email
+			f.input :review_count
+			f.input :multi_location
+		end
+		f.buttons
 	end
 end

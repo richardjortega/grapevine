@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
                   :remember_me, 
                   :phone_number,
                   :location,
-                  :locations_attributes
+                  :locations_attributes,
+                  :review_count
 
   validates_presence_of :email
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'Please enter a correct email'
