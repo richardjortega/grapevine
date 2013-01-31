@@ -25,56 +25,73 @@ namespace :vineyard do
 
 			# Change user's review_count to zero if nil
 			user.review_count = 0 if user.review_count.nil?
-			review_count = user.review_count
+		
+			# Check user's subscription status first
+			if user.subscription.status == true
+				# Check user's plan
+				# Handle active users that are on free plan
+				if user.plan.identifier == 'gv_free'
+					plan_type = 'free'
+					if user.review_count <= 4
+						debugger
+						# increment user's review
+						user.review_count += 1
+						user.save!
+						debugger
 
-			# Check user's plan first (check for free plans)
-			if user.plan.identifier == 'gv_free'
-				plan_type = 'free'
-				if review_count <= 4
-					debugger
+						# Send the review
+						send_new_review(email, review, user.review_count, plan_type, run_now)
+						
+						# mark review sent
+						review.status = 'sent'
+						review.status_updated_at = Time.now
+						review.save!
+
+					else
+						# Handles people who hit their max review count
+						# increment user's review
+						user.review_count += 1
+						user.save!
+						
+						# Don't send the review
+						# Mark review 'archive'
+						puts "GV Review Alert: Not sending a review because user's review count has hit the max"
+						review.status = 'archive'
+						review.status_updated_at = Time.now
+						review.save!
+
+						# Alert us about users who have maxed out
+						if user.review_count == 5
+							DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}"})
+							NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
+						end
+					end
+				else
+					# Handles active users that have paid and are not on free plan
+					plan_type = 'paid'
+
 					# increment user's review
-					review_count += 1
+					user.review_count += 1
 					user.save!
-					debugger
 
 					# Send the review
-					send_new_review(email, review, review_count, plan_type, run_now)
-					
+					send_new_review(email, review, user.review_count, plan_type, run_now)
 
 					# mark review sent
 					review.status = 'sent'
 					review.status_updated_at = Time.now
 					review.save!
-
-				else
-					# Handles people who hit their max review count
-
-					# Don't send the review
-					# Mark review 'archive'
-					puts "GV Review Alert: Not sending a review because user's review count has hit the max"
-					review.status = 'archive'
-					review.status_updated_at = Time.now
-					review.save!
-
-					# Alert us about users who have maxed out
-					if review_count == 5
-						DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}"})
-						NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
-					end
 				end
 			else
-				# Handles people with paid plan_types
-				plan_type = 'paid'
-
+				# Handles unpaid/canceled users
 				# increment user's review
-				review_count += 1
+				user.review_count += 1
 				user.save!
 
-				# Send the review
-				send_new_review(email, review, review_count, plan_type, run_now)
-
-				# mark review sent
-				review.status = 'sent'
+				# Don't send the review
+				# Mark review as 'archive'
+				puts "GV Review Alert: Not sending review to user because they are unpaid/canceled."
+				review.status = 'archive'
 				review.status_updated_at = Time.now
 				review.save!
 			end

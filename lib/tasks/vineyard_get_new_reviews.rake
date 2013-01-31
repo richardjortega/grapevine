@@ -46,7 +46,7 @@ namespace :vineyard do
 	
 	desc "Check Yelp for new reviews"
 	task 'get_new_reviews:yelp' => :environment do
-		puts "Getting all associated source_location_uris of Yelp"
+		puts "Find reviews for all locations who have Yelp"
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -79,7 +79,7 @@ namespace :vineyard do
 	
 	desc "Check OpenTable for new reviews"
 	task 'get_new_reviews:opentable' => :environment do
-		puts "Getting all associated source_location_uris of OpenTable"
+		puts "Find reviews for all locations who have OpenTable"
 		source = Source.find_by_name('opentable')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -108,7 +108,7 @@ namespace :vineyard do
 
 	desc "Check GooglePlus for new reviews"
 	task 'get_new_reviews:google' => :environment do
-		puts "Getting all associated source_location_uris of Google"
+		puts "Find reviews for all locations who have Google"
 		source = Source.find_by_name('googleplus')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -138,7 +138,7 @@ namespace :vineyard do
 
 	desc "Check UrbanSpoon for new reviews"
 	task 'get_new_reviews:urbanspoon' => :environment do
-		puts "Getting all associated source_location_uris of UrbanSpoon"
+		puts "Find reviews for all locations who have UrbanSpoon"
 		source = Source.find_by_name('urbanspoon')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -167,7 +167,7 @@ namespace :vineyard do
 
 	desc "Check TripAdvisor for new reviews"
 	task 'get_new_reviews:tripadvisor' => :environment do
-		puts "Getting all associated source_location_uris of TripAdvisor"
+		puts "Find reviews for all locations who have TripAdvisor"
 		source = Source.find_by_name('tripadvisor')
 		source_vines = source.vines
 		source_vines.each do |vine|
