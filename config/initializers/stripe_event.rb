@@ -87,6 +87,7 @@ private
 		
 		user = subscription.user
 		NotifyMailer.delay.unsuccessfully_charged(invoice, user)
+		NotifyMailer.delay.update_grapevine_team(user, "User failed a charge from Stripe")
 		rescue => e
 			puts "#{e.message}"
 		end
