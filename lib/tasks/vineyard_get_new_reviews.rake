@@ -63,12 +63,15 @@ namespace :vineyard do
 			puts "Searching for new reviews at: #{source_location_uri}"
 			run = Yelp.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
+			if response.nil?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			if response.empty?
 				puts "Didn't find any new reviews for #{location.name}"
 				next
 			end
 			review_count = 0
-			next if response.nil?
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -97,7 +100,14 @@ namespace :vineyard do
 			run = OpenTable.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
-			next if response.nil?
+			if response.nil?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
+			if response.empty?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -126,7 +136,14 @@ namespace :vineyard do
 			run = Google.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
-			next if response.nil?
+			if response.nil?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
+			if response.empty?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -156,7 +173,14 @@ namespace :vineyard do
 			run = UrbanSpoon.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
-			next if response.nil?
+			if response.nil?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
+			if response.empty?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
@@ -185,7 +209,14 @@ namespace :vineyard do
 			run = TripAdvisor.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
-			next if response.nil?
+			if response.nil?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
+			if response.empty?
+				puts "Didn't find any new reviews for #{location.name}"
+				next
+			end
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
