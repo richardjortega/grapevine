@@ -1,18 +1,12 @@
 <ul class="dashnav">
 	
-	<% if current_user.plan.identifier == 'gv_free' %>
+	<% if current_user.plan.identifier == 'gv_free' or 'gv_agency' %>
 		<li class="summary"><%= link_to "Summary", root_path %></li>
 		<li class="profile"><%= link_to "Profile", edit_user_registration_path %></li>
 		<li class="upgrade"><%= link_to 'Upgrade', upgrade_path %></li>
 	<% end %>
 	
-	<% if current_user.plan.identifier == 'gv_agency' %>
-		<li class="summary"><%= link_to "Summary", root_path %></li>
-		<li class="profile"><%= link_to "Profile", edit_user_registration_path %></li>
-		<li class="billing"><%= link_to 'Billing', billing_path %></li>
-	<% end %>
-	
-	<% if current_user.plan.identifier == 'gv_needs_to_pay' %>
+	<% if current_user.plan.identifier == 'gv_needs_to_pay' or current_user.subscription.status = false %>
 		<li class="upgrade"><%= link_to 'Upgrade', upgrade_path %></li>
 	<% end %>
 

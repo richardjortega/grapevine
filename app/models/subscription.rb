@@ -26,14 +26,20 @@ class Subscription < ActiveRecord::Base
   validates :stripe_customer_token,	presence: true
 
   
-  # Create new customer on Stripe and internal, 30 Day Free Trial Signups
-  def save_without_payment 
+  
+  def save_without_payment
+    # Create new customer on Stripe and internal for free account 
     customer = stripe_customer_without_credit_card 
   	self.stripe_customer_token	= customer.id
-  	# This will not create a stripe charge at all
-  	# This assigns user to Grapevine Alerts - Monthly Alerts
-  	self.status                 = true
-    self.status_info            = "active"
+
+    # Check for clients that need to pay immediately
+    if self.plan.identifier == 'gv_needs_to_pay'
+      self.status_info = 'unpaid'
+    else
+      self.status = true
+      self.status_info = 'active'
+    end
+
     self.start_date             = Date.today.beginning_of_day.to_i
   	user.save!
     save!
