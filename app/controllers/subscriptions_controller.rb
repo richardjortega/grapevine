@@ -42,6 +42,8 @@ class SubscriptionsController < ApplicationController
         
         NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
+      else
+        NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer updated their Stripe info")
       end
       redirect_to upgrade_thank_you_path
     else
