@@ -145,7 +145,6 @@ private
 	end
 
 	# Suspend user for not paying after 3 retries to credit card
-	# Same for trials that expire (on the 31st day)
 	def handle_unpaid_customer(customer_subscription)
 		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
 		subscription.status = false

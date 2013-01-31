@@ -55,6 +55,11 @@ class MailPreview < MailView
 		NotifyMailer.account_expired(user)
 	end
 
+	def account_canceled
+		user = User.first
+		NotifyMailer.account_expired(user)
+	end
+
 	def unsuccessfully_charged
 		event = Stripe::Event.retrieve('evt_0qZ5sFpYMa8bqG')
 		charge = event.data.object
