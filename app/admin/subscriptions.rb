@@ -1,5 +1,4 @@
 ActiveAdmin.register Subscription do
-  actions :index, :show
   index do
   	selectable_column
   	column :id

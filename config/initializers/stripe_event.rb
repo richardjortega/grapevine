@@ -31,8 +31,8 @@ StripeEvent.setup do
 	# Update customer's plan to whatever Stripe lets us know.
 	subscribe 'customer.subscription.updated' do |event|
 		case event.data.object.status
-			# when 'unpaid'
-			# 	handle_unpaid_customer event.data.object
+			when 'unpaid'
+			 	handle_unpaid_customer event.data.object
 			when 'canceled'
 				handle_canceled_customer event.data.object
 			else
@@ -167,6 +167,14 @@ private
 				subscription.plan = Plan.find_by_identifier(active_plan_id)
 				subscription.save!
 			end
+
+			case customer_subscription.status
+			when 'unpaid'
+
+				
+			end
+
+
 			subscription.update_attributes({:status_info 			=> customer_subscription.status,
 											:start_date				=> customer_subscription.start,
 											:current_period_start	=> customer_subscription.current_period_start,
