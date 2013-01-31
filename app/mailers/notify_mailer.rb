@@ -77,7 +77,7 @@ class NotifyMailer < ActionMailer::Base
       else
         return false
     end
-    
+    puts "GV Review Alert: Sent a #{source.capitalize} review alert to #{location} to #{email}"
     mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
     
     ### Track all review alerts sent
