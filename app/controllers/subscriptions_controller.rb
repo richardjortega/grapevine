@@ -31,7 +31,6 @@ class SubscriptionsController < ApplicationController
   def update
     @subscription = current_user.subscription
     current_plan = current_user.plan.identifier
-    debugger
     if @subscription.delay.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if params[:subscription][:plan] == 'gv_30'
