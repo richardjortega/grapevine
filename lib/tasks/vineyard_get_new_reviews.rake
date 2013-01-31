@@ -8,7 +8,7 @@ namespace :vineyard do
 	desc "Check All Locations for New Reviews Across All Sites"
 	task 'get_new_reviews:all' => :environment do
 		job_start_time = Time.now
-		puts "GV Review Alert: Checking for new reviews across all review sites"
+		puts "Checking for new reviews across all review sites"
 		
 		opentable_start_time = Time.now
 		puts "Checking for new reviews at OpenTable"
@@ -40,13 +40,14 @@ namespace :vineyard do
 		Rake::Task['vineyard:get_new_reviews:urbanspoon'].invoke
 		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
 
-		puts "GV Review Alert: Finished checking for new reviews across all review sites"
-		puts "Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
+		puts "GV Review Alert: Checked for new reviews across all review sites"
+		puts "GV Review Alert: Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
 	end
 	
 	desc "Check Yelp for new reviews"
 	task 'get_new_reviews:yelp' => :environment do
 		puts "Find reviews for all locations who have Yelp"
+		total_review_count = 0
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -75,14 +76,17 @@ namespace :vineyard do
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
+				total_review_count += 1
 			end
-			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
 	end
 	
 	desc "Check OpenTable for new reviews"
 	task 'get_new_reviews:opentable' => :environment do
 		puts "Find reviews for all locations who have OpenTable"
+		total_review_count = 0
 		source = Source.find_by_name('opentable')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -111,14 +115,17 @@ namespace :vineyard do
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
+				total_review_count += 1
 			end
-			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
 	end
 
 	desc "Check GooglePlus for new reviews"
 	task 'get_new_reviews:google' => :environment do
 		puts "Find reviews for all locations who have Google"
+		total_review_count = 0
 		source = Source.find_by_name('googleplus')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -147,15 +154,17 @@ namespace :vineyard do
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
+				total_review_count += 1
 			end
-			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
-
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
 	end
 
 	desc "Check UrbanSpoon for new reviews"
 	task 'get_new_reviews:urbanspoon' => :environment do
 		puts "Find reviews for all locations who have UrbanSpoon"
+		total_review_count = 0
 		source = Source.find_by_name('urbanspoon')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -184,14 +193,17 @@ namespace :vineyard do
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
+				total_review_count += 1
 			end
-			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
 	end
 
 	desc "Check TripAdvisor for new reviews"
 	task 'get_new_reviews:tripadvisor' => :environment do
 		puts "Find reviews for all locations who have TripAdvisor"
+		total_review_count = 0
 		source = Source.find_by_name('tripadvisor')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -210,19 +222,21 @@ namespace :vineyard do
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			if response.nil?
-				puts "GV Review Alert: Didn't find any new reviews for #{location.name}"
+				puts "Didn't find any new reviews for #{location.name}"
 				next
 			end
 			if response.empty?
-				puts "GV Review Alert: Didn't find any new reviews for #{location.name}"
+				puts "Didn't find any new reviews for #{location.name}"
 				next
 			end
 			response.each do |review|
 				add_new_review(location, source, review)
 				review_count += 1
+				total_review_count += 1
 			end
-			puts "GV Review Alert: Finished adding #{review_count} new reviews for: #{location.name}"
+			puts "Finished adding #{review_count} new reviews for: #{location.name}"
 		end
+		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.capitalize}"
 	end
 
 	# Methods!!!

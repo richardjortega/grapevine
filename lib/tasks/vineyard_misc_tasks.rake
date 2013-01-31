@@ -19,7 +19,7 @@ namespace :vineyard do
 		# You should run 'vineyard:get_source_location_uri:all' the first time on the DB, then daily check thereafter
 		Rake::Task['vineyard:get_source_location_uri:daily_check'].reenable
 		Rake::Task['vineyard:get_source_location_uri:daily_check'].invoke
-		puts "GV Review Alert: Checked for all new source_location_uris for locations added #{Date.yesterday}"
+		puts "GV Review Alert: Matching newly added locations (#{Date.yesterday}) to likely source_location_uris"
 
 		# Get new reviews for all the locations
 		Rake::Task['vineyard:get_new_reviews:all'].reenable
@@ -29,7 +29,6 @@ namespace :vineyard do
 		# Send all new reviews to corresponding location's user email
 		Rake::Task['vineyard:send_new_reviews'].reenable
 		Rake::Task['vineyard:send_new_reviews'].invoke
-		puts "GV Review Alert: Sent all new reviews at #{Time.now}"
 
 	end
 
