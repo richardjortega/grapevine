@@ -33,11 +33,9 @@ namespace :vineyard do
 				if user.plan.identifier == 'gv_free'
 					plan_type = 'free'
 					if user.review_count <= 4
-						debugger
 						# increment user's review
 						user.review_count += 1
 						user.save!
-						debugger
 
 						# Send the review
 						send_new_review(email, review, user.review_count, plan_type, run_now)
@@ -52,7 +50,7 @@ namespace :vineyard do
 						# increment user's review
 						user.review_count += 1
 						user.save!
-						
+
 						# Don't send the review
 						# Mark review 'archive'
 						puts "GV Review Alert: Not sending a review because user's review count has hit the max"

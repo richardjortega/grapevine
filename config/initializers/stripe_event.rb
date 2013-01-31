@@ -153,7 +153,7 @@ private
 
 		user = subscription.user
 		NotifyMailer.delay.account_expired(user)
-		NotifyMailer.delay.update_grapevine_team(user, "User has been set to unpaid status")
+		NotifyMailer.delay.update_grapevine_team(user, "User has been set to UNPAID status")
 	end
 
 	# Update all items on customer to match stripe webhook
