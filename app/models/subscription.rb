@@ -42,7 +42,6 @@ class Subscription < ActiveRecord::Base
   # Used for any updating of users on Stripe after user has signed up
   def update_stripe params
     begin
-    debugger
     customer = Stripe::Customer.retrieve(stripe_customer_token)
 
     # If user is upgrading their free plan to paid plan
@@ -77,6 +76,7 @@ class Subscription < ActiveRecord::Base
     
     self.last_four             = params[:last_four]
     self.status_info           = "active"
+    self.status                = true
     self.next_bill_on          = Date.parse customer.next_recurring_charge.date
     self.stripe_customer_token = customer.id
     user.save!
