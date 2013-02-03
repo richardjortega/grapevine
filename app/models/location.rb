@@ -21,7 +21,7 @@ class Location < ActiveRecord::Base
   has_many :vines, dependent: :destroy
   has_many :sources, through: :vines
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   #Model Validations
   validates_presence_of :street_address, :city, :state, :zip
