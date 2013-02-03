@@ -17,6 +17,13 @@ namespace :vineyard do
 		new_reviews.each do |review|
 			# User assumes only one user per location (needs refactoring for multi-user)
 			user = review.location.users.first
+			
+			# Ensure the location we are checking reviews for has an associating user
+			if user.nil?
+				puts "GV Review Alert: This location doesn't have any users associated, needs to be deleted or matched to a user."
+				next
+			end
+			
 			user_id = user.id
 			email = user.email
 
