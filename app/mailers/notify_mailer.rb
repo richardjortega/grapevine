@@ -162,7 +162,7 @@ class NotifyMailer < ActionMailer::Base
     @subscription_amount = format_amount(invoice.total)
     
     # Mail invoice 
-    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt"
   end
   
   # Email invoice receipt to User's email and Grapevine Support - failed
@@ -174,7 +174,7 @@ class NotifyMailer < ActionMailer::Base
     @subscription_start = format_timestamp(@subscription.period.start)
     @subscription_end = format_timestamp(@subscription.period.end)
     # Mail invoice 
-    mail to: user.email, subject: "Grapevine Payment Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Grapevine Payment Receipt"
   end
  
 private
