@@ -1,4 +1,6 @@
 class Subscription < ActiveRecord::Base
+
+  scope :non_active_users, where('status_info != ?', 'active')
   
   attr_accessor :stripe_card_token
 

@@ -1,4 +1,7 @@
 ActiveAdmin.register Subscription do
+
+  scope :non_active_users
+  
   index do
   	selectable_column
   	column :id
