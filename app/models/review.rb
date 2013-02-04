@@ -3,6 +3,7 @@ class Review < ActiveRecord::Base
   scope :yesterday_post_date, where('post_date = ?', Date.yesterday)
   scope :new_reviews, where('status = ?', 'new').order('created_at DESC')
   scope :sent_reviews, where('status = ?', 'sent').order('status_updated_at DESC')
+  scope :archive_reviews, where('status = ?', 'archive').order('status_updated_at DESC')
 
   attr_accessible :author, 
   				:author_url, 
