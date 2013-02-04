@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
 	scope :no_stripe_customer_token
-	scope :reached_max_review_count
+	scope :review_count_over_5
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'Users can be edited, but deletion will not delete an associating location. 
