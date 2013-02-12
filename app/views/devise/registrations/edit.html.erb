@@ -3,7 +3,7 @@
 
 <header>
 <h2>Profile</h3>
-<%= render 'accounts/dashnav' %>
+<%= render :partial => 'accounts/dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
 </header>
 
 

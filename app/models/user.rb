@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   scope :no_stripe_customer_token, includes(:subscription).where(Subscription.arel_table[:stripe_customer_token].eq(nil))
-  scope :reached_max_review_count, where('review_count = ?', 5)
+  scope :review_count_over_5, where('review_count >= ?', 5)
 
   # Pre-validators!
   before_save :format_phone_number
@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
                   :remember_me, 
                   :phone_number,
                   :location,
-                  :locations_attributes
+                  :locations_attributes,
+                  :review_count
 
   validates_presence_of :email
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'Please enter a correct email'

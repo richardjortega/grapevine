@@ -2,7 +2,7 @@
 <section class="with-aside">
 <header>
 <h2>Billing</h2>
-<%= render 'dashnav' %>
+<%= render :partial => 'dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
 </header>
 
 <script type="text/javascript">

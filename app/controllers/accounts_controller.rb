@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
       force_ssl
 
 	def index
+
             if current_user.plan.identifier == 'gv_needs_to_pay'
                   redirect_to upgrade_path
             end

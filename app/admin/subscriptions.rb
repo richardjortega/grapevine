@@ -1,5 +1,7 @@
 ActiveAdmin.register Subscription do
-  actions :index, :show
+
+  scope :non_active_users
+  
   index do
   	selectable_column
   	column :id
@@ -14,7 +16,8 @@ ActiveAdmin.register Subscription do
   	column :stripe_customer_token
   	column :last_four
   	column :next_bill_on
-  	column :card_expiration
+  	column :exp_month
+    column :exp_year
   	column :current_period_start
   	column :current_period_end
   	column :trial_start

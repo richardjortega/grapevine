@@ -31,7 +31,6 @@ class SubscriptionsController < ApplicationController
   def update
     @subscription = current_user.subscription
     current_plan = current_user.plan.identifier
-
     if @subscription.delay.update_stripe params[:subscription]
       flash.now[:error] = "Thanks for signup for Grapevine, you'll membership will be billed monthly."
       if params[:subscription][:plan] == 'gv_30'
@@ -42,6 +41,8 @@ class SubscriptionsController < ApplicationController
         
         NotifyMailer.delay.paid_signup(@subscription.user)
         NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer Upgraded to PAID")
+      else
+        NotifyMailer.delay.update_grapevine_team(@subscription.user, "Customer updated their Stripe info")
       end
       redirect_to upgrade_thank_you_path
     else

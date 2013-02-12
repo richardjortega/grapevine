@@ -7,7 +7,7 @@
 <% else %>
 	<h2>Change Your Plan</h2>
 <% end %>
-<%= render 'dashnav' %>
+<%= render :partial => 'dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
 </header>
 
 	<div class="section-content">

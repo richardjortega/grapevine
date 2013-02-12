@@ -77,12 +77,11 @@ class NotifyMailer < ActionMailer::Base
       else
         return false
     end
-    
-    mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
-    
     ### Track all review alerts sent
     DelayedKiss.record(email, 'Sent Review Alert', {'Location' => "#{location}", 
                                                       'Source' => "#{source.to_s.titleize}" })
+    puts "GV Review Alert: Sent a #{source.capitalize} review alert to #{location} to #{email}"
+    mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
   end
 
   # Follow up email for people after calling
@@ -163,7 +162,7 @@ class NotifyMailer < ActionMailer::Base
     @subscription_amount = format_amount(invoice.total)
     
     # Mail invoice 
-    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Unsuccessful Payment - Grapevine Receipt"
   end
   
   # Email invoice receipt to User's email and Grapevine Support - failed
@@ -175,7 +174,7 @@ class NotifyMailer < ActionMailer::Base
     @subscription_start = format_timestamp(@subscription.period.start)
     @subscription_end = format_timestamp(@subscription.period.end)
     # Mail invoice 
-    mail to: user.email, subject: "Grapevine Payment Receipt", bcc: "erik@pickgrapevine.com"
+    mail to: user.email, subject: "Grapevine Payment Receipt"
   end
  
 private

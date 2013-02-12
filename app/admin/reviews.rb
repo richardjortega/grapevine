@@ -14,6 +14,7 @@ ActiveAdmin.register Review do
 	scope :yesterday_post_date
 	scope :new_reviews
 	scope :sent_reviews
+	scope :archive_reviews
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'This page is not directly editable, reviews should be handled by our crawlers (if you see errors report them)!'
@@ -22,6 +23,14 @@ ActiveAdmin.register Review do
 		column :id
 		column :location do |review|
 			"#{review.location.name}"
+		end
+		column 'Associated Users' do |review|
+			next if review.location.users.empty?
+			users = []
+			review.location.users.each do |user|
+				users << user.display_name
+			end
+			users.join(', ')
 		end
 		column :source do |review|
 			"#{review.source.name}"

@@ -7,29 +7,28 @@ namespace :vineyard do
 		if Date.today == Date.today.beginning_of_month
 			Rake::Task['vineyard:reset_users_review_counts'].reenable
 			Rake::Task['vineyard:reset_users_review_counts'].invoke
-			puts "Grapevine Notice: Reset all users' review counts to 0 for the start of the month"
+			puts "GV Review Alert: Reset all users' review counts to 0 for the start of the month"
 		end
 
 		# Daily reseting of API tallies
 		Rake::Task['vineyard:reset_daily_api_count'].reenable
 		Rake::Task['vineyard:reset_daily_api_count'].invoke
-		puts "Grapevine Notice: Reseted Daily API Count"
+		puts "GV Review Alert: Reseted Daily API Count"
 
 		# Check for new source_location_uris for any locations that don't have any
 		# You should run 'vineyard:get_source_location_uri:all' the first time on the DB, then daily check thereafter
 		Rake::Task['vineyard:get_source_location_uri:daily_check'].reenable
 		Rake::Task['vineyard:get_source_location_uri:daily_check'].invoke
-		puts "Grapevine Notice: Checked for all new source_location_uris for locations added #{Date.yesterday}"
+		puts "GV Review Alert: Matching newly added locations (#{Date.yesterday}) to likely source_location_uris"
 
 		# Get new reviews for all the locations
 		Rake::Task['vineyard:get_new_reviews:all'].reenable
 		Rake::Task['vineyard:get_new_reviews:all'].invoke
-		puts "Grapevine Notice: Searched for all new reviews for #{Date.yesterday}"
+		puts "GV Review Alert: Searched for all new reviews for #{Date.yesterday}"
 
 		# Send all new reviews to corresponding location's user email
 		Rake::Task['vineyard:send_new_reviews'].reenable
 		Rake::Task['vineyard:send_new_reviews'].invoke
-		puts "Grapevine Notice: Sent all new reviews at #{Time.now}"
 
 	end
 

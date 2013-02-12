@@ -31,8 +31,8 @@ StripeEvent.setup do
 	# Update customer's plan to whatever Stripe lets us know.
 	subscribe 'customer.subscription.updated' do |event|
 		case event.data.object.status
-			# when 'unpaid'
-			# 	handle_unpaid_customer event.data.object
+			when 'unpaid'
+			 	handle_unpaid_customer event.data.object
 			when 'canceled'
 				handle_canceled_customer event.data.object
 			else
@@ -87,6 +87,7 @@ private
 		
 		user = subscription.user
 		NotifyMailer.delay.unsuccessfully_charged(invoice, user)
+		NotifyMailer.delay.update_grapevine_team(user, "User failed a charge from Stripe")
 		rescue => e
 			puts "#{e.message}"
 		end
@@ -145,7 +146,6 @@ private
 	end
 
 	# Suspend user for not paying after 3 retries to credit card
-	# Same for trials that expire (on the 31st day)
 	def handle_unpaid_customer(customer_subscription)
 		subscription = Subscription.find_by_stripe_customer_token(customer_subscription.customer)
 		subscription.status = false
@@ -154,7 +154,7 @@ private
 
 		user = subscription.user
 		NotifyMailer.delay.account_expired(user)
-		NotifyMailer.delay.update_grapevine_team(user, "User has been set to unpaid status")
+		NotifyMailer.delay.update_grapevine_team(user, "User has been set to UNPAID status")
 	end
 
 	# Update all items on customer to match stripe webhook
@@ -167,7 +167,9 @@ private
 				subscription.plan = Plan.find_by_identifier(active_plan_id)
 				subscription.save!
 			end
-			subscription.update_attributes({:status_info 			=> customer_subscription.status,
+
+			subscription.update_attributes({:status 				=> true,
+											:status_info 			=> customer_subscription.status,
 											:start_date				=> customer_subscription.start,
 											:current_period_start	=> customer_subscription.current_period_start,
 											:current_period_end		=> customer_subscription.current_period_end })
