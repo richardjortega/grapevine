@@ -20,6 +20,16 @@ class Yelp
 		Source.update_counters(source_id, :api_count_daily => 1)
 	end
 
+	def api_limit_exceeded?(response)
+		# Handle Yelp API query limit
+		if response['error'].present?
+			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
+			true
+		else
+			false
+		end
+	end
+
 	def get_location_id(term, lat, long)
 		begin
 		parsed_term = URI.parse(URI.encode(term.strip))
@@ -89,15 +99,7 @@ class Yelp
 		end
 	end
 
-	def api_limit_exceeded?(response)
-		# Handle Yelp API query limit
-		if response['error'].present?
-			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
-			true
-		else
-			false
-		end
-	end
+	
 end
 
 
