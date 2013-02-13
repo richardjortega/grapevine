@@ -56,7 +56,7 @@ namespace :vineyard do
 		source = Source.find_by_name('yelp')
 		source_location_uri = location.vines.find_by_source_id(source.id)
 		reviews = location.reviews.where('source_id = ?', source.id)
-		get_latest_review
+		current_reviews_in_database = get_last_five_reviews(reviews)
 		if reviews.empty?
 			default_post_date = Date.today - 2
 			latest_review = {:post_date => default_post_date, :comment => '' }
@@ -262,6 +262,14 @@ namespace :vineyard do
 	end
 
 	# Methods!!!
+	def get_last_five_reviews(location, options = {})
+		# Pass in the source object into options hash for last 5 reviews by specific source
+		reviews = if options[:source]
+			location.reviews.where('source_id = ?', options[:source].id).last(5)
+		else
+			location.reviews.last(5)
+		end
+	end
 
 	def add_new_review(location, source, review)
 		Review.create(:location_id 		=> location.id,
