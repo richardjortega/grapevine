@@ -27,14 +27,9 @@ class Yelp
 		response = JSON.parse(@access_token.get(path).body)
 		
 		location_id = nil
+		return if api_limit_exceeded?(response)
+
 		# Check each location
-
-		# Handle Yelp API query limit
-		if response['error'].present?
-			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
-			return
-		end
-
 		response['businesses'].each do |result|
 			#Check lat and long against lat and long of resulted
 			result_lat = result['location']['coordinate']['latitude']
@@ -65,8 +60,10 @@ class Yelp
 		parsed_location_id = URI.parse(URI.encode(location_id.strip))
 		path = "/v2/business/#{parsed_location_id}"	
 		response = JSON.parse(@access_token.get(path).body)
-		url = response["url"]
 
+		return if api_limit_exceeded?(response)
+
+		url = response["url"]
 		new_reviews = []
 		return if response['reviews'].nil?
 		response["reviews"].each do |review|
@@ -89,6 +86,16 @@ class Yelp
 			pp e.message
 			pp e.backtrace
 			puts "Encountered an error, moving on..."
+		end
+	end
+
+	def api_limit_exceeded?(response)
+		# Handle Yelp API query limit
+		if response['error'].present?
+			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
+			true
+		else
+			false
 		end
 	end
 end

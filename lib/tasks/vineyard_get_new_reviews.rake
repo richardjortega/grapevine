@@ -43,6 +43,28 @@ namespace :vineyard do
 		puts "GV Review Alert: Checked for new reviews across all review sites"
 		puts "GV Review Alert: Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
 	end
+
+	desc 'Check Yelp for new reviews, for one location'
+	task 'get_new_reviews:yelp:for_one', [:location] => :environment do |t, args|
+		if args[:location].nil?
+			puts "A location object is required for this task"
+			next
+		else
+			location = args[:location]
+		end
+		puts "Finding reviews for #{location.name}"
+		source = Source.find_by_name('yelp')
+		source_location_uri = location.vines.find_by_source_id(source.id)
+		reviews = location.reviews.where('source_id = ?', source.id)
+		get_latest_review
+		if reviews.empty?
+			default_post_date = Date.today - 2
+			latest_review = {:post_date => default_post_date, :comment => '' }
+		else
+			last_review = reviews.order('post_date DESC').first
+			latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
+		end
+	end
 	
 	desc "Check Yelp for new reviews"
 	task 'get_new_reviews:yelp' => :environment do
