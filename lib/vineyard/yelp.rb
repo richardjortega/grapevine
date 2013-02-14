@@ -16,9 +16,6 @@ class Yelp
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
 	end
 
-
-	
-
 	def get_location_id(term, lat, long)
 		begin
 		parsed_term = URI.parse(URI.encode(term.strip))
@@ -106,7 +103,7 @@ private
 
 	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 		new_reviews = []
-		
+
 		url = response["url"]
 		response["reviews"].each do |review|
 			review_date = Time.at(review["time_created"]).to_date

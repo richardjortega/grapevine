@@ -96,34 +96,9 @@ namespace :vineyard do
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
 		source_vines.each do |vine|
-			source_location_uri = vine.source_location_uri
 			location = vine.location
-			reviews = vine.location.reviews.where('source_id = ?', source.id)
-			if reviews.empty?
-				default_post_date = Date.today - 2
-				latest_review = {:post_date => default_post_date, :comment => '' }
-			else
-				last_review = reviews.order('post_date DESC').first
-				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
-			end
-			puts "Searching for new reviews at: #{source_location_uri}"
-			run = Yelp.new
-			response = run.get_new_reviews(latest_review, source_location_uri)
-			if response.nil?
-				puts "Didn't find any new reviews for #{location.name}"
-				next
-			end
-			if response.empty?
-				puts "Didn't find any new reviews for #{location.name}"
-				next
-			end
-			review_count = 0
-			response.each do |review|
-				add_new_review(location, source, review)
-				review_count += 1
-				total_review_count += 1
-			end
-			puts "Finished adding #{review_count} new reviews for: #{location.name}"
+			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
+			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
 		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
