@@ -84,6 +84,10 @@ class NotifyMailer < ActionMailer::Base
     mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
   end
 
+  def reviews_maxed_alert(user)
+    mail to: user.email, subject: "Grapevine review limit reached"
+  end
+
   # Follow up email for people after calling
 
   def follow_up_alert(email, name, body, body_part2, location_link)
