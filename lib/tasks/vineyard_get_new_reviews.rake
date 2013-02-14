@@ -68,7 +68,7 @@ namespace :vineyard do
 		puts "Finding reviews for #{location.name} at #{source.name.capitalize}"
 		run = source.name.capitalize.constantize.new
 		response = if reviews.empty?
-			run.get_new_reviews(source_location_uri)
+			run.get_new_reviews(location)
 		else
 			latest_five_reviews = get_last_five_reviews(location, :source => source)
 			latest_review_date = latest_five_reviews.sort_by(&:post_date).reverse.first.post_date
@@ -220,7 +220,7 @@ namespace :vineyard do
 	# 			latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 	# 		end
 	# 		puts "Searching for new reviews at: #{location.name}"
-	# 		run = Google.new
+	# 		run = Googleplus.new
 	# 		response = run.get_new_reviews(latest_review, source_location_uri)
 	# 		review_count = 0
 	# 		if response.nil?
