@@ -86,14 +86,16 @@ class Urbanspoon
 	def get_new_reviews(location, options = {})
 		begin
 
-		if options[:latest_five_reviews]
-			latest_reviews = options[:latest_five_reviews]
-			latest_review_date = latest_reviews.sort_by(&:post_date).reverse.first.post_date
-			latest_comments = latest_reviews.map(&:comment)
+		latest_review_date = if options[:latest_review_date] 
+			options[:latest_review_date] 
 		else
 			default_post_date = Date.today - 2
-			latest_review_date = default_post_date
-			latest_comments = ''
+		end
+
+		latest_comments = if options[:latest_comments]
+			options[:latest_comments]
+		else
+			''
 		end
 
 		url = "#{@site}#{location_id}"

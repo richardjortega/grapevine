@@ -61,19 +61,8 @@ class Yelp
 
 	def get_new_reviews(location, options = {})	
 		begin
-		
-		latest_review_date = if options[:latest_review_date] 
-			options[:latest_review_date] 
-		else
-			default_post_date = Date.today - 2
-		end
-
-		latest_comments = if options[:latest_comments]
-			options[:latest_comments]
-		else
-			''
-		end
-		
+		latest_review_date = options[:latest_review_date] || Date.today - 2
+		latest_comments = options[:latest_comments] || ''
 
 		response = fetch_reviews(location)
 
