@@ -9,36 +9,15 @@ namespace :vineyard do
 	task 'get_new_reviews:all' => :environment do
 		job_start_time = Time.now
 		puts "Checking for new reviews across all review sites"
-		
-		opentable_start_time = Time.now
-		puts "Checking for new reviews at OpenTable"
-		Rake::Task['vineyard:get_new_reviews:opentable'].reenable
-		Rake::Task['vineyard:get_new_reviews:opentable'].invoke
-		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
 
-		yelp_start_time = Time.now
-		puts "Checking for new reviews at Yelp"
-		Rake::Task['vineyard:get_new_reviews:yelp'].reenable
-		Rake::Task['vineyard:get_new_reviews:yelp'].invoke
-		puts "Total check time: #{((Time.now - yelp_start_time)/60.0)} minutes"
-
-		google_start_time = Time.now
-		puts "Checking for new reviews at Google"
-		Rake::Task['vineyard:get_new_reviews:google'].reenable
-		Rake::Task['vineyard:get_new_reviews:google'].invoke
-		puts "Total check time: #{((Time.now - google_start_time)/60.0)} minutes"
-
-		tripadvisor_start_time = Time.now
-		puts "Checking for new reviews at TripAdvisor"
-		Rake::Task['vineyard:get_new_reviews:tripadvisor'].reenable
-		Rake::Task['vineyard:get_new_reviews:tripadvisor'].invoke
-		puts "Total check time: #{((Time.now - tripadvisor_start_time)/60.0)} minutes"
-
-		opentable_start_time = Time.now
-		puts "Checking for new reviews at UrbanSpoon"
-		Rake::Task['vineyard:get_new_reviews:urbanspoon'].reenable
-		Rake::Task['vineyard:get_new_reviews:urbanspoon'].invoke
-		puts "Total check time: #{((Time.now - opentable_start_time)/60.0)} minutes"
+		parsers = Source.all
+		parsers.each do |parser|
+			parser_start_time = Time.now
+			puts "Check for new reviews for #{parser.name}"
+			Rake::Task["vineyard:get_new_reviews:#{parser.name}"].reenable
+			Rake::Task["vineyard:get_new_reviews:#{parser.name}"].invoke
+			puts "Total check time: #{((Time.now - parser_start_time)/60.0)} minutes"
+		end
 
 		puts "GV Review Alert: Checked for new reviews across all review sites"
 		puts "GV Review Alert: Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
@@ -116,7 +95,7 @@ namespace :vineyard do
 	end
 
 	desc "Check Google Plus for new reviews"
-	task 'get_new_reviews:google' => :environment do
+	task 'get_new_reviews:googleplus' => :environment do
 		puts "Find reviews for all locations who have Google Plus"
 		source = Source.find_by_name('googleplus')
 		source_vines = source.vines
