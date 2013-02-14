@@ -44,26 +44,52 @@ namespace :vineyard do
 		puts "GV Review Alert: Total check time: #{((Time.now - job_start_time)/60.0)} minutes"
 	end
 
-	desc 'Check Yelp for new reviews, for one location'
-	task 'get_new_reviews:yelp:for_one', [:location] => :environment do |t, args|
+	# Individual get_new_reviews rake calls
+
+	desc 'Check for new reviews, for one location at a particular source'
+	task 'get_new_reviews:for_one', [:location, :source] => :environment do |t, args|
 		if args[:location].nil?
 			puts "A location object is required for this task"
 			next
 		else
 			location = args[:location]
 		end
-		puts "Finding reviews for #{location.name}"
-		source = Source.find_by_name('yelp')
-		source_location_uri = location.vines.find_by_source_id(source.id)
-		reviews = location.reviews.where('source_id = ?', source.id)
-		current_reviews_in_database = get_last_five_reviews(reviews)
-		if reviews.empty?
-			default_post_date = Date.today - 2
-			latest_review = {:post_date => default_post_date, :comment => '' }
+
+		if args[:source].nil?
+			puts "A source object is required for this task"
+			next
 		else
-			last_review = reviews.order('post_date DESC').first
-			latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
+			source = args[:source]
 		end
+
+		puts "Finding reviews for #{location.name}"
+		reviews = location.reviews.where('source_id = ?', source.id)
+
+		
+		
+		run = Yelp.new
+		response = if reviews.empty?
+			run.get_new_reviews(source_location_uri)
+		else
+			latest_five_reviews = get_last_five_reviews(location, :source => source)
+			run.get_new_reviews(location, :latest_five_reviews => latest_five_reviews)
+		end
+		
+		if response.nil?
+			puts "Didn't find any new reviews for #{location.name}"
+			next
+		end
+		if response.empty?
+			puts "Didn't find any new reviews for #{location.name}"
+			next
+		end
+		review_count = 0
+		response.each do |review|
+			add_new_review(location, source, review)
+			review_count += 1
+			total_review_count += 1
+		end
+		puts "Finished adding #{review_count} new reviews for: #{location.name}"
 	end
 	
 	desc "Check Yelp for new reviews"
