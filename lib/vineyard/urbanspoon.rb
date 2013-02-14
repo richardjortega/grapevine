@@ -83,26 +83,22 @@ class Urbanspoon
 		end
 	end
 
-	def get_new_reviews(location, options = {})
-		begin
-
-		latest_review_date = if options[:latest_review_date] 
-			options[:latest_review_date] 
-		else
-			default_post_date = Date.today - 2
-		end
-
-		latest_comments = if options[:latest_comments]
-			options[:latest_comments]
-		else
-			''
-		end
-
-		url = "#{@site}#{location_id}"
+	def fetch_data(location)
+		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
+		url = "#{@site}#{source_location_uri}"
 		job_start_time = Time.now
 		puts "Crawling: #{url}"
 
 		doc = Nokogiri::HTML(open(url)).css('.list > ul > li.comment')
+	end
+
+	def get_new_reviews(location, options = {})
+		begin
+		latest_review_date = options[:latest_review_date] || Date.today - 2
+		latest_comments = options[:latest_comments] || ''
+
+		response.
+		
 		new_reviews = []
 
 		doc.each do |review|

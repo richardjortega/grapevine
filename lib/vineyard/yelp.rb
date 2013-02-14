@@ -51,7 +51,7 @@ class Yelp
 		end
 	end
 
-	def fetch_reviews(location)
+	def fetch_data(location)
 		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
 		puts "Searching for new reviews at: #{source_location_uri}"
 		parsed_location_id = URI.parse(URI.encode(source_location_uri.strip))
@@ -64,7 +64,7 @@ class Yelp
 		latest_review_date = options[:latest_review_date] || Date.today - 2
 		latest_comments = options[:latest_comments] || ''
 
-		response = fetch_reviews(location)
+		response = fetch_data(location)
 
 		return if api_limit_exceeded?(response)
 		return if response['reviews'].nil?
