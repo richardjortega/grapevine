@@ -27,18 +27,18 @@ namespace :vineyard do
 
 	desc 'Check for new reviews, for one location at a particular source'
 	task 'get_new_reviews:for_location', [:location, :source] => :environment do |t, args|
-		if args[:location].nil?
+		if args[:location]
+			location = args[:location]
+		else
 			puts "Alert: A location object is required for this task"
 			next
-		else
-			location = args[:location]
 		end
 
-		if args[:source].nil?
+		if args[:source]
+			source = args[:source]
+		else
 			puts "Alert: A source object is required for this task"
 			next
-		else
-			source = args[:source]
 		end
 
 		reviews = location.reviews.where('source_id = ?', source.id)
@@ -68,6 +68,16 @@ namespace :vineyard do
 		end
 
 		add_new_reviews(response, location, source)
+	end
+
+	desc 'Check for all reviews given a Parser'
+	task 'get_new_reviews:all:by_parser', [:source] => :environment do |t, args|
+		if args[:location]
+			location = args[:location]
+		else
+			puts "Alert: A location object is required for this task"
+			next
+		end
 	end
 	
 	desc "Check Yelp for new reviews"
