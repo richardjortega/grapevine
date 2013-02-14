@@ -86,7 +86,6 @@ class Tripadvisor
 	def fetch_data(location)
 		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
 		@url = "#{@site}#{source_location_uri}"
-		
 		puts "Crawling: #{@url}"
 		Nokogiri::HTML(open(@url)).css('div#REVIEWS div.reviewSelector')
 	end
@@ -101,14 +100,28 @@ class Tripadvisor
 
 		return if response.nil?
 
+		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+		puts "Total Crawl Time: #{Time.now - job_start_time} seconds"
+		new_reviews
+		
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered error on #{@url} page, moving on..."
+		end
+	end
+
+private
+
+	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 		new_reviews = []
-		doc.each do |review|
+		response.each do |review|
 			review_date = Date.parse(review.at_css('span.ratingDate').text.strip.slice(9..-1))
 			review_comment = review.at_css('p.partial_entry').children.first.text.strip
 
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= latest_review[:post_date]
-				next if review_comment == latest_review[:comment].chomp
+			if review_date >= latest_review_date
+				next if latest_comments.include?(review_comment)
 				new_review = {}
 				new_review[:post_date] = review_date
 				new_review[:comment] = review_comment
@@ -119,21 +132,10 @@ class Tripadvisor
 				new_reviews << new_review
 			end
 		end
-		puts "Total Crawl Time: #{Time.now - job_start_time} seconds"
-		
-		rescue => e
-			pp e.message
-			pp e.backtrace
-			puts "Encountered error on #{@url} page, moving on..."
-		end
-
 		new_reviews
 	end
-
-private
 	
 	def track_api_call
 		Source.update_counters(@source, :api_count_daily => 1)
 	end
-
 end

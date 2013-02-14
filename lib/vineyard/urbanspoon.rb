@@ -102,7 +102,6 @@ class Urbanspoon
 
 		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 		puts "Total Crawl Time: #{Time.now - job_start_time} seconds"
-
 		new_reviews
 		
 		rescue => e
@@ -115,7 +114,6 @@ class Urbanspoon
 private
 	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 		new_reviews = []
-
 		response.each do |review|
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
 			if review.at_css('div.body a.show_more').nil?

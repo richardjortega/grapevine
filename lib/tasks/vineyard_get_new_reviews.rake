@@ -89,14 +89,11 @@ namespace :vineyard do
 		end
 
 		add_new_reviews(response, location, source)
-		
-		puts "Finished adding #{review_count} new reviews for: #{location.name} from #{source.name.capitalize}"
 	end
 	
 	desc "Check Yelp for new reviews"
 	task 'get_new_reviews:yelp' => :environment do
 		puts "Find reviews for all locations who have Yelp"
-		total_review_count = 0
 		source = Source.find_by_name('yelp')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -104,13 +101,11 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check UrbanSpoon for new reviews"
 	task 'get_new_reviews:urbanspoon' => :environment do
 		puts "Find reviews for all locations who have UrbanSpoon"
-		total_review_count = 0
 		source = Source.find_by_name('urbanspoon')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -118,13 +113,11 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check Google Plus for new reviews"
 	task 'get_new_reviews:google' => :environment do
 		puts "Find reviews for all locations who have Google Plus"
-		total_review_count = 0
 		source = Source.find_by_name('googleplus')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -132,13 +125,11 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check TripAdvisor for new reviews"
 	task 'get_new_reviews:tripadvisor' => :environment do
 		puts "Find reviews for all locations who have TripAdvisor"
-		total_review_count = 0
 		source = Source.find_by_name('tripadvisor')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -146,13 +137,11 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 
 	desc "Check OpenTable for new reviews"
 	task 'get_new_reviews:opentable' => :environment do
 		puts "Find reviews for all locations who have OpenTable"
-		total_review_count = 0
 		source = Source.find_by_name('opentable')
 		source_vines = source.vines
 		source_vines.each do |vine|
@@ -160,7 +149,6 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_new_reviews:for_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:for_location'].invoke(location, source)
 		end
-		puts "GV Review Alert: Added #{total_review_count} new reviews from #{source.name.capitalize}"
 	end
 	
 	# desc "Check OpenTable for new reviews"
@@ -350,8 +338,8 @@ namespace :vineyard do
 		response.each do |review|
 			add_new_review(location, source, review)
 			review_count += 1
-			total_review_count += 1
 		end
+		puts "GV Alert: Finished adding #{review_count} new reviews for: #{location.name} from #{source.name.capitalize}"
 	end
 
 end
