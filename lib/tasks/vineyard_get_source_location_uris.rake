@@ -128,7 +128,7 @@ namespace :vineyard do
 		lat = args[:lat]
 		long = args[:long]
 		puts "Searching for UrbanSpoon ID using term: #{term}"
-		run = UrbanSpoon.new
+		run = Urbanspoon.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip, lat, long)
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"

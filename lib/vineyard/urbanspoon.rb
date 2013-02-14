@@ -3,7 +3,7 @@ require 'open-uri'
 require 'httparty'
 require 'uri'
 
-class UrbanSpoon
+class Urbanspoon
 	def initialize
 		@site = 'http://www.urbanspoon.com'
 		track_api_call('urbanspoon')

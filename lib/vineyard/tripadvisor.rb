@@ -2,7 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'uri'
 
-class TripAdvisor
+class Tripadvisor
 	def initialize
 		@site = 'http://www.tripadvisor.com'
 		track_api_call('tripadvisor')
