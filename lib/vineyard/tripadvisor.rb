@@ -5,12 +5,8 @@ require 'uri'
 class Tripadvisor
 	def initialize
 		@site = 'http://www.tripadvisor.com'
-		track_api_call('tripadvisor')
-	end
-
-	def track_api_call(source_name)
-		source_id = Source.find_by_name("#{source_name}")
-		Source.update_counters(source_id, :api_count_daily => 1)
+		@source = Source.find_by_name('tripadvisor')
+		track_api_call
 	end
 
 	def get_location_id(term, street_address, city, state, zip)
@@ -122,4 +118,11 @@ class Tripadvisor
 
 		new_reviews
 	end
+
+private
+	
+	def track_api_call
+		Source.update_counters(@source, :api_count_daily => 1)
+	end
+	
 end
