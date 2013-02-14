@@ -83,12 +83,23 @@ class Tripadvisor
 		end
 	end
 
-	def get_new_reviews(latest_review, location_id)
+	def fetch_data(location)
+		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
+		@url = "#{@site}#{source_location_uri}"
+		
+		puts "Crawling: #{@url}"
+		Nokogiri::HTML(open(@url)).css('div#REVIEWS div.reviewSelector')
+	end
+
+	def get_new_reviews(location, options = {})
 		begin
-		url = "#{@site}#{location_id}"
+		latest_review_date = options[:latest_review_date] || Date.today - 2
+		latest_comments = options[:latest_comments] || ''
+
 		job_start_time = Time.now
-		puts "Crawling: #{url}"
-		doc = Nokogiri::HTML(open(url)).css('div#REVIEWS div.reviewSelector')
+		response = fetch_data(location)
+
+		return if response.nil?
 
 		new_reviews = []
 		doc.each do |review|
@@ -104,7 +115,7 @@ class Tripadvisor
 				new_review[:author] = review.at_css('div.username span').text.strip
 				new_review[:rating] = review.at_css('img.sprite-ratings')[:content].to_f
 				new_review[:title] = review.at_css('div.quote').text.strip.slice(1..-2)
-				new_review[:url] = "#{url}"
+				new_review[:url] = "#{@url}"
 				new_reviews << new_review
 			end
 		end
@@ -113,7 +124,7 @@ class Tripadvisor
 		rescue => e
 			pp e.message
 			pp e.backtrace
-			puts "Encountered error on #{url} page, moving on..."
+			puts "Encountered error on #{@url} page, moving on..."
 		end
 
 		new_reviews
@@ -124,5 +135,5 @@ private
 	def track_api_call
 		Source.update_counters(@source, :api_count_daily => 1)
 	end
-	
+
 end
