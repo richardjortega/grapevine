@@ -2,7 +2,7 @@ require 'open-uri'
 require 'httparty'
 require 'nokogiri'
 
-class OpenTable
+class Opentable
 	def initialize
 		apiversion = '4.9'
 		passkey = 'tjp43pshizud7jpex6rokvyop'

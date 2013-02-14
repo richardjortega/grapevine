@@ -168,7 +168,7 @@ namespace :vineyard do
 		state = args[:state]
 		zip = args[:zip]
 		puts "Searching for OpenTable ID using term: #{term}"
-		run = OpenTable.new
+		run = Opentable.new
 		source_location_uri = run.get_location_id(term, street_address, city, state, zip)
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"

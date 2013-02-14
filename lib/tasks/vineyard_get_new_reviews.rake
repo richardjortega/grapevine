@@ -147,7 +147,7 @@ namespace :vineyard do
 				latest_review = {:post_date => last_review[:post_date], :comment => last_review[:comment]}
 			end
 			puts "Searching for new reviews at: #{location.name}"
-			run = OpenTable.new
+			run = Opentable.new
 			response = run.get_new_reviews(latest_review, source_location_uri)
 			review_count = 0
 			if response.nil?
