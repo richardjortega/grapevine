@@ -47,7 +47,7 @@ namespace :vineyard do
 	# Individual get_new_reviews rake calls
 
 	desc 'Check for new reviews, for one location at a particular source'
-	task 'get_new_reviews:for_one', [:location, :source] => :environment do |t, args|
+	task 'get_new_reviews:for_location', [:location, :source] => :environment do |t, args|
 		if args[:location].nil?
 			puts "A location object is required for this task"
 			next
@@ -64,8 +64,6 @@ namespace :vineyard do
 
 		puts "Finding reviews for #{location.name}"
 		reviews = location.reviews.where('source_id = ?', source.id)
-
-		
 		
 		run = Yelp.new
 		response = if reviews.empty?
