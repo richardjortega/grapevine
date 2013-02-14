@@ -108,7 +108,7 @@ class Urbanspoon
 		rescue => e
 			pp e.message
 			pp e.backtrace
-			puts "Encountered error on #{url} page, moving on..."
+			puts "Encountered error on #{@url} page, moving on..."
 		end
 	end
 
