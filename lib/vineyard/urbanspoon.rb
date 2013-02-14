@@ -10,10 +10,6 @@ class Urbanspoon
 		track_api_call
 	end
 
-	def track_api_call
-		Source.update_counters(@source, :api_count_daily => 1)
-	end
-
 	def get_location_id(term, street_address, city, state, zip, lat, long)
 		begin
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"
@@ -87,8 +83,19 @@ class Urbanspoon
 		end
 	end
 
-	def get_new_reviews(latest_review, location_id)
+	def get_new_reviews(location, options = {})
 		begin
+
+		if options[:latest_five_reviews]
+			latest_reviews = options[:latest_five_reviews]
+			latest_review_date = latest_reviews.sort_by(&:post_date).reverse.first.post_date
+			latest_comments = latest_reviews.map(&:comment)
+		else
+			default_post_date = Date.today - 2
+			latest_review_date = default_post_date
+			latest_comments = ''
+		end
+
 		url = "#{@site}#{location_id}"
 		job_start_time = Time.now
 		puts "Crawling: #{url}"
@@ -127,4 +134,10 @@ class Urbanspoon
 
 		new_reviews
 	end
+
+private
+	def track_api_call
+		Source.update_counters(@source, :api_count_daily => 1)
+	end
+
 end

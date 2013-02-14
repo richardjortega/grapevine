@@ -71,7 +71,11 @@ namespace :vineyard do
 			run.get_new_reviews(source_location_uri)
 		else
 			latest_five_reviews = get_last_five_reviews(location, :source => source)
-			run.get_new_reviews(location, :latest_five_reviews => latest_five_reviews)
+			latest_review_date = latest_five_reviews.sort_by(&:post_date).reverse.first.post_date
+			latest_comments = latest_five_reviews.map(&:comment)
+			run.get_new_reviews(location, 
+				:latest_review_date => latest_review_date, 
+				:latest_comments => latest_comments)
 		end
 		
 		# Error handling of nil and empty response values
