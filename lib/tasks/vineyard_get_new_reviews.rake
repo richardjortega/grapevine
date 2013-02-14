@@ -49,23 +49,24 @@ namespace :vineyard do
 	desc 'Check for new reviews, for one location at a particular source'
 	task 'get_new_reviews:for_location', [:location, :source] => :environment do |t, args|
 		if args[:location].nil?
-			puts "A location object is required for this task"
+			puts "Alert: A location object is required for this task"
 			next
 		else
 			location = args[:location]
 		end
 
 		if args[:source].nil?
-			puts "A source object is required for this task"
+			puts "Alert: A source object is required for this task"
 			next
 		else
 			source = args[:source]
 		end
 
-		puts "Finding reviews for #{location.name}"
 		reviews = location.reviews.where('source_id = ?', source.id)
 		
-		run = Yelp.new
+		# Instantiate new object of provided source
+		puts "Finding reviews for #{location.name} at #{source.name.capitalize}"
+		run = source.name.capitalize.constantize.new
 		response = if reviews.empty?
 			run.get_new_reviews(source_location_uri)
 		else
@@ -73,21 +74,19 @@ namespace :vineyard do
 			run.get_new_reviews(location, :latest_five_reviews => latest_five_reviews)
 		end
 		
+		# Error handling of nil and empty response values
 		if response.nil?
-			puts "Didn't find any new reviews for #{location.name}"
+			puts "No new reviews added for #{location.name} at #{source.name.capitalize}"
 			next
 		end
 		if response.empty?
-			puts "Didn't find any new reviews for #{location.name}"
+			puts "No new reviews added for #{location.name} at #{source.name.capitalize}"
 			next
 		end
-		review_count = 0
-		response.each do |review|
-			add_new_review(location, source, review)
-			review_count += 1
-			total_review_count += 1
-		end
-		puts "Finished adding #{review_count} new reviews for: #{location.name}"
+
+		add_new_reviews(response, location, source)
+		
+		puts "Finished adding #{review_count} new reviews for: #{location.name} from #{source.name.capitalize}"
 	end
 	
 	desc "Check Yelp for new reviews"
@@ -309,6 +308,15 @@ namespace :vineyard do
 					    :status				=> 'new',
 					    :status_updated_at  => Time.now )
 
+	end
+
+	def add_new_reviews(response, location, source)
+		review_count = 0
+		response.each do |review|
+			add_new_review(location, source, review)
+			review_count += 1
+			total_review_count += 1
+		end
 	end
 
 end

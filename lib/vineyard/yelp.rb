@@ -16,19 +16,8 @@ class Yelp
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
 	end
 
-	def track_api_call
-		Source.update_counters(@source, :api_count_daily => 1)
-	end
 
-	def api_limit_exceeded?(response)
-		# Handle Yelp API query limit
-		if response['error'].present?
-			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
-			true
-		else
-			false
-		end
-	end
+	
 
 	def get_location_id(term, lat, long)
 		begin
@@ -88,20 +77,42 @@ class Yelp
 
 		response = fetch_reviews(location)
 
-		debugger
-
 		return if api_limit_exceeded?(response)
-
-		url = response["url"]
-		new_reviews = []
 		return if response['reviews'].nil?
+
+		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered an error, moving on..."
+		end
+	end
+
+private
+	def api_limit_exceeded?(response)
+		# Handle Yelp API query limit
+		if response['error'].present?
+			puts "GV Review Alert: Yelp Error - #{response['error']['text']}"
+			true
+		else
+			false
+		end
+	end
+
+	def track_api_call
+		Source.update_counters(@source, :api_count_daily => 1)
+	end
+
+	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+		new_reviews = []
+		
+		url = response["url"]
 		response["reviews"].each do |review|
 			review_date = Time.at(review["time_created"]).to_date
 			review_comment = review["excerpt"].strip
 			
-			debugger
 			if review_date >= latest_review_date
-				debugger
 				next if latest_comments.include?(review_comment)
 				new_review = {}
 				new_review[:post_date] = review_date
@@ -113,46 +124,6 @@ class Yelp
 			end
 		end
 		new_reviews
-		rescue => e
-			pp e.message
-			pp e.backtrace
-			puts "Encountered an error, moving on..."
-		end
 	end
 
-	# def get_new_reviews(latest_review, location_id)	
-	# 	begin
-	# 	parsed_location_id = URI.parse(URI.encode(location_id.strip))
-	# 	path = "/v2/business/#{parsed_location_id}"	
-	# 	response = JSON.parse(@access_token.get(path).body)
-
-	# 	return if api_limit_exceeded?(response)
-
-	# 	url = response["url"]
-	# 	new_reviews = []
-	# 	return if response['reviews'].nil?
-	# 	response["reviews"].each do |review|
-	# 		review_date = Time.at(review["time_created"]).to_date
-	# 		review_comment = review["excerpt"].strip
-			
-	# 		if review_date >= latest_review[:post_date]
-	# 			next if review_comment == latest_review[:comment].chomp
-	# 			new_review = {}
-	# 			new_review[:post_date] = review_date
-	# 			new_review[:comment] = review_comment
-	# 			new_review[:author] = review["user"]["name"]
-	# 			new_review[:rating] = review["rating"].to_i
-	# 			new_review[:url] = url
-	# 			new_reviews << new_review
-	# 		end
-	# 	end
-	# 	new_reviews
-	# 	rescue => e
-	# 		pp e.message
-	# 		pp e.backtrace
-	# 		puts "Encountered an error, moving on..."
-	# 	end
-	# end
-
-	
 end
