@@ -96,8 +96,8 @@ class Urbanspoon
 		latest_comments = options[:latest_comments] || ''
 
 		job_start_time = Time.now
+		
 		response = fetch_data(location)
-
 		return if response.nil?
 
 		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
