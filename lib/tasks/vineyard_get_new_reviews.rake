@@ -264,7 +264,7 @@ namespace :vineyard do
 	# Methods!!!
 	def get_last_five_reviews(location, options = {})
 		# Pass in the source object into options hash for last 5 reviews by specific source
-		reviews = if options[:source]
+		if options[:source]
 			location.reviews.where('source_id = ?', options[:source].id).last(5)
 		else
 			location.reviews.last(5)
