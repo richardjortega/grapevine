@@ -85,11 +85,9 @@ class Urbanspoon
 
 	def fetch_data(location)
 		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
-		url = "#{@site}#{source_location_uri}"
-		job_start_time = Time.now
-		puts "Crawling: #{url}"
-
-		doc = Nokogiri::HTML(open(url)).css('.list > ul > li.comment')
+		@url = "#{@site}#{source_location_uri}"
+		puts "Crawling: #{@url}"
+		Nokogiri::HTML(open(@url)).css('.list > ul > li.comment')
 	end
 
 	def get_new_reviews(location, options = {})
@@ -97,11 +95,28 @@ class Urbanspoon
 		latest_review_date = options[:latest_review_date] || Date.today - 2
 		latest_comments = options[:latest_comments] || ''
 
-		response.
+		job_start_time = Time.now
+		response = fetch_data(location)
+
+		return if response.nil?
+
+		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+		puts "Total Crawl Time: #{Time.now - job_start_time} seconds"
+
+		new_reviews
 		
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered error on #{url} page, moving on..."
+		end
+	end
+
+private
+	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 		new_reviews = []
 
-		doc.each do |review|
+		response.each do |review|
 			review_date = Date.parse(review.at_css('div.date.comment').children.last.text.gsub("\n","").slice(13..-1))
 			if review.at_css('div.body a.show_more').nil?
 				review_comment = review.at_css('div.body').text.strip
@@ -110,30 +125,21 @@ class Urbanspoon
 			end
 
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= latest_review[:post_date]
-				next if review_comment == latest_review[:comment].strip
+			if review_date >= latest_review_date
+				next if latest_comments.include?(review_comment)
 				new_review = {}
 				new_review[:post_date] = review_date
 				new_review[:comment] = review_comment
 				new_review[:author] = review.at_css('div.with_stats div.title').text.strip
 				new_review[:rating] = review.at_css('div.opinion').text
 				new_review[:title] = review.at_css('div.details div.title').text.strip
-				new_review[:url] = url
+				new_review[:url] = @url
 				new_reviews << new_review
 			end
 		end
-		puts "Total Crawl Time: #{Time.now - job_start_time} seconds"
-		
-		rescue => e
-			pp e.message
-			pp e.backtrace
-			puts "Encountered error on #{url} page, moving on..."
-		end
-
 		new_reviews
 	end
 
-private
 	def track_api_call
 		Source.update_counters(@source, :api_count_daily => 1)
 	end
