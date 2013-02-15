@@ -72,7 +72,7 @@ private
 		if reviews.empty?
 			run.get_new_reviews(location)
 		else
-			latest_five_reviews = get_last_five_reviews(location, :parser => parser)
+			latest_five_reviews = get_last_five_reviews(location, parser)
 			latest_review_date = latest_five_reviews.sort_by(&:post_date).reverse.first.post_date
 			latest_comments = latest_five_reviews.map(&:comment)
 			run.get_new_reviews(location, 
@@ -81,13 +81,8 @@ private
 		end
 	end
 	
-	def get_last_five_reviews(location, options = {})
-		# Pass in the source/parser object into options hash for last 5 reviews by specific source/parser
-		if options[:parser]
-			location.reviews.where('source_id = ?', options[:parser].id).last(5)
-		else
-			location.reviews.last(5)
-		end
+	def get_last_five_reviews(location, parser)
+		location.reviews.where('source_id = ?', options[:parser].id).last(5)
 	end
 
 	def add_new_reviews(response, location, parser)
