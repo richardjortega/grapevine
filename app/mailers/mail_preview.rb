@@ -16,6 +16,11 @@ class MailPreview < MailView
 		NotifyMailer.review_alert(email, review, rating, source, location, location_link, review_count, plan_type)
 	end
 
+	def reviews_maxed_alert
+		user = User.find_by_email('richard@pickgrapevine.com')
+		NotifyMailer.reviews_maxed_alert(user)
+	end
+
 	def follow_up_alert
 		email = 'info+test@pickgrapevine.com'
 		name = 'Bob Smith'
