@@ -129,7 +129,7 @@ class NotifyMailer < ActionMailer::Base
     DelayedKiss.alias(user.full_name, user.email)
     DelayedKiss.record(user.email, 'Sent Paid Signup Email')
     @user = user
-    mail to: user.email, subject: "You've Upgraded to our Small Business plan!"
+    mail to: user.email, subject: "You've Upgraded to our Business Pro plan!"
   end
 
   # Update Grapevine team about important account changes
