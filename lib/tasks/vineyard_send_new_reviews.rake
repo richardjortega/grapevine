@@ -54,8 +54,8 @@ namespace :vineyard do
 
 						# Alert us about users who have maxed out
 						if user.review_count == 5
-							puts "GV Review Alerts: #{email} has hit their max review count"
-							DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}"})
+							puts "GV Review Alert: #{email} has hit their max review count"
+							DelayedKiss.record(email, 'User Hit Max Review Count')
 							NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
 							NotifyMailer.delay({:run_at => 2.days.from_now}).reviews_maxed_alert(user)
 						end
