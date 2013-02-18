@@ -82,7 +82,7 @@ private
 	end
 	
 	def get_last_five_reviews(location, parser)
-		location.reviews.where('source_id = ?', options[:parser].id).last(5)
+		location.reviews.where('source_id = ?', parser.id).last(5)
 	end
 
 	def add_new_reviews(response, location, parser)
