@@ -67,7 +67,7 @@ namespace :vineyard do
 
 						# Don't send the review
 						# Mark review 'archive'
-						puts "GV Review Alert: Not sending a review because user's review count has hit the max"
+						puts "GV Review Alert: Not sending a review because #{email} has hit their review count max"
 						review.status = 'archive'
 						review.status_updated_at = Time.now
 						review.save!

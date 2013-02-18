@@ -45,10 +45,11 @@ namespace :vineyard do
 
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
 	task 'get_source_location_uri:daily_check' => :environment do
-		count = Location.where('created_at >= ?', Date.yesterday.beginning_of_day).count
-		puts "There are #{count} locations we will check for source_location_uris."
+		new_locations = Location.where('created_at >= ?', Date.yesterday.beginning_of_day)
+		count = new_locations.count
+		puts "GV Alert: There are #{count} locations we will check for source_location_uris."
 		next if count == 0
-		Location.where('created_at >= ?', Date.yesterday.beginning_of_day).each do |location|
+		new_locations.each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			next if location.uri_check_date
 			
