@@ -85,6 +85,9 @@ class NotifyMailer < ActionMailer::Base
   end
 
   def reviews_maxed_alert(user)
+    host = 'www.pickgrapevine.com'
+    uri_encoded_upgrade_link = URI.encode_www_form('link' => '/upgrade', 'kme' => 'Clicked Upgrade From Sixth Email', 'kmi' => user.email)
+    @upgrade_link = "http://#{host}/upgrade?#{uri_encoded_upgrade_link}"
     mail to: user.email, subject: "Grapevine review limit reached"
   end
 
