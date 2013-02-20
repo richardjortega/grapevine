@@ -129,7 +129,7 @@ private
 				new_review[:post_date] = review_date
 				new_review[:comment] = review_comment
 				new_review[:author] = review.at_css('div.with_stats div.title').text.strip
-				if review.at_css('div.opinion').text
+				if review.at_css('div.opinion').present?
 					new_review[:rating] = review.at_css('div.opinion').text
 				end
 				new_review[:title] = review.at_css('div.details div.title').text.strip
