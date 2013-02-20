@@ -36,6 +36,7 @@ Grapevine::Application.routes.draw do
     get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
     post 'sign_in' => 'devise/sessions#create', :as => :user_session
     match 'upgrade' => 'devise/sessions#new', :as => :upgrade
+    match 'billing' => 'devise/sessions#new', :as => :billing
     match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
       :via => Devise.mappings[:user].sign_out_via
     get 'profile' => 'registrations#edit', :as => :edit_user_registration
