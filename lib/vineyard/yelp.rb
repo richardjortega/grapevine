@@ -67,7 +67,7 @@ class Yelp
 		response = fetch_data(location)
 
 		return if api_limit_exceeded?(response)
-		return if response['reviews'].nil?
+		return if response['reviews'].blank?
 
 		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
 

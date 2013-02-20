@@ -63,6 +63,12 @@ class Googleplus
 
 		response = fetch_data(location)
 
+		#Handle blank response
+		if response.blank?
+			puts "GV Alert: The returned response was blank, please look into #{location.name}"
+			return
+		end
+
 		# Handle no reviews
 		if !response["result"]["reviews"].present?
 			puts "There are no reviews for this restaurant"
@@ -74,7 +80,7 @@ class Googleplus
 		rescue => e
 			pp e.message
 			pp e.backtrace
-			puts "Encountered error on #{location_id} page, moving on..."
+			puts "Encountered error on #{location.name} page, moving on..."
 		end
 	end
 
