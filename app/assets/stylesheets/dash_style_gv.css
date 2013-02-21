@@ -1,0 +1,37 @@
+/* Custom GV Styles */
+
+/* HEADER */
+#header.navbar-inverse .navbar-inner {
+	background: #8d6db1;
+}
+.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+	color:#fff;
+}
+#header .brand {
+	margin-top: -5px !important;
+	margin-left:-30px;
+	width: 203px;
+}
+
+
+
+/* SIDEBAR NAV */
+#sidebar > ul > li.active {
+	border-right: 4px solid #d7c9e6;
+}
+
+.dashboard a, .breadcrumb a { color:#8d6db1;}
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+	background:#8d6db1 ;
+}
+.nav-tabs { border:none;}
+.nav-pills > .active > a { position: relative;}
+.nav-pills > .active > a:before {
+	border-top: 10px solid #8d6db1;
+	border-left: 0px solid transparent;
+	border-right: 10px solid transparent;
+	position: absolute;
+	content: '';
+	bottom: -11px;
+	left: 8px;
+}
