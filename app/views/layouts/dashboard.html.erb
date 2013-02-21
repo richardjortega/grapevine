@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>Conquer Admin Dashboard Template</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<%= javascript_include_tag 'bootstrap.min' %>
+	<%= stylesheet_link_tag 'bootstrap.min' %>
+	<%= stylesheet_link_tag 'bootstrap_responsive.min' %>
+	<%= stylesheet_link_tag 'dash_style' %>
+	<%= stylesheet_link_tag 'dash_style_responsive' %>
+	<%= stylesheet_link_tag 'dash_style_default' %>
+	<%= stylesheet_link_tag 'dash_style_gv' %>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+	<!-- BEGIN HEADER -->
+	<div id="header" class="navbar navbar-inverse navbar-fixed-top">
+		<!-- BEGIN TOP NAVIGATION BAR -->
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<!-- BEGIN LOGO -->
+				<a class="brand" href="index.html">
+				<img src="http://www.pickgrapevine.com/assets/logo-white.png" alt="Grapevine" />
+				</a>
+				<!-- END LOGO -->
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+				<a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="arrow"></span>
+				</a>          
+				<!-- END RESPONSIVE MENU TOGGLER -->				
+				<div class="top-nav">
+					
+					
+					<!-- BEGIN TOP NAVIGATION MENU -->					
+					<ul class="nav pull-right" id="top_menu">
+						<li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+						<li><a href="#"><i class="icon-credit-card"></i> Billing</a></li>
+						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+					</ul>
+					<!-- END TOP NAVIGATION MENU -->	
+				</div>
+			</div>
+		</div>
+		<!-- END TOP NAVIGATION BAR -->
+	</div>
+	<!-- END HEADER -->
+
+	<%= yield %>
+	
+	<!-- BEGIN FOOTER -->
+	<footer>
+		<%= render 'layouts/footer' %>
+     	<%= render 'layouts/analytics' %>
+		<div class="span pull-right">
+			<span class="go-top"><i class="icon-arrow-up"></i></span>
+		</div>
+	</footer>
+	<!-- END FOOTER -->
+</body>
+<!-- END BODY -->
+</html>

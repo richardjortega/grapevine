@@ -28,6 +28,7 @@ Grapevine::Application.routes.draw do
     match '/billing', to: 'accounts#billing', as: 'billing'
     match '/upgrade', to: 'accounts#update', as: 'upgrade'
     match '/upgrade-thank-you', to: 'accounts#upgrade_thank_you', as: 'upgrade_thank_you'
+    match '/dash', to: 'accounts#dashboard', as: 'dashboard'
   end
 
   # Reconfiguring Devise routes for pretty URLs, because they look pretty!
