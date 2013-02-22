@@ -56,6 +56,7 @@ gem 'dj_mon'
 # Gems for the Vineyard
 gem 'oauth'
 gem 'httparty'
+gem 'fuzzy-string-match'
 
 #used only in testing, but heroku needs all rake to pass before using other rakes
 gem 'database_cleaner', '>= 0.7.2'

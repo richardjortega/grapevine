@@ -18,6 +18,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    RubyInline (3.12.1)
+      ZenTest (~> 4.3)
+    ZenTest (4.9.0)
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
       mail (~> 2.4.4)
@@ -147,6 +150,9 @@ GEM
       thor (>= 0.13.6)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    fuzzy-string-match (0.9.4)
+      RubyInline (>= 3.8.6)
+      RubyInline (>= 3.8.6)
     geocoder (1.1.6)
     girl_friday (0.11.2)
       connection_pool (~> 1.0)
@@ -372,6 +378,7 @@ DEPENDENCIES
   factory_girl_rails (>= 3.1.0)
   font-awesome-sass-rails
   foreman
+  fuzzy-string-match
   geocoder
   growl
   guard-rspec

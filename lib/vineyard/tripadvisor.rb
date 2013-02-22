@@ -11,7 +11,7 @@ class Tripadvisor
 
 	def get_location_id(term, street_address, city, state, zip)
 		begin
-		short_term = term.split(' ', 2)[0]
+		short_term = term.split[0..1].join(' ')
 		query = "#{short_term} #{city}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:fiksaiphsou"
@@ -20,12 +20,15 @@ class Tripadvisor
 		response = HTTParty.get(path)
 		location_id = nil
 		
+		debugger
+
 		# Handle spelling errors (must be handled first)
 		if response['spelling']
 			puts "This query (location or address) is likely spelled wrong, please fix it."
 			puts "Recommended/Corrected Query: #{response['spelling']['correctedQuery']}"
 			puts "Reruning search with Corrected Query: #{response['spelling']['correctedQuery']}"
 			query = "#{response['spelling']['correctedQuery']}"
+			short_term = query.split[0..1].join(' ')
 			parsed_query = URI.parse(URI.encode(query.strip))
 			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 			response = HTTParty.get(path)
@@ -55,7 +58,7 @@ class Tripadvisor
 				puts "This result is not in the same city as given location"
 				next
 			end
-			if result_title.split(' ', 2)[0].include?("#{short_term}")
+			if result_title.split[0..1].join(' ').include?("#{short_term}")
 				puts "This location has a matching city and first word"
 				puts "Found Likely Match: #{result_id} to #{term}"
 				similar_responses += 1
