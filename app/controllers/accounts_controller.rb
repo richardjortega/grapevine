@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
             @items = current_user.locations
             @item = @items.first
-            @reviews = @item.reviews.scoped
+            @reviews = @item.reviews
       end
 
 	def index
