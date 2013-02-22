@@ -10,9 +10,7 @@ class AccountsController < ApplicationController
 
             @items = current_user.locations
             @item = @items.first
-            @this_month_reviews = @item.reviews.where(:post_date => Date.today.beginning_of_month..Date.today).order(:post_date).reverse_order
             @reviews = @item.reviews.scoped
-            @last_month_reviews = @item.reviews.where(:post_date => Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month).order(:post_date).reverse_order
       end
 
 	def index
