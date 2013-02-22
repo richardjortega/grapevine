@@ -5,6 +5,11 @@ class Review < ActiveRecord::Base
   scope :sent_reviews, where('status = ?', 'sent').order('status_updated_at DESC')
   scope :archive_reviews, where('status = ?', 'archive').order('status_updated_at DESC')
 
+  scope :last_month_reviews, where(:post_date => Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month).order(:post_date).reverse_order
+  scope :this_month_reviews, where(:post_date => Date.today.beginning_of_month..Date.today).order(:post_date).reverse_order
+  scope :last_5_reviews, limit(5).order('post_date DESC')
+
+
   attr_accessible :author, 
   				:author_url, 
   				:comment, 
