@@ -1,0 +1,17 @@
+<!-- BEGIN SIDEBAR -->
+	<div id="sidebar" class="nav-collapse collapse">
+		
+		<!-- BEGIN SIDEBAR MENU -->
+		<ul>
+			<li><a href="index.html"><i class="icon-home"></i> Home</a></li>
+
+			<!-- example josh of how to take care of icons inside of this -->
+			<% @items.each do |item| %>
+				<li class='active'><%= link_to "<i class='icon-building'></i> #{item.name}".html_safe, item.name, :class => "" %></li>
+			<% end %>
+			<li><a href="#"><i class="icon-plus-sign"></i> Add a location</a></li>
+			
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+<!-- END SIDEBAR -->

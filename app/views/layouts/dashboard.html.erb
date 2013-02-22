@@ -51,8 +51,13 @@
 		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
-
-	<%= yield %>
+	
+	<!-- BEGIN CONTAINER -->
+		<div id="container" class="row-fluid">
+			<%= render 'sidebar' %>
+			<%= yield %>
+		</div>
+	<!-- END CONTAINER -->
 	
 	<!-- BEGIN FOOTER -->
 	<footer>

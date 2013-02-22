@@ -1,24 +1,5 @@
-<!-- BEGIN CONTAINER -->
-<div id="container" class="row-fluid">
-	<!-- BEGIN SIDEBAR -->
-	<div id="sidebar" class="nav-collapse collapse">
-		
-		<!-- BEGIN SIDEBAR MENU -->
-		<ul>
-			<li><a href="index.html"><i class="icon-home"></i> Home</a></li>
-
-			<!-- example josh of how to take care of icons inside of this -->
-			<% @items.each do |item| %>
-				<li class='active'><%= link_to "<i class='icon-building'></i> #{item.name}".html_safe, item.name, :class => "" %></li>
-			<% end %>
-			<li><a href="#"><i class="icon-plus-sign"></i> Add a location</a></li>
-			
-		</ul>
-		<!-- END SIDEBAR MENU -->
-	</div>
-	<!-- END SIDEBAR -->
-	<!-- BEGIN PAGE -->
-	<div id="body">
+<!-- BEGIN PAGE -->
+<div id="body">
 		
 		<!-- BEGIN PAGE CONTAINER-->
 		<div class="container-fluid">
@@ -33,9 +14,9 @@
 					<ul class="breadcrumb">
 						<li>
 							<i class="icon-home"></i>
-							<a href="#">Home</a> <span class="divider">/</span>
+							<%= link_to "Home", root_path %> <span class="divider">/</span>
 						</li>
-						<li><a href="#">Location A</a></li>
+						<li><%= link_to "#{@item.name}", @item.name %><a href="#">Location A</a></li>
 						
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -187,7 +168,5 @@
 			<!-- END PAGE CONTENT-->
 		</div>
 		<!-- END PAGE CONTAINER-->		
-	</div>
-	<!-- END PAGE -->
 </div>
-<!-- END CONTAINER -->
+<!-- END PAGE -->
