@@ -41,9 +41,9 @@
 					
 					<!-- BEGIN TOP NAVIGATION MENU -->					
 					<ul class="nav pull-right" id="top_menu">
-						<li><i class="icon-wrench"></i> <%= link_to 'Settings', edit_user_registration_path %></li>
-						<li><a href="#"><i class="icon-credit-card"></i> Billing</a></li>
-						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+						<li><%= link_to "<i class='icon-wrench'></i> Settings".html_safe , edit_user_registration_path %></li>
+						<li><%= link_to "<i class='icon-credit-card'></i> Billing".html_safe , billing_path %></li>
+						<li><%= link_to "<i class='icon-off'></i> Logout".html_safe , destroy_user_session_path %></li>
 					</ul>
 					<!-- END TOP NAVIGATION MENU -->	
 				</div>

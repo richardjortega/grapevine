@@ -3,8 +3,13 @@ class AccountsController < ApplicationController
       layout 'dashboard'
 
       def dashboard
+            # testing ton of locations
+            user = User.find(106)
+            @items = user.locations
+
             @items = current_user.locations
             @item = @items.first
+            @reviews = @item.reviews
       end
 
 	def index

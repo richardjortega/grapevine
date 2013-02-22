@@ -98,60 +98,23 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="highlight">
-												<a href="#">Yelp</a>
-											</td>
-											<td></td>
-											<td class="review">Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>3.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
-										<tr>
-											<td class="highlight">
-												<a href="#">Yelp</a>
-											</td>
-											<td></td>
-											<td>Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>2.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
-										<tr>
-											<td class="highlight">
-												<a href="#">OpenTable</a>
-											</td>
-											<td></td>
-											<td>Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>2.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
-										<tr>
-											<td class="highlight">
-												<a href="#">TripAdvisor</a>
-											</td>
-											<td></td>
-											<td>Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>2.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
-										<tr>
-											<td class="highlight">
-												<a href="#">OpenTable</a>
-											</td>
-											<td></td>
-											<td>Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>2.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
-										<tr>
-											<td class="highlight">
-												<a href="#">TripAdvisor</a>
-											</td>
-											<td></td>
-											<td>Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-											<td>2.5</td>
-											<td><a href="#" class="btn btn-mini hidden-phone hidden-tablet">View</a>&nbsp;<a href="#" class="btn btn-mini">Respond</a></td>
-										</tr>
+										<% @reviews.each do |review| %>
+											<tr>
+												<td class="highlight">
+													<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
+												</td>
+												<td>
+													<%= review.post_date %>
+												</td>
+												<td class="review">
+													<%= review.comment %>
+												</td>
+												<td>
+													<%= review.rating.to_f %>
+												</td>
+												<td><%= link_to 'View', review.url, :class => "btn btn-mini hidden-phone hidden-tablet" %>&nbsp;<%= link_to 'Respond', review.source.management_response_url, :class => "btn btn-mini" %></td>
+											</tr>
+										<% end %>
 									</tbody>
 								</table>
 								<div class="space7"></div>
