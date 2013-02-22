@@ -3,13 +3,15 @@ class AccountsController < ApplicationController
       layout 'dashboard'
 
       def dashboard
+            
             # testing ton of locations
             user = User.find(106)
             @items = user.locations
 
             @items = current_user.locations
             @item = @items.first
-            @reviews = @item.reviews
+            @this_month_reviews = @item.reviews.where(:post_date => Date.today.beginning_of_month..Date.today).order(:post_date).reverse_order
+            @last_month_reviews = @item.reviews.where(:post_date => Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month).order(:post_date).reverse_order
       end
 
 	def index

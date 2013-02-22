@@ -98,13 +98,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% @reviews.each do |review| %>
+										<% @this_month_reviews.each do |review| %>
 											<tr>
 												<td class="highlight">
 													<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
 												</td>
 												<td>
-													<%= review.post_date %>
+													<%= review.post_date.to_formatted_s(:short) %>
 												</td>
 												<td class="review">
 													<%= review.comment %>
