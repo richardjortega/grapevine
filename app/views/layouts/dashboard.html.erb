@@ -40,7 +40,7 @@
 					
 					<!-- BEGIN TOP NAVIGATION MENU -->					
 					<ul class="nav pull-right" id="top_menu">
-						<li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+						<li><i class="icon-wrench"></i> <%= link_to 'Settings', edit_user_registration_path %></li>
 						<li><a href="#"><i class="icon-credit-card"></i> Billing</a></li>
 						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
 					</ul>
@@ -56,7 +56,6 @@
 	
 	<!-- BEGIN FOOTER -->
 	<footer>
-		<%= render 'layouts/footer' %>
      	<%= render 'layouts/analytics' %>
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-arrow-up"></i></span>

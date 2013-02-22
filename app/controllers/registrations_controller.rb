@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   force_ssl
+  layout 'dashboard'
 
   def edit
     @business = current_user.locations[0]
