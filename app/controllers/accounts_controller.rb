@@ -2,6 +2,11 @@ class AccountsController < ApplicationController
       force_ssl
       layout 'dashboard'
 
+      def dashboard
+            @items = current_user.locations
+            @item = @items.first
+      end
+
 	def index
 
             if current_user.plan.identifier == 'gv_needs_to_pay'
