@@ -10,6 +10,9 @@ gem 'activeadmin'
 gem 'meta_search',	'>= 1.1.0.pre'
 gem 'dalli'
 
+#Design
+gem 'font-awesome-sass-rails'
+
 # Exception/Error Reporting
 gem 'airbrake'
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
