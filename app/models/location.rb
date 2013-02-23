@@ -1,6 +1,8 @@
 class Location < ActiveRecord::Base
   #Before methods and triggers!
 
+  before_save :format_name
+
   attr_accessible :address_line_2, 
   				  :city, 
   				  :lat, 
@@ -36,4 +38,9 @@ class Location < ActiveRecord::Base
     [street_address, address_line_2, city, state, zip].compact.join(', ')
   end
 
+private
+  
+  def format_name
+    self.name = self.name.titleize
+  end
 end
