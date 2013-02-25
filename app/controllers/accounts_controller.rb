@@ -5,8 +5,8 @@ class AccountsController < ApplicationController
       def dashboard
             
             # testing ton of locations
-            user = User.find(106)
-            @items = user.locations
+            # user = User.find(106)
+            # @items = user.locations
 
             @items = current_user.locations
             @item = @items.first
