@@ -33,7 +33,11 @@ namespace :vineyard do
 		end
 
 		puts "Find reviews for all locations who have #{parser.name.capitalize}"
-		parser.vines.each do |vine|
+		# TODO: 2.days.ago is so we have one day to manually check source_location_uris of urbanspoon and tripadvisor
+		vines_older_than_two_days = parser.vines.where('created_at <= ?', 2.days.ago.beginning_of_day)
+
+		vines_older_than_two_days.each do |vine|
+		#parser.vines.each do |vine|
 			location = vine.location
 			Rake::Task['vineyard:get_new_reviews:all:by_location'].reenable
 			Rake::Task['vineyard:get_new_reviews:all:by_location'].invoke(location, parser)
