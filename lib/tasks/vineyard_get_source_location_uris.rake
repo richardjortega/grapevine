@@ -46,7 +46,8 @@ namespace :vineyard do
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
 	task 'get_source_location_uri:daily_check' => :environment do
 		# TODO: 2.days.ago is so we have one day to manually check source_location_uris of urbanspoon and tripadvisor
-		new_locations = Location.where('created_at >= ?', 2.days.ago)
+		new_locations = Location.where('created_at = ?', 2.days.ago)
+		# new_locations = Location.where('created_at >= ?', Date.yesterday.beginning_of_day)
 		count = new_locations.count
 		puts "GV Alert: There are #{count} locations we will check for source_location_uris."
 		next if count == 0
