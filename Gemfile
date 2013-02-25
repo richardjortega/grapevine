@@ -12,6 +12,7 @@ gem 'dalli'
 
 #Design
 gem 'font-awesome-sass-rails'
+gem 'lazy_high_charts'
 
 # Exception/Error Reporting
 gem 'airbrake'
