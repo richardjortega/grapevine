@@ -12,7 +12,7 @@ gem 'dalli'
 
 #Design
 gem 'font-awesome-sass-rails'
-gem 'lazy_high_charts'
+gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git'
 
 # Exception/Error Reporting
 gem 'airbrake'

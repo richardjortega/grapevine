@@ -14,11 +14,11 @@
 }
 
 
-
-/* SIDEBAR NAV */
 #sidebar > ul > li.active {
 	border-right: 4px solid #d7c9e6;
 }
+
+#body h3.page-title { margin-bottom: 0; }
 
 .dashboard a, .breadcrumb a { color:#8d6db1;}
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
