@@ -16,6 +16,7 @@ Grapevine::Application.routes.draw do
 
   devise_for  :users, :controllers => {:registrations => "registrations"}
   resources   :subscriptions
+  resources   :locations
   resources   :wantmore,    only: [:show], :controller => 'blasts'
   resources   :send_to_site, only: [:show], :controller => 'static_pages'
 
@@ -23,7 +24,7 @@ Grapevine::Application.routes.draw do
 
   #Account Dashboard pages (for logged in users)
   authenticated :user do
-    root to: 'accounts#index'
+    root to: 'accounts#dashboard'
     match '/changeplan', to: 'accounts#update', as: 'change_plan'
     match '/billing', to: 'accounts#billing', as: 'billing'
     match '/upgrade', to: 'accounts#update', as: 'upgrade'
