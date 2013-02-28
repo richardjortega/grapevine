@@ -14,3 +14,4 @@
 //= require modernizr
 //= require custom
 //= require rails.validations
+//= require highcharts
