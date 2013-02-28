@@ -77,6 +77,10 @@ GEM
     arel (3.0.2)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     bourbon (3.0.1)
       sass (>= 3.2.0)
       thor
@@ -372,6 +376,8 @@ DEPENDENCIES
   activeadmin
   airbrake
   awesome_print
+  better_errors
+  binding_of_caller
   cancan (>= 1.6.7)
   capybara
   client_side_validations

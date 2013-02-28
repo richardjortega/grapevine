@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
       force_ssl
       layout 'dashboard'
+      before_filter :set_items
 
       def dashboard
             
@@ -158,4 +159,7 @@ class AccountsController < ApplicationController
       def upgrade_thank_you
       end
 
+      def set_items
+            @items = current_user.locations
+      end
 end
