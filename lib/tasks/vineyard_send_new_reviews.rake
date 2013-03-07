@@ -52,6 +52,13 @@ namespace :vineyard do
 						review.status_updated_at = Time.now
 						review.save!
 
+						# Alert us about users who have maxed out
+						if user.review_count == 5
+							puts "GV Review Alert: #{email} has hit their max review count"
+							DelayedKiss.record(email, 'User Hit Max Review Count')
+							NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
+							NotifyMailer.delay({:run_at => 2.days.from_now}).reviews_maxed_alert(user)
+						end
 					else
 						# Handles people who hit their max review count
 						# increment user's review
@@ -60,16 +67,10 @@ namespace :vineyard do
 
 						# Don't send the review
 						# Mark review 'archive'
-						puts "GV Review Alert: Not sending a review because user's review count has hit the max"
+						puts "GV Review Alert: Not sending a review because #{email} has hit their review count max"
 						review.status = 'archive'
 						review.status_updated_at = Time.now
 						review.save!
-
-						# Alert us about users who have maxed out
-						if user.review_count == 5
-							DelayedKiss.record(email, 'User Hit Max Review Count', {'Location' => "#{location}"})
-							NotifyMailer.delay.update_grapevine_team(user, "User has just hit their max review")
-						end
 					end
 				else
 					# Handles active users that have paid and are not on free plan

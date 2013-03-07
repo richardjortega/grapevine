@@ -1,18 +1,14 @@
 require 'open-uri'
 require 'httparty'
 
-class Google
+class Googleplus
 	def initialize
 		@sensor = false
 		@radius = 500
 		@output = 'json'
 		@key = 'AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU'
-		track_api_call('googleplus')
-	end
-
-	def track_api_call(source_name)
-		source_id = Source.find_by_name("#{source_name}")
-		Source.update_counters(source_id, :api_count_daily => 1)
+		@source = Source.find_by_name('googleplus')
+		track_api_call
 	end
 
 	def get_location_id(term, lat, long)
@@ -54,27 +50,53 @@ class Google
 		end
 	end
 
-	def get_new_reviews(latest_review, location_id)
-		begin
-		path = "https://maps.googleapis.com/maps/api/place/details/#{@output}?reference=#{location_id}&sensor=#{@sensor}&key=#{@key}"
-		parsed_response = HTTParty.get(path)
-		url = parsed_response["result"]["url"]
+	def fetch_data(location)
+		source_location_uri = location.vines.find_by_source_id(@source.id).source_location_uri
+		path = "https://maps.googleapis.com/maps/api/place/details/#{@output}?reference=#{source_location_uri}&sensor=#{@sensor}&key=#{@key}"
+		HTTParty.get(path)
+	end
 
-		new_reviews = []
+	def get_new_reviews(location, options = {})
+		begin
+		latest_review_date = options[:latest_review_date] || Date.today - 2
+		latest_comments = options[:latest_comments] || ''
+
+		response = fetch_data(location)
+
+		#Handle blank response
+		if response.blank?
+			puts "GV Alert: The returned response was blank, please look into #{location.name}"
+			return
+		end
 
 		# Handle no reviews
-		if !parsed_response["result"]["reviews"].present?
+		if !response["result"]["reviews"].present?
 			puts "There are no reviews for this restaurant"
 			return
 		end
 
-		parsed_response["result"]["reviews"].each do |review|
+		new_reviews = compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "Encountered error on #{location.name} page, moving on..."
+		end
+	end
+
+private
+	
+	def compare_reviews_to_latest_reviews(response, latest_review_date, latest_comments)
+		new_reviews = []
+
+		url = response["result"]["url"]
+		response["result"]["reviews"].each do |review|
 			review_date = Time.at(review["time"]).to_date
 			review_comment = review["text"].strip
 			
 			# when review_date is taking date objects, change this to just 'if review_date >= latest_review[:post_date]'
-			if review_date >= latest_review[:post_date]
-				next if review_comment == latest_review[:comment].strip
+			if review_date >= latest_review_date
+				next if latest_comments.include?(review_comment)
 				new_review = {}
 				new_review[:post_date] = review_date
 				new_review[:comment] = review_comment
@@ -110,12 +132,10 @@ class Google
 				new_reviews << new_review
 			end
 		end
-		rescue => e
-			pp e.message
-			pp e.backtrace
-			puts "Encountered error on #{location_id} page, moving on..."
-		end
-
 		new_reviews
+	end
+
+	def track_api_call
+		Source.update_counters(@source, :api_count_daily => 1)
 	end
 end

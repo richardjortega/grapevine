@@ -84,6 +84,13 @@ class NotifyMailer < ActionMailer::Base
     mail to: @email, subject: "You have a new #{source.to_s.titleize} review"
   end
 
+  def reviews_maxed_alert(user)
+    host = 'www.pickgrapevine.com'
+    uri_encoded_upgrade_link = URI.encode_www_form('link' => '/upgrade', 'kme' => 'Clicked Upgrade From Sixth Email', 'kmi' => user.email)
+    @upgrade_link = "http://#{host}/upgrade?#{uri_encoded_upgrade_link}"
+    mail to: user.email, subject: "Grapevine review limit reached"
+  end
+
   # Follow up email for people after calling
 
   def follow_up_alert(email, name, body, body_part2, location_link)
@@ -125,7 +132,7 @@ class NotifyMailer < ActionMailer::Base
     DelayedKiss.alias(user.full_name, user.email)
     DelayedKiss.record(user.email, 'Sent Paid Signup Email')
     @user = user
-    mail to: user.email, subject: "You've Upgraded to our Small Business plan!"
+    mail to: user.email, subject: "You've Upgraded to our Business Pro plan!"
   end
 
   # Update Grapevine team about important account changes

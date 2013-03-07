@@ -4,8 +4,8 @@
 # Stripe can give an Stripe::InvalidRequestError: Plan already exists. If that occurs, simply move on
 stripe_plans = [
   { amount: 0, interval: 'month', currency: 'usd', id: 'gv_free',  name: 'Grapevine Alerts - Free Forever Plan'},
-  { amount: 3000, interval: 'month', currency: 'usd', id: 'gv_30',  name: 'Grapevine Alerts - Basic Monthly Plan (1 Location)'},
-  { amount: 5000, interval: 'month', currency: 'usd', id: 'gv_50',  name: 'Grapevine Alerts - Basic Monthly Plan (3 Locations)'},
+  { amount: 3000, interval: 'month', currency: 'usd', id: 'gv_30',  name: 'Grapevine Alerts - Business Pro Plan'},
+  { amount: 5000, interval: 'month', currency: 'usd', id: 'gv_50',  name: 'Grapevine Alerts - Business Pro Plan'},
   { amount: 0, interval: 'month', currency: 'usd', id: 'gv_agency',  name: 'Grapevine Alerts - Agency'},
   { amount: 0, interval: 'month', currency: 'usd', id: 'gv_needs_to_pay',  name: 'Grapevine Alerts - Pro Plan'}
 
