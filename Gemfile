@@ -12,7 +12,7 @@ gem 'dalli'
 
 #Design
 gem 'font-awesome-rails'
-gem 'lazy_high_charts'
+gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git'
 
 # Exception/Error Reporting
 gem 'airbrake'
@@ -85,6 +85,8 @@ group :development do
 	gem 'rails-erd'
 	gem 'thoughtbot-shoulda'
 	gem 'awesome_print'
+	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 group :test do

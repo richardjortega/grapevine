@@ -3,13 +3,13 @@
 		
 		<!-- BEGIN SIDEBAR MENU -->
 		<ul>
-			<li><a href="index.html"><i class="icon-home"></i> Home</a></li>
+			<li><%= nav_link raw("<i class='icon-home'></i> Home"), locations_path %></li>
 
 			<!-- example josh of how to take care of icons inside of this -->
 			<% @items.each do |item| %>
-				<li class='active'><%= link_to "<i class='icon-building'></i> #{item.name}".html_safe, item.name, :class => "" %></li>
+				<li><i class='icon-building'></i><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
 			<% end %>
-			<li><a href="#"><i class="icon-plus-sign"></i> Add a location</a></li>
+			<li><%= link_to raw("<i class='icon-plus-sign'></i> Add a location"), new_location_path %></li>
 			
 		</ul>
 		<!-- END SIDEBAR MENU -->

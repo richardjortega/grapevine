@@ -55,7 +55,7 @@
 	
 	<!-- BEGIN CONTAINER -->
 		<div id="container" class="row-fluid">
-			<%= render 'sidebar' %>
+			<%= render 'accounts/sidebar' %>
 			<%= yield %>
 		</div>
 	<!-- END CONTAINER -->
@@ -66,6 +66,7 @@
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-arrow-up"></i></span>
 		</div>
+		<%= debug(params) if Rails.env.development? %>
 	</footer>
 	<!-- END FOOTER -->
 </body>

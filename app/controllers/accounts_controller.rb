@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
       before_filter :set_items
 
       def dashboard
-            
+
             # testing ton of locations
             # user = User.find(106)
             # @items = user.locations
@@ -158,10 +158,16 @@ class AccountsController < ApplicationController
       def upgrade_thank_you
       end
 
+<<<<<<< HEAD
 private
 
       def set_items
             @items = current_user.locations
       end
 
+=======
+      def set_items
+            @items = current_user.locations
+      end
+>>>>>>> 8f34eb4a396caa24707a1d3c77bdaf3e5d24444e
 end

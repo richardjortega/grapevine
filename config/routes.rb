@@ -16,6 +16,7 @@ Grapevine::Application.routes.draw do
 
   devise_for  :users, :controllers => {:registrations => "registrations"}
   resources   :subscriptions
+  resources   :locations
   resources   :wantmore,    only: [:show], :controller => 'blasts'
   resources   :send_to_site, only: [:show], :controller => 'static_pages'
 
