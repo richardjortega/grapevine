@@ -214,18 +214,6 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].reenable
 			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
 		end
-
-		unless existing_vines.include?('tripadvisor')
-			puts "Didn't find a TripAdvisor source_location_uri for #{term}, finding it now..."			
-			Rake::Task['vineyard:get_source_location_uri:tripadvisor'].reenable
-			Rake::Task['vineyard:get_source_location_uri:tripadvisor'].invoke(location_id, term, street_address, city, state, zip)
-		end
-
-		unless existing_vines.include?('opentable')
-			puts "Didn't find a OpenTable source_location_uri for #{term}, finding it now..."			
-			Rake::Task['vineyard:get_source_location_uri:opentable'].reenable
-			Rake::Task['vineyard:get_source_location_uri:opentable'].invoke(location_id, term, street_address, city, state, zip)
-		end
 	end
 
 	def set_check_date(location)
