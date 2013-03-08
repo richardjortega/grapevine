@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
       force_ssl
       layout 'dashboard'
+      before_filter :set_items
 
       def dashboard
             
@@ -8,13 +9,12 @@ class AccountsController < ApplicationController
             # user = User.find(106)
             # @items = user.locations
 
-            @items = current_user.locations
             @item = @items.first
             @reviews = @item.reviews
 
             @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
                   f.options[:chart][:defaultSeriesType] = 'line'
-                  f.title(:text => 'Testing line graph')
+                  f.title(:text => 'Number of Reviews')
                   f.xAxis(:categories => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
                   f.series(:name => 'Tokyo', :data => [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6] )
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
                         ]
                   }
                   f.series(series)
-                  f.title(:text => 'Suck it')
+                  f.title(:text => 'Reviews by Source')
                   f.legend(:layout => 'veritcal', :style => {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'})
                   f.plot_options(:pie=>{
                     :allowPointSelect=>true, 
@@ -156,6 +156,12 @@ class AccountsController < ApplicationController
       end
 
       def upgrade_thank_you
+      end
+
+private
+
+      def set_items
+            @items = current_user.locations
       end
 
 end
