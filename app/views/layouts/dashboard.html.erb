@@ -56,7 +56,15 @@
 	<!-- BEGIN CONTAINER -->
 		<div id="container" class="row-fluid">
 			<%= render 'accounts/sidebar' %>
-			<%= yield %>
+			<!-- BEGIN PAGE -->
+			<div id="body">
+				<!-- BEGIN PAGE CONTAINER-->
+				<div class="container-fluid">
+					<%= yield %>
+				</div>
+				<!-- END PAGE CONTAINER-->		
+			</div>
+			<!-- END PAGE -->
 		</div>
 	<!-- END CONTAINER -->
 	
