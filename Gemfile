@@ -11,7 +11,7 @@ gem 'meta_search',	'>= 1.1.0.pre'
 gem 'dalli'
 
 #Design
-gem 'font-awesome-sass-rails'
+gem 'font-awesome-rails'
 gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git'
 
 # Exception/Error Reporting
