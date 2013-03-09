@@ -43,6 +43,7 @@ namespace :vineyard do
 		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
+	#########
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
 	task 'get_source_location_uri:daily_check' => :environment do
 		new_locations = Location.where('created_at >= ?', Date.yesterday.beginning_of_day)
@@ -52,14 +53,8 @@ namespace :vineyard do
 		new_locations.each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			next if location.uri_check_date
-			
-			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-			existing_vines = []
-			location.vines.each do |vine|
-				existing_vines << vine.source.name
-			end
 
-			check_review_sites(existing_vines, location)
+			check_review_sites(location)
 			set_check_date(location)
 		end
 		puts "Finished checking for locations added from yesterday for any source_location_uris that may have been missing. Thank you, pwnage."
@@ -79,7 +74,7 @@ namespace :vineyard do
 		set_check_date(location)
 		puts "Finished checking for source_location_uris for #{location.name}. Thank you, pwnage."
 	end
-
+	##########
 
 	desc 'Find Yelp ID# and associate it to Location: term, lat, long (Assumes 1st is right)'
 	task 'get_source_location_uri:yelp', [:location_id, :term, :lat, :long] => :environment do |t, args|
@@ -177,6 +172,20 @@ namespace :vineyard do
 		end
 	end
 
+	desc 'Find source_location_uri by parser given a location object'
+	task 'get_source_location_uri:by_parser', [:location, :parser] => :environment do |t, args|
+		if args[:location] && args[:parser]
+			location = args[:location]
+			parser = args[:parser]
+		else
+			puts "Alert: Both a location and a source/parser object is required for this task. Rake task terminated."
+			next
+		end
+
+		check_review_sites
+	end
+
+
 	# Methods!!
 	def add_new_vine(source, location_id, source_location_uri, term)
 		return if source_location_uri.nil?
@@ -186,34 +195,55 @@ namespace :vineyard do
 		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{term}"	
 	end
 
-	def check_review_sites(existing_vines, location)
+	def check_review_sites(location)
 
-		location_id = location.id
-		term = location.name
-		street_address = location.street_address
-		city = location.city
-		state = location.state
-		zip = location.zip
-		lat = location.lat.to_f
-		long = location.long.to_f
+		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+		existing_vines = []
+		location.vines.each do |vine|
+			existing_vines << vine.source.name
+		end
+		# Sites having issues with finding source_location_uris: TripAdvisor, OpenTable
+		bad_parsers = ['tripadvisor', 'opentable']
 
-		unless existing_vines.include?('yelp')
-			puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
-			Rake::Task['vineyard:get_source_location_uri:yelp'].reenable
-			Rake::Task['vineyard:get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
+		parsers = existing_vines - bad_parsers
+
+		parsers.each do |parser|
+
+			new_vine = find_vine(location, parser)
+
 		end
 
-		unless existing_vines.include?('googleplus')
-			puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
-			Rake::Task['vineyard:get_source_location_uri:google'].reenable
-			Rake::Task['vineyard:get_source_location_uri:google'].invoke(location_id, term, lat, long)
-		end
+		# location_id = location.id
+		# term = location.name
+		# street_address = location.street_address
+		# city = location.city
+		# state = location.state
+		# zip = location.zip
+		# lat = location.lat.to_f
+		# long = location.long.to_f
 
-		unless existing_vines.include?('urbanspoon')
-			puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
-			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].reenable
-			Rake::Task['vineyard:get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
-		end
+		# unless existing_vines.include?('yelp')
+		# 	puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
+		# 	Rake::Task['vineyard:get_source_location_uri:yelp'].reenable
+		# 	Rake::Task['vineyard:get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
+		# end
+
+		# unless existing_vines.include?('googleplus')
+		# 	puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
+		# 	Rake::Task['vineyard:get_source_location_uri:google'].reenable
+		# 	Rake::Task['vineyard:get_source_location_uri:google'].invoke(location_id, term, lat, long)
+		# end
+
+		# unless existing_vines.include?('urbanspoon')
+		# 	puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
+		# 	Rake::Task['vineyard:get_source_location_uri:urbanspoon'].reenable
+		# 	Rake::Task['vineyard:get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
+		# end
+	end
+
+	def find_vine(location, parser)
+		puts "Checking for new source_location_uri for #{location.name}, finding it now..."
+
 	end
 
 	def set_check_date(location)
