@@ -48,6 +48,33 @@ class AccountsController < ApplicationController
                     }
                   })
             end
+
+            if current_user.plan.identifier == 'gv_needs_to_pay'
+                  redirect_to upgrade_path
+            end
+
+            DelayedKiss.alias(current_user.full_name, current_user.email) unless current_user.nil?
+            DelayedKiss.record(current_user.email, 'Signed In') unless current_user.nil?
+
+            @locations = current_user.locations
+
+            @plan = current_user.subscription.plan
+            @location = current_user.locations[0]
+            @subscription = current_user.subscription
+
+            # For aside
+
+            if current_user.subscription.status_info
+                  @status = current_user.subscription.status_info.capitalize
+            else
+                  @status = "No status info available, please contact Grapevine"
+            end
+
+            if @subscription.start_date
+                  @start_date = Time.at(@subscription.start_date).to_date.strftime("%A, %B %d, %Y")
+            else
+                  @start_date = "No start date found, please contact Grapevine"
+            end
       end
 
 	def index
