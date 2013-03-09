@@ -14,6 +14,14 @@ class OpenTableParser
 		@city_location_link = "http://www.#{@source}/#{@directory_listing}"
 	end
 
+	def get_location_id_status?
+		true
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
 	# I know the parser engine should be broken out but this is just a spike example
 	def parser_engine
 
