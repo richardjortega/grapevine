@@ -7,7 +7,7 @@
 
 			<!-- example josh of how to take care of icons inside of this -->
 			<% @items.each do |item| %>
-				<li><i class='icon-building'></i><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
+				<li><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
 			<% end %>
 			<li><%= link_to raw("<i class='icon-plus-sign'></i> Add a location"), new_location_path %></li>
 			

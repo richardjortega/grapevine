@@ -163,3 +163,4 @@ private
       def set_items
             @items = current_user.locations
       end
+end
