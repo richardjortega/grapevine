@@ -60,6 +60,7 @@
 			<div id="body">
 				<!-- BEGIN PAGE CONTAINER-->
 				<div class="container-fluid">
+					<%= render partial: "shared/flash_messages", flash: flash %> 
 					<%= yield %>
 				</div>
 				<!-- END PAGE CONTAINER-->		
