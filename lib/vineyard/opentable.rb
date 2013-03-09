@@ -12,6 +12,14 @@ class Opentable
 		track_api_call
 	end
 
+	def get_location_id_status?
+		false
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
 	def get_location_id(term, street_address, city, state, zip)
 		begin
 		query = "#{term} #{street_address} #{city} #{state} #{zip}"

@@ -16,6 +16,14 @@ class Yelp
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
 	end
 
+	def get_location_id_status?
+		true
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
 	def get_location_id(term, lat, long)
 		begin
 		parsed_term = URI.parse(URI.encode(term.strip))

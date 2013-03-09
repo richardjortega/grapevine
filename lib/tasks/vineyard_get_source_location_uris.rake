@@ -51,7 +51,7 @@ namespace :vineyard do
 		puts "GV Alert: There are #{count} locations we will check for source_location_uris."
 		next if count == 0
 		new_locations.each do |location|
-			# Don't check this location if we've checked within the last 30 days
+			# Don't check this location if we've checked already
 			next if location.uri_check_date
 
 			check_review_sites(location)
@@ -59,6 +59,7 @@ namespace :vineyard do
 		end
 		puts "Finished checking for locations added from yesterday for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
+	##########
 
 	desc 'Find all source_location_uris for one location that does not have vines'
 	task 'get_source_location_uri:one_for_all' => :environment do
@@ -74,7 +75,6 @@ namespace :vineyard do
 		set_check_date(location)
 		puts "Finished checking for source_location_uris for #{location.name}. Thank you, pwnage."
 	end
-	##########
 
 	desc 'Find Yelp ID# and associate it to Location: term, lat, long (Assumes 1st is right)'
 	task 'get_source_location_uri:yelp', [:location_id, :term, :lat, :long] => :environment do |t, args|
@@ -197,18 +197,16 @@ namespace :vineyard do
 
 	def check_review_sites(location)
 
+		found_vines = find_existing_vines(location)
 		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
 		existing_vines = []
 		location.vines.each do |vine|
 			existing_vines << vine.source.name
 		end
-		# Sites having issues with finding source_location_uris: TripAdvisor, OpenTable
-		bad_parsers = ['tripadvisor', 'opentable']
-
-		parsers = existing_vines - bad_parsers
 
 		parsers.each do |parser|
-
+			next unless parser.get_location_id_status?
+			next if existing_vines.include?(parser.name)
 			new_vine = find_vine(location, parser)
 
 		end
@@ -241,9 +239,17 @@ namespace :vineyard do
 		# end
 	end
 
+	def find_existing_vines(location)
+		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+		found_vines = []
+		location.vines.each do |vine|
+			found_vines << vine.source.name
+		end
+		found_vines
+	end
+
 	def find_vine(location, parser)
 		puts "Checking for new source_location_uri for #{location.name}, finding it now..."
-
 	end
 
 	def set_check_date(location)
