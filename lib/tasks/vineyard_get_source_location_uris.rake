@@ -182,7 +182,7 @@ namespace :vineyard do
 			next
 		end
 
-		check_review_sites
+		get_vine(location, parser)
 	end
 
 
@@ -198,17 +198,14 @@ namespace :vineyard do
 	def check_review_sites(location)
 
 		found_vines = find_existing_vines(location)
-		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-		existing_vines = []
-		location.vines.each do |vine|
-			existing_vines << vine.source.name
-		end
 
+		parsers = Source.all
 		parsers.each do |parser|
 			next unless parser.get_location_id_status?
-			next if existing_vines.include?(parser.name)
-			new_vine = find_vine(location, parser)
-
+			next if found_vines.include?(parser.name)
+			puts "Checking for new source_location_uri for #{location.name}, finding it now..."
+			Rake::Task['vineyard:get_source_location_uri:by_parser'].reenable
+			Rake::Task['vineyard:get_source_location_uri:by_parser'].invoke(location, parser)
 		end
 
 		# location_id = location.id
@@ -239,17 +236,25 @@ namespace :vineyard do
 		# end
 	end
 
-	def find_existing_vines(location)
-		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-		found_vines = []
-		location.vines.each do |vine|
-			found_vines << vine.source.name
+	def get_vine(location, parser)
+		puts "Searching for #{parser.name.capitalize} ID for #{location.name}"
+		run = parser.name.capitalize.constantize.new
+
+		source_location_uri = run.get_location_id(location)
+	
+		next if source_location_uri.nil?
+		unless source_location_uri ==  "Could not find any matching information"
+			add_new_vine(source, location_id, source_location_uri, term)
 		end
-		found_vines
 	end
 
-	def find_vine(location, parser)
-		puts "Checking for new source_location_uri for #{location.name}, finding it now..."
+	def find_existing_vines(location)
+		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
+		existing_vines = []
+		location.vines.each do |vine|
+			existing_vines << vine.source.name
+		end
+		existing_vines
 	end
 
 	def set_check_date(location)
