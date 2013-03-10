@@ -20,7 +20,7 @@ class Urbanspoon
 
 	def get_location_id(location)
 		begin
-		query = "#{location.term} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
+		query = "#{location.name} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
