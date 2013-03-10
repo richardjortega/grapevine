@@ -37,17 +37,9 @@
 				<span class="arrow"></span>
 				</a>          
 				<!-- END RESPONSIVE MENU TOGGLER -->				
-				<div class="top-nav">
-					
-					
-					<!-- BEGIN TOP NAVIGATION MENU -->					
-					<ul class="nav pull-right" id="top_menu">
-						<li><%= link_to "<i class='icon-user'></i> Account".html_safe , edit_user_registration_path %></li>
-						<li><%= link_to "<i class='icon-credit-card'></i> Billing".html_safe , billing_path %></li>
-						<li><%= link_to "<i class='icon-off'></i> Logout".html_safe , destroy_user_session_path %></li>
-					</ul>
-					<!-- END TOP NAVIGATION MENU -->	
-				</div>
+				
+				<%= render :partial => 'accounts/top_nav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
+
 			</div>
 		</div>
 		<!-- END TOP NAVIGATION BAR -->

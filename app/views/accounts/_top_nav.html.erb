@@ -1,0 +1,20 @@
+<div class="top-nav">
+<ul class="nav pull-right" id="top_menu">
+	<% if status == true %>
+	
+		<% if plan == 'gv_free' %>
+			<li><%= link_to "<i class='icon-user'></i> Account".html_safe , edit_user_registration_path %></li>
+			<li><%= link_to "<i class='icon-cloud-upload'></i> Upgrade".html_safe, upgrade_path %></li>
+			<li><%= link_to "<i class='icon-off'></i> Logout".html_safe , destroy_user_session_path %></li>
+		<% else %>
+			<li><%= link_to "<i class='icon-user'></i> Account".html_safe , edit_user_registration_path %></li>
+			<li><%= link_to "<i class='icon-credit-card'></i> Billing".html_safe , billing_path %></li>
+			<li><%= link_to "<i class='icon-off'></i> Logout".html_safe , destroy_user_session_path %></li>
+		<% end %>
+
+	<% else %>
+		<li><%= link_to "<i class='icon-user'></i> Account".html_safe , edit_user_registration_path %></li>
+		<li><%= link_to "<i class='icon-off'></i> Logout".html_safe , destroy_user_session_path %></li>
+	<% end %>
+</ul>
+</div><!-- /.top-nav -->
