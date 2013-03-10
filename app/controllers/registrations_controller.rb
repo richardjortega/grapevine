@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   force_ssl
   layout 'dashboard'
+  before_filter :set_items
 
   def edit
     @business = current_user.locations[0]
@@ -28,6 +29,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     redirect_to root_path
+  end
+
+  def set_items
+        @items = current_user.locations
   end
 
 end
