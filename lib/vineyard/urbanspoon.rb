@@ -18,9 +18,9 @@ class Urbanspoon
 		true
 	end
 
-	def get_location_id(term, street_address, city, state, zip, lat, long)
+	def get_location_id(location)
 		begin
-		query = "#{term} #{street_address} #{city} #{state} #{zip}"
+		query = "#{location.term} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
@@ -60,7 +60,7 @@ class Urbanspoon
 				result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
 				result_id = URI("#{result['link']}").path
 				result_name = result['title']
-				delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+				delta = Geocoder::Calculations.distance_between([location.lat.to_f,location.long.to_f],[result_lat,result_long])
 
 				if delta < 0.25
 					location_id = result_id rescue "Could not find any matching information"
