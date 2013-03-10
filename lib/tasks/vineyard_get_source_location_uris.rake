@@ -89,7 +89,7 @@ namespace :vineyard do
 		source_location_uri = get_vine(location, parser)
 		next if source_location_uri.nil?
 		unless source_location_uri ==  "Could not find any matching information"
-			add_new_vine(source, location, source_location_uri)
+			add_new_vine(parser, location, source_location_uri)
 		end
 	end
 
@@ -113,12 +113,12 @@ namespace :vineyard do
 
 
 	# Methods!!
-	def add_new_vine(source, location, source_location_uri)
+	def add_new_vine(parser, location, source_location_uri)
 		return if source_location_uri.nil?
-		Vine.create(:source_id 			   => source.id, 
+		Vine.create(:source_id 			   => parser.id, 
 		 			:location_id 		   => location.id, 
 					:source_location_uri   => source_location_uri)
-		puts "Added #{source.name} source_location_uri '#{source_location_uri}' to #{location.name}"	
+		puts "Added #{parser.name} source_location_uri '#{source_location_uri}' to #{location.name}"	
 	end
 
 	def check_review_sites(location)
