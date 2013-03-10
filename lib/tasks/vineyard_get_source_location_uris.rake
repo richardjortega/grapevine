@@ -77,7 +77,7 @@ namespace :vineyard do
 	end
 
 	desc 'Find source_location_uri by parser given a location object'
-	task 'get_source_location_uri:by_parser', [:location, :parser] => :environment do |t, args|
+	task 'get_source_location_uri', [:location, :parser] => :environment do |t, args|
 		if args[:location] && args[:parser]
 			location = args[:location]
 			parser = args[:parser]
@@ -91,6 +91,24 @@ namespace :vineyard do
 		unless source_location_uri ==  "Could not find any matching information"
 			add_new_vine(source, location, source_location_uri)
 		end
+	end
+
+	desc 'Find source_location_uri by IDs given, for both parser and location'
+	task 'get_source_location_uri:by_id', [:location_id, :parser_id] => :environment do |t, args|
+		if args[:location_id] && args[:parser_id]
+			location = Location.find(args[:location_id])
+			parser = Source.find(args[:parser_id])
+		else
+			puts "Alert: Both a location and a source/parser object is required for this task. Rake task terminated."
+			next
+		end
+
+		source_location_uri = get_vine(location, parser)
+		if source_location_uri.nil?
+			puts "Nothing found."
+			next
+		end
+		puts "Found source_location_uri for #{location.name}: #{source_location_uri}"
 	end
 
 
@@ -110,15 +128,18 @@ namespace :vineyard do
 		parsers.each do |parser|
 			next unless parser.get_location_id_status?
 			next if found_vines.include?(parser.name)
-			puts "Checking for new source_location_uri for #{location.name}, finding it now..."
-			Rake::Task['vineyard:get_source_location_uri:by_parser'].reenable
-			Rake::Task['vineyard:get_source_location_uri:by_parser'].invoke(location, parser)
+			Rake::Task['vineyard:get_source_location_uri'].reenable
+			Rake::Task['vineyard:get_source_location_uri'].invoke(location, parser)
 		end
 	end
 
 	def get_vine(location, parser)
 		puts "Searching for #{parser.name.capitalize} ID for #{location.name}"
 		run = parser.name.capitalize.constantize.new
+		unless run.get_location_id_status?
+			puts "This source has been marked as having issues finding source_location_uris, choose another source"
+			return
+		end
 		source_location_uri = run.get_location_id(location)
 	end
 
