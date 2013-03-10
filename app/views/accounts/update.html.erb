@@ -1,43 +1,49 @@
-<!-- from other page -->
-<div id="main-container" class="dash-page change-plan">
-<section class="with-aside">
-<header>
+<div class="row-fluid">
+	<div class="span12">
 <% if @plan_identifier == 'gv_free' or 'gv_needs_to_pay' %>
-	<h2>Upgrade to Unlimited Review Alerts!</h2>
+	<h3 class="page-title">Upgrade to Unlimited Review Alerts!</h3>
 <% else %>
-	<h2>Change Your Plan</h2>
+	<h3 class="page-title">Change Your Plan</h3>
 <% end %>
-<%= render :partial => 'dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
-</header>
-
-	<div class="section-content">
+	
 		<% unless @plan_identifier == 'gv_needs_to_pay' %>
-		<div class="current-plan">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></div>
+		<p class="muted">You are currently subscribed to our: <span><%= @current_user.plan.name %></span></p>
 		<% end %>
-		<% if @plan_identifier == 'gv_free' or 'gv_needs_to_pay' %>
-	    	<h3>What does upgrading get me?</h3>
-			<h4>Unlimited Review Tracking for Your Business.</h4>
+	</div><!-- /.span12 -->
+</div><!-- /.row-fluid -->
 
-			<h3>How much does it cost?</h3>
-			<h4>$30 per month.</h4>
-			<p>That&rsquo;s it. Awesome, right?<br /> Sign up below and your account will be immediately upgraded!</p>
-			<div class="form-wrapper">
-			<%= render 'shared/payment_form' %>
+<div id="page" class="dashboard">
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="widget">
+				<div class="widget-title">
+					<h4>Upgrade</h4>
+				</div>
+				<div class="widget-body">
+					<%= render 'shared/payment_form' %>
+				</div>
 			</div>
+		</div><!-- /.span4 -->
+		<div class="span4">
+		<% if @plan_identifier == 'gv_free' or 'gv_needs_to_pay' %>
+	    <h4>What does upgrading get me?</h4>
+			<ul>
+				<li>Unlimited Review Tracking for Your Business</li>
+				<li>All access to our reivew dashboard</li>
+			</ul>
+
+			<h4>How much does it cost?</h4>
+			<p><strong>$30 per month per location</strong>.</p>
+			<p>That&rsquo;s it. Awesome, right?<br /> Sign up and your account will be immediately upgraded!</p>
+			
 	    <% else %>
 	    	<h3>Need to change your plan?</h3>
 	    	<p>Please call us about any account change including plan inquiries, downgrades, or cancellations. We'd be happy to help. 
     		<p class="span6 muted" style="margin-top:20px; font-size:13px;">Need help? Give us a call and we&rsquo;ll hug it out. <br />Call us at <a href="tel:+12105497799">210-549-7799</a>.</p>
 		<% end %>
+		</div><!-- /.span4 -->
+	</div><!-- /.row-fluid -->
 		
-	</div><!-- /.section-content -->
-
-
-	<% unless @plan_identifier == 'gv_needs_to_pay' %>
-		<aside>
-			<%= render 'account_overview' %>
-		</aside>
-	<% end %>
+</div><!-- /#page -->
 	
-</section>
-</div><!-- /#main-container.dash-page -->
+
