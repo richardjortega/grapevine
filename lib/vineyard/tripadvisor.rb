@@ -17,10 +17,10 @@ class Tripadvisor
 		true
 	end
 
-	def get_location_id(term, street_address, city, state, zip)
+	def get_location_id(location)
 		begin
-		short_term = term.split[0..1].join(' ')
-		query = "#{short_term} #{city}"
+		short_term = location.name.split(' ', 2)[0]
+		query = "#{short_term} #{location.city}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:fiksaiphsou"
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
@@ -62,13 +62,13 @@ class Tripadvisor
 			result_title = result['title']
 			result_id = URI("#{result['link']}").path
 			# Find if city matches up to result if not, next
-			if !result_title.include?("#{city}")
+			if !result_title.include?("#{location.city}")
 				puts "This result is not in the same city as given location"
 				next
 			end
 			if result_title.split[0..1].join(' ').include?("#{short_term}")
 				puts "This location has a matching city and first word"
-				puts "Found Likely Match: #{result_id} to #{term}"
+				puts "Found Likely Match: #{result_id} to #{location.name}"
 				similar_responses += 1
 				results << result_id
 			end
@@ -76,7 +76,7 @@ class Tripadvisor
 
 		if similar_responses > 1
 			puts "Detected possibly similar locations in same city, rerunning with smarter query..."
-			query = "#{term} #{street_address} #{city} #{state} #{zip}"
+			query = "#{location.name} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
 			parsed_query = URI.parse(URI.encode(query.strip))
 			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
 			response = HTTParty.get(path)
