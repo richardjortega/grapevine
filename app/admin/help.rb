@@ -58,7 +58,7 @@ ActiveAdmin.register_page "Help" do
                 "http://www.urbanspoon.com/r/39/432569/restaurant/Riverwalk/Zinc-Bistro-Wine-Bar-San-Antonio"
             end
             td :style => 'border:1px solid black;' do
-                'r/39/432569/restaurant/Riverwalk/Zinc-Bistro-Wine-Bar-San-Antonio'
+                '/r/39/432569/restaurant/Riverwalk/Zinc-Bistro-Wine-Bar-San-Antonio'
             end
             td :style => 'border:1px solid black;' do
                 "$ rake vineyard:get_source_location_uri:by_id[location_id,parser_id] -- where location_id is the Location's ID and parser_id is the Parser's ID (both as integers, no quotes)"
