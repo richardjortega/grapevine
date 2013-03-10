@@ -48,7 +48,7 @@
 	
 	<!-- BEGIN CONTAINER -->
 		<div id="container" class="row-fluid">
-			<%= render 'accounts/sidebar' %>
+			<%= render :partial => 'accounts/sidebar', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
 			<!-- BEGIN PAGE -->
 			<div id="body">
 				<!-- BEGIN PAGE CONTAINER-->

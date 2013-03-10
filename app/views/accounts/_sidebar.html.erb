@@ -5,11 +5,15 @@
 		<ul>
 			<li><%= nav_link raw("<i class='icon-home'></i> Home"), root_path %></li>
 
-			<!-- example josh of how to take care of icons inside of this -->
-			<% @items.each do |item| %>
-				<li><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
+			<% if plan == 'gv_free' %>
+				<li><a href="#" class="show-popover" data-toggle="popover" data-placement="bottom" data-content="Upgrade to our pro plan today to enjoy multiple location alerts and experience our dashboard reporting." title="" data-original-title="Upgrade for more locations"><i class="icon-plus-sign"></i> Add a location</a></li>
+			<% else %>
+
+				<% @items.each do |item| %>
+					<li><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
+				<% end %>
+				<li><a href="#" class="show-popover" data-toggle="popover" data-placement="bottom" data-content="Need more locations? No problem, just contact us by email at info@pickgrapevine.com or call us at 210-549-7799." title="" data-original-title="Contact us to add more"><i class="icon-plus-sign"></i> Add a location</a></li>
 			<% end %>
-			<li><%= link_to raw("<i class='icon-plus-sign'></i> Add a location"), new_location_path %></li>
 			
 		</ul>
 		<!-- END SIDEBAR MENU -->
