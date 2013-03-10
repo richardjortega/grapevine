@@ -182,7 +182,11 @@ namespace :vineyard do
 			next
 		end
 
-		get_vine(location, parser)
+		source_location_uri = get_vine(location, parser)
+		next if source_location_uri.nil?
+		unless source_location_uri ==  "Could not find any matching information"
+			add_new_vine(source, location_id, source_location_uri, term)
+		end
 	end
 
 
@@ -196,7 +200,6 @@ namespace :vineyard do
 	end
 
 	def check_review_sites(location)
-
 		found_vines = find_existing_vines(location)
 
 		parsers = Source.all
@@ -207,45 +210,12 @@ namespace :vineyard do
 			Rake::Task['vineyard:get_source_location_uri:by_parser'].reenable
 			Rake::Task['vineyard:get_source_location_uri:by_parser'].invoke(location, parser)
 		end
-
-		# location_id = location.id
-		# term = location.name
-		# street_address = location.street_address
-		# city = location.city
-		# state = location.state
-		# zip = location.zip
-		# lat = location.lat.to_f
-		# long = location.long.to_f
-
-		# unless existing_vines.include?('yelp')
-		# 	puts "Didn't find a Yelp source_location_uri for #{term}, finding it now..."			
-		# 	Rake::Task['vineyard:get_source_location_uri:yelp'].reenable
-		# 	Rake::Task['vineyard:get_source_location_uri:yelp'].invoke(location_id, term, lat, long)
-		# end
-
-		# unless existing_vines.include?('googleplus')
-		# 	puts "Didn't find a Google source_location_uri for #{term}, finding it now..."			
-		# 	Rake::Task['vineyard:get_source_location_uri:google'].reenable
-		# 	Rake::Task['vineyard:get_source_location_uri:google'].invoke(location_id, term, lat, long)
-		# end
-
-		# unless existing_vines.include?('urbanspoon')
-		# 	puts "Didn't find a UrbanSpoon source_location_uri for #{term}, finding it now..."			
-		# 	Rake::Task['vineyard:get_source_location_uri:urbanspoon'].reenable
-		# 	Rake::Task['vineyard:get_source_location_uri:urbanspoon'].invoke(location_id, term, street_address, city, state, zip, lat, long)
-		# end
 	end
 
 	def get_vine(location, parser)
 		puts "Searching for #{parser.name.capitalize} ID for #{location.name}"
 		run = parser.name.capitalize.constantize.new
-
 		source_location_uri = run.get_location_id(location)
-	
-		next if source_location_uri.nil?
-		unless source_location_uri ==  "Could not find any matching information"
-			add_new_vine(source, location_id, source_location_uri, term)
-		end
 	end
 
 	def find_existing_vines(location)
