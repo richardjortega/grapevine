@@ -17,7 +17,7 @@ class Tripadvisor
 		true
 	end
 
-	def get_location_id(location) term, street_address, city, state, zip)
+	def get_location_id(location)
 		begin
 		short_term = location.name.split(' ', 2)[0]
 		query = "#{short_term} #{location.city}"
