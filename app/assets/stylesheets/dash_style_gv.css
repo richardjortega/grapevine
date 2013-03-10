@@ -36,3 +36,6 @@
 	left: 8px;
 }
 .widget-body { background:#fff;}
+.widget .form-actions {
+	margin:0 -15px -34px;
+}

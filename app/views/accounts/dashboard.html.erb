@@ -15,10 +15,13 @@
 
 				<div class="row-fluid">
 
-					<div class="span4">
+					<div class="span6">
 						<div class="widget">
 							<div class="widget-title">
 								<h4>Your Information</h4>
+								<span class="tools">
+									<a href="#"><i class="icon-pencil"></i> Edit your information</a>
+								</span>
 							</div><!-- /.widget-title -->
 							<div class="widget-body">
 								<table class="table table-striped">
@@ -45,12 +48,12 @@
 						</div><!-- /.widget -->
 					</div><!-- /.span4 -->
 
-					<div class="span4">
+					<div class="span6">
 						<div class="widget">
 							<div class="widget-title">
 								<h4>Locations</h4>
 								<span class="tools">
-									<a href="#" class="show-popover" data-toggle="popover" data-placement="top" data-content="No problem, we can help. Contact us by email at info@pickgrapevine.com or call us at 210-549-7799." title="" data-original-title="Need to edit your location?"><i class="icon-pencil"></i></a>
+									<a href="#" class="show-popover" data-toggle="popover" data-placement="left" data-content="No problem, we can help. Contact us by email at info@pickgrapevine.com or call us at 210-549-7799." title="" data-original-title="Need to edit your location?">Need to edit a location?</a>
 								</span>
 							</div><!-- /.widget-title -->
 							<div class="widget-body">
@@ -65,7 +68,7 @@
 										<% @items.each do |item| %>
 										<tr>
 											<td><%= item.name %></td>
-											<td><%= item.street_address %></td>
+											<td><%= item.street_address %>, <%= item.city %>, <%= item.state %> <%= item.zip %></td>
 										</tr>
 										<% end %>
 									</tbody>
@@ -75,19 +78,7 @@
 						</div><!-- /.widget -->
 					</div><!-- /.span4 -->
 
-					<div class="span4">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>Plan Details</h4>
-							</div><!-- /.widget-title -->
-							<div class="widget-body">
-								Some kinda shit
-							</div><!-- /.widget-body -->
-						</div><!-- /.widget -->
-					</div><!-- /.span4 -->
-
-
-
+					
 				</div><!-- /.row-fluid -->
 
 			</div><!-- /#page -->
