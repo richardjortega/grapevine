@@ -1,44 +1,33 @@
-<div id="main-container" class="dash-page billing">
-<section class="with-aside">
-<header>
-<h2>Billing</h2>
-<%= render :partial => 'dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
-</header>
-
-<script type="text/javascript">
- $(document).ready(function() {
-  $('.form-wrapper').hide();
-  $('.edit-billing-info').click(function() {
-    event.preventDefault();
-    $('.form-wrapper').toggle();
-    $('.form-wrapper form')[0].reset();
-  });
- });
-</script>
-	<div class="section-content">
-		
-		<div class="current-plan">
-
-			You are currently subscribed to our: <span><%= @current_user.plan.name %></span>
-		</div>
-		<p>Thanks for choosing Grapevine, your plan is billed monthly from the date you upgraded on a rolling 30 day period.</p>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">Billing</h3>
+		<p class="muted">Thanks for choosing Grapevine, your plan is billed monthly from the date you upgraded on a rolling 30 day period. <br> You are currently subscribed to our: <span><%= @current_user.plan.name %><br> </span></p>
 		<% if @subscription.last_four.present? %>
-			<p>You have already provided a credit card ending in : <strong><%= @subscription.last_four %></strong>
-			<p>Need to update your billing information?</p> 
-			<p><a href="#" class="edit-billing-info">Update Your Billing Information</a></p>
+			<p class="alert alert-notice">You have already provided a credit card ending in : <strong><%= @subscription.last_four %></strong>
+			
 		<% else %>
-			<p>You have not yet added your billing information<p>
-			<p>Need to add your billing information?</p>
-			<p><a href="#" class="edit-billing-info">Add Your Billing Information</a></p>
+			<p class="alert alert-notice">You have not yet added your billing information. Need to add your billing information? Update it below</p>
 		<% end %>
-		<div class="form-wrapper">
-			<h3 class="form-title">Billing Information</h3>
-			<p>Any updates you make here will be used for billing on your next invoice.</p>
-			<%= render 'shared/payment_form' %>
-		</div>
-	</div><!-- /.section-content -->
-	<aside>
-		<%= render 'account_overview' %>
-	</aside>
-</section>
-</div><!-- /#main-container.dash-page -->
+	</div>
+</div>
+
+<div id="page" class="dashboard">
+	<div class="row-fluid">
+		
+	<div class="span6">
+		<div class="widget">
+			<div class="widget-title">
+				<h4>Update your billing information</h4>
+			</div>
+			<div class="widget-body">
+
+				<p>Any updates you make here will be used for billing on your next invoice.</p>
+				<%= render 'shared/payment_form' %>
+			</div><!-- /.widget-body -->
+
+		
+		</div><!-- /.widget -->
+	</div><!-- /.span6 -->
+
+	</div><!-- /.row-fluid -->
+</div><!-- /#page -->
