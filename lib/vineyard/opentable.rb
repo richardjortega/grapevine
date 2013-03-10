@@ -20,9 +20,9 @@ class Opentable
 		true
 	end
 
-	def get_location_id(term, street_address, city, state, zip)
+	def get_location_id(location)
 		begin
-		query = "#{term} #{street_address} #{city} #{state} #{zip}"
+		query = "#{location.name} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:tbwceh9avj4"
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
@@ -55,7 +55,7 @@ class Opentable
 		location_url = nil
 		response['items'].each do |result|
 			postal_address = result['pagemap']['postaladdress'][0]['streetaddress'] rescue "Couldn't find a postal address to compare to, be more specific or this is the wrong link."
-			if postal_address.include?("#{zip}")
+			if postal_address.include?("#{location.zip}")
 				puts "Found a search result that matches the zip code provided."
 				location_url = result['link'] rescue "Could not find any matching information"
 				break
