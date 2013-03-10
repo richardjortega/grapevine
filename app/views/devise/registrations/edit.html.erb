@@ -1,36 +1,22 @@
-<div id="main-container" class="dash-page profile">
-<section class="with-aside">
+<div class="row-fluid">
+  <div class="span12">
 
-<header>
-<h2>Profile</h3>
-<%= render :partial => 'accounts/dashnav', :locals => {:status => current_user.subscription.status, :plan => current_user.plan.identifier} %>
-</header>
-
-
-<div class="section-content">
-  <ul class="unstyled user-details-list">
-    <h3>Current Information</h3>
-    <li><strong>Name</strong> <span><%= current_user.first_name %> <%= current_user.last_name %></span></li>
-    <li><strong>Email</strong> <span><%= current_user.email %></span></li>
-    <li><strong>Phone Number</strong> <span><%= current_user.phone_number %></span></li>
-</ul>
-
-<p>Need to update your profile information? <a href="#" class="edit-profile-info">Edit Profile</a></p>
+    <h3 class="page-title">Profile</h3>
+  </div><!-- /.span12 -->
+</div><!-- /.row-fluid -->
 
 
-<script type="text/javascript">
- $(document).ready(function() {
-  // $('.profile-fields').hide();
-  $('.edit-profile-info, a.cancel-profile-edit').click(function() {
-    $('.profile-fields').toggle();
-    $('.profile-fields form')[0].reset();
-    event.preventDefault();
-  });
- });
-</script>
-<div class="profile-fields" style="display:none;">
-<h3>Edit Your <%= resource_name.to_s.humanize %> Information</h3>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-horizontal', :method => :put }) do |user_form| %>
+<div id="page" class="dashboard">
+  <div class="row-fluid">
+    
+
+<div class="span4">
+<div class="widget">
+  <div class="widget-title">
+    <h4>Edit Your <%= resource_name.to_s.humanize %> Information</h4>
+  </div>
+  <div class="widget-body">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true, :html => { :class => 'form-vertical', :method => :put }) do |user_form| %>
   <%= devise_error_messages! %>
 
 
@@ -65,34 +51,23 @@
       <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
     </div>
   </div>
-<div class="form-actions" style="margin:60px 0 20px 0;">
- <%= user_form.submit "Save Changes", :class => 'btn alt' %>
- <p><a href="#" class="cancel-profile-edit">Cancel</a></p>
+  <div class="form-actions">
+   <a href="#" class="btn cancel-profile-edit">Cancel</a>
+   <%= user_form.submit "Save Changes", :class => 'btn alt' %>
+   
+  </div>
 <% end %>
-</div>
-</div><!-- /.profile-fields -->
+</div><!-- /.widget-body -->
+</div><!-- /.widget -->
+</div><!-- /.span4 -->
 
-<ul class="unstyled user-details-list">
-  <h3>Business Information</h3>
-  <li><strong>Name</strong> <span><%= @business.name %></span></li>
-  <li><strong>Address</strong> <span><%= @business.street_address %></span></li>
-  <% unless @business.address_line_2.empty? %>
-    <li><strong>&nbsp;</strong> <span><%= @business.address_line_2 %></span></li>
-  <% end %>
-  <li><strong>City</strong> <span><%= @business.city %></span></li>
-  <li><strong>State</strong> <span><%= @business.state %></span></li>
-  <li><strong>Zip</strong> <span><%= @business.zip %></span></li>
-</ul>
+<div class="span4">
 
-<p class="span6 muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too. <br />Please contact Grapevine's Customer Service at <a href="tel:+12105497799">210-549-7799</a>.</p>
 
-</div><!-- /.section-content -->
+<p class="muted" style="margin-top:20px; font-size:13px;">Unhappy? Give us a call and we&rsquo;ll hug it out. If you need to cancel, we can do that too. Please contact Grapevine's Customer Service<br> at <a href="tel:+12105497799">210-549-7799</a>.</p>
 
-<aside>
-  <h3>Need to edit your business?</h3>
-    <p>Please contact us directly if you need your business information requires updating.</p>
-    <p>Customer Service: <a href="tel:+12105497799">210-549-7799</a></p>
-</aside>
-</section>
-</div><!-- /#main-container -->
+</div><!-- /.span4 -->
 
+</div><!-- /.row-fluid -->
+
+</div><!-- /#page -->
