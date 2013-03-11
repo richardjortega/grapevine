@@ -3,9 +3,13 @@
 		
 		<!-- BEGIN SIDEBAR MENU -->
 		<ul>
+
 			<li><%= nav_link raw("<i class='icon-home'></i> Home"), root_path %></li>
 
 			<% if plan == 'gv_free' %>
+				<% @items.each do |item| %>
+					<li><%= nav_link raw("<i class='icon-building'></i> #{item.name}"), location_path(item) %></li>
+				<% end %>
 				<li><a href="#" class="show-popover" data-toggle="popover" data-placement="bottom" data-content="Upgrade to our pro plan today to enjoy multiple location alerts and experience our dashboard reporting." title="" data-original-title="Upgrade for more locations"><i class="icon-plus-sign"></i> Add a location</a></li>
 			<% else %>
 
