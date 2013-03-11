@@ -25,7 +25,7 @@ Grapevine::Application.routes.draw do
   #Account Dashboard pages (for logged in users)
   authenticated :user do
     root to: 'accounts#dashboard'
-    match '/pro_features', :to => 'accounts#pro_features', :as => 'pro_features'
+    match '/pro_features', to: 'accounts#pro_features', as: 'pro_features'
     match '/changeplan', to: 'accounts#update', as: 'change_plan'
     match '/billing', to: 'accounts#billing', as: 'billing'
     match '/upgrade', to: 'accounts#update', as: 'upgrade'

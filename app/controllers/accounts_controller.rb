@@ -185,6 +185,9 @@ class AccountsController < ApplicationController
       def upgrade_thank_you
       end
 
+      def pro_features
+      end
+
 private
 
       def set_items
