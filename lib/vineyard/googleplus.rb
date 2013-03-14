@@ -11,10 +11,18 @@ class Googleplus
 		track_api_call
 	end
 
-	def get_location_id(term, lat, long)
+	def get_location_id_status?
+		true
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
+	def get_location_id(location)
 		begin
-		parsed_term = URI.parse(URI.encode(term.strip))
-		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{lat},#{long}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
+		parsed_term = URI.parse(URI.encode(location.name.strip))
+		path = "https://maps.googleapis.com/maps/api/place/nearbysearch/#{@output}?location=#{location.lat.to_f},#{location.long.to_f}&keyword=#{parsed_term}&radius=#{@radius}&sensor=#{@sensor}&key=#{@key}"
 		response = HTTParty.get(path)
 		
 		# Handle Zero Results
@@ -30,10 +38,10 @@ class Googleplus
 			result_long = result['geometry']['location']['lng']
 			result_id = result['reference']
 			result_name = result['name']
-			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+			delta = Geocoder::Calculations.distance_between([location.lat.to_f,location.long.to_f],[result_lat,result_long])
 
 			if delta < 0.25
-				puts "Matching found location '#{result_name}' to given location: #{term}"
+				puts "Matching found location '#{result_name}' to given location: #{location.name}"
 				location_id = result_id rescue "Could not find any matching information"
 				break
 			else
