@@ -61,21 +61,6 @@ namespace :vineyard do
 	end
 	##########
 
-	desc 'Find all source_location_uris for one location that does not have vines'
-	task 'get_source_location_uri:one_for_all' => :environment do
-		location = Location.find(ENV["LOCATION_ID"])
-
-		# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-		existing_vines = []
-		location.vines.each do |vine|
-			existing_vines << vine.source.name
-		end
-
-		check_review_sites(existing_vines, location)
-		set_check_date(location)
-		puts "Finished checking for source_location_uris for #{location.name}. Thank you, pwnage."
-	end
-
 	desc 'Find source_location_uri by parser given a location object'
 	task 'get_source_location_uri', [:location, :parser] => :environment do |t, args|
 		if args[:location] && args[:parser]
