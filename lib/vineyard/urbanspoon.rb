@@ -10,9 +10,17 @@ class Urbanspoon
 		track_api_call
 	end
 
-	def get_location_id(term, street_address, city, state, zip, lat, long)
+	def get_location_id_status?
+		true
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
+	def get_location_id(location)
 		begin
-		query = "#{term} #{street_address} #{city} #{state} #{zip}"
+		query = "#{location.name} #{location.street_address} #{location.city} #{location.state} #{location.zip}"
 		parsed_query = URI.parse(URI.encode(query.strip))
 		cx = "009410204525769731320:oued95zmsuy"
 		key = "AIzaSyBZMXlt7q31RrFXUvwglhPwIIi_TabjfNU"
@@ -33,15 +41,8 @@ class Urbanspoon
 
 		# Handle zero results
 		if response['queries']['request'][0]['totalResults'].to_i == 0
-			puts "Found no results. Rerunning with simpler query: '#{term} #{city}'"
-			query = "#{term} #{city}"
-			parsed_query = URI.parse(URI.encode(query.strip))
-			path = "https://www.googleapis.com/customsearch/v1?q=#{parsed_query}&cx=#{cx}&key=#{key}"
-			response = HTTParty.get(path)
-			if response['queries']['request'][0]['totalResults'].to_i == 0
-				puts "Found no results, moving on..."
-				return
-			end
+			puts "Found no results, moving on..."
+			return
 		end
 
 		# Handle error responses
@@ -59,7 +60,7 @@ class Urbanspoon
 				result_long = result['pagemap']['metatags'][0]['urbanspoon:location:longitude'].to_f
 				result_id = URI("#{result['link']}").path
 				result_name = result['title']
-				delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+				delta = Geocoder::Calculations.distance_between([location.lat.to_f,location.long.to_f],[result_lat,result_long])
 
 				if delta < 0.25
 					location_id = result_id rescue "Could not find any matching information"

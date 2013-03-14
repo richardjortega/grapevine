@@ -6,7 +6,7 @@ require 'iconv'
 require 'pp'
 require 'watir-webdriver'
 
-class OpenTableChecker
+class OTReviewDateChecker
 
 	def initialize(city_listing)
 		@source = "opentable.com"
