@@ -1,5 +1,15 @@
 /* Custom GV Styles */
 
+.btn.primary {
+	background: #eca919;
+    background: rgb(239,184,65);
+    background: -moz-linear-gradient(top, rgba(239,184,65,1) 0%, rgba(234,162,7,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,184,65,1)), color-stop(100%,rgba(234,162,7,1)));
+    background: -webkit-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: -o-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: -ms-linear-gradient(top, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+    background: linear-gradient(to bottom, rgba(239,184,65,1) 0%,rgba(234,162,7,1) 100%);
+}
 /* HEADER */
 #header.navbar-inverse .navbar-inner {
 	background: #8d6db1;
@@ -38,4 +48,30 @@
 .widget-body { background:#fff;}
 .widget .form-actions {
 	margin:0 -15px -34px;
+}
+
+#pro-features .pro-features-container {
+		width:100%;
+		height:auto;
+		position:relative;
+		
+}
+#pro-features .pro-features-container img {
+
+			width:100%;
+			height:auto;
+
+}
+#pro-features .features-message {
+		position: absolute;
+		width: 400px;
+		background: #fff;
+		margin: 0 auto;
+		z-index: 5;
+		left: 31%;
+		top: 70px;
+		padding: 20px;
+		border-radius: 4px;
+		text-align: center;
+	
 }
