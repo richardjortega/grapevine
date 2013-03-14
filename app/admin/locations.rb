@@ -5,6 +5,7 @@ ActiveAdmin.register Location do
 			You must associate a User to a Location through the Relationships tab by creating a new Relationship.'
 		end
 		selectable_column
+		column :id
 		column :name do |location|
 			link_to "#{location.name}", admin_location_path(location)
 		end

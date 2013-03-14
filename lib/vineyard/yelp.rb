@@ -16,10 +16,18 @@ class Yelp
 		@access_token = OAuth::AccessToken.new(consumer, token, token_secret)
 	end
 
-	def get_location_id(term, lat, long)
+	def get_location_id_status?
+		true
+	end
+
+	def get_new_reviews_status?
+		true
+	end
+
+	def get_location_id(location)
 		begin
-		parsed_term = URI.parse(URI.encode(term.strip))
-		path = "/v2/search?term=#{parsed_term}&ll=#{lat},#{long}"
+		parsed_term = URI.parse(URI.encode(location.name.strip))
+		path = "/v2/search?term=#{parsed_term}&ll=#{location.lat.to_f},#{location.long.to_f}"
 		response = JSON.parse(@access_token.get(path).body)
 		
 		location_id = nil
@@ -32,10 +40,10 @@ class Yelp
 			result_long = result['location']['coordinate']['longitude']
 			result_id = result['id']
 			result_name = result['name']
-			delta = Geocoder::Calculations.distance_between([lat.to_f,long.to_f],[result_lat,result_long])
+			delta = Geocoder::Calculations.distance_between([location.lat.to_f,location.long.to_f],[result_lat,result_long])
 
 			if delta < 0.25
-				puts "Matching found location '#{result_name}' to given location: #{term}"
+				puts "Matching found location '#{result_name}' to given location: #{location.name}"
 				location_id = result_id rescue "Could not find any matching information"
 				break
 			else
