@@ -13,13 +13,6 @@ namespace :vineyard do
 		Location.all.each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			next if location.uri_check_date
-			
-			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-			existing_vines = []
-			location.vines.each do |vine|
-				existing_vines << vine.source.name
-			end
-
 			check_review_sites(existing_vines, location)
 			set_check_date(location)
 		end
@@ -31,12 +24,6 @@ namespace :vineyard do
 		count = Location.all.count
 		puts "There are #{count} locations we will check for source_location_uris"
 		Location.all.each do |location|
-			# Make sure we don't overwrite existing urls, only find uris for locations without a corrresponding source
-			existing_vines = []
-			location.vines.each do |vine|
-				existing_vines << vine.source.name
-			end
-
 			check_review_sites(existing_vines, location)
 			set_check_date(location)
 		end
