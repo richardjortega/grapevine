@@ -1,5 +1,5 @@
-require_relative "../jobs/opentable.rb"
-require_relative "../jobs/opentable-check_review_count.rb"
+require_relative "../jobs/ot_email_parser.rb"
+require_relative "../jobs/ot_review_date_checker.rb"
 
 
 namespace :crawl do
@@ -21,7 +21,7 @@ namespace :crawl do
 		File.open(filename, "r") do |aFile|
 			aFile.each_line do |city_listing|
 				listing = city_listing.to_s.chomp!
-				run = OpenTableParser.new city_listing
+				run = OTEmailParser.new city_listing
 				result = run.parser_engine
 				input_files << result
 			end
@@ -64,7 +64,7 @@ namespace :crawl do
 		File.open(filename, "r") do |aFile|
 			aFile.each_line do |city_listing|
 				listing = city_listing.to_s.chomp!
-				run = OpenTableChecker.new city_listing
+				run = OTReviewDateChecker.new city_listing
 				result = run.parser_engine
 				input_files << result
 			end

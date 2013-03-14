@@ -6,7 +6,7 @@ require 'iconv'
 require 'pp'
 require 'watir-webdriver'
 
-class OpenTableParser
+class OTEmailParser
 
 	def initialize(city_listing)
 		@source = "opentable.com"
