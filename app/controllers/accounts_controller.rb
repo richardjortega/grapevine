@@ -15,10 +15,10 @@ class AccountsController < ApplicationController
             @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
                   f.options[:chart][:defaultSeriesType] = 'line'
                   f.title(:text => 'Number of Reviews')
-                  f.xAxis(:categories => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
-                  f.series(:name => 'Tokyo', :data => [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6] )
-                  f.series(:name => 'New York', :data => [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5] )
+                  f.xAxis(:categories => ['01', '02', '03', '04', '05', '06', 
+                        '07', '08', '09', '10', '11', '12', '13', '14', '15'])
+                  f.series(:name => 'OpenTable', :data => [2, 6, 9, 5, 8, 1, 2, 5, 3, 8, 3, 6, 2, 4, 1] )
+                  f.series(:name => 'Yelp', :data => [2, 8, 7, 1, 1, 2, 4, 1, 2, 4, 6, 5 , 5, 2, 6] )
             end
 
             @pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
@@ -27,9 +27,9 @@ class AccountsController < ApplicationController
                         :type => 'pie',
                         :name => 'Browser share',
                         :data => [
-                              ['TripAdvisor', 22],
+                              ['OpenTable', 22],
                               ['Yelp', 28],
-                              ['OpenTable', 50]
+                              ['TripAdvisor', 50]
                         ]
                   }
                   f.series(series)
