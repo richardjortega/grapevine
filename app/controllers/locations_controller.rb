@@ -26,6 +26,11 @@ class LocationsController < ApplicationController
 
     @reviews = @item.reviews
 
+    @last_5_reviews = @reviews.last_5_reviews
+    @this_month_reviews = @reviews.this_month_reviews
+    @last_month_reviews = @reviews.last_month_reviews
+
+
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 

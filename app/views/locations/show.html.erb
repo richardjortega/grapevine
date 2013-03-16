@@ -102,7 +102,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% @reviews.last_5_reviews.each do |review| %>
+										<% @last_5_reviews.each do |review| %>
 											<tr>
 												<td class="highlight">
 													<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
