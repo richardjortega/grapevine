@@ -91,7 +91,7 @@ class Subscription < ActiveRecord::Base
     save!
 
     rescue Stripe::InvalidRequestError => e
-      puts "#{e.message}"    
+      puts "GV Alert: #{e.message}"    
     end
   end
 
