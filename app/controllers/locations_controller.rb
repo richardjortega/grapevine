@@ -28,39 +28,44 @@ class LocationsController < ApplicationController
 
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.options[:chart][:defaultSeriesType] = 'line'
-          f.title(:text => 'Testing line graph')
           f.xAxis(:categories => ['01', '02', '03', '04', '05', '06', 
-                        '07', '08', '09', '10', '11', '12', '13', '14', '15'])
-          f.series(:name => 'OpenTable', :data => [2, 6, 9, 5, 8, 1, 2, 5, 3, 8, 3, 6, 2, 4, 1] )
-                  f.series(:name => 'Yelp', :data => [2, 8, 7, 1, 1, 2, 4, 1, 2, 4, 6, 5 , 5, 2, 6] )
+                        '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'])
+          f.series(:name => 'OpenTable', :data => [2, 6, 9, 5, 8, 1, 2, 5, 3, 8, 3, 6, 2, 4, 1, 2, 6, 9, 5, 8, 1, 2, 5, 3, 8, 3, 6, 2, 4, 1] )
+          f.series(:name => 'Yelp', :data => [2, 8, 7, 1, 1, 2, 4, 1, 2, 4, 6, 5 , 5, 2, 6, 2, 8, 7, 1, 1, 2, 4, 1, 2, 4, 6, 5 , 5, 2, 6] )
     end
 
-    @pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
-          f.chart({:defaultSeriesType => 'pie'})
-          series = {
-                :type => 'pie',
-                :name => 'Browser share',
-                :data => [
-                      ['TripAdvisor', 22],
-                      ['Yelp', 28],
-                      ['OpenTable', 50]
-                ]
+    @chart = LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" , :margin=> [0, 50, 0, 50]} )
+      series = {
+               :type=> 'pie',
+               :name=> 'Browser share',
+               :data=> [
+                  ['Firefox',   45.0],
+                  ['IE',       26.8],
+                  {
+                     :name=> 'Chrome',    
+                     :y=> 12.8,
+                     :sliced=> true,
+                     :selected=> true
+                  },
+                  ['Safari',    8.5],
+                  ['Opera',     6.2],
+                  ['Others',   0.7]
+               ]
+      }
+      f.series(series)
+      f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+      f.plot_options(:pie=>{
+        :allowPointSelect=>true, 
+        :cursor=>"pointer" , 
+        :dataLabels=>{
+          :enabled=>true,
+          :color=>"black",
+          :style=>{
+            :font=>"13px Trebuchet MS, Verdana, sans-serif"
           }
-          f.series(series)
-          f.title(:text => 'Suck it')
-          f.legend(:layout => 'veritcal', :style => {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'})
-          f.plot_options(:pie=>{
-            :allowPointSelect=>true, 
-            :cursor=>"pointer" , 
-            :dataLabels=>{
-              :enabled=>true,
-              :color=>"white",
-              :connectorColor=>'black',
-              :style=>{
-                :font=>"13px Trebuchet MS, Verdana, sans-serif"
-              }
-            }
-          })
+        }
+      })
     end
 
     respond_to do |format|
