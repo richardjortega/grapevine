@@ -7,8 +7,7 @@ class Review < ActiveRecord::Base
 
   scope :last_month_reviews, where(:post_date => Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month).order(:post_date).reverse_order
   scope :this_month_reviews, where(:post_date => Date.today.beginning_of_month..Date.today).order(:post_date).reverse_order
-  scope :last_5_reviews, limit(5).order('post_date DESC')
-
+  scope :last_two_weeks_reviews, where(:post_date => 2.weeks.ago..Date.today).order(:post_date).reverse_order
 
   attr_accessible :author, 
   				:author_url, 

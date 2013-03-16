@@ -28,7 +28,7 @@
 
 				<div class="row-fluid">
 					<ul class="nav date-range-nav nav-tabs nav-pills">
-							<li class="active"><a href="#">Last 5 Reviews</a></li>
+							<li class="active"><a href="#">Last 2 Weeks</a></li>
 							<li><a href="#">This Month</a></li>
 							<li><a href="#">Last Month</a></li>
 						</ul>
@@ -102,7 +102,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% @last_5_reviews.each do |review| %>
+										<% @last_two_weeks_reviews.each do |review| %>
 											<tr>
 												<td class="highlight">
 													<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
