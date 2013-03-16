@@ -26,9 +26,14 @@ class LocationsController < ApplicationController
 
     @reviews = @item.reviews
 
+    last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
     @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
+    
+
+
     @this_month_reviews = @reviews.this_month_reviews
     @last_month_reviews = @reviews.last_month_reviews
+
 
 
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
