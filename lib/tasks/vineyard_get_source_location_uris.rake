@@ -8,46 +8,64 @@ namespace :vineyard do
 	
 	desc 'Find all source_location_uris for all locations that do not have vines'
 	task 'get_source_location_uri:all' => :environment do
-		count = Location.all.count
-		puts "There are #{count} locations we will check for source_location_uris"
-		Location.all.each do |location|
-			# Don't check this location if we've checked within the last 30 days
-			if location.uri_check_date
-				puts "#{location.name} has already been matched."
-				next
-			end 
-			check_review_sites(location)
-			set_check_date(location)
+		begin
+			count = Location.all.count
+			puts "There are #{count} locations we will check for source_location_uris"
+			Location.all.each do |location|
+				# Don't check this location if we've checked within the last 30 days
+				if location.uri_check_date
+					puts "#{location.name} has already been matched."
+					next
+				end 
+				check_review_sites(location)
+				set_check_date(location)
+			end
+			puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "GV Alert: Encountered an error, moving on..."
 		end
-		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
 	desc 'Find all source_location_uris for all locations that do not have vines, except ignore the last uri check date'
 	task 'get_source_location_uri:all:ignore_check_date' => :environment do
-		count = Location.all.count
-		puts "There are #{count} locations we will check for source_location_uris"
-		Location.all.each do |location|
-			check_review_sites(location)
-			set_check_date(location)
+		begin
+			count = Location.all.count
+			puts "There are #{count} locations we will check for source_location_uris"
+			Location.all.each do |location|
+				check_review_sites(location)
+				set_check_date(location)
+			end
+			puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "GV Alert: Encountered an error, moving on..."
 		end
-		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 
 	#########
 	desc 'Daily find for source_location_uris for all locations that do not have vines'
 	task 'get_source_location_uri:daily_check' => :environment do
-		new_locations = Location.where('created_at >= ?', Date.yesterday.beginning_of_day)
-		count = new_locations.count
-		puts "GV Alert: There are #{count} locations we will check for source_location_uris."
-		next if count == 0
-		new_locations.each do |location|
-			# Don't check this location if we've checked already
-			next if location.uri_check_date
+		begin
+			new_locations = Location.where('created_at >= ?', Date.yesterday.beginning_of_day)
+			count = new_locations.count
+			puts "GV Alert: There are #{count} locations we will check for source_location_uris."
+			next if count == 0
+			new_locations.each do |location|
+				# Don't check this location if we've checked already
+				next if location.uri_check_date
 
-			check_review_sites(location)
-			set_check_date(location)
+				check_review_sites(location)
+				set_check_date(location)
+			end
+			puts "Finished checking for locations added from yesterday for any source_location_uris that may have been missing. Thank you, pwnage."
+		rescue => e
+			pp e.message
+			pp e.backtrace
+			puts "GV Alert: Encountered an error, moving on..."
 		end
-		puts "Finished checking for locations added from yesterday for any source_location_uris that may have been missing. Thank you, pwnage."
 	end
 	##########
 
