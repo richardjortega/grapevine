@@ -13,7 +13,7 @@ namespace :vineyard do
 		Location.all.each do |location|
 			# Don't check this location if we've checked within the last 30 days
 			next if location.uri_check_date
-			check_review_sites(existing_vines, location)
+			check_review_sites(location)
 			set_check_date(location)
 		end
 		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
@@ -24,7 +24,7 @@ namespace :vineyard do
 		count = Location.all.count
 		puts "There are #{count} locations we will check for source_location_uris"
 		Location.all.each do |location|
-			check_review_sites(existing_vines, location)
+			check_review_sites(location)
 			set_check_date(location)
 		end
 		puts "Finished checking for all locations for any source_location_uris that may have been missing. Thank you, pwnage."
@@ -98,6 +98,7 @@ namespace :vineyard do
 
 		parsers = Source.all
 		parsers.each do |parser|
+			debugger
 			next unless parser.get_location_id_status?
 			next if found_vines.include?(parser.name)
 			Rake::Task['vineyard:get_source_location_uri'].reenable
