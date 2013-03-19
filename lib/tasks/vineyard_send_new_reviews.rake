@@ -9,6 +9,7 @@ namespace :vineyard do
 	desc 'Send new reviews for all locations'
 	task :send_new_reviews, [:run_now] => :environment do |t, args|
 		args.with_defaults(:run_now => false)
+
 		new_reviews = Review.where('status = ?', 'new').order('created_at DESC')
 		if new_reviews.empty?
 			puts "GV Review Alert: No new reviews found from yesterday. No sending needed."

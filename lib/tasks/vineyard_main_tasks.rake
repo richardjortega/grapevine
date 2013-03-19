@@ -1,8 +1,17 @@
 # These tasks will handle various misc tasks associated
 # with our vineyard system
 namespace :vineyard do
+	desc 'Run all processes now'
+	task 'harvest:now' do
+		puts "Running vineyard:harvest now."
+		Rake::Task['vineyard:harvest'].invoke(true)
+	end
+
 	desc 'Run everything in sequence'
-	task :harvest => :environment do
+	task :harvest, [:run_now] => :environment do |t, args|
+		args.with_defaults(:run_now => false)
+		run_now = args[:run_now]
+
 		# Check to verify if it's first of the month, if it is reset all user's review count to 0
 		if Date.today == Date.today.beginning_of_month
 			Rake::Task['vineyard:reset_users_review_counts'].reenable
@@ -26,9 +35,15 @@ namespace :vineyard do
 		Rake::Task['vineyard:get_new_reviews:all'].invoke
 		puts "GV Review Alert: Searched for all new reviews for #{Date.yesterday}"
 
-		# Send all new reviews to corresponding location's user email
-		Rake::Task['vineyard:send_new_reviews'].reenable
-		Rake::Task['vineyard:send_new_reviews'].invoke
+		if args[:run_now] == true
+			# Send all new reviews to corresponding location's user email
+			Rake::Task['vineyard:send_new_reviews'].reenable
+			Rake::Task['vineyard:send_new_reviews'].invoke(run_now)
+		else
+			# Send all new reviews to corresponding location's user email
+			Rake::Task['vineyard:send_new_reviews'].reenable
+			Rake::Task['vineyard:send_new_reviews'].invoke
+		end
 
 	end
 
