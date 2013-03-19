@@ -97,7 +97,7 @@ namespace :vineyard do
 
 				# Don't send the review
 				# Mark review as 'archive'
-				puts "GV Review Alert: Not sending review to user because they are unpaid/canceled."
+				puts "GV Review Alert: Not sending review to #{email} because they are unpaid/canceled."
 				review.status = 'archive'
 				review.status_updated_at = Time.now
 				review.save!
@@ -113,10 +113,10 @@ namespace :vineyard do
 		location = review.location.name
 		location_link = review.url
 		if run_now == true
-			puts "GV Review Alert: Sending reviews at #{Time.now}"
+			puts "GV Review Alert: Sending reviews at #{Time.now} to #{email}"
 			NotifyMailer.delay.review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 		else
-			puts "GV Review Alert: Sending reviews at #{6.hours.from_now}"
+			puts "GV Review Alert: Sending reviews at #{6.hours.from_now} to #{email}"
 			NotifyMailer.delay({:run_at => 6.hours.from_now}).review_alert(email, comment, rating, source, location, location_link, review_count, plan_type)
 		end
 	end
