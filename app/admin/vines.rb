@@ -21,7 +21,11 @@ ActiveAdmin.register Vine do
 			link_to "#{vine.location.name}", admin_location_path(vine.location)
 		end
 		column :source_location_uri  do |vine|
-			truncate("#{vine.source_location_uri}", :length => 50)
+			if vine.source.name == 'googleplus'
+				truncate("#{vine.source_location_uri}", :length => 50)
+			else
+				vine.source_location_uri
+			end
 		end
 		default_actions
 	end
