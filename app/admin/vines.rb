@@ -1,8 +1,8 @@
 ActiveAdmin.register Vine do
 	scope :all, :default => true
 	scope :locations_without_uris
-	filter :location, :collection => proc { Location.all.sort_by { |location| location.created_at}.reverse }
-	filter :source
+	filter :location, :collection => proc { Location.all.sort_by {|location| location.name.downcase} }
+	filter :source, :collection => proc { Source.all.sort_by {|source| source.name.downcase} }
 
 	#views
 	index do
@@ -34,7 +34,7 @@ ActiveAdmin.register Vine do
 	
 	form do |f|
 		f.inputs 'Location' do
-			f.input :location, :as => :select, :collection => Location.all.sort_by { |location| location.created_at}.reverse
+			f.input :location, :as => :select, :collection => Location.all.sort_by {|location| location.name.downcase}
 			f.input :source, :as => :select
 			f.input :source_location_uri
 			f.input :overall_rating

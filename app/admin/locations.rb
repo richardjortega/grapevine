@@ -1,5 +1,5 @@
 ActiveAdmin.register Location do
-
+	
 	#views
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 

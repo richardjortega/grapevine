@@ -1,4 +1,6 @@
 ActiveAdmin.register Relationship do
+	filter :user, :collection => proc { User.all.sort_by {|user| user.full_name.downcase} }
+	filter :location, :collection => proc { Location.all.sort_by {|location| location.name.downcase} }
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'Relationships are the assocations between Users and their Locations, or vice versa.'

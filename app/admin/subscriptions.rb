@@ -1,4 +1,10 @@
 ActiveAdmin.register Subscription do
+  filter :plan
+  filter :user, :collection => proc { User.all.sort_by {|user| user.full_name.downcase} }
+  filter :status
+  filter :status_info
+  filter :stripe_customer_token
+  filter :last_four
 
   scope :non_active_users
   
@@ -9,19 +15,12 @@ ActiveAdmin.register Subscription do
   		link_to "#{subscription.user.first_name} #{subscription.user.last_name}", admin_user_path(subscription.user)
   	end
   	column :plan_id do |subscription|
-  		link_to "#{subscription.plan.name}", admin_plan_path(subscription.plan)
+  		"#{subscription.plan.name}"
   	end
   	column :status
   	column :status_info
   	column :stripe_customer_token
   	column :last_four
-  	column :next_bill_on
-  	column :exp_month
-    column :exp_year
-  	column :current_period_start
-  	column :current_period_end
-  	column :trial_start
-  	column :trial_end
   	column :created_at
   	column :updated_at
 
