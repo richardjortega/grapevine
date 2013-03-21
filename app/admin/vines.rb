@@ -3,6 +3,8 @@ ActiveAdmin.register Vine do
 	scope :locations_without_uris
 	filter :location, :collection => proc { Location.all.sort_by { |location| location.created_at}.reverse }
 	filter :source
+
+	#views
 	index do
 		h2 :style => "line-height:26px; width:65%;" do 
 			'Vines represent the assocation between a Location and a Source as well as the matching source_location_uri string needed for crawlers and API calls.'
@@ -29,6 +31,7 @@ ActiveAdmin.register Vine do
 		end
 		default_actions
 	end
+	
 	form do |f|
 		f.inputs 'Location' do
 			f.input :location, :as => :select, :collection => Location.all.sort_by { |location| location.created_at}.reverse
