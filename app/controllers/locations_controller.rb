@@ -26,8 +26,10 @@ class LocationsController < ApplicationController
 
     @reviews = @item.reviews
 
-    last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
+    @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
     @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
+
+    debugger
     
 
 
@@ -39,8 +41,7 @@ class LocationsController < ApplicationController
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
-          f.xAxis(:categories => ['01', '02', '03', '04', '05', '06', 
-                        '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'])
+          f.xAxis(:categories => @last_two_weeks_dates)
           f.series(:name => 'UrbanSpoon', :color => '#000099', :data => [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, ] )
           f.series(:name => 'Yelp', :color => '#cc0000', :data => [0, 1, 3, 0, 1, 0, 0, 0, 3, 1, 0, 0, 2, 0, 3, 1, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
           f.series(:name => 'TripAdvisor', :color => '#009900', :data => [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] )
