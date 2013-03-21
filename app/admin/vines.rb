@@ -20,7 +20,9 @@ ActiveAdmin.register Vine do
 			next if vine.location.nil?
 			link_to "#{vine.location.name}", admin_location_path(vine.location)
 		end
-		column :source_location_uri
+		column :source_location_uri  do |vine|
+			truncate("#{vine.source_location_uri}", :length => 50)
+		end
 		default_actions
 	end
 	form do |f|
