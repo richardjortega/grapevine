@@ -13,73 +13,11 @@
 
 			<div id="page" class="dashboard">
 
-				<div class="row-fluid">
-
-					<div class="span6">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>Your Information</h4>
-								<span class="tools">
-									<%= link_to "<i class='icon-pencil'></i>".html_safe , edit_user_registration_path, :title => 'Edit your account information' %>
-								</span>
-							</div><!-- /.widget-title -->
-							<div class="widget-body">
-								<table class="table table-striped">
-									<tbody>
-										<tr>
-											<td><strong>Name:</strong></td>
-											<td><%= current_user.first_name %> <%= current_user.last_name %></td>
-										</tr>
-										<tr>
-											<td><strong>Email:</strong></td>
-											<td><%= current_user.email %></td>
-										</tr>
-										<tr>
-											<td><strong>Plan:</strong></td>
-											<td><%= @plan.name %></td>
-										</tr>
-										<tr>
-											<td><strong>Status:</strong></td>
-											<td><%= @status %></td>
-										</tr>
-									</tbody>
-								</table>
-							</div><!-- /.widget-body -->
-						</div><!-- /.widget -->
-					</div><!-- /.span4 -->
-
-					<div class="span6">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>Locations</h4>
-								<span class="tools">
-									<a href="#" class="show-popover" data-trigger="hover" data-toggle="popover" data-placement="left" data-content="No problem, we can help. Contact us by email at info@pickgrapevine.com or call us at 210-549-7799." title="" data-original-title="Need to edit your location?">Need to edit a location?</a>
-								</span>
-							</div><!-- /.widget-title -->
-							<div class="widget-body">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Address</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% @items.each do |item| %>
-										<tr>
-											<td><%= item.name %></td>
-											<td><%= item.street_address %>, <%= item.city %>, <%= item.state %> <%= item.zip %></td>
-										</tr>
-										<% end %>
-									</tbody>
-								</table>
-										
-							</div><!-- /.widget-body -->
-						</div><!-- /.widget -->
-					</div><!-- /.span4 -->
-
-					
-				</div><!-- /.row-fluid -->
+				<% if plan == 'gv_free' %>
+					<%= render 'account_status' %>
+				<% else %>
+					<%= render 'summary' %>
+				<% end %>
 
 			</div><!-- /#page -->
 
