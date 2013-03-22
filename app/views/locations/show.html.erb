@@ -50,8 +50,9 @@
 										</span>							
 									</div>
 									<div class="widget-body">
-										<%= high_chart("line_chart", @line_chart) %>
-
+										<%= high_chart("line_chart", @line_chart) do |c| %>
+											<%= raw "options.tooltip.formatter = function () { return Highcharts.dateFormat('%B %e %Y', this.x) +'<br /><b>' + this.series.name + '</b>' + ': ' + this.y + ' reviews'; }"  %>
+										<% end %>
 										<div align='center'><em>*Click on Review site titles to HIDE/SHOW them</em></div>
 										
 									</div>
