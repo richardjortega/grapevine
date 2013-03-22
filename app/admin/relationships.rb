@@ -34,9 +34,10 @@ ActiveAdmin.register Relationship do
 	end
 
 	form do |f|
-    f.inputs "New Relationship" do
-        f.input :user_id, :as => :select, :collection => User.all.sort_by {|user| user.full_name.downcase}
-        f.input :location_id, :as => :select, :collection => Location.all.sort_by {|location| location.name.downcase}
-    end
-end
+	    f.inputs "New Relationship" do
+	        f.input :user_id, :as => :select, :collection => User.all.sort_by {|user| user.full_name.downcase}
+	        f.input :location_id, :as => :select, :collection => Location.all.sort_by {|location| location.name.downcase}
+	    end
+	    f.buttons
+	end
 end
