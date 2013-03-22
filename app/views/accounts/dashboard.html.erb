@@ -13,7 +13,7 @@
 
 			<div id="page" class="dashboard">
 
-				<% if plan == 'gv_free' %>
+				<% if @plan == 'gv_free' %>
 					<%= render 'account_status' %>
 				<% else %>
 					<%= render 'summary' %>

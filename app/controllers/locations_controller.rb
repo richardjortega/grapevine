@@ -29,7 +29,6 @@ class LocationsController < ApplicationController
     @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
     @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
 
-    debugger
     
 
 
