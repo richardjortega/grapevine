@@ -9,8 +9,22 @@ class AccountsController < ApplicationController
             # user = User.find(106)
             # @items = user.locations
 
-            @item = @items.first
-            @reviews = @item.reviews
+            @items = current_user.locations
+
+                # testing ton of locations
+                # user = User.find(106)
+                # @items = user.locations
+
+                @reviews = @items.first.reviews
+
+                @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
+                @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
+
+                
+
+
+                @this_month_reviews = @reviews.this_month_reviews
+                @last_month_reviews = @reviews.last_month_reviews
 
             @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
                   f.options[:chart][:defaultSeriesType] = 'line'
@@ -21,33 +35,32 @@ class AccountsController < ApplicationController
                   f.series(:name => 'Yelp', :data => [2, 8, 7, 1, 1, 2, 4, 1, 2, 4, 6, 5 , 5, 2, 6] )
             end
 
-            @pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
-                  f.chart({:defaultSeriesType => 'pie'})
+            @chart = LazyHighCharts::HighChart.new('pie') do |f|
+                  f.chart({:defaultSeriesType=>"pie" , :margin=> [0, 0, 0, 0]} )
+                  f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
                   series = {
-                        :type => 'pie',
-                        :name => 'Browser share',
-                        :data => [
-                              ['OpenTable', 22],
-                              ['Yelp', 28],
-                              ['TripAdvisor', 50]
-                        ]
+                           :type=> 'pie',
+                           :name=> 'Browser share',
+                           :data=> [
+                              ['UrbanSpoon',   7],
+                              ['Yelp',       19],
+                              ['TripAdvisor',    5],
+                              ['Google+',     9],
+                              ['OpenTable',   0]
+                           ]
                   }
                   f.series(series)
-                  f.title(:text => 'Reviews by Source')
-                  f.legend(:layout => 'veritcal', :style => {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'})
+                  f.legend(:layout=> 'horizontal',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
                   f.plot_options(:pie=>{
                     :allowPointSelect=>true, 
                     :cursor=>"pointer" , 
                     :dataLabels=>{
-                      :enabled=>true,
-                      :color=>"white",
-                      :connectorColor=>'black',
-                      :style=>{
-                        :font=>"13px Trebuchet MS, Verdana, sans-serif"
-                      }
-                    }
+                      :enabled=>false,
+                      },
+                      :showInLegend=>true
                   })
             end
+
 
             if current_user.plan.identifier == 'gv_needs_to_pay'
                   redirect_to upgrade_path
