@@ -8,7 +8,7 @@
 
 <div id="page" class="dashboard">
 
-  <% unless @plan == 'gv_free' %>
+  <% unless @plan.identifier == 'gv_free' %>
     <%= render 'accounts/account_status' %>
   <% end %>
 
