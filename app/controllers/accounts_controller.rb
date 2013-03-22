@@ -62,7 +62,7 @@ class AccountsController < ApplicationController
             end
 
 
-            if current_user.plan.identifier == 'gv_needs_to_pay'
+            if @plan == 'gv_needs_to_pay'
                   redirect_to upgrade_path
             end
 
@@ -71,7 +71,6 @@ class AccountsController < ApplicationController
 
             @locations = current_user.locations
 
-            @plan = current_user.subscription.plan
             @location = current_user.locations[0]
             @subscription = current_user.subscription
 
@@ -92,7 +91,7 @@ class AccountsController < ApplicationController
 
 	def index
 
-            if current_user.plan.identifier == 'gv_needs_to_pay'
+            if @plan == 'gv_needs_to_pay'
                   redirect_to upgrade_path
             end
 
@@ -101,7 +100,6 @@ class AccountsController < ApplicationController
 
             @locations = current_user.locations
 
-            @plan = current_user.subscription.plan
             @location = current_user.locations[0]
             @subscription = current_user.subscription
 
@@ -205,5 +203,6 @@ private
 
       def set_items
             @items = current_user.locations
+            @plan = current_user.subscription.plan
       end
 end

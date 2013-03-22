@@ -142,5 +142,6 @@ class LocationsController < ApplicationController
 
   def set_items
      @items = current_user.locations
+     @plan = current_user.subscription.plan
   end
 end
