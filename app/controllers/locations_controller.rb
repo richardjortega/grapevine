@@ -27,24 +27,25 @@ class LocationsController < ApplicationController
     @reviews = @item.reviews
 
     @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
+
+
+
     @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
-
-    
-
 
     @this_month_reviews = @reviews.this_month_reviews
     @last_month_reviews = @reviews.last_month_reviews
-
-
 
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:categories => @last_two_weeks_dates)
-          f.series(:name => 'UrbanSpoon', :color => '#000099', :data => [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, ] )
-          f.series(:name => 'Yelp', :color => '#cc0000', :data => [0, 1, 3, 0, 1, 0, 0, 0, 3, 1, 0, 0, 2, 0, 3, 1, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
-          f.series(:name => 'TripAdvisor', :color => '#009900', :data => [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] )
-          f.series(:name => 'Google+', :color => '#0066ff', :data => [0, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
+          Source.all.each do |source|
+            f.series(:name => source.name.capitalize, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, @item, source).map(&:values).flatten.map {|value|value.to_i} )
+          end
+          # f.series(:name => 'UrbanSpoon', :color => '#000099', :data => [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, ] )
+          # f.series(:name => 'Yelp', :color => '#cc0000', :data => [0, 1, 3, 0, 1, 0, 0, 0, 3, 1, 0, 0, 2, 0, 3, 1, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
+          # f.series(:name => 'TripAdvisor', :color => '#009900', :data => [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] )
+          # f.series(:name => 'Google+', :color => '#0066ff', :data => [0, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
           #f.series(:name => 'OpenTable', :color => '#cccc99', :data => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ] )
     end
 
@@ -140,7 +141,22 @@ class LocationsController < ApplicationController
     end
   end
 
+private
+
   def set_items
      @items = current_user.locations
   end
+
+  def locations_chart_data(date_range, location, source)
+    reviews_by_day = location.reviews.where("source_id = ?", source.id).group("date(post_date)").select("post_date, count(id) as total_reviews").each_with_object({}) { |o,hsh| hsh[o.post_date.to_date] = o.total_reviews }
+
+    #group_by { |l| l.post_date.to_date }
+
+    (date_range).map do |date|
+      {
+        reviews: reviews_by_day[date] || 0
+      }
+    end
+  end
+
 end
