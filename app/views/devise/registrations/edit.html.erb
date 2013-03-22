@@ -7,10 +7,16 @@
 
 
 <div id="page" class="dashboard">
+
+  <% unless @plan == 'gv_free' %>
+    <%= render 'accounts/account_status' %>
+  <% end %>
+
+
+
   <div class="row-fluid">
     
-
-<div class="span4">
+<div class="span6">
 <div class="widget">
   <div class="widget-title">
     <h4>Edit Your <%= resource_name.to_s.humanize %> Information</h4>
@@ -23,31 +29,31 @@
   <div class="control-group">
     <label class="control-label">First Name</label>
     <div class="controls">
-      <%= user_form.text_field :first_name %>
+      <%= user_form.text_field :first_name, :class => 'input-xlarge' %>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label">Last Name</label>
     <div class="controls">
-      <%= user_form.text_field :last_name %>
+      <%= user_form.text_field :last_name, :class => 'input-xlarge' %>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label">Email</label>
     <div class="controls">
-      <%= user_form.email_field :email, :validate => true %>
+      <%= user_form.email_field :email, :validate => true, :class => 'input-xlarge' %>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label">Phone Number</label>
     <div class="controls">
-      <%= user_form.phone_field :phone_number %>
+      <%= user_form.phone_field :phone_number, :class => 'input-xlarge' %>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label">Password</label>
     <div class="controls">
-      <%= user_form.password_field :password, :validate => { :presence => true, :format => true } %>
+      <%= user_form.password_field :password, :validate => { :presence => true, :format => true }, :class => 'input-xlarge' %>
       <span class="help-block">Leave blank if you don&rsquo;t want to change it</span>
     </div>
   </div>

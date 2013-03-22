@@ -145,6 +145,7 @@ private
 
   def set_items
      @items = current_user.locations
+     @plan = current_user.subscription.plan
   end
 
   def locations_chart_data(date_range, location, source)
