@@ -208,7 +208,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<% @last_two_weeks_reviews.each do |review| %>
+												<% @last_month_reviews.each do |review| %>
 													<tr>
 														<td class="highlight">
 															<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
