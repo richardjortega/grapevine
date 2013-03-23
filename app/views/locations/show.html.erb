@@ -50,7 +50,7 @@
 										</span>							
 									</div>
 									<div class="widget-body">
-										<%= high_chart("line_chart", @last_two_weeks_reviews_line_chart) do |c| %>
+										<%= high_chart("last_two_weeks_reviews_line_chart", @last_two_weeks_reviews_line_chart) do |c| %>
 											<%= raw "options.tooltip.formatter = function () { return Highcharts.dateFormat('%B %e %Y', this.x) +'<br /><b>' + this.series.name + '</b>' + ': ' + this.y + ' reviews'; }"  %>
 										<% end %>
 										<div align='center'><em>*Click on Review site titles to HIDE/SHOW them</em></div>
@@ -71,7 +71,7 @@
 									</div>
 									
 									<div class="widget-body">
-										<%= high_chart("my_id4", @last_two_weeks_reviews_pie_chart) do |c| %>
+										<%= high_chart("last_two_weeks_reviews_pie_chart", @last_two_weeks_reviews_pie_chart) do |c| %>
 								          <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y;}"  %>
 								          <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
 								        <% end %>
@@ -152,7 +152,7 @@
 										</span>							
 									</div>
 									<div class="widget-body">
-										<%= high_chart("line_chart", @last_month_reviews_line_chart) do |c| %>
+										<%= high_chart("last_month_reviews_line_chart", @last_month_reviews_line_chart) do |c| %>
 											<%= raw "options.tooltip.formatter = function () { return Highcharts.dateFormat('%B %e %Y', this.x) +'<br /><b>' + this.series.name + '</b>' + ': ' + this.y + ' reviews'; }"  %>
 										<% end %>
 										<div align='center'><em>*Click on Review site titles to HIDE/SHOW them</em></div>
@@ -173,7 +173,7 @@
 									</div>
 									
 									<div class="widget-body">
-										<%= high_chart("my_id4", @last_month_reviews_pie_chart) do |c| %>
+										<%= high_chart("last_month_reviews_pie_chart", @last_month_reviews_pie_chart) do |c| %>
 								          <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y;}"  %>
 								          <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
 								        <% end %>
@@ -254,7 +254,7 @@
 										</span>							
 									</div>
 									<div class="widget-body">
-										<%= high_chart("line_chart", @this_month_reviews_line_chart) do |c| %>
+										<%= high_chart("this_month_reviews_line_chart", @this_month_reviews_line_chart) do |c| %>
 											<%= raw "options.tooltip.formatter = function () { return Highcharts.dateFormat('%B %e %Y', this.x) +'<br /><b>' + this.series.name + '</b>' + ': ' + this.y + ' reviews'; }"  %>
 										<% end %>
 										<div align='center'><em>*Click on Review site titles to HIDE/SHOW them</em></div>
@@ -275,7 +275,7 @@
 									</div>
 									
 									<div class="widget-body">
-										<%= high_chart("my_id4", @this_month_reviews_pie_chart) do |c| %>
+										<%= high_chart("this_month_reviews_pie_chart", @this_month_reviews_pie_chart) do |c| %>
 								          <%= raw "options.tooltip.formatter = function() {return '<b>'+ this.point.name +'</b>: '+ this.y;}"  %>
 								          <%= raw "options.plotOptions.pie.dataLabels.formatter = function() { if (this.y > 5) return this.point.name; }"  %>
 								        <% end %>

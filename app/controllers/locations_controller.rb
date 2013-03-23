@@ -72,7 +72,6 @@ class LocationsController < ApplicationController
       # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
       series = {
                :type=> 'pie',
-               :name=> 'Browser share',
                :data=> @last_two_weeks_reviews_pie_chart_data
       }
       f.series(series)
@@ -105,7 +104,6 @@ class LocationsController < ApplicationController
       # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
       series = {
                :type=> 'pie',
-               :name=> 'Browser share',
                :data=> @this_month_reviews_pie_chart_data
       }
       f.series(series)
@@ -137,7 +135,6 @@ class LocationsController < ApplicationController
       # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
       series = {
                :type=> 'pie',
-               :name=> 'Browser share',
                :data=> @last_month_reviews_pie_chart_data
       }
       f.series(series)
