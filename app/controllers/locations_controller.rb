@@ -26,9 +26,7 @@ class LocationsController < ApplicationController
 
     @reviews = @item.reviews
 
-    @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).map(&:day).map(&:to_s)
-
-
+    @last_two_weeks_dates = (2.weeks.ago.to_date..Date.today).to_a #map(&:day) #.map(&:to_s)
 
     @last_two_weeks_reviews = @reviews.last_two_weeks_reviews
 
@@ -38,15 +36,10 @@ class LocationsController < ApplicationController
     @line_chart = LazyHighCharts::HighChart.new('graph') do |f|
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
-          f.xAxis(:categories => @last_two_weeks_dates)
+          f.xAxis(:type => 'datetime')
           Source.all.each do |source|
-            f.series(:name => source.name.capitalize, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, @item, source).map(&:values).flatten.map {|value|value.to_i} )
+            f.series(:pointInterval => 1.day, :pointStart => 2.weeks.ago.to_date, :name => source.name.capitalize, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, @item, source).map(&:values).flatten.map {|value|value.to_i} )
           end
-          # f.series(:name => 'UrbanSpoon', :color => '#000099', :data => [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, ] )
-          # f.series(:name => 'Yelp', :color => '#cc0000', :data => [0, 1, 3, 0, 1, 0, 0, 0, 3, 1, 0, 0, 2, 0, 3, 1, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
-          # f.series(:name => 'TripAdvisor', :color => '#009900', :data => [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] )
-          # f.series(:name => 'Google+', :color => '#0066ff', :data => [0, 0, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0] )
-          #f.series(:name => 'OpenTable', :color => '#cccc99', :data => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ] )
     end
 
     @chart = LazyHighCharts::HighChart.new('pie') do |f|
