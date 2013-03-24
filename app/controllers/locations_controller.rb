@@ -63,13 +63,13 @@ class LocationsController < ApplicationController
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
           @sources.each do |source|
-            f.series(:pointInterval => 1.day, :pointStart => 2.weeks.ago.to_date, :name => source.name.capitalize, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
+            f.series(:pointInterval => 1.day, :pointStart => 2.weeks.ago.to_date, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
     end
 
     @last_two_weeks_reviews_pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [0, 0, 0, 0]} )
-      # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
+      f.colors(@sources.map(&:hex_value))
       series = {
                :type=> 'pie',
                :data=> @last_two_weeks_reviews_pie_chart_data
@@ -95,13 +95,13 @@ class LocationsController < ApplicationController
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
           @sources.each do |source|
-            f.series(:pointInterval => 1.day, :pointStart => Date.today.beginning_of_month, :name => source.name.capitalize, :data => locations_chart_data(Date.today.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
+            f.series(:pointInterval => 1.day, :pointStart => Date.today.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
     end
 
     @this_month_reviews_pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [0, 0, 0, 0]} )
-      # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
+      f.colors(@sources.map(&:hex_value))
       series = {
                :type=> 'pie',
                :data=> @this_month_reviews_pie_chart_data
@@ -126,13 +126,13 @@ class LocationsController < ApplicationController
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
           @sources.each do |source|
-            f.series(:pointInterval => 1.day, :pointStart => Date.today.prev_month.beginning_of_month, :name => source.name.capitalize, :data => locations_chart_data(Date.today.prev_month.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
+            f.series(:pointInterval => 1.day, :pointStart => Date.today.prev_month.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.prev_month.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
     end
 
     @last_month_reviews_pie_chart = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [0, 0, 0, 0]} )
-      # f.colors(['#000099', '#cc0000', '#009900', '#0066ff', '#cccc99'])
+      f.colors(@sources.map(&:hex_value))
       series = {
                :type=> 'pie',
                :data=> @last_month_reviews_pie_chart_data
