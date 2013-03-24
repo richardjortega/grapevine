@@ -295,7 +295,7 @@ a,a:focus, a:hover, a:active {
 
 /* i8 fix for form input height in fluid rows */
 .ie8 .row-fluid [class*="span"] {
-    1min-height: 20px !important;
+    min-height: 20px !important;
 }
 
 /* body container */
