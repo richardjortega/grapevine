@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/getsentry/raven-ruby.git
-  revision: 5e96c445dffb8b79e711a207c53aa0e3e79cb704
+  revision: ead49c8d8a6ff99260827f9267bd3bda33a5993e
   specs:
     sentry-raven (0.4.5)
       faraday (>= 0.7.6)
@@ -224,7 +224,7 @@ GEM
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
     mime-types (1.21)
-    multi_json (1.7.1)
+    multi_json (1.7.2)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     net-http-persistent (2.8)

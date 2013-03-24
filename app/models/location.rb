@@ -43,4 +43,5 @@ private
   def format_name
     self.name = self.name.titleize
   end
+
 end
