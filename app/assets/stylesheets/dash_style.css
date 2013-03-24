@@ -472,7 +472,7 @@ a,a:focus, a:hover, a:active {
 }
 
 /* ie10 fixes */
-.ie10 .#header .search-input-icon > i, .ie10 #sidebar .search-input-icon > i {
+.ie10 #header .search-input-icon > i, .ie10 #sidebar .search-input-icon > i {
   top:-2px !important;
 }
 
