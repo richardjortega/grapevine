@@ -163,7 +163,7 @@ class NotifyMailer < ActionMailer::Base
 
   # Email invoice receipt to User's email and Grapevine Support - successful
   def unsuccessfully_charged(invoice, user)
-    @subscription = invoice.lines.subscriptions[0]
+    @subscription = invoice.lines.data.first
     @user = user
     @subscription_plan = @subscription.plan.name
     @subscription_amount = format_amount(invoice.total)
@@ -174,7 +174,7 @@ class NotifyMailer < ActionMailer::Base
   
   # Email invoice receipt to User's email and Grapevine Support - failed
   def successfully_charged(invoice, user)
-    @subscription = invoice.lines.subscriptions[0]
+    @subscription = invoice.lines.data.first
     @user = user
     @subscription_plan = @subscription.plan.name
     @subscription_amount = format_amount(invoice.total)
