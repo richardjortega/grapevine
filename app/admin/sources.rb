@@ -9,6 +9,7 @@ ActiveAdmin.register Source do
   	column :main_url
     column :api_count_daily
     column :api_count_all_time
+    column :hex_value
   	default_actions
   end
 end

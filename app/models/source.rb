@@ -6,7 +6,8 @@ class Source < ActiveRecord::Base
   				:max_rating, 
   				:name,
           :api_count_daily,
-          :api_count_all_time
+          :api_count_all_time,
+          :hex_value
 
   has_many :vines
   has_many :locations, through: :vines
