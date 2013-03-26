@@ -3,16 +3,18 @@ class LocationsController < ApplicationController
   layout 'dashboard'
   before_filter :set_items
 
+  # for time being, index and edit actions have been disabled.
+
   # GET /locations
   # GET /locations.json
-  def index
-    @locations = current_user.locations
+  # def index
+  #   @locations = current_user.locations
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @locations }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @locations }
+  #   end
+  # end
 
   # GET /locations/1
   # GET /locations/1.json
@@ -167,10 +169,10 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/1/edit
-  def edit
-    @location = Location.find(params[:id])
-  end
+  # # GET /locations/1/edit
+  # def edit
+  #   @location = Location.find(params[:id])
+  # end
 
   # POST /locations
   # POST /locations.json
