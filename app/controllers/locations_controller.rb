@@ -131,7 +131,7 @@ class LocationsController < ApplicationController
           f.xAxis(:type => 'datetime')
           f.yAxis(:minPadding => 0)
           @sources.each do |source|
-            f.series(:pointInterval => 1.day, :pointStart => Date.today.prev_month.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.prev_month.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
+            f.series(:pointInterval => 1.day, :pointStart => Date.today.prev_month.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.prev_month.beginning_of_month..Date.today.prev_month.end_of_month, source).map(&:values).flatten.map {|value|value.to_i} )
           end
     end
 
