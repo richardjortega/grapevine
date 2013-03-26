@@ -123,7 +123,7 @@
 															<td>
 																<%= review.rating.to_f %>
 															</td>
-															<td><%= link_to 'View', review.url, :class => "btn btn-mini hidden-phone hidden-tablet" %>&nbsp;<%= link_to 'Respond', review.source.management_response_url, :class => "btn btn-mini" %></td>
+															<td><%= link_to 'View', review.url, :class => "btn btn-mini hidden-phone hidden-tablet", :target => '_blank' %>&nbsp;<%= link_to 'Respond', review.source.management_response_url, :class => "btn btn-mini", :target => '_blank' %></td>
 														</tr>
 													<% end %>
 												</tbody>
