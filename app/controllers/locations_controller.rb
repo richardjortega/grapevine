@@ -64,6 +64,7 @@ class LocationsController < ApplicationController
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
+          f.yAxis(:minPadding => 0)
           @sources.each do |source|
             f.series(:pointInterval => 1.day, :pointStart => 2.weeks.ago.to_date, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(2.weeks.ago.to_date..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
@@ -96,6 +97,7 @@ class LocationsController < ApplicationController
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
+          f.yAxis(:minPadding => 0)
           @sources.each do |source|
             f.series(:pointInterval => 1.day, :pointStart => Date.today.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
@@ -127,6 +129,7 @@ class LocationsController < ApplicationController
           f.options[:chart][:defaultSeriesType] = 'line'
           f.legend(:layout=> 'horizontal') 
           f.xAxis(:type => 'datetime')
+          f.yAxis(:minPadding => 0)
           @sources.each do |source|
             f.series(:pointInterval => 1.day, :pointStart => Date.today.prev_month.beginning_of_month, :name => source.name.capitalize, :color => source.hex_value, :data => locations_chart_data(Date.today.prev_month.beginning_of_month..Date.today, source).map(&:values).flatten.map {|value|value.to_i} )
           end
