@@ -1,5 +1,10 @@
 <% if @reviews.blank? %>
-	Currently there are no reviews for this timeframe, we're scouring the web daily to any new reviews. If you feel this is in error, please contact the Grapevine team at info@pickgrapevine.com
+	
+	<div class="reviews-blank-message modal">
+		<div class="modal-body">
+		Currently there are no reviews for this timeframe, we're scouring the web daily to any new reviews. If you feel this is in error, please contact the Grapevine team at info@pickgrapevine.com
+		</div>
+	</div><!-- /.reviews-blank-message -->
 <% else %>
 	<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">

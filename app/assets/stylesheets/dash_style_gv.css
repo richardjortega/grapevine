@@ -102,3 +102,9 @@
 #pro-features .pro-features-list li {
 	margin:10px 0;
 }
+
+.reivews-blank-message {
+	margin-top: 150px;
+	font-size: 16px;
+	line-height: 26px;
+}
