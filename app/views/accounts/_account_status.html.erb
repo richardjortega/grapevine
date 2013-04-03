@@ -65,5 +65,12 @@
 
 
 				<% if @plan.identifier == 'gv_free' %>
-					plan free
+					<div class="row-fluid">
+						<div class="span4">
+							<p>What to upgrade your account? Click below to get UNLIMITED review alerts now.</p>
+							<p><%= link_to '<i class="icon-cloud-upload"></i> Upgrade'.html_safe, upgrade_path, :class => 'btn alt btn-large' %></p>
+						
+						</div><!-- /.span6 -->
+
+					</div><!-- /.row-fluid -->
 				<% end %>
