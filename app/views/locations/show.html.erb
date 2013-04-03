@@ -117,7 +117,7 @@
 													<% @last_two_weeks_reviews.each do |review| %>
 														<tr>
 															<td class="highlight">
-																<%= link_to "#{review.source.name.capitalize}", review.source.main_url %>
+																<%= link_to "#{review.source.name.capitalize}", review.source.main_url, :target => '_blank' %>
 															</td>
 															<td>
 																<%= review.post_date.to_formatted_s(:short) %>
