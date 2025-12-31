@@ -142,6 +142,16 @@ class NotifyMailer < ActionMailer::Base
     mail to: "erik@pickgrapevine.com", subject: "Update Alert: #{@message}"
   end
 
+  # Alert Erik when a new account is matched automatically
+  def account_matched_alert(location, source_name, source_location_uri)
+    @location = location
+    @source_name = source_name
+    @source_location_uri = source_location_uri
+    # Get first user associated with location; template handles nil case
+    @user = location.users.first
+    mail to: "erik@pickgrapevine.com", subject: "New Account Matched: #{location.name} to #{source_name.titleize}"
+  end
+
   # Send canceled email
   def account_canceled(user)
     DelayedKiss.alias(user.full_name, user.email)
