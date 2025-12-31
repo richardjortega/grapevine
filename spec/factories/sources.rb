@@ -8,5 +8,6 @@ FactoryGirl.define do
     accepts_management_response false
     management_response_url "MyString"
     main_url "MyString"
+    approved false
   end
 end
