@@ -7,7 +7,8 @@ class Source < ActiveRecord::Base
   				:name,
           :api_count_daily,
           :api_count_all_time,
-          :hex_value
+          :hex_value,
+          :approved
 
   has_many :vines
   has_many :locations, through: :vines

@@ -39,13 +39,13 @@ puts "Created #{gv_needs_to_pay[:name]} in local database"
 # Add Sources to Source Tables
 # Source(id: integer, name: string, category: string, max_rating: decimal, accepts_management_response: boolean, management_response_url: string, main_url: string, created_at: datetime, updated_at: datetime) 
 
-source1 = Source.find_or_create_by_name! name: 'yelp', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'https://biz.yelp.com/', main_url: 'http://www.yelp.com/'
+source1 = Source.find_or_create_by_name! name: 'yelp', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'https://biz.yelp.com/', main_url: 'http://www.yelp.com/', approved: true
 puts "Added source: #{source1[:name]}, unless already in database"
-source2 = Source.find_or_create_by_name! name: 'googleplus', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.google.com/placesforbusiness', main_url: 'http://www.google.com/places/'
+source2 = Source.find_or_create_by_name! name: 'googleplus', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.google.com/placesforbusiness', main_url: 'http://www.google.com/places/', approved: true
 puts "Added source: #{source2[:name]}, unless already in database"
-source3 = Source.find_or_create_by_name! name: 'opentable', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.otrestaurant.com/', main_url: 'http://www.opentable.com'
+source3 = Source.find_or_create_by_name! name: 'opentable', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.otrestaurant.com/', main_url: 'http://www.opentable.com', approved: true
 puts "Added source: #{source3[:name]}, unless already in database"
-source4 = Source.find_or_create_by_name! name: 'tripadvisor', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.tripadvisor.com/Owners', main_url: 'http://www.tripadvisor.com'
+source4 = Source.find_or_create_by_name! name: 'tripadvisor', category: 'general', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.tripadvisor.com/Owners', main_url: 'http://www.tripadvisor.com', approved: true
 puts "Added source: #{source4[:name]}, unless already in database"
-source5 = Source.find_or_create_by_name! name: 'urbanspoon', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.urbanspoon.com/u/signin', main_url: 'http://www.urbanspoon.com'
+source5 = Source.find_or_create_by_name! name: 'urbanspoon', category: 'restaurants', max_rating: 5.0, accepts_management_response: true, management_response_url: 'http://www.urbanspoon.com/u/signin', main_url: 'http://www.urbanspoon.com', approved: true
 puts "Added source: #{source5[:name]}, unless already in database"
