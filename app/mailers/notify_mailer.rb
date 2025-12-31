@@ -147,6 +147,7 @@ class NotifyMailer < ActionMailer::Base
     @location = location
     @source_name = source_name
     @source_location_uri = source_location_uri
+    # Get first user associated with location; template handles nil case
     @user = location.users.first
     mail to: "erik@pickgrapevine.com", subject: "New Account Matched: #{location.name} to #{source_name.titleize}"
   end
