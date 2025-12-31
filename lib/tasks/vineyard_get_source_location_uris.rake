@@ -111,7 +111,10 @@ namespace :vineyard do
 		Vine.create(:source_id 			   => parser.id, 
 		 			:location_id 		   => location.id, 
 					:source_location_uri   => source_location_uri)
-		puts "Added #{parser.name} source_location_uri '#{source_location_uri}' to #{location.name}"	
+		puts "Added #{parser.name} source_location_uri '#{source_location_uri}' to #{location.name}"
+		# Alert Erik about the new match
+		NotifyMailer.delay.account_matched_alert(location, parser.name, source_location_uri)
+		puts "Sent alert to Erik about new match for #{location.name}"
 	end
 
 	def check_review_sites(location)
