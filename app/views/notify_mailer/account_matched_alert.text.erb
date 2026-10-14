@@ -1,0 +1,19 @@
+Hey, Erik!
+New Account Matched Automatically
+===============================================
+
+Location: <%= @location.name %>
+Address: <%= @location.full_address %>
+Source: <%= @source_name.titleize %>
+Source Location URI: <%= @source_location_uri %>
+
+<% if @user %>
+User: <%= @user.first_name %> <%= @user.last_name %>
+Email: <%= @user.email %>
+<% else %>
+User: No user associated yet
+<% end %>
+
+This location was automatically matched to <%= @source_name.titleize %> during the daily check.
+
+Have a great day Erik!
